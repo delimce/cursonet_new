@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use App\Models\Cn2\Student;
 
 class AccountController extends BaseController
 {
@@ -20,6 +21,6 @@ class AccountController extends BaseController
 
     public function index()
     {
-        return "hola";
+       return  view('student.pages.login');
     }
 }

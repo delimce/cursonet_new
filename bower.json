@@ -1,0 +1,21 @@
+{
+  "name": "cursonet 2.0",
+  "authors": [
+    "Luis De Lima <delimce@gmail.com>"
+  ],
+  "description": "proyecto plataforma Elearning para latinoamerica",
+  "main": "",
+  "keywords": [
+    "cursonet",
+    "elearning",
+    "estudios",
+    "internet"
+  ],
+  "license": "MIT",
+  "homepage": "www.cursonet.com.ve",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.1.0",
+    "jquery": "^3.3.1"
+  }
+}
