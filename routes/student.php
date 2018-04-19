@@ -17,6 +17,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () use ($router) {
     $router->get('/', 'AccountController@index');
+    $router->get('/forgotten', 'AccountController@forgotPassword');
     $router->get('profile', [
         'middleware' => 'auth',
         'logout' => 'AccountController@showProfile'

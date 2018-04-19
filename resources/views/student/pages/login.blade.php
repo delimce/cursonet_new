@@ -8,7 +8,6 @@
 
 @section('content')
     <div id="login-box" class="card toright card-container">
-        <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
         <div class="logo_student">
             &nbsp;
         </div>
@@ -16,7 +15,7 @@
             <span id="reauth-email" class="reauth-email"></span>
             <input type="email" v-model="email" class="form-control" placeholder="Usuario" required autofocus>
             <div id="login-account">
-                <span class="forgot-password"><a href="#">¿Olvidaste tu contraseña?</a> </span>
+                <span class="forgot-password"><a href="{!! url('student/forgotten') !!} ">¿Olvidaste tu contraseña?</a> </span>
             </div>
             <input type="password" v-model="password" class="form-control" placeholder="Contraseña" required>
             <button class="btn btn-lg btn-block btn-signin" type="submit">Iniciar Sesión</button>

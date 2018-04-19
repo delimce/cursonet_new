@@ -23,4 +23,9 @@ class AccountController extends BaseController
     {
        return  view('student.pages.login');
     }
+
+    public function forgotPassword()
+    {
+        return  view('student.pages.forgotPassword');
+    }
 }
