@@ -9,6 +9,9 @@
     <!-- Bootstrap -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/student.style.css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/roboto-fontface/css/roboto/roboto-fontface.css">
+    <link rel="stylesheet" href="bower_components/roboto-fontface/css/roboto-condensed/roboto-condensed-fontface.css">
+    <link rel="stylesheet" href="bower_components/roboto-fontface/css/roboto-slab/roboto-slab-fontface.css">
 </head>
 <body>
 
@@ -16,6 +19,18 @@
 <div id="app" class="container-fluid">
     @yield('content')
 </div>
+
+
+<!--Footer-->
+<footer class="page-footer font-small blue pt-4 mt-4">
+    <!--Copyright-->
+    <div class="footer-copyright py-3 text-center">
+       Creado por:<br>
+        <a target="_blank" href="http://develemento.com.ve">devElemento</a>
+    </div>
+    <!--/.Copyright-->
+</footer>
+<!--/.Footer-->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
