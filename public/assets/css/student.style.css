@@ -9,7 +9,7 @@ body {
     font-size: 12px;
 }
 
-.card-container{
+.card-container {
     height: 350px;
     margin: auto;
     display: block;
@@ -17,13 +17,18 @@ body {
     max-width: 370px;
 }
 
+.card-container2 {
+    margin: auto;
+    display: block;
+    max-width: 860px;
+}
+
 .card-container.card {
     background: rgba(90, 90, 90, 0.7);
     border-radius: 10px;
 }
 
-
-.logo_student{
+.logo_student {
     background: url('../img/logo_student.png') no-repeat center center;
     width: 300px;
     height: 101px;
@@ -38,15 +43,15 @@ body {
     cursor: default;
 }
 
-.btn-signin{
+.btn-signin {
     background-color: #00ccff;
     color: #00ccff;
 }
 
-#login-account{
+#login-account {
     color: #fff;
     font-weight: normal;
-    text-align:right;
+    text-align: right;
     font-size-adjust: inherit;
     font-family: 'Roboto-Condensed-Light', Helvetica, Arial, sans-serif;
     margin-right: 5px;
@@ -112,8 +117,11 @@ body {
 .form-signin input[type=email],
 .form-signin input[type=password],
 .form-signin input[type=text],
+.form-signin input[type=date],
 .form-signin button {
     width: 95%;
+    opacity: 0.84;
+    color: #000;
     display: block;
     z-index: 1;
     position: relative;
@@ -123,19 +131,41 @@ body {
     -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
     border-radius: 7px;
-    font-family: 'Roboto-Condensed-Light', Helvetica, Arial, sans-serif;
+    font-family: 'Roboto-Condensed-Regular', Helvetica, Arial, sans-serif;
     margin: 10px;
 }
-.form-signin a{
+
+.form-signin input[placeholder]{
+    font-family: 'Roboto-Condensed-Light', Helvetica, Arial, sans-serif;
+}
+
+.form-signin button {
+    opacity: 1;
+}
+.form-signin a {
     color: #00ccff;
     cursor: pointer;
 }
 
+
+.form-signin label {
+    text-transform: capitalize;
+    color: #00ccff !important;
+    line-height: 1px;
+    margin-left: 20px;
+    float: left;
+}
+
+.form-group.required .control-label:after {
+    content:"*";
+    color:#00ccff;
+}
+
 .form-signin .form-control:focus {
-    border-color: rgb(104, 145, 162);
+    border-color: #00ccff;
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px #00ccff;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px #00ccff;
 }
 
 .btn.btn-signin {
@@ -158,7 +188,8 @@ body {
 .page-footer {
     color: #fff;
 }
-.page-footer a{
+
+.page-footer a {
     color: #fff;
 }
 
@@ -170,7 +201,6 @@ body {
     color: #2c3e50;
     margin-top: 60px;
 }
-
 
 .forgot-password {
     font-size: 11px;

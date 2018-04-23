@@ -21,11 +21,16 @@ class AccountController extends BaseController
 
     public function index()
     {
-       return  view('student.pages.login');
+       return  view('student.pages.account.login');
     }
 
     public function forgotPassword()
     {
-        return  view('student.pages.forgotPassword');
+        return  view('student.pages.account.forgotPassword');
+    }
+
+    public function register()
+    {
+        return  view('student.pages.account.register');
     }
 }

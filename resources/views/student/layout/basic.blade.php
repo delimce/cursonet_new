@@ -8,10 +8,12 @@
     <title>Cursonet 2.0 - @yield('title')</title>
     <!-- Bootstrap -->
     <link href="{!! url('bower_components/bootstrap/dist/css/bootstrap.min.css') !!}" rel="stylesheet">
+    <link href="{!! url('assets/css/commons.css') !!}" rel="stylesheet">
     <link href="{!! url('assets/css/student.style.css') !!}" rel="stylesheet">
     <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto/roboto-fontface.css') !!} ">
     <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto-condensed/roboto-condensed-fontface.css') !!}">
     <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto-slab/roboto-slab-fontface.css') !!}">
+    @yield('head')
 </head>
 <body>
 
