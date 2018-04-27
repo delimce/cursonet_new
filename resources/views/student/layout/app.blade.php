@@ -9,6 +9,7 @@
     <!-- Bootstrap -->
     <link href="{!! url('bower_components/bootstrap/dist/css/bootstrap.min.css') !!}" rel="stylesheet">
     <link href="{!! url('bower_components/select2/dist/css/select2.min.css') !!}" rel="stylesheet" />
+    <link href="{!! url('bower_components/animate.css/animate.min.css') !!}" rel="stylesheet" />
     <link href="{!! url('assets/css/commons.css') !!}" rel="stylesheet">
     <link href="{!! url('assets/css/student.style.css') !!}" rel="stylesheet">
     <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto/roboto-fontface.css') !!} ">
@@ -55,6 +56,7 @@
 <script src="{!! url('bower_components/select2/dist/js/select2.min.js') !!}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{!! url('bower_components/bootstrap/dist/js/bootstrap.min.js') !!}"></script>
+<script src="{!! url('bower_components/remarkable-bootstrap-notify/bootstrap-notify.min.js') !!}"></script>
 <script>
     $(document).ready(function() {
         $('.adv-select').select2({
