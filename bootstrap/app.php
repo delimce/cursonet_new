@@ -67,6 +67,9 @@ $app->singleton(
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -78,10 +81,11 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(Collective\Html\HtmlServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
+class_alias('Collective\Html\HtmlFacade', 'Html');
+class_alias('Collective\Html\FormFacade', 'Form');
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

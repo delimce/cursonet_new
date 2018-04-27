@@ -6,7 +6,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Models\Cn2\Student;
 
-class AccountController extends BaseController
+class InitialController extends BaseController
 {
     /**
      * Create a new controller instance.
@@ -21,16 +21,16 @@ class AccountController extends BaseController
 
     public function index()
     {
-       return  view('student.pages.account.login');
+       return  view('student.pages.initial.login');
     }
 
     public function forgotPassword()
     {
-        return  view('student.pages.account.forgotPassword');
+        return  view('student.pages.initial.forgotPassword');
     }
 
     public function register()
     {
-        return  view('student.pages.account.register');
+        return  view('student.pages.initial.register');
     }
 }
