@@ -10,6 +10,7 @@
     <link href="{!! url('bower_components/bootstrap/dist/css/bootstrap.min.css') !!}" rel="stylesheet">
     <link href="{!! url('bower_components/select2/dist/css/select2.min.css') !!}" rel="stylesheet" />
     <link href="{!! url('bower_components/animate.css/animate.min.css') !!}" rel="stylesheet" />
+    <link href="{!! url('bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.css') !!}" rel="stylesheet">
     <link href="{!! url('assets/css/commons.css') !!}" rel="stylesheet">
     <link href="{!! url('assets/css/student.style.css') !!}" rel="stylesheet">
     <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto/roboto-fontface.css') !!} ">
