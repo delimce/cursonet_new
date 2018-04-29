@@ -8,14 +8,17 @@
     <title>Cursonet 2.0 - @yield('title')</title>
     <!-- Bootstrap -->
     <link href="{!! url('bower_components/bootstrap/dist/css/bootstrap.min.css') !!}" rel="stylesheet">
-    <link href="{!! url('bower_components/select2/dist/css/select2.min.css') !!}" rel="stylesheet" />
-    <link href="{!! url('bower_components/animate.css/animate.min.css') !!}" rel="stylesheet" />
-    <link href="{!! url('bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.css') !!}" rel="stylesheet">
+    <link href="{!! url('bower_components/select2/dist/css/select2.min.css') !!}" rel="stylesheet"/>
+    <link href="{!! url('bower_components/animate.css/animate.min.css') !!}" rel="stylesheet"/>
+    <link href="{!! url('bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css') !!}"
+          rel="stylesheet">
     <link href="{!! url('assets/css/commons.css') !!}" rel="stylesheet">
     <link href="{!! url('assets/css/student.style.css') !!}" rel="stylesheet">
     <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto/roboto-fontface.css') !!} ">
-    <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto-condensed/roboto-condensed-fontface.css') !!}">
-    <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto-slab/roboto-slab-fontface.css') !!}">
+    <link rel="stylesheet"
+          href="{!! url('bower_components/roboto-fontface/css/roboto-condensed/roboto-condensed-fontface.css') !!}">
+    <link rel="stylesheet"
+          href="{!! url('bower_components/roboto-fontface/css/roboto-slab/roboto-slab-fontface.css') !!}">
     @yield('head')
 </head>
 <body>
@@ -37,20 +40,36 @@
     <div class="right-nav">
         <div class="profile-activity clearfix">
             <div id="user-logged">
-                <img src="http://bootdey.com/img/Content/avatar/avatar1.png">
-                <span><b>Estudiante:</b>&nbsp;Carmelo Jose Alvarado Ramirez</span>
-                <span><a href="#">Editar Perfil</a></span>
+                <h1><i class="fas fa-user-circle"></i></h1>
+                <div id="user-info">
+                    <span><b>Estudiante:</b>&nbsp;Carmelo Jose Alvarado Ramirez</span>
+                    <span><a href="#">Editar Perfil</a></span>
+                </div>
             </div>
+        </div>
+        <div class="nav-items">
+            <span><a href="#">Inicio</a> </span>|
+            <span><a href="#">Mis Notas</a></span>|
+            <span><a href="#">Mensajes</a></span>|
+            <span><a style="color: #00ccff" href="#">Cerrar sesion</a></span>
         </div>
     </div>
 
 </nav>
 <div id="app2" class="container-fluid">
-    @section('sidebar')
-
-    @show
     @yield('content')
+
+    <div class="footer">
+        <div class="footer-nav-items">
+            <span><a href="#">Inicio</a> </span>|
+            <span><a href="#">Facilitadores</a></span>|
+            <span><a href="#">Centro de Soporte</a></span>
+        </div>
+    </div>
+
 </div>
+
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{!! url('bower_components/jquery/dist/jquery.min.js') !!}"></script>
@@ -59,7 +78,7 @@
 <script src="{!! url('bower_components/bootstrap/dist/js/bootstrap.min.js') !!}"></script>
 <script src="{!! url('bower_components/remarkable-bootstrap-notify/bootstrap-notify.min.js') !!}"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.adv-select').select2({
             placeholder: "Seleccone un curso",
             allowClear: true

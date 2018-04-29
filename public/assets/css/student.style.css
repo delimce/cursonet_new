@@ -22,6 +22,19 @@ a {
     max-width: 370px;
 }
 
+.footer {
+    width: 100%;
+    text-align: right;
+    color: #000;
+}
+
+.footer .footer-nav-items a{
+    font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
+    text-align: right;
+    color: #000;
+}
+
+
 .card-container2 {
     margin: auto;
     display: block;
@@ -224,6 +237,7 @@ a {
 
 /*navbar for app*/
 #main-nav{
+    margin-top: 0;
     height: 105px;
     background-color: #383A46;
 
@@ -232,6 +246,20 @@ a {
 .left-nav{
     margin-left: 10px;
     color:#eff0f2;
+}
+
+.nav-items{
+    color: #eff0f2;
+    display:inline;
+    float:left;
+}
+.nav-items span,  .footer-nav-items span{
+    padding: 10px 20px 10px 2px;
+}
+
+.nav-items a{
+    font-weight: bold;
+    color: #eff0f2;
 }
 
 #nav-logo{
@@ -252,15 +280,15 @@ a {
 /*profile section*/
 
 .profile-activity {
-    padding: 10px 4px;
+    top: 1px;
+    padding: 5px 1px;
     position: relative;
 }
 
-.profile-activity img {
-    border: 2px solid #666;
+.profile-activity h1, img {
     float:left;
     border-radius: 100%;
-    max-width: 45px;
+    max-width: 47px;
     margin-right: 10px;
     margin-left: 0;
     box-shadow: none
@@ -272,12 +300,14 @@ a {
     min-width: 300px;
 }
 
+#user-logged #user-info{
+    padding-top: 10px;
+}
+
 #user-logged span{
     width: 300px;
     display: block;
 }
-
-
 
 
 #app2{
@@ -287,10 +317,43 @@ a {
     background: -webkit-linear-gradient(top, #383a46 0%,#eff0f2 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, #383a46 0%,#eff0f2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#383a46', endColorstr='#eff0f2',GradientType=0 ); /* IE6-9 */
-    height: 550px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    padding-bottom: 40px;
 }
 
+/*homepage*/
+.home-page{
+    padding-top: 13px;
+}
+.card-border{
+    padding: 2px 5px 5px 2px;
+    border: 5px solid transparent;
+}
+.home-page section{
+    background-color: #eff0f2;
+    padding: 14px 15px 11px 10px;
+    width: 96%;
+    height: 100%;
+    min-height: 200px;
+    opacity: 0.9;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+.home-page section div{
+    padding: 1px 11px 5px 11px;
+}
+.subtext{
+    font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
+    text-transform: capitalize;
+}
+h2{
+    text-transform: capitalize;
+    font-size: 13px;
+    text-decoration: underline;
+    font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
+    margin-left: 8px;
+}
