@@ -4,7 +4,7 @@
 @section('content')
     <div class="home-page">
         <div class="row">
-            <div class="col-sm-7 card-border">
+            <div class="col-md-7 card-border">
                 <section>
                     <h2>Informacion del Curso</h2>
 
@@ -48,7 +48,7 @@
 
                 </section>
             </div>
-            <div class="col-sm-5 card-border">
+            <div class="col-md-5 card-border">
                 <section>
                     <h2>Cartelera</h2>
                 </section>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-7 card-border">
+            <div class="col-md-7 card-border">
                 <section>
                     <h2>Bandeja de entrada</h2>
 
@@ -90,7 +90,7 @@
                 </section>
             </div>
 
-            <div class="col-sm-5 card-border">
+            <div class="col-md-5 card-border">
                 <section>
                     <h2>Actividad reciente</h2>
                     <div class="row">
