@@ -50,7 +50,7 @@
             </div>
             <div class="col-sm-5 card-border">
                 <section>
-                    <h2>Informacion General</h2>
+                    <h2>Cartelera</h2>
                 </section>
 
             </div>

@@ -248,6 +248,22 @@ a {
     color:#eff0f2;
 }
 
+@media (max-width: 530px) {
+
+    #main-nav{
+        padding-top: 10px;
+        height: 205px;
+    }
+
+    .home-page{
+        padding-top: 123px;
+    }
+}
+
+.right-nav{
+
+}
+
 .nav-items{
     color: #eff0f2;
     display:inline;
