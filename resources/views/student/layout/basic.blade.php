@@ -8,15 +8,17 @@
     <title>Cursonet 2.0 - @yield('title')</title>
     <!-- Bootstrap -->
     <link href="{!! url('bower_components/bootstrap/dist/css/bootstrap.min.css') !!}" rel="stylesheet">
-    <link href="{!! url('bower_components/animate.css/animate.min.css') !!}" rel="stylesheet" />
+    <link href="{!! url('bower_components/animate.css/animate.min.css') !!}" rel="stylesheet"/>
     <link href="{!! url('bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css') !!}"
           rel="stylesheet">
     <link href="{!! url('assets/css/commons.css') !!}" rel="stylesheet">
     <link href="{!! url('assets/css/student.style.css') !!}" rel="stylesheet">
     <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto/roboto-fontface.css') !!} ">
-    <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto-condensed/roboto-condensed-fontface.css') !!}">
-    <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto-slab/roboto-slab-fontface.css') !!}">
-    @yield('head')
+    <link rel="stylesheet"
+          href="{!! url('bower_components/roboto-fontface/css/roboto-condensed/roboto-condensed-fontface.css') !!}">
+    <link rel="stylesheet"
+          href="{!! url('bower_components/roboto-fontface/css/roboto-slab/roboto-slab-fontface.css') !!}">
+    @stack('head')
 </head>
 <body>
 
@@ -27,7 +29,7 @@
 <footer class="page-footer font-small blue pt-4 mt-4">
     <!--Copyright-->
     <div class="footer-copyright py-3 text-center">
-       Creado por:<br>
+        Creado por:<br>
         <a target="_blank" href="http://develemento.com.ve">devElemento</a>
     </div>
     <!--/.Copyright-->
@@ -41,6 +43,6 @@
 <script src="{!! url('bower_components/bootstrap/dist/js/bootstrap.min.js') !!}"></script>
 <script src="{!! url('bower_components/remarkable-bootstrap-notify/bootstrap-notify.min.js') !!}"></script>
 <script src="{!! url('assets/js/functions.js') !!}"></script>
-@yield('scripts')
+@stack('scripts')
 </body>
 </html>

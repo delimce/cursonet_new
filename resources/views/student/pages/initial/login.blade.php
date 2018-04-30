@@ -24,7 +24,7 @@
         </form><!-- /form -->
     </div><!-- /card-container -->
 @endsection
-@section('scripts')
+@push('scripts')
     <script>
         $("#login_form").submit(function (event) {
 
@@ -39,4 +39,4 @@
             event.preventDefault();
         });
     </script>
-@stop
+@endpush

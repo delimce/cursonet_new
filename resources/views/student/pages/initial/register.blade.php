@@ -1,8 +1,8 @@
 @extends('student.layout.basic')
 @section('title', 'Registrarse')
-@section('head')
+@push('head')
 <script src='https://www.google.com/recaptcha/api.js'></script>
-@stop
+@endpush
 @section('content')
     <div id="login-box" class="card card-container2">
         <div class="logo_student">

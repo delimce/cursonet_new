@@ -20,6 +20,7 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () us
     $router->get('/forgotten', 'InitialController@forgotPassword');
     $router->get('/register', 'InitialController@register');
     $router->get('/home', 'HomeController@home');
+    $router->get('/classroom', 'ClassRoomController@main');
     $router->get('profile', [
         'middleware' => 'auth',
         'logout' => 'AccountController@showProfile'

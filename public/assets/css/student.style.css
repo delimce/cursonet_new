@@ -349,13 +349,12 @@ a {
     padding: 5px 7px 5px 18px;
     border: 5px solid transparent;
 }
-.home-page section{
+.home-page section, .classroom-page section{
     background-color: #eff0f2;
     padding: 14px 15px 11px 10px;
     width: 96%;
     height: 100%;
     min-height: 200px;
-    opacity: 0.9;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
@@ -373,4 +372,13 @@ h2{
     text-decoration: underline;
     font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
     margin-left: 8px;
+}
+
+/*classroom*/
+.nav-link{
+    font-family: 'Roboto-Regular', Helvetica, Arial, sans-serif;
+}
+
+#classroom-content{
+    min-height: 400px;
 }

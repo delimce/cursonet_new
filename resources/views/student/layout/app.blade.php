@@ -19,7 +19,7 @@
           href="{!! url('bower_components/roboto-fontface/css/roboto-condensed/roboto-condensed-fontface.css') !!}">
     <link rel="stylesheet"
           href="{!! url('bower_components/roboto-fontface/css/roboto-slab/roboto-slab-fontface.css') !!}">
-    @yield('head')
+    @stack('head')
 </head>
 <body>
 <nav id="main-nav" class="navbar navbar-default navbar-fixed-top">
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="nav-items">
-            <span><a href="#">Inicio</a> </span>|
+            <span><a href="{!! url('student/home') !!}">Inicio</a> </span>|
             <span><a href="#">Mis Notas</a></span>|
             <span><a href="#">Mensajes</a></span>|
             <span><a style="color: #00ccff" href="#">Cerrar sesion</a></span>
@@ -61,7 +61,7 @@
 
     <div class="footer">
         <div class="footer-nav-items">
-            <span><a href="#">Inicio</a> </span>|
+            <span><a href="{!! url('student/home') !!}">Inicio</a> </span>|
             <span><a href="#">Facilitadores</a></span>|
             <span><a href="#">Centro de Soporte</a></span>
         </div>
@@ -70,13 +70,13 @@
 </div>
 
 
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{!! url('bower_components/jquery/dist/jquery.min.js') !!}"></script>
 <script src="{!! url('bower_components/select2/dist/js/select2.min.js') !!}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{!! url('bower_components/bootstrap/dist/js/bootstrap.min.js') !!}"></script>
 <script src="{!! url('bower_components/remarkable-bootstrap-notify/bootstrap-notify.min.js') !!}"></script>
+@stack('scripts')
 <script>
     $(document).ready(function () {
         $('.adv-select').select2({
