@@ -4,18 +4,18 @@
     <div class="classroom-page">
         <div class="row">
             <div class="col-md-3 card-border">
-                @include('student.pages.classroom.modules', ['some' => 'data'])
+                @include('student.pages.classroom.modules', ['modules' => [["selected"=>true],["selected"=>false],["selected"=>false]]])
             </div>
 
             <div class="col-md-9 card-border">
                 <section id="classroom-content">
 
-                    <ul class="nav nav-tabs" id="classroom-tabs" role="tablist">
+                    <ul class="nav nav-tabs mb-3" id="classroom-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#content" role="tab" aria-controls="contenido" aria-selected="true">Contenido</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="files-tab" data-toggle="tab" href="#files" role="tab" aria-controls="archivos" aria-selected="false">Archivos</a>
+                            <a class="nav-link" id="files-tab" data-toggle="tab" href="#resources" role="tab" aria-controls="recursos" aria-selected="false">Recursos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="eval-tab" data-toggle="tab" href="#eval" role="tab" aria-controls="evaluaciones" aria-selected="false">Evaluaciones</a>
@@ -34,7 +34,7 @@
                         <div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="home-tab">
                             @include('student.pages.classroom.content', ['some' => 'data'])
                         </div>
-                        <div class="tab-pane fade" id="files" role="tabpanel" aria-labelledby="files-tab">...</div>
+                        <div class="tab-pane fade" id="resources" role="tabpanel" aria-labelledby="files-tab">...</div>
                         <div class="tab-pane fade" id="eval" role="tabpanel" aria-labelledby="eval-tab">...</div>
                         <div class="tab-pane fade" id="forum" role="tabpanel" aria-labelledby="forum-tab">...</div>
                         <div class="tab-pane fade" id="project" role="tabpanel" aria-labelledby="project-tab">...</div>

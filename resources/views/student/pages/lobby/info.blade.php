@@ -35,8 +35,15 @@
 
     <div style="float: right; width: 50%; padding-top: 20px">
         <div class="col-sm-auto">
-            <button class="btn btn-lg btn-block btn-signin" type="submit">Ir al Curso</button>
+            <button id="btocontent" class="btn btn-lg btn-block btn-signin" type="submit">Ir al Curso</button>
         </div>
     </div>
 
 </section>
+@push('scripts')
+    <script>
+        $("#btocontent").click(function () {
+            redirect('{!! url('student/classroom') !!}');
+        })
+    </script>
+@endpush

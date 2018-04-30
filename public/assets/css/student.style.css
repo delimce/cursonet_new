@@ -382,3 +382,16 @@ h2{
 #classroom-content{
     min-height: 400px;
 }
+
+.module-item{
+    padding: 6px 2px 9px 8px;
+    cursor: pointer;
+}
+
+.current-module {
+    background-color: #00ccff;
+    border:1px solid #eff0f2;
+    cursor: default;
+    border-radius: 5px;
+
+}

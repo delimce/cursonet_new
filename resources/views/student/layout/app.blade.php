@@ -42,7 +42,7 @@
             <div id="user-logged">
                 <h1><i class="fas fa-user-circle"></i></h1>
                 <div id="user-info">
-                    <span><b>Estudiante:</b>&nbsp;Carmelo Jose Alvarado Ramirez</span>
+                    <span><b>Estudiante:</b>&nbsp;Ramon Jose Alvarado Ramirez</span>
                     <span><a href="#">Editar Perfil</a></span>
                 </div>
             </div>
@@ -76,6 +76,7 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{!! url('bower_components/bootstrap/dist/js/bootstrap.min.js') !!}"></script>
 <script src="{!! url('bower_components/remarkable-bootstrap-notify/bootstrap-notify.min.js') !!}"></script>
+<script src="{!! url('assets/js/functions.js') !!}"></script>
 @stack('scripts')
 <script>
     $(document).ready(function () {
