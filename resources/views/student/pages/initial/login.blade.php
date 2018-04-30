@@ -24,3 +24,10 @@
         </form><!-- /form -->
     </div><!-- /card-container -->
 @endsection
+@section('scripts')
+   <script>
+
+       showSuccess("hola")
+
+   </script>
+@stop
