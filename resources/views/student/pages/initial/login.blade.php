@@ -10,14 +10,14 @@
         <div class="logo_student">
             &nbsp;
         </div>
-        <form class="form-signin">
+        <form id="login_form" class="form-signin">
             <span id="reauth-email" class="reauth-email"></span>
-            <input type="email" v-model="email" class="form-control" placeholder="Usuario" required autofocus>
+            <input type="email" id="email" class="form-control" placeholder="Usuario" required autofocus>
             <div id="login-account">
                 <span class="forgot-password"><a href="{!! url('student/forgotten') !!} ">¿Olvidaste tu contraseña?</a> </span>
             </div>
-            <input type="password" v-model="password" class="form-control" placeholder="Contraseña" required>
-            <button class="btn btn-lg btn-block btn-signin" type="submit">Iniciar Sesión</button>
+            <input type="password" id="password" class="form-control" placeholder="Contraseña" required>
+            <button id="blogin" class="btn btn-lg btn-block btn-signin" type="submit">Iniciar Sesión</button>
             <div id="login-account">
                 <span>¿No tienes una cuenta?&nbsp;<a href="{!! url('student/register') !!} ">Registrate Aquí</a> </span>
             </div>
@@ -25,9 +25,18 @@
     </div><!-- /card-container -->
 @endsection
 @section('scripts')
-   <script>
+    <script>
+        $("#login_form").submit(function (event) {
 
-       showSuccess("hola")
-
-   </script>
+            axios.post('{!! url('api/student/login') !!}', {
+                email: $("#email").val(),
+                password: $("#password").val()
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                showAlert("datos de acceso no autorizados")
+            });
+            event.preventDefault();
+        });
+    </script>
 @stop

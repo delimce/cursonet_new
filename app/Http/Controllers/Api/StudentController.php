@@ -31,4 +31,16 @@ class StudentController extends BaseController
     }
 
 
+    public function forgotten(Request $req)
+    {
+
+        $this->validate($req, [
+            'email' => 'required|email'
+        ]);
+
+        return response()->json(['name' => 'Abigail', 'state' => 'CA']);
+
+    }
+
+
 }
