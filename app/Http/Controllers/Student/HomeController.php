@@ -24,4 +24,10 @@ class HomeController extends BaseController
        return  view('student.pages.lobby.home');
     }
 
+    public function logout()
+    {
+        return redirect()->route('student.login');
+    }
+
+
 }

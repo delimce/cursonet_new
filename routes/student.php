@@ -16,11 +16,16 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () use ($router) {
-    $router->get('/', 'InitialController@index');
+   // $router->get('/', 'InitialController@index');
+    $router->get('/', [
+        'as' => 'student.login', 'uses' => 'InitialController@index'
+    ]);
     $router->get('/forgotten', 'InitialController@forgotPassword');
     $router->get('/register', 'InitialController@register');
     $router->get('/home', 'HomeController@home');
+    $router->get('/logout', 'HomeController@logout');
     $router->get('/classroom', 'ClassRoomController@main');
+
     $router->get('profile', [
         'middleware' => 'auth',
         'logout' => 'AccountController@showProfile'

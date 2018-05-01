@@ -51,7 +51,7 @@
             <span><a href="{!! url('student/home') !!}">Inicio</a> </span>|
             <span><a href="#">Mis Notas</a></span>|
             <span><a href="#">Mensajes</a></span>|
-            <span><a style="color: #00ccff" href="#">Cerrar sesion</a></span>
+            <span><a style="color: #00ccff" href="{!! url('student/logout') !!}">Cerrar sesion</a></span>
         </div>
     </div>
 
