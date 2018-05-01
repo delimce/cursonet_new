@@ -13,11 +13,10 @@
 
             <section id="classroom-content">
 
-                <button type="button" id="sidebarCollapse" class="navbar-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                <a href="#" id="sidebarCollapse">
+                    <i class="plusMinus fas fa-arrow-left"></i>
+                    <span class="swapText">Ocultar temas</span>
+                </a>
 
                 <ul class="nav nav-tabs mb-3" id="classroom-tabs" role="tablist">
                     <li class="nav-item">
@@ -81,6 +80,11 @@
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
+                $(this).find(".plusMinus").toggleClass('fa-arrow-left fa-arrow-right');
+                if($("#sidebar").hasClass('active'))
+                    $(".swapText").html("Mostrar temas")
+                else
+                    $(".swapText").html("Ocultar temas")
             });
         });
     </script>

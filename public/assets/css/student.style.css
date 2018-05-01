@@ -28,12 +28,11 @@ a {
     color: #000;
 }
 
-.footer .footer-nav-items a{
+.footer .footer-nav-items a {
     font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
     text-align: right;
     color: #000;
 }
-
 
 .card-container2 {
     margin: auto;
@@ -153,7 +152,7 @@ a {
     margin: 10px;
 }
 
-.form-signin input[placeholder]{
+.form-signin input[placeholder] {
     font-family: 'Roboto-Condensed-Light', Helvetica, Arial, sans-serif;
 }
 
@@ -170,8 +169,8 @@ a {
 }
 
 .form-group.required .control-label:after {
-    content:"*";
-    color:#00ccff;
+    content: "*";
+    color: #00ccff;
 }
 
 .form-signin .form-control:focus {
@@ -224,55 +223,55 @@ a {
 }
 
 /*selects*/
-.adv-select{
+.adv-select {
     min-width: 160px;
 }
 
-
 /*navbar for app*/
-#main-nav{
+#main-nav {
     margin-top: 0;
     height: 105px;
     background-color: #383A46;
 
 }
 
-.left-nav{
+.left-nav {
     margin-left: 10px;
-    color:#eff0f2;
+    color: #eff0f2;
 }
 
 @media (max-width: 530px) {
 
-    #main-nav{
+    #main-nav {
         padding-top: 10px;
         height: 205px;
     }
 
-    .home-page{
+    .home-page {
         padding-top: 123px;
     }
 }
 
-.right-nav{
+.right-nav {
 
 }
 
-.nav-items{
+.nav-items {
     color: #eff0f2;
-    display:inline;
-    float:left;
+    display: inline;
+    float: left;
 }
-.nav-items span,  .footer-nav-items span{
+
+.nav-items span, .footer-nav-items span {
     padding: 10px 20px 10px 2px;
 }
 
-.nav-items a{
+.nav-items a {
     font-weight: bold;
     color: #eff0f2;
 }
 
-#nav-logo{
+#nav-logo {
     background: url('../img/logo_student.png') no-repeat;
     background-size: 150px 45px;
     position: absolute;
@@ -281,11 +280,10 @@ a {
     top: 2px;
 }
 
-#nav-selects{
+#nav-selects {
     width: 200px;
     position: absolute;
 }
-
 
 /*profile section*/
 
@@ -296,7 +294,7 @@ a {
 }
 
 .profile-activity h1, img {
-    float:left;
+    float: left;
     border-radius: 100%;
     max-width: 47px;
     margin-right: 10px;
@@ -304,29 +302,27 @@ a {
     box-shadow: none
 }
 
-
-#user-logged{
+#user-logged {
     color: #eff0f2;
     min-width: 300px;
 }
 
-#user-logged #user-info{
+#user-logged #user-info {
     padding-top: 10px;
 }
 
-#user-logged span{
+#user-logged span {
     width: 300px;
     display: block;
 }
 
-
-#app2{
+#app2 {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#383a46+0,eff0f2+100 */
     background: #383a46; /* Old browsers */
     background: -moz-linear-gradient(top, #383a46 0%, #eff0f2 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #383a46 0%,#eff0f2 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #383a46 0%,#eff0f2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#383a46', endColorstr='#eff0f2',GradientType=0 ); /* IE6-9 */
+    background: -webkit-linear-gradient(top, #383a46 0%, #eff0f2 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #383a46 0%, #eff0f2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#383a46', endColorstr='#eff0f2', GradientType=0); /* IE6-9 */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -336,14 +332,16 @@ a {
 }
 
 /*homepage*/
-.home-page{
+.home-page {
     padding-top: 13px;
 }
-.card-border{
+
+.card-border {
     padding: 5px 7px 5px 18px;
     border: 5px solid transparent;
 }
-.home-page section{
+
+.home-page section {
     background-color: #eff0f2;
     padding: 14px 15px 11px 10px;
     width: 96%;
@@ -353,14 +351,17 @@ a {
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
-.home-page section div{
+
+.home-page section div {
     padding: 1px 11px 5px 11px;
 }
-.subtext{
+
+.subtext {
     font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
     text-transform: capitalize;
 }
-h2{
+
+h2 {
     text-transform: capitalize;
     font-size: 13px;
     text-decoration: underline;
@@ -369,11 +370,11 @@ h2{
 }
 
 /*classroom*/
-.nav-link{
+.nav-link {
     font-family: 'Roboto-Regular', Helvetica, Arial, sans-serif;
 }
 
-#classroom-content{
+#classroom-content {
     min-height: 400px;
     width: 98%;
     background-color: #eff0f2;
@@ -383,24 +384,23 @@ h2{
     border-radius: 10px;
 }
 
-#classroom-tabs{
+#classroom-tabs {
+    margin-top: 12px;
     width: 95%;
 }
 
-
-.module-item{
+.module-item {
     padding: 6px 2px 9px 8px;
     cursor: pointer;
 }
 
 .current-module {
     background-color: #00ccff;
-    border:1px solid #eff0f2;
+    border: 1px solid #eff0f2;
     cursor: default;
     border-radius: 5px;
 
 }
-
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -411,7 +411,6 @@ h2{
     perspective: 1500px;
     padding-top: 15px;
 }
-
 
 #sidebar {
     min-width: 290px;
@@ -434,7 +433,6 @@ h2{
     transform: rotateY(100deg);
 }
 
-
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -445,36 +443,18 @@ h2{
 }
 
 #sidebarCollapse {
-    width: 40px;
-    height: 40px;
-    background: #f5f5f5;
+    width: 110px;
+    height: 30px;
 }
 
 #sidebarCollapse span {
     width: 80%;
-    height: 2px;
     margin: 0 auto;
-    display: block;
-    background: #555;
-    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
-    transition-delay: 0.2s;
 }
 
-#sidebarCollapse span:first-of-type {
-    transform: rotate(45deg) translate(2px, 2px);
-}
-#sidebarCollapse span:nth-of-type(2) {
-    opacity: 0;
-}
-#sidebarCollapse span:last-of-type {
-    transform: rotate(-45deg) translate(1px, -1px);
+#sidebarCollapse.active{
+    color: #000000;
 }
 
-
-#sidebarCollapse.active span {
-    transform: none;
-    opacity: 1;
-    margin: 5px auto;
-}
 
 
