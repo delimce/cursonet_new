@@ -349,7 +349,7 @@ a {
     padding: 5px 7px 5px 18px;
     border: 5px solid transparent;
 }
-.home-page section, .classroom-page section{
+.home-page section{
     background-color: #eff0f2;
     padding: 14px 15px 11px 10px;
     width: 96%;
@@ -381,7 +381,17 @@ h2{
 
 #classroom-content{
     min-height: 400px;
+    background-color: #eff0f2;
+    padding: 14px 15px 11px 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
 }
+
+#classroom-tabs{
+    width: 95%;
+}
+
 
 .module-item{
     padding: 6px 2px 9px 8px;
@@ -395,3 +405,78 @@ h2{
     border-radius: 5px;
 
 }
+
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    perspective: 1500px;
+    padding-top: 15px;
+}
+
+
+#sidebar {
+    min-width: 290px;
+    max-width: 290px;
+    background-color: #eff0f2;
+    padding: 17px 16px 11px 16px;
+    margin-right: 14px;
+    height: 100%;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
+}
+
+#sidebar.active {
+    margin-left: -295px;
+    transform: rotateY(100deg);
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+#content {
+    min-height: 71vh;
+    transition: all 0.3s;
+}
+
+#sidebarCollapse {
+    width: 40px;
+    height: 40px;
+    background: #f5f5f5;
+}
+
+#sidebarCollapse span {
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    display: block;
+    background: #555;
+    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+    transition-delay: 0.2s;
+}
+
+#sidebarCollapse span:first-of-type {
+    transform: rotate(45deg) translate(2px, 2px);
+}
+#sidebarCollapse span:nth-of-type(2) {
+    opacity: 0;
+}
+#sidebarCollapse span:last-of-type {
+    transform: rotate(-45deg) translate(1px, -1px);
+}
+
+
+#sidebarCollapse.active span {
+    transform: none;
+    opacity: 1;
+    margin: 5px auto;
+}
+
+
