@@ -3,6 +3,7 @@
 var redirect = function (url) {
     window.location = url
 }
+
 var showAlert = function (message) {
     $.notify({
         // options

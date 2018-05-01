@@ -34,7 +34,7 @@
             }).then(function (response) {
                 console.log(response);
             }).catch(function (error) {
-                showAlert("datos de acceso no autorizados")
+                showAlert(error.response.data.message)
             });
             event.preventDefault();
         });
