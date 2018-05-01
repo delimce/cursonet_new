@@ -161,9 +161,6 @@ a {
     opacity: 1;
 }
 
-
-
-
 .form-signin label {
     text-transform: capitalize;
     color: #00ccff !important;
@@ -185,9 +182,6 @@ a {
 }
 
 .btn.btn-signin {
-    /*background-color: #4d90fe; */
-    /*background-color: rgb(104, 145, 162);
-    / background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
     color: #fff;
     padding: 0px;
     font-weight: 700;
@@ -381,6 +375,7 @@ h2{
 
 #classroom-content{
     min-height: 400px;
+    width: 98%;
     background-color: #eff0f2;
     padding: 14px 15px 11px 10px;
     -moz-border-radius: 10px;
@@ -424,12 +419,14 @@ h2{
     background-color: #eff0f2;
     padding: 17px 16px 11px 16px;
     margin-right: 14px;
-    height: 100%;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
+    height: 100%;
+    position: sticky;
+    top: 30px;
 }
 
 #sidebar.active {
@@ -442,6 +439,7 @@ h2{
     CONTENT STYLE
 ----------------------------------------------------- */
 #content {
+    width: 100%;
     min-height: 71vh;
     transition: all 0.3s;
 }
