@@ -47,7 +47,14 @@ class StudentController extends BaseController
             'email' => 'required|email'
         ]);
 
-        return response()->json(['name' => 'Abigail', 'state' => 'CA']);
+        $user = Student::where('email', $req->input('email'))->first();
+        if (!is_null($user)){
+            return response()->json(['status' => 'ok']);
+        }else{
+            return response()->json(['status' => 'error','message'=>'Email desconocido'], 401);
+        }
+
+
 
     }
 

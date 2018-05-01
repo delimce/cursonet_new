@@ -15,7 +15,7 @@
         </form><!-- /form -->
     </div><!-- /card-container -->
 @endsection
-@section('scripts')
+@push('scripts')
     <script>
         $("#forget_form").submit(function (event) {
 
@@ -24,9 +24,9 @@
             }).then(function (response) {
                 showSuccess("Se ha enviado un email con instrucciones para el cambio de clave, revise su cuenta de correo para culminar el proceso.",6000)
             }).catch(function (error) {
-                showAlert("problemas con el email suministrado")
+                showAlert(error.response.data.message)
             });
             event.preventDefault();
         });
     </script>
-@stop
+@endpush
