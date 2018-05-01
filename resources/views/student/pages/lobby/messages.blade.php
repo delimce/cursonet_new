@@ -26,5 +26,10 @@
         </div>
     </div>
 
-    <div style="text-align: right"><a href="#">Ver todos los mensajes</a></div>
+    <div style="text-align: right">
+        <a href="#">
+            <i class="fas fa-plus-square"></i>
+            Ver todos los mensajes
+        </a>
+    </div>
 </section>
