@@ -66,21 +66,21 @@
 
                     <div class="form-group required row">
                         <div class="col-sm-6">
-                            <label for="password1" class="control-label">Clave</label>
-                            <input type="password" class="form-control" id="password1" name="password1"
-                                   autocomplete="new-pass1"
+                            <label for="pass" class="control-label">Clave</label>
+                            <input type="password" class="form-control" id="pass" name="pass"
+                                   autocomplete="new-pass"
                                    placeholder="Clave"
                                    data-bv-identical="true"
-                                   data-bv-identical-field="password2"
+                                   data-bv-identical-field="pass2"
                                    data-bv-identical-message="La clave no es igual a la confirmación"
                                    required>
                         </div>
                         <div class="col-sm-6">
                             <label for="password2" class="control-label">Confirmación clave</label>
-                            <input type="password" class="form-control" id="password2" name="password2"
+                            <input type="password" class="form-control" id="pass2" name="pass2"
                                    autocomplete="new-pass2"
                                    data-bv-identical="true"
-                                   data-bv-identical-field="password1"
+                                   data-bv-identical-field="pass"
                                    data-bv-identical-message="La clave no es igual a la confirmación"
                                    placeholder="confirme la clave" required>
                         </div>
@@ -118,16 +118,15 @@
                 // Get the form instance
                 var $form = $(e.target);
 
-                axios.post('{!! url('api/student/signup') !!}', {
-                    email: $("#email").val(),
-                    password: $("#password").val()
-                }).then(function (response) {
+                axios.post('{!! url('api/student/signup') !!}', $form.serialize())
+                .then(function (response) {
                     console.log(response);
                 }).catch(function (error) {
-                    showAlert(error.response.data.message)
+                    console.log(error);
+                    showAlert(error.response.data.message);
+                    $('#bregister').prop('disabled', false);
                 });
 
-                $('#register_form').disableSubmitButtons(false)
             })
 
 

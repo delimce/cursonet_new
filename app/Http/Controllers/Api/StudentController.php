@@ -77,25 +77,27 @@ class StudentController extends BaseController
 
     public function signUp(Request $req){
 
-        $this->validate($req, [
+    /*    $this->validate($req, [
             'email' => 'required|email',
             'nombre' => 'required',
             'apellido' => 'required',
             'id_number' => 'required',
             'fecha_nac' => 'required',
             'pass' => 'required'
-        ]);
+        ]);*/
 
 
         $user = Student::where('email', $req->input('email'))->orWhere('id_number',$req->input('id_number'))->first();
-        if (!is_null($user)){
+
+        if (is_null($user)){
 
             $student = new Student();
-            $student->nombre = $req->nombre;
-            $student->apellido = $req->apellido;
-            $student->id_number = $req->id_number;
-            $student->fecha_nac = $req->fecha_nac;
-            $student->pass = Hash::make($req->pass);
+            $student->nombre = $req->input('nombre');
+            $student->apellido = $req->input('apellido');
+            $student->id_number = $req->input('id_number');
+            $student->email = $req->input('email');
+            $student->fecha_nac = $req->input('fecha_nac');
+            $student->pass = Hash::make($req->input('pass'));
 
             $student->save();
 
