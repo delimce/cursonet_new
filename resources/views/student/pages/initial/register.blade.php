@@ -8,18 +8,22 @@
         <div class="logo_student">
             &nbsp;&nbsp;
         </div>
-        <form id="register_form" class="form-signin">
+        <form id="register_form" class="form-signin"
+              data-bv-submitbuttons='button[type="submit"]'
+              data-bv-live="enabled">
             <div class="row">
                 <div class="col-md-10 mx-auto">
                     <div class="form-group required row">
                         <div class="col-sm-6">
                             <label for="nombre" class="control-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"
+                                   autocomplete="my-name"
                                    required>
                         </div>
                         <div class="col-sm-6">
                             <label for="apellido" class="control-label">Apellido</label>
                             <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido"
+                                   autocomplete="my-lastname"
                                    required>
                         </div>
                     </div>
@@ -27,11 +31,13 @@
                         <div class="col-sm-6">
                             <label for="id_number" class="control-label">Cédula</label>
                             <input type="text" class="form-control" id="id_number" name="id_number" placeholder="Cédula"
+                                   autocomplete="numberid"
                                    required>
                         </div>
                         <div class="col-sm-6">
                             <label for="fecha_nac" class="control-label">Fecha de Nac.</label>
                             <input type="date" class="form-control" id="fecha_nac" name="fecha_nac"
+                                   autocomplete="birthday"
                                    placeholder="Fecha de Nac."
                                    required>
                         </div>
@@ -41,11 +47,19 @@
                         <div class="col-sm-6">
                             <label for="email" class="control-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                   autocomplete="my-email"
+                                   data-bv-identical="true"
+                                   data-bv-identical-field="email2"
+                                   data-bv-identical-message="el Email no es igual a la confirmación"
                                    required>
                         </div>
                         <div class="col-sm-6">
                             <label for="email2" class="control-label">Confirmación de Email</label>
-                            <input type="email" class="form-control" id="email2" name="email2" placeholder="confimación de Email"
+                            <input type="email" class="form-control" id="email2" name="email2"
+                                   placeholder="confimación de Email" autocomplete="my-email2"
+                                   data-bv-identical="true"
+                                   data-bv-identical-field="email"
+                                   data-bv-identical-message="el Email no es igual a la confirmación"
                                    required>
                         </div>
                     </div>
@@ -54,12 +68,20 @@
                         <div class="col-sm-6">
                             <label for="password1" class="control-label">Clave</label>
                             <input type="password" class="form-control" id="password1" name="password1"
+                                   autocomplete="new-pass1"
                                    placeholder="Clave"
+                                   data-bv-identical="true"
+                                   data-bv-identical-field="password2"
+                                   data-bv-identical-message="La clave no es igual a la confirmación"
                                    required>
                         </div>
                         <div class="col-sm-6">
                             <label for="password2" class="control-label">Confirmación clave</label>
                             <input type="password" class="form-control" id="password2" name="password2"
+                                   autocomplete="new-pass2"
+                                   data-bv-identical="true"
+                                   data-bv-identical-field="password1"
+                                   data-bv-identical-message="La clave no es igual a la confirmación"
                                    placeholder="confirme la clave" required>
                         </div>
                     </div>
@@ -88,35 +110,30 @@
 @push('scripts')
     <script>
 
-        $("#email").focusout(function () {
+        $(document).ready(function () {
+            $('#register_form').bootstrapValidator().on('success.form.bv', function (e) {
+                // Prevent form submission
+                e.preventDefault();
 
-            if ($("#email").val().length > 3) {
-                axios.post('{!! url('api/student/email/validate') !!}', {
-                    email: $("#email").val()
+                // Get the form instance
+                var $form = $(e.target);
+
+                axios.post('{!! url('api/student/signup') !!}', {
+                    email: $("#email").val(),
+                    password: $("#password").val()
                 }).then(function (response) {
-                    $("#email-validation").removeClass("unavailable-email").addClass("available-email").html("Email de usuario disponible");
-                    $("#bregister").removeAttr('disabled');
+                    console.log(response);
                 }).catch(function (error) {
-                    $("#email-validation").removeClass("available-email").addClass("unavailable-email").html(error.response.data.message);
-                    $("#bregister").attr('disabled', 'disabled');
+                    showAlert(error.response.data.message)
                 });
 
-            }
+                $('#register_form').disableSubmitButtons(false)
+            })
+
 
         });
 
-        $("#register_form").submit(function (event) {
 
-            axios.post('{!! url('api/student/signup') !!}', {
-                email: $("#email").val(),
-                password: $("#password").val()
-            }).then(function (response) {
-                console.log(response);
-            }).catch(function (error) {
-                showAlert(error.response.data.message)
-            });
-            event.preventDefault();
-        });
     </script>
 @endpush
 

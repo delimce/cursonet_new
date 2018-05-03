@@ -8,6 +8,7 @@
     <title>Cursonet 2.0 - @yield('title')</title>
     <!-- Bootstrap -->
     <link href="{!! url('bower_components/bootstrap/dist/css/bootstrap.min.css') !!}" rel="stylesheet">
+    <link rel="stylesheet" href="{!! url('bower_components/bootstrapvalidator/dist/css/bootstrapValidator.min.css') !!}"/>
     <link href="{!! url('bower_components/animate.css/animate.min.css') !!}" rel="stylesheet"/>
     <link href="{!! url('bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css') !!}"
           rel="stylesheet">
@@ -41,6 +42,8 @@
 <script src="{!! url('bower_components/axios/dist/axios.min.js') !!}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{!! url('bower_components/bootstrap/dist/js/bootstrap.min.js') !!}"></script>
+<script src="{!! url('bower_components/bootstrapvalidator/dist/js/bootstrapValidator.min.js') !!}"></script>
+<script type="text/javascript" src="{!! url('bower_components/bootstrapvalidator/src/js/language/es_ES.js') !!}"></script>
 <script src="{!! url('bower_components/remarkable-bootstrap-notify/bootstrap-notify.min.js') !!}"></script>
 <script src="{!! url('assets/js/functions.js') !!}"></script>
 @stack('scripts')
