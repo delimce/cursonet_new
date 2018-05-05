@@ -1,6 +1,6 @@
 {
-  "name": "laravel/lumen",
-  "description": "The Laravel Lumen Framework.",
+  "name": "cursonet/2.0",
+  "description": "elearning project cursonet",
   "keywords": [
     "framework",
     "laravel",
@@ -12,8 +12,9 @@
     "php": ">=5.6.4",
     "laravel/lumen-framework": "5.5.*",
     "vlucas/phpdotenv": "~2.2",
-    "vluzrmos/collective-html": "1.0.11 as 5.1",
-    "laravelcollective/html":"^5.4.0"
+    "laravelcollective/html":"^5.4.0",
+    "guzzlehttp/guzzle": "^6.3",
+    "illuminate/mail": "^5.5"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

@@ -22,7 +22,7 @@
             axios.post('{!! url('api/student/forgotten') !!}', {
                 email: $("#email").val()
             }).then(function (response) {
-                showSuccess("Se ha enviado un email con instrucciones para el cambio de clave, revise su cuenta de correo para culminar el proceso.",6000)
+                showSuccess(response.data.message, 5000)
             }).catch(function (error) {
                 showAlert(error.response.data.message)
             });

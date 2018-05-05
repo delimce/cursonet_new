@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Cn2\Student;
@@ -52,7 +53,13 @@ class StudentController extends BaseController
 
         $user = Student::where('email', $req->input('email'))->first();
         if (!is_null($user)) {
-            return response()->json(['status' => 'ok']);
+
+            Mail::send('student.emails.forgotten', ['user' => $user], function ($m) use ($user) {
+
+                $m->to($user->email, $user->nombre . ' ' . $user->apellido)->subject('Recordatorio de contraseña');
+            });
+
+            return response()->json(['status' => 'ok','message'=>'Se ha enviado un Email de recuperación al recipiente:'.$user->email]);
         } else {
             return response()->json(['status' => 'error', 'message' => 'Email desconocido'], 401);
         }
@@ -111,6 +118,24 @@ class StudentController extends BaseController
 
 
     }
+
+
+    public function testEmail()
+    {
+
+        $data = array(
+            'name' => "Learning Laravel",
+        );
+
+
+
+        Mail::send('student.emails.testing', [], function ($m) {
+
+            $m->to("delimce@gmail.com", "luis de lima")->subject('Email test cursonet');
+        });
+
+    }
+
 
 
 }

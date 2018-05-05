@@ -27,6 +27,9 @@ $app->withFacades();
 
 $app->withEloquent();
 
+$app->configure('mail');
+$app->configure('database');
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -47,6 +50,7 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
+
 
 /*
 |--------------------------------------------------------------------------
@@ -81,14 +85,17 @@ $app->singleton(
 |
 */
 
+
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
+
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
 
 $app->register(Collective\Html\HtmlServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
 
 class_alias('Collective\Html\HtmlFacade', 'Html');
 class_alias('Collective\Html\FormFacade', 'Form');
