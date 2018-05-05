@@ -23,6 +23,7 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () us
     $router->get('/forgotten', 'InitialController@forgotPassword');
     $router->get('/register', 'InitialController@register');
     $router->get('/register/success/{email}', 'InitialController@registerSuccess');
+    $router->get('/activate/{apikey}', 'InitialController@userActivated');
     $router->get('/home', 'HomeController@home');
     $router->get('/logout', 'HomeController@logout');
     $router->get('/classroom', 'ClassRoomController@main');
