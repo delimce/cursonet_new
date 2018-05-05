@@ -109,18 +109,15 @@
 @endsection
 @push('scripts')
     <script>
-
         $(document).ready(function () {
             $('#register_form').bootstrapValidator().on('success.form.bv', function (e) {
                 // Prevent form submission
                 e.preventDefault();
-
                 // Get the form instance
                 var $form = $(e.target);
-
                 axios.post('{!! url('api/student/signup') !!}', $form.serialize())
                 .then(function (response) {
-                    console.log(response);
+                   redirect("{!! url('student/register/success') !!}/"+$("#email").val(),false)
                 }).catch(function (error) {
                     console.log(error);
                     showAlert(error.response.data.message);

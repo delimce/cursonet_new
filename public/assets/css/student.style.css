@@ -381,6 +381,11 @@ a {
     text-transform: capitalize;
 }
 
+.reactive{
+    font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
+    color: #00ccff;
+}
+
 h2 {
     text-transform: capitalize;
     font-size: 13px;

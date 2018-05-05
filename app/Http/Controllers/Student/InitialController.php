@@ -33,4 +33,9 @@ class InitialController extends BaseController
     {
         return  view('student.pages.initial.register');
     }
+
+    public function registerSuccess($email)
+    {
+        return  view('student.pages.initial.registerSuccess', ['email' => $email]);
+    }
 }

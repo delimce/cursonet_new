@@ -1,7 +1,9 @@
 'use strict'
 
-var redirect = function (url) {
-    window.location = url
+var redirect = function (url, back=true) {
+    if (back)
+        window.location = url
+    else location.replace(url)
 }
 
 var showAlert = function (message) {
