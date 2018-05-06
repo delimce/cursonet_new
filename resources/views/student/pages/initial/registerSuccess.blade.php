@@ -2,17 +2,16 @@
 @section('title', 'Registro exitoso')
 
 @section('content')
-    <div id="login-box" class="card card-container">
-        <div class="logo_student">
-            &nbsp;
-        </div>
+    @component("student.components.loginbox")
+        @slot("info")
+            Registro exitoso,
+        @endslot
         <div id="login-account" style="text-align: center">
-            Registro exitoso, se ha enviado un correo electrónico,
+            Se ha enviado un correo electrónico,
             para la activación de tu cuenta a la dirección:<br> <b>{{$email}}</b>
             <br><br>
-           <p class="reactive">Revisa tu bandeja de entrada</p>
-           <p>¡Gracias por registrarte!</p>
+            <p class="reactive">Revisa tu bandeja de entrada</p>
+            <p>¡Gracias por registrarte!</p>
         </div>
-
-    </div><!-- /card-container -->
+    @endcomponent
 @endsection

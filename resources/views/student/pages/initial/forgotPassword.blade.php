@@ -2,27 +2,23 @@
 @section('title', 'Recordar su clave')
 
 @section('content')
-    <div id="login-box" class="card card-container">
-        <div class="logo_student">
-            &nbsp;
-        </div>
-        <form id="forget_form" class="form-signin">
+    @component("student.components.loginbox")
+        @slot("form")
             <input type="email" id="email" class="form-control" placeholder="Email Registrado" required>
-            <button class="btn btn-lg btn-block btn-signin" type="submit">Reiniciar mi clave</button>
-            <div id="login-account">
-                <span>¿No tienes una cuenta?&nbsp;<a href="{!! url('student/register') !!} ">Registrate Aquí</a> </span>
-            </div>
-        </form><!-- /form -->
-    </div><!-- /card-container -->
+            <button id="bforget" class="btn btn-lg btn-block btn-signin" type="submit">Reiniciar mi clave</button>
+            @component("student.components.tosignup")
+            @endcomponent
+        @endslot
+    @endcomponent
 @endsection
 @push('scripts')
     <script>
-        $("#forget_form").submit(function (event) {
-
+        $("#main_form").submit(function (event) {
             axios.post('{!! url('api/student/forgotten') !!}', {
                 email: $("#email").val()
             }).then(function (response) {
                 showSuccess(response.data.message, 5000)
+                $('#bforget').prop('disabled', true);
             }).catch(function (error) {
                 showAlert(error.response.data.message)
             });
