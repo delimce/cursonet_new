@@ -36,8 +36,8 @@ class StudentController extends BaseController
             return response()->json(['status' => 'fail', 'message' => 'Disculpe, su usuario no está habilitado.'], 401);
         } else if (Hash::check($req->input('password'), $user->pass)) {
             $apikey = md5(str_random(40));
-            Student::where('email', $req->input('email'))->update(['api_key' => "$apikey"]);
-            return response()->json(['status' => 'ok', 'api_key' => $apikey]);
+            Student::where('email', $req->input('email'))->update(['token' => "$apikey"]);
+            return response()->json(['status' => 'ok', 'token' => $apikey]);
         } else {
             return response()->json(['status' => 'fail', 'message' => 'el password no es correcto'], 401);
         }
@@ -59,7 +59,7 @@ class StudentController extends BaseController
                 $m->to($user->email, $user->nombre . ' ' . $user->apellido)->subject('Recordatorio de contraseña');
             });
 
-            return response()->json(['status' => 'ok','message'=>'Se ha enviado un Email de recuperación al recipiente:'.$user->email]);
+            return response()->json(['status' => 'ok', 'message' => 'Se ha enviado un Email de recuperación al recipiente:' . $user->email]);
         } else {
             return response()->json(['status' => 'error', 'message' => 'Email desconocido'], 401);
         }
@@ -106,9 +106,14 @@ class StudentController extends BaseController
             $student->email = $req->input('email');
             $student->fecha_nac = $req->input('fecha_nac');
             $student->pass = Hash::make($req->input('pass'));
-            $student->api_key = md5(str_random(40)); ///for email
+            $student->token = md5(str_random(40)); ///for email
 
             $student->save();
+
+            Mail::send("student.emails.registered", ["user" => $student, "token" => $student->token], function ($m) use ($student) {
+
+                $m->to($student->email, $student->nombre . " " . $student->apellido)->subject('Usuario registrado en Cursonet');
+            });
 
             return response()->json(['status' => 'ok', 'message' => 'usuario creado con éxito']);
 
@@ -118,24 +123,6 @@ class StudentController extends BaseController
 
 
     }
-
-
-    public function testEmail()
-    {
-
-        $data = array(
-            'name' => "Learning Laravel",
-        );
-
-
-
-        Mail::send('student.emails.testing', [], function ($m) {
-
-            $m->to("delimce@gmail.com", "luis de lima")->subject('Email test cursonet');
-        });
-
-    }
-
 
 
 }

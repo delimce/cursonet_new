@@ -16,7 +16,7 @@ class TestingController extends BaseController
 
     public function testEmail()
     {
-        return  view('student.emails.forgotten');
+        return  view('student.emails.registered',["token"=>"43234234"]);
     }
 
 

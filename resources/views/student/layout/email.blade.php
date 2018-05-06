@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{!! url('assets/css/commons.css') !!}" rel="stylesheet">
-    <link href="{!! url('assets/css/student.style.css') !!}" rel="stylesheet">
-</head>
-
-<body>
-<header>
-algo aqui
-</header>
+<body style="background-image: url('{!! url("assets/img/email_back.png")  !!}');  -webkit-background-size: cover; ">
+<div style="padding: 14px ">
+    <img src="{!! url("assets/img/logo_student.png") !!}">
+</div>
 <div>
     @yield('content')
 </div>

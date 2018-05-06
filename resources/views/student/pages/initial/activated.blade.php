@@ -5,12 +5,10 @@
         <div class="logo_student">&nbsp</div>
 
         <div style="color: #fff">
-            <span class="subtext">Tu cuenta ha sido activada.</span>
-                <br><br>
             <div>
-                ¡Lo lograste <b>{{$user->nombre}}</b>! tu cuenta ha sido activada. Ahora puedes acceder simplemente
-                usando tu correo de registro: <b>{{$user->email}}</b> y tu contraseña, te damos la bienvenida
-                a la plataforma de enseñanza <b>Cursonet</b>
+                ¡Listo <b>{{$user->nombre}}</b>! tu cuenta ha sido activada. Ahora puedes acceder
+                usando tu correo de registro: <b>{{$user->email}}</b> y tu contraseña.  Bienvenid@ a <b>Cursonet</b>
+
             </div>
             <br>
             <p>

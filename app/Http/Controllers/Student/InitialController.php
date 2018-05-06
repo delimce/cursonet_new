@@ -37,10 +37,10 @@ class InitialController extends BaseController
     public function userActivated($apikey)
     {
 
-        $user = Student::where('api_key',$apikey)->first();
+        $user = Student::where('token',$apikey)->first();
         if(!is_null($user)){
-         //   $newapikey = md5(str_random(40));
-         //   Student::where('email', $user->email)->update(['api_key' => "$newapikey","activo"=>1]);
+            $newapikey = md5(str_random(40));
+            Student::where('email', $user->email)->update(['token' => "$newapikey","activo"=>1]);
         }
 
         return  view('student.pages.initial.activated',['user' => $user]);
