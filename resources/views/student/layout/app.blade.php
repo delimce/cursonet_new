@@ -80,12 +80,10 @@
 <script src="{!! url('assets/js/functions.js') !!}"></script>
 @stack('scripts')
 <script>
-    $(document).ready(function () {
         $('.adv-select').select2({
             placeholder: "Seleccone un curso",
             allowClear: true
         });
-    });
 </script>
 </body>
 </html>

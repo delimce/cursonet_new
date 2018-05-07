@@ -28,13 +28,11 @@
 }
 
 #status {
-    width:200px;
-    height:200px;
+    font-size: 15px;
+    width:100%;
+    height:100%;
     position:absolute;
-    left:50%; /* centers the loading animation horizontally on the screen */
-    top:50%; /* centers the loading animation vertically on the screen */
-    background-image:url('../img/preloader.gif'); /* path to your loading animation */
-    background-repeat:no-repeat;
-    background-position:center;
-    margin:-100px 0 0 -100px; /* is width and height divided by two */
+    left:45%; /* centers the loading animation horizontally on the screen */
+    top:40%; /* centers the loading animation vertically on the screen */
+    margin:auto; /* is width and height divided by two */
 }
