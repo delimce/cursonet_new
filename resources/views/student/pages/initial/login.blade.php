@@ -27,6 +27,7 @@
                 password: $("#password").val()
             }).then(function (response) {
                 console.log(response);
+                redirect('{!! url('student/home') !!}', false)
             }).catch(function (error) {
                 showAlert(error.response.data.message)
             });

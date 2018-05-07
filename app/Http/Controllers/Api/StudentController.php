@@ -20,6 +20,13 @@ class StudentController extends BaseController
         //  $this->middleware('auth:api');
     }
 
+    /**string for student token
+     * @return string
+     */
+    static function newUserToken(){
+        return md5(str_random(40));
+    }
+
     public function login(Request $req)
     {
 
@@ -35,7 +42,7 @@ class StudentController extends BaseController
         if (!$user->activo) {
             return response()->json(['status' => 'fail', 'message' => 'Disculpe, su usuario no está habilitado.'], 401);
         } else if (Hash::check($req->input('password'), $user->pass)) {
-            $apikey = md5(str_random(40));
+            $apikey = $this->newUserToken();
             Student::where('email', $req->input('email'))->update(['token' => "$apikey"]);
             return response()->json(['status' => 'ok', 'token' => $apikey]);
         } else {
@@ -46,19 +53,18 @@ class StudentController extends BaseController
 
     public function forgotten(Request $req)
     {
-
         $this->validate($req, [
             'email' => 'required|email'
         ]);
 
         $user = Student::where('email', $req->input('email'))->first();
+
         if (!is_null($user)) {
-
-            Mail::send('student.emails.forgotten', ['user' => $user], function ($m) use ($user) {
-
+            $apikey = $this->newUserToken();
+            Student::where('email', $req->input('email'))->update(['token' => "$apikey"]);
+            Mail::send('student.emails.forgotten', ["user" => $user, "token" => $apikey], function ($m) use ($user) {
                 $m->to($user->email, $user->nombre . ' ' . $user->apellido)->subject('Recordatorio de contraseña');
             });
-
             return response()->json(['status' => 'ok', 'message' => 'Se ha enviado un Email de recuperación al recipiente:' . $user->email]);
         } else {
             return response()->json(['status' => 'error', 'message' => 'Email desconocido'], 401);
@@ -66,18 +72,23 @@ class StudentController extends BaseController
 
     }
 
-    public function emailValidation(Request $req)
-    {
+
+    public function restorePassword(Request $req){
 
         $this->validate($req, [
-            'email' => 'required|email'
+            'token' => 'required',
+            'pass' => 'required'
         ]);
 
-        $user = Student::where('email', $req->input('email'))->first();
+        $user = Student::where('token', $req->input('token'))->first();
         if (!is_null($user)) {
-            return response()->json(['status' => 'error', 'message' => 'El email ya se encuentra registrado'], 422);
+            $apikey = $this->newUserToken();
+            $newPass =  Hash::make($req->input('pass'));
+            Student::where('token', $req->input('token'))->update(['token' => "$apikey","pass"=>$newPass]);
+
+            return response()->json(['status' => 'ok', 'message' => 'cambio de password correctamente']);
         } else {
-            return response()->json(['status' => 'ok'], 200);
+            return response()->json(['status' => 'error', 'message' => 'token no válido'], 401);
         }
 
     }
@@ -106,7 +117,7 @@ class StudentController extends BaseController
             $student->email = $req->input('email');
             $student->fecha_nac = $req->input('fecha_nac');
             $student->pass = Hash::make($req->input('pass'));
-            $student->token = md5(str_random(40)); ///for email
+            $student->token = $this->newUserToken(); ///for email
 
             $student->save();
 

@@ -1,13 +1,15 @@
 @extends('student.layout.basic')
-@section('title', 'Cuenta activada éxitosamente')
+@section('title', 'Clave restaurada')
+
 @section('content')
     @component("student.components.loginbox")
+        @slot("title")
+            Clave restaurada
+        @endslot
         @slot("info")
             <div style="color: #fff">
                 <div>
-                    ¡Listo <b>{{$user->nombre}}</b>! tu cuenta ha sido activada. Ahora puedes acceder
-                    usando tu correo de registro: <b>{{$user->email}}</b> y tu contraseña. Bienvenid@ a <b>Cursonet</b>
-
+                    Su contraseña ha sido restaurada con éxito.
                 </div>
                 <br>
                 <p>

@@ -15,7 +15,7 @@ a {
 }
 
 .card-container {
-    height: 350px;
+    min-height: 300px;
     margin: auto;
     display: block;
     min-width: 320px;
