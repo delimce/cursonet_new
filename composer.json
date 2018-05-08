@@ -1,6 +1,6 @@
 {
   "name": "cursonet/2.0",
-  "description": "elearning project cursonet",
+  "description": "E-learning project cursonet",
   "keywords": [
     "framework",
     "laravel",
@@ -14,7 +14,10 @@
     "vlucas/phpdotenv": "~2.2",
     "laravelcollective/html":"^5.4.0",
     "guzzlehttp/guzzle": "^6.3",
-    "illuminate/mail": "^5.5"
+    "illuminate/mail": "^5.5",
+    "vinkla/recaptcha": "^3.0",
+    "php-http/message": "^1.6",
+    "php-http/guzzle6-adapter": "^1.1"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
