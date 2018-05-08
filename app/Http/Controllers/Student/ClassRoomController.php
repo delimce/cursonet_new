@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Models\Cn2\Student;
 
 class ClassRoomController extends BaseController
@@ -19,9 +20,10 @@ class ClassRoomController extends BaseController
 
     //
 
-    public function main()
+    public function main(Request $req)
     {
-       return  view('student.pages.classroom.main');
+        $courses = $req->session()->get('myCourses');
+        return view('student.pages.classroom.main', ["myCourses" => $courses]);
     }
 
 }

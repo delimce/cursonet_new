@@ -3,13 +3,13 @@
 
     <div>
         <span class="subtext">Nombre del curso:</span>
-        <span>unknown printer took </span>
+        <span id="course_name">unknown printer took </span>
     </div>
     <div>
         <span class="subtext">Duracion:</span>
-        <span>3 semanas</span>
+        <span id="course_duration">3 semanas</span>
     </div>
-    <div>
+    <div id="course_description">
         is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
         industry's
         standard dummy text ever since the 1500s, when an unknown printer took a galley of type and

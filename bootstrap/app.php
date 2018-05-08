@@ -29,6 +29,7 @@ $app->withEloquent();
 
 $app->configure('mail');
 $app->configure('database');
+$app->configure('session');
 
 /*
 |--------------------------------------------------------------------------
@@ -71,8 +72,17 @@ $app->singleton(
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 
+$app->middleware([
+    \Illuminate\Session\Middleware\StartSession::class,
+]);
 
+$app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
+    return new \Illuminate\Session\SessionManager($app);
+});
 
+$app->withFacades(true, [
+    Illuminate\Support\Facades\Session::class => "Session",
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +98,7 @@ $app->singleton(
 
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(\Illuminate\Session\SessionServiceProvider::class);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,

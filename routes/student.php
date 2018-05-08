@@ -27,6 +27,7 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () us
     $router->get('/restore/{apikey}', 'InitialController@restoringPassword');
     $router->get('/restoring/success', 'InitialController@restored');
     $router->get('/home', 'HomeController@home');
+    $router->post('/select/course', 'HomeController@courseSelected');
     $router->get('/logout', 'HomeController@logout');
     $router->get('/classroom', 'ClassRoomController@main');
 

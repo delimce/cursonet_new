@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $table = 'tbl_curso';
-    protected $visible = array('id','nombre','alias'); ///only fields that return
+    protected $visible = array('id','nombre','alias','duracion','descripcion'); ///only fields that return
 
     public function author()
     {
