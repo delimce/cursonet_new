@@ -2,6 +2,10 @@
 @section('title', 'Home')
 
 @section('content')
+
+    @component("student.components.preloader")
+    @endcomponent
+
     <div class="home-page">
         <div class="row">
             <div class="col-md-7 card-border">

@@ -3,7 +3,9 @@
 @section('content')
 
     @component("student.components.preloader")
-
+        @slot("text")
+            cargando datos del curso
+        @endslot
     @endcomponent
     <div class="wrapper">
 
