@@ -3,19 +3,14 @@
 
     <div>
         <span class="subtext">Nombre del curso:</span>
-        <span id="course_name">unknown printer took </span>
+        <span id="course_name">{{$current["nombre"]}}</span>
     </div>
     <div>
         <span class="subtext">Duracion:</span>
-        <span id="course_duration">3 semanas</span>
+        <span id="course_duration">{{$current["duracion"]}}</span>
     </div>
     <div id="course_description">
-        is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-        industry's
-        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-        scrambled
-        it to make a type specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting
+        {{$current["descripcion"]}}
     </div>
 
     <div style="float: left; width: 50%">

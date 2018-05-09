@@ -24,7 +24,18 @@ class HomeController extends BaseController
     {
         $courses = Course::all();
         $req->session()->put('myCourses', $courses);
-        return view('student.pages.lobby.home', ["myCourses" => $courses]);
+
+        if ($req->session()->has("courseSelected")) {
+
+            $currentCourse = $courses->filter(function ($value) use ($req) {
+                return ($value->id == $req->session()->get("courseSelected"));
+            })->first();
+
+        } else if (count($courses) > 0) { ///almost one
+            $currentCourse = $courses->first();
+        }
+
+        return view('student.pages.lobby.home', ["myCourses" => $courses, "current" => $currentCourse->toArray()]);
     }
 
 

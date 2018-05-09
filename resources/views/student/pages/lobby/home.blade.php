@@ -5,14 +5,13 @@
 
     @component("student.components.preloader")
     @endcomponent
-
     <div class="home-page">
         <div class="row">
             <div class="col-md-7 card-border">
-                @include('student.pages.lobby.info', ['some' => 'data'])
+                @include('student.pages.lobby.info')
             </div>
             <div class="col-md-5 card-border">
-                @include('student.pages.lobby.wall', ['some' => 'data'])
+                @include('student.pages.lobby.wall')
             </div>
         </div>
 
