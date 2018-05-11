@@ -3,9 +3,6 @@
 
 @section('content')
     @component("student.components.loginbox")
-        @slot("title")
-            Clave restaurada
-        @endslot
         @slot("info")
             <div style="color: #fff">
                 <div>

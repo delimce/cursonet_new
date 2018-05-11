@@ -38,8 +38,6 @@
                        placeholder="confirme la clave" required>
             </div>
             <button class="btn btn-lg btn-block btn-signin" type="submit">Reiniciar mi clave</button>
-            @component("student.components.tosignup")
-            @endcomponent
         @endslot
     @endcomponent
 @endsection

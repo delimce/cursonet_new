@@ -4,12 +4,12 @@
 @section('content')
     @component("student.components.loginbox")
         @slot("title")
-            Registro exitoso,
+            ¡Registro exitoso!
         @endslot
         @slot("info")
             <div id="login-account" style="text-align: center">
-                Se ha enviado un correo electrónico,
-                para la activación de tu cuenta a la dirección:<br> <b>{{$email}}</b>
+                Hemos enviado un correo electrónico a&nbsp;
+                <b>{{$email}}</b> para activar tu cuenta<br>
                 <br><br>
                 <p class="reactive">Revisa tu bandeja de entrada</p>
                 <p>¡Gracias por registrarte!</p>
