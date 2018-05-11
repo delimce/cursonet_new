@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Vinkla\Recaptcha\Recaptcha;
 use App\Models\Cn2\Student;
 
 class StudentController extends BaseController
@@ -23,7 +24,8 @@ class StudentController extends BaseController
     /**string for student token
      * @return string
      */
-    static function newUserToken(){
+    static function newUserToken()
+    {
         return md5(str_random(40));
     }
 
@@ -73,7 +75,8 @@ class StudentController extends BaseController
     }
 
 
-    public function restorePassword(Request $req){
+    public function restorePassword(Request $req)
+    {
 
         $this->validate($req, [
             'token' => 'required',
@@ -83,8 +86,8 @@ class StudentController extends BaseController
         $user = Student::where('token', $req->input('token'))->first();
         if (!is_null($user)) {
             $apikey = $this->newUserToken();
-            $newPass =  Hash::make($req->input('pass'));
-            Student::where('token', $req->input('token'))->update(['token' => "$apikey","pass"=>$newPass]);
+            $newPass = Hash::make($req->input('pass'));
+            Student::where('token', $req->input('token'))->update(['token' => "$apikey", "pass" => $newPass]);
 
             return response()->json(['status' => 'ok', 'message' => 'cambio de password correctamente']);
         } else {
@@ -105,6 +108,22 @@ class StudentController extends BaseController
             'fecha_nac' => 'required',
             'pass' => 'required'
         ]);
+
+        //recaptcha
+
+        if(!empty($_POST['g-recaptcha-response'])){
+
+            try {
+                $recaptcha = new Recaptcha(env('RECAPTCHA_SECRET_KEY'));
+                $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+            } catch (RecaptchaException $e) {
+                // If the verification fails.
+                return response()->json(['status' => 'error', 'message' => 'recaptcha not valid'], 422);
+            }
+        }else{
+            return response()->json(['status' => 'error', 'message' => 'recaptcha not valid'], 422);
+        }
+
 
         $user = Student::where('email', $req->input('email'))->orWhere('id_number', $req->input('id_number'))->first();
 

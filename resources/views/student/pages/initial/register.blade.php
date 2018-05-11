@@ -88,12 +88,7 @@
 
                     <div class="form-group row">
                         <div class="col-sm-6">
-                            <div class="g-recaptcha" data-sitekey="6LcO41QUAAAAAK6wP3l8Xs62Az0oL-Z4n1smu_dB"
-                                 data-callback="verifyRecaptchaCallback"
-                                 data-expired-callback="expiredRecaptchaCallback"></div>
-                            <input class="form-control d-none" data-recaptcha="true" required
-                                   data-error="Please complete the Captcha">
-                            <div class="help-block with-errors"></div>
+                             <div class="g-recaptcha" data-sitekey="{{env('RECAPTCHA_SITE_KEY')}}"></div>
                         </div>
                         <div class="col-sm-6">
                             <button id="bregister" class="btn btn-lg btn-block btn-signin" type="submit">Registrar
