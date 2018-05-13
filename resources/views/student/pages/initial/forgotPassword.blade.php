@@ -14,12 +14,14 @@
 @push('scripts')
     <script>
         $("#main_form").submit(function (event) {
+            $("#bforget").html('Enviando...').prop('disabled', true);
             axios.post('{!! url('api/student/forgotten') !!}', {
                 email: $("#email").val()
             }).then(function (response) {
                 showSuccess(response.data.message, 5000)
-                $('#bforget').prop('disabled', true);
+                $("#bforget").html('Email enviado').prop('disabled', true);
             }).catch(function (error) {
+                $("#bforget").html('Reiniciar mi clave').prop('disabled', false);
                 showAlert(error.response.data.message)
             });
             event.preventDefault();
