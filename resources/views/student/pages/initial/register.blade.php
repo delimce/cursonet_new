@@ -107,6 +107,7 @@
         $(document).ready(function () {
             $('#register_form').bootstrapValidator().on('success.form.bv', function (e) {
                 // Prevent form submission
+                $("#bregister").html('Enviando...');
                 e.preventDefault();
                 // Get the form instance
                 var $form = $(e.target);
@@ -115,8 +116,9 @@
                    redirect("{!! url('student/register/success') !!}/"+$("#email").val(),false)
                 }).catch(function (error) {
                     console.log(error);
+                    grecaptcha.reset();
                     showAlert(error.response.data.message);
-                    $('#bregister').prop('disabled', false);
+                    $("#bregister").html('Registrar').prop('disabled', false);
                 });
 
             })
