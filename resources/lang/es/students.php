@@ -7,7 +7,7 @@ return [
     'messages' => 'Mensajes',
     'my_results' => 'Mis notas',
     'edit_profile' => 'Editar perfil',
-    'logout' => 'Cerrar sesion',
+    'logout' => 'Cerrar sesión',
     'email' => 'Email',
     'password' => 'Contraseña',
     'teachers' => 'Profesores',
@@ -22,6 +22,9 @@ return [
     'login.email_sent' => 'Email enviado',
     //COURSE
     'course.info' => 'Informacion del curso',
+    'course.name' => 'Nombre del curso',
+    'course.long' => 'Duración',
+    'course.info.loading' => 'cargando datos del curso',
     'course.goto' => 'Ir al Curso',
     'course.selected' => 'Curso seleccionado:',
     'course.selected.error' => 'error al seleccionar un curso',
@@ -31,5 +34,10 @@ return [
     'signup.here' => 'Registrate Aquí',
     //WALL
     'wall.title' => 'Cartelera',
+    //CLASSROOM
+    'classroom.modules.subject' => 'Tema',
+    'classroom.modules.select' => 'Seleccione el tema',
+    'classroom.modules.show' => 'Mostrar temas',
+    'classroom.modules.hide' => 'Ocultar temas',
 
 ];

@@ -14,14 +14,14 @@
 @push('scripts')
     <script>
         $("#main_form").submit(function (event) {
-            $("#bforget").html('{{ trans('students.sending') }}').prop('disabled', true);
+            $("#bforget").html('@lang('students.sending')').prop('disabled', true);
             axios.post('{!! url('api/student/forgotten') !!}', {
                 email: $("#email").val()
             }).then(function (response) {
                 showSuccess(response.data.message, 5000)
-                $("#bforget").html('{{ trans('students.login.email_sent') }}').prop('disabled', true);
+                $("#bforget").html('@lang('students.login.email_sent')').prop('disabled', true);
             }).catch(function (error) {
-                $("#bforget").html('{{ trans('students.login.reset_password') }}').prop('disabled', false);
+                $("#bforget").html('@lang('students.login.reset_password')').prop('disabled', false);
                 showAlert(error.response.data.message)
             });
             event.preventDefault();

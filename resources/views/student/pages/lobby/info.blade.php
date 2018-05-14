@@ -2,11 +2,11 @@
     <h2>{{ trans('students.course.info') }}</h2>
 
     <div>
-        <span class="subtext">Nombre del curso:</span>
+        <span class="subtext">@lang('students.course.name'):</span>
         <span id="course_name">{{$current["nombre"]}}</span>
     </div>
     <div>
-        <span class="subtext">Duración:</span>
+        <span class="subtext">@lang('students.course.long'):</span>
         <span id="course_duration">{{$current["duracion"]}}</span>
     </div>
     <div id="course_description">

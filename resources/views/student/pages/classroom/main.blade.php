@@ -1,10 +1,9 @@
 @extends('student.layout.app')
 @section('title', 'Aula Virtual')
 @section('content')
-
     @component("student.components.preloader")
         @slot("text")
-            cargando datos del curso
+            @lang('students.course.info.loading')
         @endslot
     @endcomponent
     <div class="wrapper">
@@ -28,9 +27,9 @@
                 $(this).toggleClass('active');
                 $(this).find(".plusMinus").toggleClass('fa-arrow-left fa-arrow-right');
                 if ($("#sidebar").hasClass('active'))
-                    $(".swapText").html("Mostrar temas")
+                    $(".swapText").html("@lang('students.classroom.modules.show')")
                 else
-                    $(".swapText").html("Ocultar temas")
+                    $(".swapText").html("@lang('students.classroom.modules.hide')")
             });
 
         });
