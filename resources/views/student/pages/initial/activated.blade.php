@@ -11,7 +11,7 @@
                 </div>
                 <br>
                 <p>
-                    <a href="{!! url('student/login') !!} ">Inicia sesión Aquí</a> </span>
+                    <a href="{!! url('student/login') !!} ">{{ trans('students.login.login') }}</a> </span>
                 </p>
             </div>
         @endslot

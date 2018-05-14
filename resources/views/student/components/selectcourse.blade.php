@@ -1,3 +1,4 @@
+<span> {{ trans('students.course.selected') }}</span>
 <div id="nav-selects">
     <select class="adv-select" name="course" id="course">
         @if(count($courses)>0)
@@ -13,7 +14,7 @@
 @push('scripts')
     <script>
         $('.adv-select').select2({
-            placeholder: "{{ trans('students.select_course') }}",
+            placeholder: "{{ trans('students.course.select') }}",
             allowClear: false
         });
 
@@ -33,7 +34,7 @@
                 @endif
 
             }).catch(function (error) {
-                showAlert("{{ trans('students.select_course_error') }}")
+                showAlert("{{ trans('students.course.selected.error') }}")
                 $("#course_button").hide();
             });
         })

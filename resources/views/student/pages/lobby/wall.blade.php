@@ -1,3 +1,3 @@
 <section>
-    <h2>Cartelera</h2>
+    <h2>{{ trans('students.wall.title') }}</h2>
 </section>

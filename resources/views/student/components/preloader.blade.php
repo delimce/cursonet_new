@@ -5,7 +5,7 @@
         @if(isset($text))
             <span>{{$text}}</span>
         @else
-            <span>{{ trans('students.preloader_text') }}</span>
+            <span>{{ trans('students.preloader') }}</span>
         @endif
     </div>
 </div>

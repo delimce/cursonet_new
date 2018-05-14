@@ -1,3 +1,3 @@
 <div id="login-account">
-    <span>{{ trans('students.initial_no_account') }}<a href="{!! url('student/register') !!} ">{{ trans('students.initial_signup_here') }}</a> </span>
+    <span>{{ trans('students.signup.noaccount') }}<a href="{!! url('student/register') !!} ">{{ trans('students.signup.here') }}</a> </span>
 </div>

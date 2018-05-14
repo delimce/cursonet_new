@@ -4,8 +4,8 @@
 @section('content')
     @component("student.components.loginbox")
         @slot("form")
-            <input type="email" id="email" class="form-control" placeholder="Email Registrado" required>
-            <button id="bforget" class="btn btn-lg btn-block btn-signin" type="submit">Reiniciar mi clave</button>
+            <input type="email" id="email" class="form-control" placeholder="{{ trans('students.login.email') }}" required>
+            <button id="bforget" class="btn btn-lg btn-block btn-signin" type="submit">{{ trans('students.login.reset_password') }}</button>
             @component("student.components.tosignup")
             @endcomponent
         @endslot
@@ -14,14 +14,14 @@
 @push('scripts')
     <script>
         $("#main_form").submit(function (event) {
-            $("#bforget").html('Enviando...').prop('disabled', true);
+            $("#bforget").html('{{ trans('students.sending') }}').prop('disabled', true);
             axios.post('{!! url('api/student/forgotten') !!}', {
                 email: $("#email").val()
             }).then(function (response) {
                 showSuccess(response.data.message, 5000)
-                $("#bforget").html('Email enviado').prop('disabled', true);
+                $("#bforget").html('{{ trans('students.login.email_sent') }}').prop('disabled', true);
             }).catch(function (error) {
-                $("#bforget").html('Reiniciar mi clave').prop('disabled', false);
+                $("#bforget").html('{{ trans('students.login.reset_password') }}').prop('disabled', false);
                 showAlert(error.response.data.message)
             });
             event.preventDefault();

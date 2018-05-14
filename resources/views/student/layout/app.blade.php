@@ -28,7 +28,6 @@
     <!-- Navbar content -->
     <div class="left-nav">
         <div id="nav-logo">&nbsp;</div>
-        <span> {{ trans('students.selected_course') }}</span>
         @component("student.components.selectcourse",['courses' => $myCourses])
         @endcomponent
     </div>
