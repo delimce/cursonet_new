@@ -25,15 +25,15 @@ class HomeController extends BaseController
         $courses = Course::all();
         $req->session()->put('myCourses', $courses);
 
-        if ($req->session()->has("courseSelected")) {
+            if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
 
-            $currentCourse = $courses->filter(function ($value) use ($req) {
-                return ($value->id == $req->session()->get("courseSelected"));
-            })->first();
+                $currentCourse = $courses->filter(function ($value) use ($req) {
+                    return ($value->id == $req->session()->get("courseSelected"));
+                })->first();
 
-        } else if (count($courses) > 0) { ///almost one
-            $currentCourse = $courses->first();
-        }
+            } else { ///one at least
+                $currentCourse = $courses->first();
+            }
 
         return view('student.pages.lobby.home', ["myCourses" => $courses, "current" => $currentCourse->toArray()]);
     }

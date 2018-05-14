@@ -74,6 +74,7 @@ $app->singleton(
 
 $app->middleware([
     \Illuminate\Session\Middleware\StartSession::class,
+    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
 ]);
 
 $app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
@@ -110,6 +111,9 @@ $app->register(Illuminate\Mail\MailServiceProvider::class);
 
 class_alias('Collective\Html\HtmlFacade', 'Html');
 class_alias('Collective\Html\FormFacade', 'Form');
+$app->alias('session', \Illuminate\Session\SessionManager::class);
+$app->alias('session.store', \Illuminate\Session\Store::class);
+$app->alias('session.store', \Illuminate\Contracts\Session\Session::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
