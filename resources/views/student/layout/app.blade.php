@@ -28,7 +28,7 @@
     <!-- Navbar content -->
     <div class="left-nav">
         <div id="nav-logo">&nbsp;</div>
-        <span>Curso seleccionado:</span>
+        <span> {{ trans('students.selected_course') }}</span>
         @component("student.components.selectcourse",['courses' => $myCourses])
         @endcomponent
     </div>
@@ -38,16 +38,16 @@
             <div id="user-logged">
                 <h1><i class="fas fa-user-circle"></i></h1>
                 <div id="user-info">
-                    <span><b>Estudiante:</b>&nbsp;Ramon Jose Alvarado Ramirez</span>
-                    <span><a href="#">Editar Perfil</a></span>
+                    <span><b>{{ trans('students.student') }}:</b>&nbsp;Ramon Jose Alvarado Ramirez</span>
+                    <span><a href="#">{{ trans('students.edit_profile') }}</a></span>
                 </div>
             </div>
         </div>
         <div class="nav-items">
-            <span><a href="{!! url('student/home') !!}">Inicio</a> </span>|
-            <span><a href="#">Mis Notas</a></span>|
-            <span><a href="#">Mensajes</a></span>|
-            <span><a style="color: #00ccff" href="{!! url('student/logout') !!}">Cerrar sesion</a></span>
+            <span><a href="{!! url('student/home') !!}">{{ trans('students.home') }}</a> </span>|
+            <span><a href="#">{{ trans('students.my_results') }}</a></span>|
+            <span><a href="#">{{ trans('students.messages') }}</a></span>|
+            <span><a style="color: #00ccff" href="{!! url('student/logout') !!}">{{ trans('students.logout') }}</a></span>
         </div>
     </div>
 
@@ -57,9 +57,9 @@
 
     <div class="footer">
         <div class="footer-nav-items">
-            <span><a href="{!! url('student/home') !!}">Inicio</a> </span>|
-            <span><a href="#">Facilitadores</a></span>|
-            <span><a href="#">Centro de Soporte</a></span>
+            <span><a href="{!! url('student/home') !!}">{{ trans('students.home') }}</a> </span>|
+            <span><a href="#">{{ trans('students.teachers') }}</a></span>|
+            <span><a href="#">{{ trans('students.support') }}</a></span>
         </div>
     </div>
 

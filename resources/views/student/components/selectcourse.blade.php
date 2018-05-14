@@ -10,7 +10,6 @@
         @endif
     </select>
 </div>
-{!! session()->get("courseSelected") !!}
 @push('scripts')
     <script>
         $('.adv-select').select2({

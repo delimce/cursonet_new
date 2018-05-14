@@ -30,7 +30,7 @@
 <footer class="page-footer font-small blue pt-4 mt-4">
     <!--Copyright-->
     <div class="footer-copyright py-3 text-center">
-        Creado por:<br>
+        {{ trans('students.created_by') }}<br>
         <a target="_blank" href="http://develemento.com.ve">devElemento</a>
     </div>
     <!--/.Copyright-->
