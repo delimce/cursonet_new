@@ -13,7 +13,7 @@
 @push('scripts')
     <script>
         $('.adv-select').select2({
-            placeholder: "Seleccone un curso",
+            placeholder: "{{ trans('students.select_course') }}",
             allowClear: false
         });
 
@@ -33,7 +33,7 @@
                 @endif
 
             }).catch(function (error) {
-                showAlert("error al seleccionar el curso")
+                showAlert("{{ trans('students.select_course_error') }}")
                 $("#course_button").hide();
             });
         })
