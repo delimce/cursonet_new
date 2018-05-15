@@ -10,7 +10,7 @@
                 </div>
                 <br>
                 <p>
-                    <a href="{!! url('student/login') !!} ">Inicia sesión Aquí</a> </span>
+                    <a href="{!! url('student/login') !!} ">@lang('students.login.login')</a> </span>
                 </p>
             </div>
         @endslot

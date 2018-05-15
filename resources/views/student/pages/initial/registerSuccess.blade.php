@@ -4,7 +4,7 @@
 @section('content')
     @component("student.components.loginbox")
         @slot("title")
-            ¡Registro exitoso!
+            @lang('students.register.success')
         @endslot
         @slot("info")
             <div id="login-account" style="text-align: center">
@@ -12,7 +12,7 @@
                 <b>{{$email}}</b> para activar tu cuenta<br>
                 <br><br>
                 <p class="reactive">Revisa tu bandeja de entrada</p>
-                <p>¡Gracias por registrarte!</p>
+                <p>@lang('students.register.thanks')</p>
             </div>
         @endslot
     @endcomponent

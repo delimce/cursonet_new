@@ -3,29 +3,29 @@
 
 @section('content')
     @component("student.components.loginbox")
-        @slot("info")
-            Reiniciar clave
+        @slot("title")
+            @lang('students.login.reset_password')
         @endslot
 
         @slot("form")
             <div class="form-group">
-                <label for="nombre" class="control-label">Nombre</label>
+                <label for="nombre" class="control-label">@lang('students.register.name')</label>
                 <input type="text" value="{{$user->nombre." ".$user->apellido}}" class="form-control" id="nombre"
                        name="nombre"
                        autocomplete="my-name" readonly>
-                <label for="email" class="control-label">Email</label>
+                <label for="email" class="control-label">@lang('students.email')</label>
                 <input type="email" value="{{$user->email}}" class="form-control" id="email" name="email"
-                       placeholder="Email"
+                       placeholder="@lang('students.email')"
                        autocomplete="my-email" readonly>
             </div>
 
             <div class="form-group">
                 <input type="password" class="form-control" id="pass" name="pass" autofocus
                        autocomplete="new-pass"
-                       placeholder="nueva clave"
                        data-bv-identical="true"
                        data-bv-identical-field="pass2"
-                       data-bv-identical-message="La clave no es igual a la confirmación"
+                       data-bv-identical-message="@lang('students.register.password.error.equal')"
+                       placeholder="@lang('students.register.new_password')"
                        required>
             </div>
 
@@ -34,10 +34,12 @@
                        autocomplete="new-pass2"
                        data-bv-identical="true"
                        data-bv-identical-field="pass"
-                       data-bv-identical-message="La clave no es igual a la confirmación"
-                       placeholder="confirme la clave" required>
+                       data-bv-identical-message="@lang('students.register.password.error.equal')"
+                       placeholder="@lang('students.register.new_password.repeat')" required>
             </div>
-            <button class="btn btn-lg btn-block btn-signin" type="submit">Reiniciar mi clave</button>
+            <button class="btn btn-lg btn-block btn-signin" type="submit">
+                @lang('students.login.reset_password')
+            </button>
         @endslot
     @endcomponent
 @endsection

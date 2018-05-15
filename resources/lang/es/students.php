@@ -20,6 +20,14 @@ return [
     'login.email' => 'Email registrado.',
     'login.reset_password' => 'Reiniciar mi clave',
     'login.email_sent' => 'Email enviado',
+    'login.remember' => 'Recordar su clave',
+    //REGISTER
+    'register.name' => 'Nombre',
+    'register.success' => '¡Registro exitoso!',
+    'register.thanks' => '¡Gracias por registrarte!',
+    'register.new_password' => 'Nueva clave',
+    'register.new_password.repeat' => 'Confirme la clave',
+    'register.password.error.equal' => 'La clave no es igual a la confirmación',
     //COURSE
     'course.info' => 'Informacion del curso',
     'course.name' => 'Nombre del curso',
