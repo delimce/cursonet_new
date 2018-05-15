@@ -1,5 +1,5 @@
 @extends('student.layout.app')
-@section('title', 'Aula Virtual')
+@section('title', trans('students.classroom.title'))
 @section('content')
     @component("student.components.preloader")
         @slot("text")

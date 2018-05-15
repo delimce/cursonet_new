@@ -39,16 +39,16 @@ class StudentController extends BaseController
 
         $user = Student::where('email', $req->input('email'))->first();
         if (is_null($user))
-            return response()->json(['status' => 'error', 'message' => 'Email desconocido'], 401);
+            return response()->json(['status' => 'error', 'message' => trans('students.login.email.unknown')], 401);
 
         if (!$user->activo) {
-            return response()->json(['status' => 'fail', 'message' => 'Disculpe, su usuario no está habilitado.'], 401);
+            return response()->json(['status' => 'fail', 'message' => trans('students.login.signin.active.error')], 401);
         } else if (Hash::check($req->input('password'), $user->pass)) {
             $apikey = $this->newUserToken();
             Student::where('email', $req->input('email'))->update(['token' => "$apikey"]);
-            return response()->json(['status' => 'ok', 'token' => $apikey]);
+            return response()->json(['status' => 'ok', 'user' => $user]);
         } else {
-            return response()->json(['status' => 'fail', 'message' => 'el password no es correcto'], 401);
+            return response()->json(['status' => 'fail', 'message' => trans('students.login.password.error')], 401);
         }
     }
 
@@ -67,9 +67,9 @@ class StudentController extends BaseController
             Mail::send('student.emails.forgotten', ["user" => $user, "token" => $apikey], function ($m) use ($user) {
                 $m->to($user->email, $user->nombre . ' ' . $user->apellido)->subject('Recordatorio de contraseña');
             });
-            return response()->json(['status' => 'ok', 'message' => 'Se ha enviado un Email de recuperación al recipiente:' . $user->email]);
+            return response()->json(['status' => 'ok', 'message' => trans('students.login.password.restore',['email'=>$user->email])]);
         } else {
-            return response()->json(['status' => 'error', 'message' => 'Email desconocido'], 401);
+            return response()->json(['status' => 'error', 'message' => trans('students.login.email.unknown')], 401);
         }
 
     }
@@ -89,9 +89,9 @@ class StudentController extends BaseController
             $newPass = Hash::make($req->input('pass'));
             Student::where('token', $req->input('token'))->update(['token' => "$apikey", "pass" => $newPass]);
 
-            return response()->json(['status' => 'ok', 'message' => 'cambio de password correctamente']);
+            return response()->json(['status' => 'ok', 'message' => trans('login.reset_password.success')]);
         } else {
-            return response()->json(['status' => 'error', 'message' => 'token no válido'], 401);
+            return response()->json(['status' => 'error', 'message' => trans('students.token_unknown')], 401);
         }
 
     }
@@ -145,10 +145,10 @@ class StudentController extends BaseController
                 $m->to($student->email, $student->nombre . " " . $student->apellido)->subject('Usuario registrado en Cursonet');
             });
 
-            return response()->json(['status' => 'ok', 'message' => 'usuario creado con éxito']);
+            return response()->json(['status' => 'ok', 'message' => trans('students.register.success')]);
 
         } else {
-            return response()->json(['status' => 'error', 'message' => 'El email o la cédula ya se encuentra registrada'], 422);
+            return response()->json(['status' => 'error', 'message' => trans('students.register.already')], 422);
         }
 
 

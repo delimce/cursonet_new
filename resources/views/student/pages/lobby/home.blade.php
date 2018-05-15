@@ -1,5 +1,5 @@
 @extends('student.layout.app')
-@section('title', 'Home')
+@section('title', trans('students.home'))
 
 @section('content')
 
