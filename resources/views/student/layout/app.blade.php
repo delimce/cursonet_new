@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="assets/img/favicon.png">
     <title>Cursonet 2.0 - @yield('title')</title>
     <!-- Bootstrap -->
@@ -63,7 +64,6 @@
     </div>
 
 </div>
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{!! url('bower_components/jquery/dist/jquery.min.js') !!}"></script>
 <script src="{!! url('bower_components/axios/dist/axios.min.js') !!}"></script>

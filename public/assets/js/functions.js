@@ -1,5 +1,7 @@
 'use strict'
 
+axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
 var redirect = function (url, back=true) {
     if (back)
         window.location = url
