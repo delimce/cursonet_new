@@ -16,25 +16,24 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () use ($router) {
-   // $router->get('/', 'InitialController@index');
-    $router->get('/login', [
-        'as' => 'student.login', 'uses' => 'InitialController@index'
-    ]);
+    $router->get('/login', ['as' => 'student.login', 'uses' => 'InitialController@login']);
+    $router->get('/', ['as' => 'student.in', 'uses' => 'InitialController@index']);
     $router->get('/forgotten', 'InitialController@forgotPassword');
     $router->get('/register', 'InitialController@register');
     $router->get('/register/success/{email}', 'InitialController@registerSuccess');
     $router->get('/activate/{apikey}', 'InitialController@userActivated');
     $router->get('/restore/{apikey}', 'InitialController@restoringPassword');
     $router->get('/restoring/success', 'InitialController@restored');
-    $router->get('/home', 'HomeController@home');
-    $router->post('/select/course', 'HomeController@courseSelected');
-    $router->get('/logout', 'HomeController@logout');
     $router->get('/classroom', 'ClassRoomController@main');
-
     $router->get('profile', [
         'middleware' => 'auth',
         'logout' => 'AccountController@showProfile'
     ]);
+});
 
-
+$router->group(['prefix' => 'student', 'namespace' => 'Student'], function () use ($router) {
+    $router->get('/home', ['as' => 'student.home', 'uses' => 'HomeController@home']);
+    $router->get('/logout', 'HomeController@logout');
+    $router->get('/inbox', 'HomeController@getInbox');
+    $router->post('/select/course', 'HomeController@courseSelected');
 });

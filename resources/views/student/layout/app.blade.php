@@ -29,7 +29,7 @@
     <!-- Navbar content -->
     <div class="left-nav">
         <div id="nav-logo">&nbsp;</div>
-        @component("student.components.selectcourse",['courses' => $myCourses])
+        @component("student.components.selectcourse",['courses' => session()->get("myCourses")])
         @endcomponent
     </div>
 
@@ -44,10 +44,10 @@
             </div>
         </div>
         <div class="nav-items">
-            <span><a href="{!! url('student/home') !!}">{{ trans('students.home') }}</a> </span>|
-            <span><a href="#">{{ trans('students.my_results') }}</a></span>|
-            <span><a href="#">{{ trans('students.messages') }}</a></span>|
-            <span><a style="color: #00ccff" href="{!! url('student/logout') !!}">{{ trans('students.logout') }}</a></span>
+            <span><a href="{!! url('student/home') !!}">@lang('students.home')</a> </span>|
+            <span><a href="#">@lang('students.my_results')</a></span>|
+            <span><a href="{!! url('student/inbox') !!}">@lang('students.messages')</a></span>|
+            <span><a style="color: #00ccff" href="{!! url('student/logout') !!}">@lang('students.logout')</a></span>
         </div>
     </div>
 

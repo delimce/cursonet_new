@@ -8,5 +8,4 @@ $router->group(['prefix' => 'api/student', 'namespace' => 'Api'], function () us
     $router->post('/forgotten', 'StudentController@forgotten');
     $router->post('/restore', 'StudentController@restorePassword');
 
-
 });

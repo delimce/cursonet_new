@@ -47,6 +47,8 @@ return [
     //SIGNUP
     'signup.noaccount' => '¿No tienes una cuenta? ',
     'signup.here' => 'Registrate Aquí',
+    //INBOX
+    'inbox.title' => 'Mis Mensajes',
     //WALL
     'wall.title' => 'Cartelera',
     //CLASSROOM

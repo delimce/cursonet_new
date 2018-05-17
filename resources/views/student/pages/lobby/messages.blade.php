@@ -27,7 +27,7 @@
     </div>
 
     <div style="text-align: right">
-        <a href="#">
+        <a href="{!! url("") !!}">
             <i class="fas fa-plus-square"></i>
             Ver todos los mensajes
         </a>

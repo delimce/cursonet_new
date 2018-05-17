@@ -20,7 +20,17 @@ class InitialController extends BaseController
 
     //
 
-    public function index()
+    public function index(Request $req){
+
+        if($req->session()->has("myUser")){
+            return redirect()->route('student.home');
+        }else{
+            return redirect()->route('student.login');
+        }
+
+    }
+
+    public function login()
     {
         return view('student.pages.initial.login');
     }
