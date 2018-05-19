@@ -36,3 +36,12 @@
     top:40%; /* centers the loading animation vertically on the screen */
     margin:auto; /* is width and height divided by two */
 }
+
+.dataTableCn{
+    width: 98%;
+    line-height: 22px;
+}
+
+.dataTableCn th{
+    text-transform: capitalize;
+}

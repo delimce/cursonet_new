@@ -9,10 +9,16 @@
         <div class="col-md-7 card-border">
             <section>
                 <h2>@lang('students.inbox.title')</h2>
+
+                @component("student.components.dataTable")
+                    @slot("id")
+                        inbox
+                    @endslot
+                @endcomponent
+
             </section>
         </div>
 
     </div>
-
 
 @endsection

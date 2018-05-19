@@ -7,21 +7,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="assets/img/favicon.png">
     <title>Cursonet 2.0 - @yield('title')</title>
-    <!-- Bootstrap -->
-    <link href="{!! url('bower_components/bootstrap/dist/css/bootstrap.min.css') !!}" rel="stylesheet">
-    <link rel="stylesheet"
-          href="{!! url('bower_components/bootstrapvalidator/dist/css/bootstrapValidator.min.css') !!}"/>
-    <link href="{!! url('bower_components/select2/dist/css/select2.min.css') !!}" rel="stylesheet"/>
-    <link href="{!! url('bower_components/animate.css/animate.min.css') !!}" rel="stylesheet"/>
-    <link href="{!! url('bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css') !!}"
-          rel="stylesheet">
-    <link href="{!! url('assets/css/commons.css') !!}" rel="stylesheet">
-    <link href="{!! url('assets/css/student.style.css') !!}" rel="stylesheet">
-    <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto/roboto-fontface.css') !!} ">
-    <link rel="stylesheet"
-          href="{!! url('bower_components/roboto-fontface/css/roboto-condensed/roboto-condensed-fontface.css') !!}">
-    <link rel="stylesheet"
-          href="{!! url('bower_components/roboto-fontface/css/roboto-slab/roboto-slab-fontface.css') !!}">
+    {{--ccs files--}}
+    @include('student.layout.css')
+    {{--js files--}}
+    @include('student.layout.js')
     @stack('head')
 </head>
 <body>
@@ -38,8 +27,8 @@
             <div id="user-logged">
                 <h1><i class="fas fa-user-circle"></i></h1>
                 <div id="user-info">
-                    <span><b>{{ trans('students.student') }}:</b>&nbsp;Ramon Jose Alvarado Ramirez</span>
-                    <span><a href="#">{{ trans('students.edit_profile') }}</a></span>
+                    <span><b>@lang('students.student'):</b>&nbsp;Ramon Jose Alvarado Ramirez</span>
+                    <span><a href="#">@lang('students.edit_profile')</a></span>
                 </div>
             </div>
         </div>
@@ -54,25 +43,20 @@
 </nav>
 <div id="app2" class="container-fluid">
     @yield('content')
-
     <div class="footer">
         <div class="footer-nav-items">
-            <span><a href="{!! url('student/home') !!}">{{ trans('students.home') }}</a> </span>|
-            <span><a href="#">{{ trans('students.teachers') }}</a></span>|
-            <span><a href="#">{{ trans('students.support') }}</a></span>
+            <span><a href="{!! url('student/home') !!}">@lang('students.home')</a> </span>|
+            <span><a href="#">@lang('students.teachers')</a></span>|
+            <span><a href="#">@lang('students.support')</a></span>
         </div>
     </div>
-
 </div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="{!! url('bower_components/jquery/dist/jquery.min.js') !!}"></script>
-<script src="{!! url('bower_components/axios/dist/axios.min.js') !!}"></script>
-<script src="{!! url('bower_components/select2/dist/js/select2.min.js') !!}"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="{!! url('bower_components/bootstrap/dist/js/bootstrap.min.js') !!}"></script>
-<script src="{!! url('bower_components/bootstrapvalidator/dist/js/bootstrapValidator.min.js') !!}"></script>
-<script src="{!! url('bower_components/remarkable-bootstrap-notify/bootstrap-notify.min.js') !!}"></script>
 <script src="{!! url('assets/js/functions.js') !!}"></script>
 @stack('scripts')
+<script>
+    $(document).ready(function () {
+        @stack('scripts-ready')
+    });
+</script>
 </body>
 </html>

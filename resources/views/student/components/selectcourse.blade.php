@@ -12,6 +12,7 @@
     </select>
 </div>
 @push('scripts')
+    <script src="{!! url('bower_components/select2/dist/js/select2.min.js') !!}"></script>
     <script>
         $('.adv-select').select2({
             placeholder: "@lang('students.course.select')",

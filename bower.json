@@ -23,6 +23,7 @@
     "animate.css": "^3.5.2",
     "font-awesome": "^5.0.10",
     "axios": "^0.18.0",
-    "bootstrapvalidator": "^0.5.3"
+    "bootstrapvalidator": "^0.5.3",
+    "datatables-bootstrap": "^1.0.0"
   }
 }
