@@ -1,4 +1,4 @@
-<table id="{{$id}}" class="display dataTableCn">
+<table id="{{$id}}" class="display stripe dataTableCn">
     <thead>
     <tr>
         <th>Name</th>
@@ -29,13 +29,22 @@
     </tbody>
 </table>
 @push('head')
-    <link href="{!! url('bower_components/datatables/media/css/dataTables.bootstrap4.min.css') !!}" rel="stylesheet">
+    <link href="{!! url('bower_components/datatables/media/css/jquery.dataTables.min.css') !!}" rel="stylesheet">
     <script src="{!! url('bower_components/datatables/media/js/jquery.dataTables.js') !!}"></script>
 @endpush
 @push('scripts-ready')
-    $('#{{$id}}').DataTable( {
-    "paging":   false,
-    "ordering": true,
-    "info":     true
-    } );
+
+        $('#{{$id}}').DataTable( {
+            "paging":   false,
+            "ordering": true,
+            "info":     true,
+            "language": {
+                "zeroRecords": "@lang('students.nofound')",
+                "search": "@lang('students.search')",
+                "info": "@lang('students.paging')",
+                "infoEmpty": "@lang('students.nofound')",
+                "infoFiltered": "(@lang('students.filtered'))"
+            }
+        } );
+
 @endpush

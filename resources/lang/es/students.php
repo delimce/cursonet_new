@@ -3,6 +3,10 @@
 return [
     'created_by' => 'Creado por:',
     'home' => 'Inicio',
+    'search' => 'Buscar',
+    'nofound' => 'no existen registros disponibles',
+    'paging' => 'Mostrando página _PAGE_ de _PAGES_',
+    'filtered' => 'filtrados  de _MAX_ en total',
     'student' => 'Estudiante',
     'messages' => 'Mensajes',
     'my_results' => 'Mis notas',

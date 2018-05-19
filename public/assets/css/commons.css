@@ -38,10 +38,13 @@
 }
 
 .dataTableCn{
-    width: 98%;
-    line-height: 22px;
+    line-height: 21px;
 }
 
-.dataTableCn th{
+.dataTableCn tr{
     text-transform: capitalize;
+}
+
+div.dataTables_wrapper {
+    margin-bottom: 3em;
 }

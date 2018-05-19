@@ -152,6 +152,19 @@ a {
     margin: 10px;
 }
 
+input[type="search"]{
+    width: 150px;
+    border: 0.3pt #0c0c0c solid;
+    opacity: 0.84;
+    min-height: 24px;
+    box-sizing: border-box;
+    padding-left: 6px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+
 .form-signin input[placeholder] {
     font-family: 'Roboto-Condensed-Light', Helvetica, Arial, sans-serif;
 }

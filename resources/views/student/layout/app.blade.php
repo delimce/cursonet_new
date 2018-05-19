@@ -5,13 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" href="{!! url('assets/img/favicon.png') !!}">
     <title>Cursonet 2.0 - @yield('title')</title>
     {{--ccs files--}}
     @include('student.layout.css')
     {{--js files--}}
     @include('student.layout.js')
     @stack('head')
+    <link rel="stylesheet" href="{!! url('assets/css/commons.css') !!}">
+    <link rel="stylesheet" href="{!! url('assets/css/student.style.css') !!}">
 </head>
 <body>
 <nav id="main-nav" class="navbar navbar-default navbar-fixed-top">
