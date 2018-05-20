@@ -65,6 +65,14 @@ a {
     color: #5ED2F1;
 }
 
+.btn-secondary {
+    font-weight: normal;
+    font-size-adjust: inherit;
+    font-size: 13px;
+    background-color: #938c90;
+    border: 0;
+}
+
 #login-account {
     color: #fff;
     font-weight: normal;
@@ -496,9 +504,26 @@ h2 {
 }
 
 .modal-title{
-    font-size: 16px;
+    font-size: 14px;
     color: #000;
-    padding-top: 10px;
+    font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
+    padding-top: 5px;
+}
+
+.modal-header{
+   padding: 11px 16px 11px 17px;
+}
+
+.modal-dialog {
+    max-width: 527px !important;
+}
+
+.modal-body input {
+    width: 70%;
+    height: 27px;
+    font-size: 11px;
+    margin-top: 10px;
+    border: 1px #8b8b8b solid;
 }
 
 /*inbox and messages*/

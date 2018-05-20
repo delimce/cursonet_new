@@ -27,9 +27,9 @@
     </div>
 
     <div style="text-align: right">
-        <a href="{!! url("") !!}">
+        <a href="{!! url('student/inbox') !!}">
             <i class="fas fa-plus-square"></i>
-            Ver todos los mensajes
+           @lang('students.inbox.all_messages')
         </a>
     </div>
 </section>

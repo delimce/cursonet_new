@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="form-group">
-                        <textarea name="mcontent" id="mcontent" rows="3" cols="8"></textarea>
+                        <textarea name="mcontent" id="mcontent"></textarea>
                     </div>
                 </form>
             </div>
@@ -47,9 +47,10 @@
                 { name: 'clipboard', items : [ 'PasteText','Undo','Redo' ] },
                 { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
                 { name: 'basicstyles', items : [ 'Bold','Italic','Subscript','Superscript','RemoveFormat' ] },
-                { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','JustifyLeft','JustifyCenter'] },
+                { name: 'paragraph', items : [ 'NumberedList','BulletedList'] },
                 { name: 'tools', items : [ 'Maximize', 'ShowBlocks' ] },
-            ]
+            ],
+            language: 'es'
         });
     </script>
 @endpush
