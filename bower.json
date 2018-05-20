@@ -24,6 +24,7 @@
     "font-awesome": "^5.0.10",
     "axios": "^0.18.0",
     "bootstrapvalidator": "^0.5.3",
-    "datatables-bootstrap": "^1.0.0"
+    "datatables-bootstrap": "^1.0.0",
+    "ckeditor": "^4.9.2"
   }
 }

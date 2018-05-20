@@ -13,6 +13,7 @@ return [
     'edit_profile' => 'Editar perfil',
     'logout' => 'Cerrar sesión',
     'email' => 'Email',
+    'close' => 'Cerrar',
     'token_unknown' => 'token incorrecto',
     'password' => 'Contraseña',
     'teachers' => 'Profesores',
@@ -53,6 +54,11 @@ return [
     'signup.here' => 'Registrate Aquí',
     //INBOX
     'inbox.title' => 'Mis Mensajes',
+    'inbox.compose' => 'Redactar nuevo',
+    'inbox.send' => 'Enviar mensaje',
+    'inbox.compose.title' => 'Redactar nuevo mensage',
+    'inbox.recipient' => 'Seleccione el destinatario',
+    'inbox.subject' => 'Asunto',
     //WALL
     'wall.title' => 'Cartelera',
     //CLASSROOM

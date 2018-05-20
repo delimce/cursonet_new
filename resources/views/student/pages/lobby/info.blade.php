@@ -31,7 +31,7 @@
     @if (!is_null($current["id"]))
     <div id="course_button" style="float: right; width: 50%; padding-top: 20px">
         <div class="col-sm-auto">
-            <button id="btocontent" class="btn btn-lg btn-block btn-signin" type="submit">{{ trans('students.course.goto') }}</button>
+            <button id="btocontent" class="btn btn-lg btn-block btn-signin" type="submit">@lang('students.course.goto')</button>
         </div>
     </div>
     @endif
