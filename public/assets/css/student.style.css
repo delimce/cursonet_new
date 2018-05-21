@@ -528,5 +528,36 @@ h2 {
 
 /*inbox and messages*/
 
+#inbox-list{
+    background-color: #eff0f2;
+    margin-left: 14px;
+    margin-right: 10px;
+    width: 75%;
+    padding: 17px 16px 11px 16px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
 
+#inbox-read{
+    background-color: #eff0f2;
+    min-width: 570px;
+    max-width: 570px;
+    padding: 17px 16px 11px 16px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    min-height: 360px;
+    display: none;
+}
+
+#inbox-read.active {
+    display: inline-block;
+}
+
+.inbox-content{
+    position: relative;
+    padding: 10px;
+}
 

@@ -58,6 +58,7 @@ return [
     'inbox.send' => 'Enviar mensaje',
     'inbox.compose.title' => 'Redactar nuevo mensage',
     'inbox.recipient' => 'Seleccione el destinatario',
+    'inbox.reply' => 'Responder',
     'inbox.subject' => 'Asunto',
     'inbox.all_messages' => 'Ver todos los mensajes',
     //WALL

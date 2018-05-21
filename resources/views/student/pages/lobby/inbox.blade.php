@@ -4,22 +4,71 @@
 @section('content')
     @component("student.components.preloader")
     @endcomponent
-    <div class="row home-page">
-        <div class="col-md-7 card-border">
-            <section>
-                <h2>@lang('students.inbox.title')</h2>
-                @component("student.components.dataTable")
-                    @slot("id")
-                        inbox
-                    @endslot
-                @endcomponent
-                <div style="width: 200px; float: right; padding: 20px">
-                    <button id="btocontent" class="btn btn-lg btn-block btn-signin" type="button" data-toggle="modal" data-target="#new-message">
-                        @lang('students.inbox.compose')
+    <div class="wrapper">
+        <div id="inbox-list">
+
+            <a href="#" id="sidebarCollapse">
+                <i class="plusMinus fas fa-arrow-left"></i>
+                <span class="swapText">Ocultar temas</span>
+            </a>
+
+            <h2>@lang('students.inbox.title')</h2>
+            @component("student.components.dataTable")
+                @slot("id")
+                    inbox
+                @endslot
+            @endcomponent
+            <div style="width: 200px; float: right; padding: 20px">
+                <button id="btocontent" class="btn btn-lg btn-block btn-signin" type="button" data-toggle="modal"
+                        data-target="#new-message">
+                    @lang('students.inbox.compose')
+                </button>
+            </div>
+        </div>
+
+        <div id="inbox-read">
+            <div class="inbox-content">
+                <div style="float: right; width: 20%; margin: auto; ">
+                    imagen
+                </div>
+                <div style="float: left; width: 80%">
+                    <span class="subtext">Nombre:</span>
+                    <span id="inbox-name">Luis De Lima</span><br>
+                    <span class="subtext">Perfil:</span>
+                    <span id="inbox-role">Estudiante</span><br>
+                    <span class="subtext">Fecha:</span>
+                    <span id="inbox-date">10/10/2018 02:00pm</span>
+                </div>
+                <div style="float: left; width: 100%; padding-top: 20px">
+                    <span class="subtext">Asunto:</span>
+                    <span id="inbox-subject">el asunto del mensaje aqui</span><br>
+                </div>
+                <div style="float:left; width: 100%; margin-top: 10px; margin-bottom: 10px">
+                    It is a long established fact that a reader will be distracted by the
+                    readable content of a page when looking at its layout. The point of using
+                    Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+                    as opposed to using 'Content here, content here', making it look like readable
+                    English. Many desktop publishing packages and web page editors now use Lorem
+                    Ipsum as their default model text, and a search for 'lorem ipsum' will uncover
+                    many web sites still in their infancy. Various versions have evolved over
+                    the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                </div>
+                <div style="float: right; width: 250px; text-align: right">
+                    <button type="button" class="btn btn-secondary">@lang('students.close')</button>
+                    <button type="button" style="width: 100px" class="btn btn-signin">
+                        @lang('students.inbox.reply')
                     </button>
                 </div>
-            </section>
+            </div>
         </div>
+
     </div>
     @include('student.pages.lobby.new-message')
 @endsection
+@push('scripts-ready')
+    $('#sidebarCollapse').on('click', function () {
+
+    $('#inbox-read').toggleClass('active');
+
+    });
+@endpush
