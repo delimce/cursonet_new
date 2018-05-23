@@ -49,10 +49,13 @@
         <div class="footer-nav-items">
             <span><a href="{!! url('student/home') !!}">@lang('students.home')</a> </span>|
             <span><a href="#">@lang('students.teachers')</a></span>|
-            <span><a href="#">@lang('students.support')</a></span>
+            <span><a href="#" data-toggle="modal" data-target="#support">
+                    @lang('students.support')</a>
+            </span>
         </div>
     </div>
 </div>
+@include('student.pages.lobby.support')
 <script src="{!! url('assets/js/functions.js') !!}"></script>
 @stack('scripts')
 <script>

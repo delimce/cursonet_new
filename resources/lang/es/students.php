@@ -19,6 +19,7 @@ return [
     'password' => 'Contraseña',
     'teachers' => 'Profesores',
     'support' => 'Soporte técnico',
+    'support.title' => 'Ante cualquier inconveniente, Escribanos a soporte técnico',
     'preloader' => 'cargando...',
     'sending' => 'Enviando...',
     //LOGIN
