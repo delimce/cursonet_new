@@ -73,6 +73,14 @@ a {
     border: 0;
 }
 
+.btn-danger{
+    font-weight: normal;
+    font-size-adjust: inherit;
+    font-size: 13px;
+    background-color: #df553d;
+    border: 0;
+}
+
 #login-account {
     color: #fff;
     font-weight: normal;
@@ -226,6 +234,10 @@ input[type="search"]{
     -webkit-transition: all 0.218s;
     transition: all 0.218s;
     font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
+}
+
+.footer{
+    margin-top: 25px;
 }
 
 .page-footer {
@@ -518,6 +530,13 @@ h2 {
     max-width: 527px !important;
 }
 
+.to-close{
+    font-size: 14px;
+    position: relative;
+    top: -4px;
+
+}
+
 .modal-body input {
     width: 70%;
     height: 27px;
@@ -530,7 +549,7 @@ h2 {
 
 #inbox-list{
     background-color: #eff0f2;
-    margin-left: 14px;
+    margin-left: 12px;
     margin-right: 10px;
     width: 75%;
     padding: 17px 16px 11px 16px;
@@ -548,7 +567,7 @@ h2 {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    min-height: 360px;
+    min-height: 380px;
     display: none;
 }
 
@@ -557,7 +576,16 @@ h2 {
 }
 
 .inbox-content{
+    margin-top: 12px;
     position: relative;
     padding: 10px;
 }
 
+.inbox-read-content{
+    float:left; width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    height: 180px;
+    overflow-y: scroll;
+    overflow-x:hidden;
+}

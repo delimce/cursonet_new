@@ -14,10 +14,11 @@ return [
     'logout' => 'Cerrar sesión',
     'email' => 'Email',
     'close' => 'Cerrar',
+    'delete' => 'Borrar',
     'token_unknown' => 'token incorrecto',
     'password' => 'Contraseña',
     'teachers' => 'Profesores',
-    'support' => 'Soporte tecnico',
+    'support' => 'Soporte técnico',
     'preloader' => 'cargando...',
     'sending' => 'Enviando...',
     //LOGIN

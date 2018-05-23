@@ -7,7 +7,7 @@
     <div class="wrapper">
         <div id="inbox-list">
 
-            <a href="#" id="sidebarCollapse">
+            <a href="#" class="readCollapse">
                 <i class="plusMinus fas fa-arrow-left"></i>
                 <span class="swapText">Ocultar temas</span>
             </a>
@@ -27,11 +27,16 @@
         </div>
 
         <div id="inbox-read">
+
+            <button type="button" class="close to-close readCollapse" aria-label="Close">
+                <i class="fas fa-times">&nbsp;</i>
+            </button>
+
             <div class="inbox-content">
-                <div style="float: right; width: 20%; margin: auto; ">
-                    imagen
+                <div style="float: right; width: 25%; margin-left: auto; ">
+                    <h1><i class="fas fa-user-circle"></i></h1>
                 </div>
-                <div style="float: left; width: 80%">
+                <div style="float: left; width: 60%">
                     <span class="subtext">Nombre:</span>
                     <span id="inbox-name">Luis De Lima</span><br>
                     <span class="subtext">Perfil:</span>
@@ -43,7 +48,7 @@
                     <span class="subtext">Asunto:</span>
                     <span id="inbox-subject">el asunto del mensaje aqui</span><br>
                 </div>
-                <div style="float:left; width: 100%; margin-top: 10px; margin-bottom: 10px">
+                <div id="inbox-content" class="inbox-read-content">
                     It is a long established fact that a reader will be distracted by the
                     readable content of a page when looking at its layout. The point of using
                     Lorem Ipsum is that it has a more-or-less normal distribution of letters,
@@ -54,7 +59,7 @@
                     the years, sometimes by accident, sometimes on purpose (injected humour and the like).
                 </div>
                 <div style="float: right; width: 250px; text-align: right">
-                    <button type="button" class="btn btn-secondary">@lang('students.close')</button>
+                    <button type="button" class="btn btn-danger">@lang('students.delete')</button>
                     <button type="button" style="width: 100px" class="btn btn-signin">
                         @lang('students.inbox.reply')
                     </button>
@@ -66,7 +71,7 @@
     @include('student.pages.lobby.new-message')
 @endsection
 @push('scripts-ready')
-    $('#sidebarCollapse').on('click', function () {
+    $('.readCollapse').on('click', function () {
 
     $('#inbox-read').toggleClass('active');
 
