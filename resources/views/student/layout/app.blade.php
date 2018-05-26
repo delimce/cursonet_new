@@ -29,7 +29,7 @@
             <div id="user-logged">
                 <h1><i class="fas fa-user-circle"></i></h1>
                 <div id="user-info">
-                    <span><b>@lang('students.student'):</b>&nbsp;Ramon Jose Alvarado Ramirez</span>
+                    <span><b>@lang('commons.student'):</b>&nbsp;Ramon Jose Alvarado Ramirez</span>
                     <span><a href="#">@lang('students.edit_profile')</a></span>
                 </div>
             </div>
@@ -37,8 +37,8 @@
         <div class="nav-items">
             <span><a href="{!! url('student/home') !!}">@lang('students.home')</a> </span>|
             <span><a href="#">@lang('students.my_results')</a></span>|
-            <span><a href="{!! url('student/inbox') !!}">@lang('students.messages')</a></span>|
-            <span><a style="color: #00ccff" href="{!! url('student/logout') !!}">@lang('students.logout')</a></span>
+            <span><a href="{!! url('student/inbox') !!}">@lang('commons.messages')</a></span>|
+            <span><a style="color: #00ccff" href="{!! url('student/logout') !!}">@lang('commons.logout')</a></span>
         </div>
     </div>
 

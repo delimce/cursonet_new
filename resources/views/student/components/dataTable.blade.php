@@ -31,7 +31,7 @@
             "info":     true,
             "language": {
                 "zeroRecords": "@lang('students.nofound')",
-                "search": "@lang('students.search')",
+                "search": "@lang('commons.search')",
                 "info": "@lang('students.paging')",
                 "infoEmpty": "@lang('students.nofound')",
                 "infoFiltered": "(@lang('students.filtered'))"

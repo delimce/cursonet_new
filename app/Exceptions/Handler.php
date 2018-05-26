@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Http\Response;
 
 class Handler extends ExceptionHandler
 {
@@ -28,7 +29,7 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $e
+     * @param  \Exception $e
      * @return void
      */
     public function report(Exception $e)
@@ -39,12 +40,21 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $e
+     * @return Response
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof HttpException) {
+            if ($e->getStatusCode() == 404) {
+                return new Response(
+                    view('errors.404'),
+                    $e->getStatusCode(),
+                    $e->getHeaders()
+                );
+            }
+        }
         return parent::render($request, $e);
     }
 }

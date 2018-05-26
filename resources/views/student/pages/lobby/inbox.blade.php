@@ -59,7 +59,7 @@
                     the years, sometimes by accident, sometimes on purpose (injected humour and the like).
                 </div>
                 <div style="float: right; width: 250px; text-align: right">
-                    <button type="button" class="btn btn-danger">@lang('students.delete')</button>
+                    <button type="button" class="btn btn-danger">@lang('commons.delete')</button>
                     <button type="button" style="width: 100px" class="btn btn-signin">
                         @lang('students.inbox.reply')
                     </button>

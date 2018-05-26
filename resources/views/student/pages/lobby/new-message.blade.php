@@ -27,7 +27,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('students.close')</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('commons.close')</button>
                 <button type="button" style="width: 150px"
                         class="btn btn-lg btn-block btn-signin">@lang('students.inbox.send')</button>
             </div>
