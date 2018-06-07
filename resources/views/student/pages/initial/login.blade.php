@@ -22,7 +22,7 @@
     <script>
         $("#main_form").submit(function (event) {
 
-            axios.post('{!! url('api/student/login') !!}', {
+            axios.post('{!! url('student/doLogin') !!}', {
                 email: $("#email").val(),
                 password: $("#password").val()
             }).then(function (response) {

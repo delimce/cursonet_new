@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Vinkla\Recaptcha\Recaptcha;
 use App\Models\Cn2\Student;
+use App\Models\Cn2\StudentLog;
+use DB;
+use Carbon\Carbon;
 
 class StudentController extends BaseController
 {
@@ -44,8 +47,16 @@ class StudentController extends BaseController
         if (!$user->activo) {
             return response()->json(['status' => 'fail', 'message' => trans('students.login.signin.active.error')], 401);
         } else if (Hash::check($req->input('password'), $user->pass)) {
+            DB::beginTransaction();
             $apikey = $this->newUserToken();
             Student::where('email', $req->input('email'))->update(['token' => "$apikey"]);
+            $log = new StudentLog();
+            $log->est_id = $user->id;
+            $log->ip_acc = $_SERVER['REMOTE_ADDR'];
+            $log->info_cliente = $_SERVER['HTTP_USER_AGENT'];
+            $log->fecha_in = Carbon::now();
+            $log->save();
+            DB::commit();
             return response()->json(['status' => 'ok', 'user' => $user]);
         } else {
             return response()->json(['status' => 'fail', 'message' => trans('students.login.password.error')], 401);
@@ -67,7 +78,7 @@ class StudentController extends BaseController
             Mail::send('student.emails.forgotten', ["user" => $user, "token" => $apikey], function ($m) use ($user) {
                 $m->to($user->email, $user->nombre . ' ' . $user->apellido)->subject('Recordatorio de contraseña');
             });
-            return response()->json(['status' => 'ok', 'message' => trans('students.login.password.restore',['email'=>$user->email])]);
+            return response()->json(['status' => 'ok', 'message' => trans('students.login.password.restore', ['email' => $user->email])]);
         } else {
             return response()->json(['status' => 'error', 'message' => trans('students.login.email.unknown')], 401);
         }
@@ -111,7 +122,7 @@ class StudentController extends BaseController
 
         //recaptcha
 
-        if(!empty($_POST['g-recaptcha-response'])){
+        if (!empty($_POST['g-recaptcha-response'])) {
 
             try {
                 $recaptcha = new Recaptcha(env('RECAPTCHA_SECRET_KEY'));
@@ -120,7 +131,7 @@ class StudentController extends BaseController
                 // If the verification fails.
                 return response()->json(['status' => 'error', 'message' => 'recaptcha not valid'], 422);
             }
-        }else{
+        } else {
             return response()->json(['status' => 'error', 'message' => 'recaptcha not valid'], 422);
         }
 

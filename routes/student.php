@@ -19,6 +19,7 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () us
     $router->get('/login', ['as' => 'student.login', 'uses' => 'InitialController@login']);
     $router->get('/', ['as' => 'student.in', 'uses' => 'InitialController@index']);
     $router->get('/forgotten', 'InitialController@forgotPassword');
+    $router->post('/doLogin', 'InitialController@doLogin');
     $router->get('/register', 'InitialController@register');
     $router->get('/register/success/{email}', 'InitialController@registerSuccess');
     $router->get('/activate/{apikey}', 'InitialController@userActivated');
