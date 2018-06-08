@@ -32,7 +32,7 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () us
     ]);
 });
 
-$router->group(['prefix' => 'student', 'namespace' => 'Student'], function () use ($router) {
+$router->group(['prefix' => 'student', 'namespace' => 'Student', 'middleware'=>['auth']], function () use ($router) {
     $router->get('/home', ['as' => 'student.home', 'uses' => 'HomeController@home']);
     $router->get('/logout', 'HomeController@logout');
     $router->get('/inbox', 'HomeController@getInbox');
