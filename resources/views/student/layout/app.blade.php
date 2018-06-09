@@ -25,15 +25,8 @@
     </div>
 
     <div class="right-nav">
-        <div class="profile-activity clearfix">
-            <div id="user-logged">
-                <h1><i class="fas fa-user-circle"></i></h1>
-                <div id="user-info">
-                    <span><b>@lang('commons.student'):</b>&nbsp;Ramon Jose Alvarado Ramirez</span>
-                    <span><a href="#">@lang('students.edit_profile')</a></span>
-                </div>
-            </div>
-        </div>
+        @component("student.components.profileInfo",['data' => session()->get("myUser")])
+        @endcomponent
         <div class="nav-items">
             <span><a href="{!! url('student/home') !!}">@lang('students.home')</a> </span>|
             <span><a href="#">@lang('students.my_results')</a></span>|
