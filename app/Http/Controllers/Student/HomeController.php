@@ -22,6 +22,7 @@ class HomeController extends BaseController
 
     public function home(Request $req)
     {
+        $myUser = $req->session()->get("myUser");
         $courses = Course::all();
         $req->session()->put('myCourses', $courses);
 
@@ -35,7 +36,14 @@ class HomeController extends BaseController
             $currentCourse = $courses->first();
         }
 
-        return view('student.pages.lobby.home', ["myCourses" => $courses, "current" => $currentCourse->toArray()]);
+        //get messages
+        $user = Student::findOrFail($myUser->id);
+        $messages = $user->messages()->orderBy('id', 'desc')->take(4)->get();
+
+        return view('student.pages.lobby.home',
+            ["myCourses" => $courses,
+            "current" => $currentCourse->toArray(),
+            "messages"=>$messages]);
     }
 
 

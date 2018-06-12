@@ -7,7 +7,8 @@ return [
     'delete' => 'Borrar',
     'messages' => 'Mensajes',
     'go_main' => 'Ingresar a la página ',
-    'student' => 'Estudiante',
+    'student' => 'Est.',
+    'teacher' => 'Prof.',
     //ERRORS
     'error.404.title' => 'Página no encontrada',
     'error.404.subtitle' => 'Upps, la página que estas buscando no existe.',

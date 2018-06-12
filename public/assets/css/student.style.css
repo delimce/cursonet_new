@@ -396,7 +396,7 @@ input[type="search"]{
 
 .home-page section {
     background-color: #eff0f2;
-    padding: 14px 15px 11px 10px;
+    padding: 19px 15px 11px 10px;
     width: 96%;
     height: 100%;
     min-height: 200px;
@@ -407,6 +407,10 @@ input[type="search"]{
 
 .home-page section div {
     padding: 1px 11px 5px 11px;
+}
+
+.content-home{
+    padding: 8px 8px 8px 0;
 }
 
 .subtext {

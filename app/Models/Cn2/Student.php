@@ -13,6 +13,10 @@ class Student extends Model
         return $this->hasMany('App\Models\Cn2\StudentLog');
     }
 
+    public function messages(){
+        return $this->hasMany('App\Models\Cn2\StudentMessage', 'para');
+    }
+
     /**
      * The attributes excluded from the model's JSON form.
      *

@@ -17,7 +17,7 @@
 
         <div class="row">
             <div class="col-md-7 card-border">
-                @include('student.pages.lobby.messages', ['some' => 'data'])
+                @include('student.pages.lobby.messages', ['messages' => $messages])
             </div>
 
             <div class="col-md-5 card-border">

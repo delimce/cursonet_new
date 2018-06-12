@@ -56,7 +56,8 @@ return [
     'inbox.recipient' => 'Seleccione el destinatario',
     'inbox.reply' => 'Responder',
     'inbox.subject' => 'Asunto',
-    'inbox.all_messages' => 'Ver todos los mensajes',
+    'inbox.all_messages' => 'Ver los mensajes',
+    'inbox.no_messages' => 'No hay mensajes para ud',
     //WALL
     'wall.title' => 'Cartelera',
     //CLASSROOM
