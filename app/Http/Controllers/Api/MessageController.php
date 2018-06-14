@@ -23,13 +23,17 @@ class MessageController extends BaseController
 
     //
 
+    /** get message by id
+     * @param $id
+     * @return mixed
+     */
     public function getMessage($id)
     {
         $message = StudentMessage::where("id", $id)->first();
 
         if (isset($message->id)) {
             ///set read
-            StudentMessage::where('id', $message->id)->where("leido",0)->update(['leido' => 1]);
+            StudentMessage::where('id', $message->id)->where("leido", 0)->update(['leido' => 1]);
             $data = array(
                 "id" => $message->id,
                 "content" => $message->content,
@@ -42,6 +46,23 @@ class MessageController extends BaseController
         } else {
             return response()->json(['status' => 'error', 'message' => trans('students.inbox.no_message')], 403);
         }
+    }
+
+
+    /** delete message by id
+     * @param $id
+     * @return mixed
+     */
+    public function deleteMessage($id)
+    {
+        try {
+            $message = StudentMessage::findOrFail($id);
+            $message->delete();
+            return response()->json(['status' => 'ok', 'message' => trans('commons.message.deleted')]);
+        } catch (\Exception $ex) {
+            return response()->json(['status' => 'error', 'message' => trans('commons.message.notfound')], 500);
+        }
+
     }
 
 }

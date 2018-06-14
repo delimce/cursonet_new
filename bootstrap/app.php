@@ -103,6 +103,7 @@ $app->register(\Illuminate\Session\SessionServiceProvider::class);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'api' => App\Http\Middleware\ApiMiddleware::class,
 ]);
 
 $app->register(Collective\Html\HtmlServiceProvider::class);

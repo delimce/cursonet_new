@@ -12,7 +12,8 @@ $router->group(['prefix' => 'api/student', 'namespace' => 'Api'], function () us
 });
 
 ///messages
-$router->group(['prefix' => 'api/student/message', 'namespace' => 'Api'], function () use ($router) {
+$router->group(['prefix' => 'api/student/message', 'namespace' => 'Api', 'middleware'=>['api']], function () use ($router) {
     $router->get('/{id}', 'MessageController@getMessage');
+    $router->delete('/{id}', 'MessageController@deleteMessage');
 
 });
