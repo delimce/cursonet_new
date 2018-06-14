@@ -19,6 +19,10 @@ class StudentMessage extends Model
     }
 
     //get sender of message
+
+    /**sender name and profile
+     * @return string
+     */
     public function sender(){
 
         if($this->tipo){
@@ -30,6 +34,20 @@ class StudentMessage extends Model
         }
 
         return "$pre {$sender->nombre} {$sender->apellido}";
+    }
+
+    /**object of sender
+     * @return mixed
+     */
+    public function senderObject(){
+
+        if($this->tipo){
+            $sender = Admin::findOrFail($this->de);
+        }else{
+            $sender = Student::findOrFail($this->de);
+        }
+
+        return $sender;
     }
 
 }

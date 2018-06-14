@@ -34,13 +34,12 @@ class StudentController extends BaseController
 
     public function login(Request $req)
     {
-
         $this->validate($req, [
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        $user = Student::where('email', $req->input('email'))->first();
+        $user = DB::table('tbl_estudiante')->select("id","nombre","apellido","id_number","foto","activo","pass","token")->where('email', $req->input('email'))->first();
         if (is_null($user))
             return response()->json(['status' => 'error', 'message' => trans('students.login.email.unknown')], 401);
 

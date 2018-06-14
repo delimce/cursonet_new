@@ -7,15 +7,27 @@
     <div class="wrapper">
         <div id="inbox-list">
 
-            <a href="#" class="readCollapse">
-                <i class="plusMinus fas fa-arrow-left"></i>
-                <span class="swapText">Ocultar temas</span>
-            </a>
-
             <h2>@lang('students.inbox.title')</h2>
             @component("student.components.dataTable")
                 @slot("id")
                     inbox
+                @endslot
+                @slot("head")
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Asunto</th>
+                            <th>Fecha</th>
+                        </tr>
+                @endslot
+                @slot("body")
+                    @foreach($messages as $message)
+                        <tr  class="@if (!$message->leido) subtext @endif my-inbox"
+                             style="cursor: pointer" data-id="{{$message->id}}">
+                            <td>{{$message->sender()}}</td>
+                            <td>{{$message->subject}}</td>
+                            <td>{{$message->datetime()}}</td>
+                        </tr>
+                     @endforeach
                 @endslot
             @endcomponent
             <div style="width: 200px; float: right; padding: 20px">
@@ -46,17 +58,10 @@
                 </div>
                 <div style="float: left; width: 100%; padding-top: 20px">
                     <span class="subtext">Asunto:</span>
-                    <span id="inbox-subject">el asunto del mensaje aqui</span><br>
+                    <span id="inbox-subject">&nbsp;</span><br>
                 </div>
                 <div id="inbox-content" class="inbox-read-content">
-                    It is a long established fact that a reader will be distracted by the
-                    readable content of a page when looking at its layout. The point of using
-                    Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-                    as opposed to using 'Content here, content here', making it look like readable
-                    English. Many desktop publishing packages and web page editors now use Lorem
-                    Ipsum as their default model text, and a search for 'lorem ipsum' will uncover
-                    many web sites still in their infancy. Various versions have evolved over
-                    the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
                 </div>
                 <div style="float: right; width: 250px; text-align: right">
                     <button type="button" class="btn btn-danger">@lang('commons.delete')</button>
@@ -77,3 +82,26 @@
 
     });
 @endpush
+
+@push('scripts')
+    <script>
+        $('.my-inbox').on('click',function (event) {
+            var me = $(this);
+            var msgId = me.data('id');
+            axios.get('{!! url('api/student/message') !!}/'+msgId, {
+            }).then(function (response) {
+                $('#inbox-read').toggleClass('active');
+                console.log(response.data)
+                $("#inbox-subject").html(response.data.message.subject)
+                $("#inbox-content").html(response.data.message.content)
+                $("#inbox-date").html(response.data.message.date)
+                var profile = (!response.data.message.profile)?'@lang('commons.student')':'@lang('commons.teacher')';
+                $("#inbox-role").html(profile)
+                $("#inbox-name").html(response.data.message.sender.nombre+" "+response.data.message.sender.apellido)
+
+            }).catch(function (error) {
+                showAlert(error.response.data.message)
+            });
+        })
+    </script>
+@endpush    

@@ -13,16 +13,19 @@ class HomeController extends BaseController
      * Create a new controller instance.
      * @return void
      */
-    public function __construct()
+
+    private $student;
+
+    public function __construct(Request $req)
     {
-        //
+        $myUser = $req->session()->get("myUser");
+        $this->student = Student::findOrFail($myUser->id);
     }
 
     //
 
     public function home(Request $req)
     {
-        $myUser = $req->session()->get("myUser");
         $courses = Course::all();
         $req->session()->put('myCourses', $courses);
 
@@ -37,13 +40,12 @@ class HomeController extends BaseController
         }
 
         //get messages
-        $user = Student::findOrFail($myUser->id);
-        $messages = $user->messages()->orderBy('id', 'desc')->take(4)->get();
+        $messages = $this->student->messages()->orderBy('id', 'desc')->take(4)->get();
 
         return view('student.pages.lobby.home',
             ["myCourses" => $courses,
-            "current" => $currentCourse->toArray(),
-            "messages"=>$messages]);
+                "current" => $currentCourse->toArray(),
+                "messages" => $messages]);
     }
 
 
@@ -54,12 +56,10 @@ class HomeController extends BaseController
      */
     public function courseSelected(Request $req)
     {
-
         $courseId = $req->input("courseId");
         $req->session()->put("courseSelected", $courseId);
         $course = Course::findOrFail($courseId);
         return response()->json(['status' => 'ok', 'course' => $course]);
-
     }
 
     public function logout(Request $req)
@@ -68,8 +68,9 @@ class HomeController extends BaseController
         return redirect()->route('student.login');
     }
 
-    public function getInbox(Request $req){
-        return view("student.pages.lobby.inbox");
+    public function getInbox()
+    {
+        return view("student.pages.lobby.inbox", ["messages" => $this->student->messages()->get()]);
     }
 
 

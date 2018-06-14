@@ -58,6 +58,7 @@ return [
     'inbox.subject' => 'Asunto',
     'inbox.all_messages' => 'Ver los mensajes',
     'inbox.no_messages' => 'No hay mensajes para ud',
+    'inbox.no_message' => 'No es posible leer el mensaje',
     //WALL
     'wall.title' => 'Cartelera',
     //CLASSROOM

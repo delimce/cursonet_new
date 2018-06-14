@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     protected $table = 'tbl_estudiante';
-    protected $visible = array('id','nombre','apellido','id_number','user','email','foto','sexo','fecha_nac','token','activo'); ///only fields that return
 
     public function logs()
     {
@@ -23,6 +22,6 @@ class Student extends Model
      * @var array
      */
     protected $hidden = [
-        'pass',
+        'pass','token','clave_preg','clave_resp',
     ];
 }

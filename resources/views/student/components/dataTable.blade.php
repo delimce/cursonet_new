@@ -1,22 +1,9 @@
 <table id="{{$id}}" class="display stripe dataTableCn">
     <thead>
-    <tr>
-        <th>Nombre</th>
-        <th>Asunto</th>
-        <th>Fecha</th>
-       </tr>
+      {{$head}}
     </thead>
     <tbody>
-    <tr>
-        <td>Tiger Nixon</td>
-        <td>System Architect</td>
-        <td>2011/04/25</td>
-    </tr>
-    <tr>
-        <td>Tiger Nixon</td>
-        <td>System Architect</td>
-        <td>2011/04/25</td>
-    </tr>
+      {{$body}}
     </tbody>
 </table>
 @push('head')
