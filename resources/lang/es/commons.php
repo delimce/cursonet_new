@@ -13,7 +13,7 @@ return [
     'message.notfound' => 'Mensaje no encontrado',
     //ERRORS
     'error.401.title' => 'Error, usuario no autenticado.',
-    'error.401.token' => 'Error en token de usuario',
+    'error.401.token' => 'token de usuario inválido',
     'error.404.title' => 'Página no encontrada',
     'error.404.subtitle' => 'Upps, la página que estas buscando no existe.',
     'error.404.message' => 'puedes intentar ingresar nuevamente a la página principal de la plataforma:',

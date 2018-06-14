@@ -15,12 +15,8 @@
 
     <div style="float: left; width: 50%">
         <div>
-            <span class="subtext">Fecha Inicio:</span>
+            <span class="subtext">Fecha creado:</span>
             <span id="course_initdate">10/11/2018</span>
-        </div>
-        <div>
-            <span class="subtext">Fecha Fin:</span>
-            <span id="course_enddate">10/11/2018</span>
         </div>
         <div>
             <span class="subtext">Facilitador:</span>

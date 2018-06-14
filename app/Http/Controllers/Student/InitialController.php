@@ -64,6 +64,7 @@ class InitialController extends BaseController
             $log->fecha_in = Carbon::now();
             $log->save();
             ///new login
+            $user->token = $apikey;
             $req->session()->put('myUser', $user);
             $req->session()->put('userLog', $log->id);
             DB::commit();

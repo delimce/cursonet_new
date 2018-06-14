@@ -21,7 +21,7 @@ class ApiMiddleware
         if (!$token) {
             return response()->json(['status' => 'error', 'message' => trans('commons.error.401.title')], 401);
         } else {
-            $user = Student::where("token", $token)->first();
+            $user = Student::where("token", $token)->where("activo",1)->first();
             if (!isset($user->id))
                 return response()->json(['status' => 'error', 'message' => trans('commons.error.401.token')], 401);
         }

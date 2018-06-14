@@ -24,11 +24,12 @@
             axios.post('{!! url('student/select/course') !!}', {
                 courseId: this.value
             }).then(function (response) {
-
+                console.log(response)
                 @if(basename(url::current())=="home")
                 $("#course_name").html(response.data.course.nombre);
                 $("#course_duration").html(response.data.course.duracion);
                 $("#course_description").html(response.data.course.descripcion);
+                $("#course_initdate").html(response.data.course.init)
                 $("#course_button").show();
                 @else
                 redirect('{!! url('student/home') !!}', false)

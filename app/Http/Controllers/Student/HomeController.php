@@ -59,7 +59,18 @@ class HomeController extends BaseController
         $courseId = $req->input("courseId");
         $req->session()->put("courseSelected", $courseId);
         $course = Course::findOrFail($courseId);
-        return response()->json(['status' => 'ok', 'course' => $course]);
+        $course->initDate = $course->createdAt();
+        $course->author = $course->author();
+        $data = array("alias"=>$course->alias,
+                      "descripcion"=>$course->descripcion,
+                      "id"=>$course->id,
+                      "nombre"=>$course->nombre,
+                      "init"=>$course->createdAt(),
+                      "author"=>$course->author(),
+                      "duracion"=>$course->duracion);
+
+
+        return response()->json(['status' => 'ok', 'course' => $data]);
     }
 
     public function logout(Request $req)

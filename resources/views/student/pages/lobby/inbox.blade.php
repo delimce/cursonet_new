@@ -88,8 +88,12 @@
         $('.my-inbox').on('click',function (event) {
             var me = $(this);
             var msgId = me.data('id');
-            axios.get('{!! url('api/student/message') !!}/'+msgId, {
-            }).then(function (response) {
+            axios.get('{!! url('api/student/message') !!}/'+msgId,
+                {headers: {
+                        "Authorization" : "{!! session()->get("myUser")->token !!}"
+                    }
+                }
+            ).then(function (response) {
                 $('#inbox-read').toggleClass('active');
                 console.log(response.data)
                 $("#inbox-subject").html(response.data.message.subject)
