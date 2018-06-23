@@ -23,6 +23,32 @@ class MessageController extends BaseController
 
     //
 
+    /**get messages of student
+     * @param Request $req
+     */
+    public function getMessages(Request $req){
+
+        $token = $req->header('Authorization');
+        $student = Student::where("token",$token)->first();
+        $messages = $student->messages()->orderBy("id","DESC")->get();
+        $data = array();
+        if(count($messages)>0){
+
+            foreach ($messages as $message) {
+                $data[] = array(
+                    "id" => $message->id,
+                    "subject" => $message->subject,
+                    "sender" => $message->sender(),
+                    "date" => $message->datetime(),
+                    "leido" => $message->leido,
+                );
+            }
+
+        }
+        return response()->json(['status' => 'ok', 'messages' => $data]);
+
+    }
+
     /** get message by id
      * @param $id
      * @return mixed
@@ -47,7 +73,6 @@ class MessageController extends BaseController
             return response()->json(['status' => 'error', 'message' => trans('students.inbox.no_message')], 403);
         }
     }
-
 
     /** delete message by id
      * @param $id

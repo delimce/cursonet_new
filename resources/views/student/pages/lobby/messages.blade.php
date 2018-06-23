@@ -26,7 +26,7 @@
     @else
 
         <div>
-            <h2>@lang('student.inbox.no_messages')</h2>
+            @lang('students.inbox.no_messages')
         </div>
 
     @endif

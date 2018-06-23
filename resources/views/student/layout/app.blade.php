@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="my-token" content="{!! session()->get("myUser")->token !!}">
     <link rel="shortcut icon" href="{!! url('assets/img/favicon.png') !!}">
     <title>Cursonet 2.0 - @yield('title')</title>
     {{--ccs files--}}
@@ -50,6 +51,8 @@
 </div>
 @include('student.pages.lobby.support')
 <script src="{!! url('assets/js/functions.js') !!}"></script>
+<script src="{!! url('bower_components/select2/dist/js/select2.min.js') !!}"></script>
+<script src="{!! url('bower_components/ckeditor/ckeditor.js') !!}"></script>
 @stack('scripts')
 <script>
     $(document).ready(function () {

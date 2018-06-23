@@ -40,7 +40,7 @@ class HomeController extends BaseController
         }
 
         //get messages
-        $messages = $this->student->messages()->orderBy('id', 'desc')->take(4)->get();
+        $messages = $this->student->messages()->with("student")->orderBy('id', 'desc')->take(4)->get();
 
         return view('student.pages.lobby.home',
             ["myCourses" => $courses,
@@ -81,7 +81,7 @@ class HomeController extends BaseController
 
     public function getInbox()
     {
-        return view("student.pages.lobby.inbox", ["messages" => $this->student->messages()->get()]);
+        return view("student.pages.lobby.inbox", ["messages" => $this->student->messages()->with('student')->get()]);
     }
 
 

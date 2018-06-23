@@ -13,6 +13,7 @@ return [
     'password' => 'Contraseña',
     'teachers' => 'Profesores',
     'support' => 'Soporte técnico',
+    'support.message' => 'Su mensaje para nosostros Aquí',
     'support.title' => 'Ante cualquier inconveniente, Escribanos a soporte técnico',
     'preloader' => 'cargando...',
     'sending' => 'Enviando...',
@@ -57,8 +58,10 @@ return [
     'inbox.reply' => 'Responder',
     'inbox.subject' => 'Asunto',
     'inbox.all_messages' => 'Ver los mensajes',
-    'inbox.no_messages' => 'No hay mensajes para ud',
+    'inbox.no_messages' => 'No hay mensajes para ud.',
     'inbox.no_message' => 'No es posible leer el mensaje',
+    'inbox.delete' => 'Borrar mensaje',
+    'inbox.delete.message' => 'Esta seguro que desea borrar el mensaje?',
     //WALL
     'wall.title' => 'Cartelera',
     //CLASSROOM

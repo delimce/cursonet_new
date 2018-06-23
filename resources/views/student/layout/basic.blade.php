@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="my-token" content="null">
     <link rel="shortcut icon" href="{!! url('assets/img/favicon.png') !!}">
     <title>Cursonet 2.0 - @yield('title')</title>
     {{--ccs files--}}

@@ -4,3 +4,4 @@
 <script src="{!! url('bower_components/axios/dist/axios.min.js') !!}"></script>
 <script src="{!! url('bower_components/bootstrapvalidator/dist/js/bootstrapValidator.min.js') !!}"></script>
 <script src="{!! url('bower_components/remarkable-bootstrap-notify/bootstrap-notify.min.js') !!}"></script>
+<script src="{!! url('bower_components/jquery-confirm2/js/jquery-confirm.js') !!}"></script>

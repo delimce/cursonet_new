@@ -565,8 +565,9 @@ h2 {
 
 #inbox-read{
     background-color: #eff0f2;
-    min-width: 570px;
-    max-width: 570px;
+    min-width: 590px;
+    max-width: 590px;
+    max-height: 430px;
     padding: 17px 16px 11px 16px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;

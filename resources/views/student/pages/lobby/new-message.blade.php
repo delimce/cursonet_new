@@ -35,8 +35,6 @@
     </div>
 </div>
 @push('scripts')
-    <script src="{!! url('bower_components/select2/dist/js/select2.min.js') !!}"></script>
-    <script src="{!! url('bower_components/ckeditor/ckeditor.js') !!}"></script>
     <script>
         $('.adv-select-to').select2({
             placeholder: "@lang('students.inbox.recipient')",

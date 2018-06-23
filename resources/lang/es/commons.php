@@ -2,6 +2,9 @@
 
 return [
     'search' => 'Buscar',
+    'name' => 'Nombre',
+    'profile' => 'Perfil',
+    'date' => 'Fecha',
     'logout' => 'Cerrar sesión',
     'close' => 'Cerrar',
     'delete' => 'Borrar',

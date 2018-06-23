@@ -1,12 +1,34 @@
 'use strict'
-
+/**
+ * token of Authorization and Cross Site Request Forgering
+ * @type {string | null}
+ */
 axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+axios.defaults.headers.common['Authorization'] = document.querySelector('meta[name="my-token"]').getAttribute('content');
 
+/**
+ * if token is invalid, then quit session
+ * @param error
+ * @param url
+ */
+var quitSession = function (error, url) {
+    if (error.status = 401)
+        redirect(url, false)
+    else
+        showAlert(error.response.data.message)
+}
+
+/**
+ * redirect to view
+ * @param url
+ * @param back
+ */
 var redirect = function (url, back=true) {
     if (back)
         window.location = url
     else location.replace(url)
 }
+
 
 var showAlert = function (message) {
     $.notify({
