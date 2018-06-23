@@ -78,7 +78,7 @@
 @push('scripts-ready')
     $('.readCollapse').on('click', function () {
 
-    $('#inbox-read').toggleClass('active');
+    $('#inbox-read').hide();
 
     });
 
@@ -86,24 +86,34 @@
 
 @push('scripts')
     <script>
-        $('.my-inbox').on('click', function (event) {
+
+        $('#inbox tbody').on('click', 'tr', function () {
             var me = $(this);
             var msgId = me.data('id');
-            axios.get('{!! url('api/student/message') !!}/' + msgId
-            ).then(function (response) {
-                $('#inbox-read').toggleClass('active');
-                console.log(response.data)
-                $("#inbox-subject").html(response.data.message.subject)
-                $("#inbox-content").html(response.data.message.content)
-                $("#inbox-date").html(response.data.message.date)
-                var profile = (!response.data.message.profile) ? '@lang('commons.student')' : '@lang('commons.teacher')';
-                $("#inbox-role").html(profile)
-                $("#inbox-name").html(response.data.message.sender.nombre + " " + response.data.message.sender.apellido)
-                ///delelete message
-                $('#delete').data('msg-id', msgId); //setter
-            }).catch(function (error) {
-                quitSession(error, '{!! url('student/logout') !!}');
-            });
+            if (me.hasClass('selected')) {
+                me.removeClass('selected');
+                $('#inbox-read').hide();
+            } else {
+                var table = $('#inbox').DataTable();
+                table.$('tr.selected').removeClass('selected');
+                me.addClass('selected');
+                axios.get('{!! url('api/student/message') !!}/' + msgId
+                ).then(function (response) {
+                    $('#inbox-read').show();
+                    me.removeClass('subtext');
+                    console.log(response.data)
+                    $("#inbox-subject").html(response.data.message.subject)
+                    $("#inbox-content").html(response.data.message.content)
+                    $("#inbox-date").html(response.data.message.date)
+                    var profile = (!response.data.message.profile) ? '@lang('commons.student')' : '@lang('commons.teacher')';
+                    $("#inbox-role").html(profile)
+                    $("#inbox-name").html(response.data.message.sender.nombre + " " + response.data.message.sender.apellido)
+                    ///delelete message
+                    $('#delete').data('msg-id', msgId); //setter
+                }).catch(function (error) {
+                    quitSession(error, '{!! url('student/logout') !!}');
+                });
+            }
         })
 
         $('#delete').confirm({
@@ -114,7 +124,7 @@
                     var msgId = $('#delete').data("msg-id");
                     axios.delete('{!! url('api/student/message') !!}/' + msgId
                     ).then(function (response) {
-                        $('#inbox-read').toggleClass('active');
+                        $('#inbox-read').hide();
                         var table = $('#inbox').DataTable();
                         table.row('.selected').remove().draw(false);
                     }).catch(function (error) {

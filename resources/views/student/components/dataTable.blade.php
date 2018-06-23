@@ -11,7 +11,6 @@
     <script src="{!! url('bower_components/datatables/media/js/jquery.dataTables.js') !!}"></script>
 @endpush
 @push('scripts-ready')
-
         $('#{{$id}}').DataTable( {
             "paging":   true,
             "ordering": true,
@@ -24,16 +23,4 @@
                 "infoFiltered": "(@lang('students.filtered'))"
             }
         } );
-
-
-        var table = $('#{{$id}}').DataTable();
-        $('#{{$id}} tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-        $(this).removeClass('selected');
-        } else {
-        table.$('tr.selected').removeClass('selected');
-        $(this).addClass('selected');
-        }
-        });
-
 @endpush

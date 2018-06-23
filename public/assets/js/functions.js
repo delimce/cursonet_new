@@ -12,7 +12,7 @@ axios.defaults.headers.common['Authorization'] = document.querySelector('meta[na
  * @param url
  */
 var quitSession = function (error, url) {
-    if (error.status = 401)
+    if (error.status == 401)
         redirect(url, false)
     else
         showAlert(error.response.data.message)
