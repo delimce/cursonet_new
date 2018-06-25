@@ -12,27 +12,28 @@ use Carbon\Carbon;
 
 class MessageController extends BaseController
 {
+    private $student;
+
     /**
      * Create a new controller instance.
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $req)
     {
-        //
+        $token = $req->header('Authorization');
+        $this->student = Student::where("token", $token)->first();
     }
 
-    //
 
     /**get messages of student
-     * @param Request $req
+     * @return mixed
      */
-    public function getMessages(Request $req){
+    public function getMessages()
+    {
 
-        $token = $req->header('Authorization');
-        $student = Student::where("token",$token)->first();
-        $messages = $student->messages()->orderBy("id","DESC")->get();
+        $messages = $this->student->messages()->orderBy("id", "DESC")->get();
         $data = array();
-        if(count($messages)>0){
+        if (count($messages) > 0) {
 
             foreach ($messages as $message) {
                 $data[] = array(
@@ -55,7 +56,7 @@ class MessageController extends BaseController
      */
     public function getMessage($id)
     {
-        $message = StudentMessage::where("id", $id)->first();
+        $message = StudentMessage::where("id", $id)->where("para", $this->student->id)->first();
 
         if (isset($message->id)) {
             ///set read
@@ -81,7 +82,7 @@ class MessageController extends BaseController
     public function deleteMessage($id)
     {
         try {
-            $message = StudentMessage::findOrFail($id);
+            $message = StudentMessage::where("id", $id)->where("para", $this->student->id)->first();
             $message->delete();
             return response()->json(['status' => 'ok', 'message' => trans('commons.message.deleted')]);
         } catch (\Exception $ex) {

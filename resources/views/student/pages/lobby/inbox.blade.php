@@ -93,7 +93,7 @@
             if (me.hasClass('selected')) {
                 me.removeClass('selected');
                 $('#inbox-read').hide();
-            } else {
+            } else if (msgId != undefined) {
                 var table = $('#inbox').DataTable();
                 table.$('tr.selected').removeClass('selected');
                 me.addClass('selected');

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Cn2;
 
 use Illuminate\Database\Eloquent\Model;
@@ -12,8 +13,14 @@ class Student extends Model
         return $this->hasMany('App\Models\Cn2\StudentLog');
     }
 
-    public function messages(){
+    public function messages()
+    {
         return $this->hasMany('App\Models\Cn2\StudentMessage', 'para');
+    }
+
+    public function groups()
+    {
+        return $this->hasMany('App\Models\Cn2\GroupStudent', 'est_id');
     }
 
     /**
@@ -22,6 +29,6 @@ class Student extends Model
      * @var array
      */
     protected $hidden = [
-        'pass','token','clave_preg','clave_resp',
+        'pass', 'token', 'clave_preg', 'clave_resp',
     ];
 }

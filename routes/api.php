@@ -19,3 +19,10 @@ $router->group(['prefix' => 'api/student/message', 'namespace' => 'Api', 'middle
     $router->delete('/{id}', 'MessageController@deleteMessage');
 
 });
+
+//account
+$router->group(['prefix' => 'api/student/account', 'namespace' => 'Api', 'middleware'=>['api']], function () use ($router) {
+    $router->get('/contacts', 'AccountController@getContacts');
+
+
+});
