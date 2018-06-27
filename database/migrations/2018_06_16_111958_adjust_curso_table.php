@@ -42,6 +42,7 @@ class AdjustCursoTable extends Migration
 
             $table->integer('resp')->unsigned()->change();
             $table->dropForeign('tbl_curso_resp_foreign');
+            $table->dropIndex('tbl_curso_resp_foreign');
 
         });
     }
