@@ -14,6 +14,11 @@ return [
     'teacher' => 'Prof.',
     'message.deleted' => 'Mensaje borrado con exito',
     'message.notfound' => 'Mensaje no encontrado',
+    ///validation
+    'validation.required' => 'Todos los campos son requeridos',
+    'validation.numeric' => 'El campo :attribute debe ser númerico',
+    'validation.min' => 'El campo :attribute debe ser mayor a :min',
+    'validation.max' => 'El campo :attribute debe ser menor a :max',
     //ERRORS
     'error.401.title' => 'Error, usuario no autenticado.',
     'error.401.token' => 'token de usuario inválido',

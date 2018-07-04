@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Cn2\Student;
 use DB;
 use Carbon\Carbon;
+use Validator;
 
 class MessageController extends BaseController
 {
@@ -96,18 +97,29 @@ class MessageController extends BaseController
      * @param Request $req
      * @return mixed
      */
-    public function createMessage(Request $req){
+    public function createMessage(Request $req)
+    {
 
-        $this->validate($req, [
-            'type' => 'required',
-            'to' => 'required',
-            'subject' => 'required',
-            'message' => 'required'
+        $validator = Validator::make($req->all(), [
+            'subject' => 'required|max:150',
+            'type' => 'required|numeric',
+            'to' => 'required|numeric',
+            'message' => 'required|min:5'
+        ], ['required' => trans('commons.validation.required'),
+            'numeric' => trans('commons.validation.numeric'),
+            'min' => trans('commons.validation.min'),
+            'max' => trans('commons.validation.max'),
         ]);
 
-        if($req->type){
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response()->json(['status' => 'error', 'message' => $error], 400);
+        }
+
+
+        if ($req->type) {
             $message = new AdminMessage();
-        }else{
+        } else {
             $message = new StudentMessage();
         }
 

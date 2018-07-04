@@ -17,7 +17,7 @@
                         </select>
                         <br>
                         <input type="text" placeholder="@lang('students.inbox.subject')" class="form-control"
-                               id="subject"
+                               id="subject" maxlength="140"
                                name="subject" autocomplete="my-subject" required>
                     </div>
 
