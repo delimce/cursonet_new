@@ -28,7 +28,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('commons.close')</button>
-                <button id="msg-send" type="button" style="width: 150px"  class="btn btn-lg btn-block btn-signin">@lang('students.inbox.send')</button>
+                <button id="msg-send" type="button" style="width: 150px"
+                        class="btn btn-lg btn-block btn-signin">@lang('students.inbox.send')</button>
             </div>
         </div>
     </div>
@@ -38,26 +39,20 @@
         $('.adv-select-to').select2({
             ajax: {
                 headers: {
-                    "Authorization" : "{{session()->get("myUser")->token}}",
+                    "Authorization": "{{session()->get("myUser")->token}}",
                 },
                 url: "{!! url('api/student/account/contacts') !!}",
                 dataType: 'json',
                 delay: 250,
-                data: function(params) {
-                    return {
-                        q: params.term,
-                        page: params.page,
-                        per_page: 10
-                    };
-                },
-                processResults: function(data, page) {
+
+                processResults: function (data) {
                     return {
                         // Select2 requires an id, so we need to map the results and add an ID
                         // You could instead include an id in the tsv you add to soulheart ;)
-                        results: data.contacts.map(function(item) {
+                        results: data.contacts.map(function (item) {
                             return {
-                                id: item.id,
-                                text: String(item.nombre).capitalize()+" "+String(item.apellido).capitalize()
+                                id: (item.hasOwnProperty('es_admin')) ? "1_" + item.id : "0_" + item.id,
+                                text: String(item.nombre).capitalize() + " " + String(item.apellido).capitalize()
                             };
                         }),
                         pagination: {
@@ -72,19 +67,40 @@
             allowClear: false
         })
 
-        CKEDITOR.replace('mcontent',  {
+        CKEDITOR.replace('mcontent', {
             toolbar: [
-                { name: 'mode', items : [ 'Source'] },
-                { name: 'clipboard', items : [ 'PasteText','Undo','Redo' ] },
-                { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-                { name: 'basicstyles', items : [ 'Bold','Italic','Subscript','Superscript','RemoveFormat' ] },
-                { name: 'paragraph', items : [ 'NumberedList','BulletedList'] },
-                { name: 'tools', items : [ 'Maximize', 'ShowBlocks' ] },
+                {name: 'mode', items: ['Source']},
+                {name: 'clipboard', items: ['PasteText', 'Undo', 'Redo']},
+                {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
+                {name: 'basicstyles', items: ['Bold', 'Italic', 'Subscript', 'Superscript', 'RemoveFormat']},
+                {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
+                {name: 'tools', items: ['Maximize', 'ShowBlocks']},
             ],
             language: 'es'
         });
 
 
+        $("#msg-send").on('click', function (event) {
+            var to = $('#to').val();
+            var destiny = to.split("_");
+            var subject = $('#subject').val();
+            var content = CKEDITOR.instances.mcontent.getData();
+            console.log(destiny)
+            axios.put('{!! url('api/student/message') !!}', {
+                type: Number(destiny[0]),
+                to: Number(destiny[1]),
+                subject: subject,
+                message: content
+            }).then(function (response) {
+                $('#new-message').modal('hide');
+                showSuccess(response.data.message, 5000)
+                $('#form-message')[0].reset();
+            }).catch(function (error) {
+                showAlert(error.response.data.message)
+            });
+            event.preventDefault();
+
+        })
 
     </script>
 @endpush

@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Cn2\Admin;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use DB;
@@ -35,10 +36,12 @@ class AccountController extends BaseController
 
         $estId = $this->student->id;
         ///student's groups
-        $groups = $this->student->groups()->select("grupo_id")->get();
+        $groups = $this->student->groups()->with('group')->get();
+        $teacher_array = array();
         $group_array = array();
-        $groups->each(function ($value) use (&$group_array) {
+        $groups->each(function ($value) use (&$group_array,&$teacher_array) {
             $group_array[] = $value->grupo_id;
+            $teacher_array[] = $value->group->prof_id;
         });
 
         $students = GroupStudent:: with(['Student' => function ($q) use ($estId) {
@@ -52,7 +55,11 @@ class AccountController extends BaseController
             if ($item->Student != null) $data_student[] = $item->Student->only(['id','nombre', 'apellido','email','foto','sexo','fecha_nac','telefono_p']);
         });
 
-        return response()->json(['status' => 'ok', 'contacts' => $data_student]);
+        ///get teachers
+        $teachers = Admin::whereIn('id',$teacher_array)->get();
+        $output = array_merge($data_student, $teachers->toArray());
+
+        return response()->json(['status' => 'ok', 'contacts' => $output]);
     }
 
 }

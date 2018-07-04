@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Cn2\AdminMessage;
 use App\Models\Cn2\StudentMessage;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
@@ -88,6 +89,37 @@ class MessageController extends BaseController
         } catch (\Exception $ex) {
             return response()->json(['status' => 'error', 'message' => trans('commons.message.notfound')], 500);
         }
+
+    }
+
+    /**create new message
+     * @param Request $req
+     * @return mixed
+     */
+    public function createMessage(Request $req){
+
+        $this->validate($req, [
+            'type' => 'required',
+            'to' => 'required',
+            'subject' => 'required',
+            'message' => 'required'
+        ]);
+
+        if($req->type){
+            $message = new AdminMessage();
+        }else{
+            $message = new StudentMessage();
+        }
+
+        $message->tipo = $req->type;
+        $message->de = $this->student->id;
+        $message->para = $req->to;
+        $message->subject = $req->subject;
+        $message->content = $req->message;
+        $message->fecha = Carbon::now();
+        $message->save();
+
+        return response()->json(['status' => 'ok', 'message' => trans('students.inbox.new.success')]);
 
     }
 

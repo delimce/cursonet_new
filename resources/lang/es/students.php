@@ -62,6 +62,7 @@ return [
     'inbox.no_message' => 'No es posible leer el mensaje',
     'inbox.delete' => 'Borrar mensaje',
     'inbox.delete.message' => 'Esta seguro que desea borrar el mensaje?',
+    'inbox.new.success' => 'Mensaje enviado con exito',
     //WALL
     'wall.title' => 'Cartelera',
     //CLASSROOM
