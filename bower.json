@@ -12,7 +12,7 @@
     "internet"
   ],
   "license": "MIT",
-  "homepage": "www.cursonet.com.ve",
+  "homepage": "www.cursonet.net",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.0",
@@ -26,6 +26,7 @@
     "bootstrapvalidator": "^0.5.3",
     "datatables-bootstrap": "^1.0.0",
     "ckeditor": "^4.9.2",
-    "jquery-confirm2": "craftpip/jquery-confirm#^3.3.2"
+    "jquery-confirm2": "craftpip/jquery-confirm#^3.3.2",
+    "bootstrap-toggle": "^2.2.2"
   }
 }

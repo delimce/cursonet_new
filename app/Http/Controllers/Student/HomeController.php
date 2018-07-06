@@ -84,5 +84,10 @@ class HomeController extends BaseController
         return view("student.pages.lobby.inbox", ["messages" => $this->student->messages()->with('student')->get()]);
     }
 
+    public function myProfile()
+    {
+        return view("student.pages.lobby.profile", ["data" => $this->student]);
+    }
+
 
 }

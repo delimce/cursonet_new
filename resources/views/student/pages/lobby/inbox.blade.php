@@ -2,10 +2,8 @@
 @section('title', trans('students.inbox.title'))
 
 @section('content')
-    @component("student.components.preloader")
-    @endcomponent
     <div class="wrapper">
-        <div id="inbox-list">
+        <div class="cn-container" id="inbox-list">
             <h2>@lang('students.inbox.title')</h2>
             @component("student.components.dataTable")
                 @slot("id")
@@ -37,7 +35,7 @@
             </div>
         </div>
 
-        <div id="inbox-read">
+        <div class="cn-container" id="inbox-read">
 
             <button type="button" class="close to-close readCollapse" aria-label="Close">
                 <i class="fas fa-times">&nbsp;</i>

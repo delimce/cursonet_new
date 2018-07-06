@@ -105,7 +105,7 @@ class MessageController extends BaseController
             'type' => 'required|numeric',
             'to' => 'required|numeric',
             'message' => 'required|min:5'
-        ], ['required' => trans('commons.validation.required'),
+        ], ['required' => trans('commons.validation.required.all'),
             'numeric' => trans('commons.validation.numeric'),
             'min' => trans('commons.validation.min'),
             'max' => trans('commons.validation.max'),

@@ -7,3 +7,4 @@
 <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto-condensed/roboto-condensed-fontface.css') !!}">
 <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto-slab/roboto-slab-fontface.css') !!}">
 <link rel="stylesheet" href="{!! url('bower_components/jquery-confirm2/css/jquery-confirm.css') !!}">
+<link rel="stylesheet" href="{!! url('bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css') !!}">

@@ -73,7 +73,7 @@ a {
     border: 0;
 }
 
-.btn-danger{
+.btn-danger {
     font-weight: normal;
     font-size-adjust: inherit;
     font-size: 13px;
@@ -168,7 +168,7 @@ a {
     margin: 10px;
 }
 
-input[type="search"]{
+input[type="search"] {
     width: 150px;
     border: 0.3pt #0c0c0c solid;
     opacity: 0.84;
@@ -179,7 +179,6 @@ input[type="search"]{
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
-
 
 .form-signin input[placeholder] {
     font-family: 'Roboto-Condensed-Light', Helvetica, Arial, sans-serif;
@@ -209,14 +208,15 @@ input[type="search"]{
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px #5ED2F1;
 }
 
-.available-email{
+.available-email {
     color: #5ED2F1;
     border: 1px solid;
     width: 100%;
     text-align: center;
     font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
 }
-.unavailable-email{
+
+.unavailable-email {
     color: #eff0f2;
     border: 1px solid;
     font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
@@ -236,7 +236,7 @@ input[type="search"]{
     font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
 }
 
-.footer{
+.footer {
     margin-top: 25px;
 }
 
@@ -248,9 +248,9 @@ input[type="search"]{
     color: #fff;
 }
 
-.help-block{
+.help-block {
     font-size: 11px;
-    color:yellow;
+    color: yellow;
     float: right;
     right: -10px;
 }
@@ -409,7 +409,7 @@ input[type="search"]{
     padding: 1px 11px 5px 11px;
 }
 
-.content-home{
+.content-home {
     padding: 8px 8px 8px 0;
 }
 
@@ -418,7 +418,7 @@ input[type="search"]{
     text-transform: capitalize;
 }
 
-.reactive{
+.reactive {
     font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
     color: #00ccff;
 }
@@ -428,7 +428,7 @@ h2 {
     font-size: 13px;
     text-decoration: underline;
     font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
-    margin-left: 8px;
+    margin: 0 0 14px 8px;
 }
 
 /*classroom*/
@@ -515,26 +515,26 @@ h2 {
     margin: 0 auto;
 }
 
-#sidebarCollapse.active{
+#sidebarCollapse.active {
     color: #000000;
 }
 
-.modal-title{
+.modal-title {
     font-size: 14px;
     color: #000;
     font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
     padding-top: 5px;
 }
 
-.modal-header{
-   padding: 11px 16px 11px 17px;
+.modal-header {
+    padding: 11px 16px 11px 17px;
 }
 
 .modal-dialog {
     max-width: 527px !important;
 }
 
-.to-close{
+.to-close {
     font-size: 14px;
     position: relative;
     top: -4px;
@@ -549,51 +549,114 @@ h2 {
     border: 1px #8b8b8b solid;
 }
 
-/*inbox and messages*/
+.btn {
+    border: none;
+    font-size: 14px;
+}
 
-#inbox-list{
+.btn-primary {
+    color: #fff;
+    background-color: #5ED2F1;
+    border-color: #00ccff;
+}
+
+.btn:not(:disabled):not(.disabled).active, .btn:not(:disabled):not(.disabled):active {
+    border: 1px #6B6B6B solid;
+}
+
+/*common container*/
+.cn-container {
     background-color: #eff0f2;
-    margin-left: 12px;
-    margin-right: 10px;
-    width: 75%;
+    margin: 0 10px 25px 12px;
     padding: 17px 16px 11px 16px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+
+}
+
+/*settings*/
+.settings {
+    margin-left: 12px;
+    padding: 20px 20px 20px 0;
+}
+
+.settings .form-group{
+    padding-bottom: 6px;
+}
+
+.settings .help-block {
+    font-size: 11px;
+    color: #000;
+    float: left;
+}
+
+.cn-container .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #00ccff;
+}
+
+.cn-container .form-group.required .control-label:after {
+    content: " *";
+    color: red;
+}
+
+.cn-container label {
+    font-weight: bold;
+}
+
+.cn-container input {
+    height: 27px;
+    max-width: 270px;
+    font-size: 11px;
+    border: 1px #8b8b8b solid;
+}
+
+/*inbox and messages*/
+
+#inbox-list {
+    width: 75%;
     transition: all 0.3s;
 }
 
-#inbox-read{
-    background-color: #eff0f2;
+#inbox-read {
     min-width: 590px;
     max-width: 590px;
     max-height: 430px;
-    padding: 17px 16px 11px 16px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
     min-height: 380px;
     display: none;
+}
+
+#profile-list {
+    width: 60%;
+    min-width: 340px;
+}
+
+#security-list {
+    width: 40%;
+    min-width: 340px;
 }
 
 #inbox-read.active {
     display: inline-block;
 }
 
-.inbox-content{
+.inbox-content {
     margin-top: 12px;
     position: relative;
     padding: 10px;
 }
 
-.inbox-read-content{
-    float:left; width: 100%;
+.inbox-read-content {
+    float: left;
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 20px;
     height: 180px;
     overflow-y: scroll;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
+
 .select2-container {
-    min-width:240px;
+    min-width: 240px;
 }

@@ -23,6 +23,8 @@ $router->group(['prefix' => 'api/student/message', 'namespace' => 'Api', 'middle
 //account
 $router->group(['prefix' => 'api/student/account', 'namespace' => 'Api', 'middleware'=>['api']], function () use ($router) {
     $router->get('/contacts', 'AccountController@getContacts');
+    $router->put('/settings', 'AccountController@setSetting');
+    $router->put('/changePass', 'AccountController@changePassword');
 
 
 });

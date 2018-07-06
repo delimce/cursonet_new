@@ -6,7 +6,7 @@
                         <?=$data->nombre?>&nbsp;
                         <?=$data->apellido?>
                     </span>
-            <span><a href="#">@lang('students.edit_profile')</a></span>
+            <span><a href="{!! url('student/profile') !!}">@lang('students.edit_profile')</a></span>
         </div>
     </div>
 </div>
