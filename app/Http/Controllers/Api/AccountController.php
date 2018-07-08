@@ -38,7 +38,6 @@ class AccountController extends BaseController
      */
     public function getContacts()
     {
-
         $estId = $this->student->id;
         ///student's groups
         $groups = $this->student->groups()->with('group')->get();
@@ -74,7 +73,6 @@ class AccountController extends BaseController
      */
     public function setSetting(Request $req)
     {
-
         $validator = Validator::make($req->all(), [
             'status' => 'required',
             'field' => 'required'
@@ -100,7 +98,6 @@ class AccountController extends BaseController
 
     public function changePassword(Request $req)
     {
-
         $validator = Validator::make($req->all(), [
             'pass' => 'required|min:5',
             'pass2' => 'required|min:5'
@@ -113,14 +110,59 @@ class AccountController extends BaseController
             return response()->json(['status' => 'error', 'message' => $error], 400);
         }
 
-        if($req->input('pass')===$req->input('pass2')){
+        if ($req->input('pass') === $req->input('pass2')) {
             $this->student->pass = Hash::make($req->input('pass'));
             $this->student->save();
             return response()->json(['status' => 'ok', 'message' => trans('students.profile.change.password.success')]);
-        }else{
+        } else {
             return response()->json(['status' => 'error', 'message' => trans('students.profile.change.password.nomatch')], 400);
         }
 
+
+    }
+
+    public function saveProfile(Request $req)
+    {
+
+        $validator = Validator::make($req->all(), [
+            'id_number' => 'required|min:5',
+            'nombre' => 'required|min:2',
+            'apellido' => 'required|min:3',
+            'sexo' => 'required',
+            'fecha_nac' => 'required|date',
+            'email' => 'required|email',
+        ], ['required' => trans('commons.validation.required'),
+            'min' => trans('commons.validation.min'),
+            'email' => trans('commons.validation.email'),
+            'date' => trans('commons.validation.date'),
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response()->json(['status' => 'error', 'message' => $error], 400);
+        }
+
+        //if email or ci exists
+        $exist = Student::where("id", "!=", $this->student->id)->where(function ($query) use ($req) {
+            $query->where("email", $req->input('email'))
+                ->orWhere("id_number", $req->input('id_number'));
+        })->count();
+
+        if ($exist > 0) {
+            return response()->json(['status' => 'error', 'message' => trans('students.profile.change.exist')], 400);
+        }
+
+        $this->student->id_number = $req->input('id_number');
+        $this->student->nombre = $req->input('nombre');
+        $this->student->apellido = $req->input('apellido');
+        $this->student->sexo = $req->input('sexo');
+        $this->student->fecha_nac = $req->input('fecha_nac');
+        $this->student->email = $req->input('email');
+        if ($req->has('telefono'))
+            $this->student->telefono_p = $req->input('telefono');
+        $this->student->save();
+
+        return response()->json(['status' => 'ok', 'message' => trans('students.profile.data.save')]);
 
     }
 

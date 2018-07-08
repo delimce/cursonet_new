@@ -10,6 +10,9 @@ return [
     'delete' => 'Borrar',
     'yes' => 'SI',
     'no' => 'NO',
+    'select'=>'Seleccione',
+    'male'=>'Masculino',
+    'female'=>'Femenino',
     'save' => 'Guardar',
     'disabled' => 'Inactivo',
     'enabled' => 'Activo',
@@ -25,6 +28,8 @@ return [
     'validation.numeric' => 'El campo :attribute debe ser númerico',
     'validation.min' => 'El campo :attribute debe ser mayor a :min',
     'validation.max' => 'El campo :attribute debe ser menor a :max',
+    'validation.email' => 'El campo :attribute debe ser un Email bien formado',
+    'validation.date' => 'El campo :attribute debe ser una Fecha bien formada',
     //ERRORS
     'error.401.title' => 'Error, usuario no autenticado.',
     'error.401.token' => 'token de usuario inválido',

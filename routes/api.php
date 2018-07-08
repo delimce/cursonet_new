@@ -12,7 +12,7 @@ $router->group(['prefix' => 'api/student', 'namespace' => 'Api'], function () us
 });
 
 ///messages
-$router->group(['prefix' => 'api/student/message', 'namespace' => 'Api', 'middleware'=>['api']], function () use ($router) {
+$router->group(['prefix' => 'api/student/message', 'namespace' => 'Api', 'middleware' => ['api']], function () use ($router) {
     $router->put('/', 'MessageController@createMessage');
     $router->get('/all', 'MessageController@getMessages');
     $router->get('/{id}', 'MessageController@getMessage');
@@ -21,10 +21,9 @@ $router->group(['prefix' => 'api/student/message', 'namespace' => 'Api', 'middle
 });
 
 //account
-$router->group(['prefix' => 'api/student/account', 'namespace' => 'Api', 'middleware'=>['api']], function () use ($router) {
+$router->group(['prefix' => 'api/student/account', 'namespace' => 'Api', 'middleware' => ['api']], function () use ($router) {
     $router->get('/contacts', 'AccountController@getContacts');
     $router->put('/settings', 'AccountController@setSetting');
     $router->put('/changePass', 'AccountController@changePassword');
-
-
+    $router->put('/profile', 'AccountController@saveProfile');
 });

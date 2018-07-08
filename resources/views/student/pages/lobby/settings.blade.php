@@ -15,7 +15,7 @@
                      aria-labelledby="v-pills-privacy-tab">
                     <div class="settings">
                         <div class="form-group">
-                            <label for="share-info" class="control-label row">Compartir mis datos con démas
+                            <label for="share-info" class="control-label row">Compartir mis datos con los démas
                                 contáctos</label>
                             <input id="share-info" class="toggle-in" data-value="share_info" data-width="90"
                                    type="checkbox" @if($data->share_info) checked @endif data-toggle="toggle"
@@ -28,7 +28,7 @@
                      aria-labelledby="v-pills-notify-tab">
                     <div class="settings">
                         <div class="form-group">
-                            <label for="notify-msg" class="control-label row">Notificar los mensajes a mi
+                            <label for="notify-msg" class="control-label row">Notificar mis mensajes por
                                 Email</label>
                             <input id="notify-msg" class="toggle-in" data-value="notify_msg" data-size="small"
                                    type="checkbox" @if($data->notify_msg) checked @endif data-toggle="toggle"
@@ -36,7 +36,7 @@
                                    data-off="@lang('commons.no')">
                         </div>
                         <div class="form-group">
-                            <label for="notify-forum" class="control-label row">Enviar notificaciones de los
+                            <label for="notify-forum" class="control-label row">Recibir notificaciones de los
                                 foros</label>
                             <input id="notify-forum" class="toggle-in" data-value="notify_forum" data-size="small"
                                    type="checkbox" @if($data->notify_forum) checked @endif data-toggle="toggle"
@@ -44,8 +44,8 @@
                                    data-off="@lang('commons.no')">
                         </div>
                         <div class="form-group">
-                            <label for="notify-exam" class="control-label row">Enviar notificaciones de las
-                                Pruebas</label>
+                            <label for="notify-exam" class="control-label row">Recibir notificaciones de los
+                                Examenes</label>
                             <input id="notify-exam" class="toggle-in" data-value="notify_exam" data-size="small"
                                    type="checkbox" @if($data->notify_exam) checked @endif data-toggle="toggle"
                                    data-on="@lang('commons.yes')"
@@ -117,7 +117,5 @@
             });
 
         })
-
-
     </script>
 @endpush

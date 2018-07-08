@@ -612,6 +612,13 @@ h2 {
     border: 1px #8b8b8b solid;
 }
 
+.cn-container select{
+    max-width: 270px;
+    font-size: 11px;
+    max-height: 28px;
+    border: 1px #8b8b8b solid;
+}
+
 /*inbox and messages*/
 
 #inbox-list {

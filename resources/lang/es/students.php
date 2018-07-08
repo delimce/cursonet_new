@@ -71,9 +71,11 @@ return [
     'profile.personal' => 'Información personal',
     'profile.security' => 'Configuración',
     'profile.save.info' => 'Guardar información',
+    'profile.data.save' => 'Datos actualizados con éxito',
     'profile.save.password' => 'Cambiar clave',
     'profile.change.password.success' => 'Cambio de clave exitoso',
     'profile.change.password.nomatch' => 'Las claves no coinciden',
+    'profile.change.exist' => 'Email o Cédula se encuentran en uso',
     //CLASSROOM
     'classroom.title' => 'Aula Virtual',
     'classroom.modules.subject' => 'Tema',
