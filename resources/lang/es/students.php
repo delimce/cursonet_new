@@ -70,6 +70,7 @@ return [
     'profile.setting.success' => 'item actualizado con éxito',
     'profile.personal' => 'Información personal',
     'profile.security' => 'Configuración',
+    'profile.pic' => 'Foto de perfil',
     'profile.save.info' => 'Guardar información',
     'profile.data.save' => 'Datos actualizados con éxito',
     'profile.save.password' => 'Cambiar clave',
