@@ -591,6 +591,14 @@ h2 {
     float: left;
 }
 
+/*picture container*/
+.pic-container{
+    padding: 20px 20px 20px 30px;
+    display: table;
+    margin: 0 auto;
+
+}
+
 .cn-container .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #00ccff;

@@ -8,7 +8,7 @@
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab"
                        aria-controls="nav-info" aria-selected="true">
-                       <span class="subtext">@lang('students.profile.personal')</span>
+                        <span class="subtext">@lang('students.profile.personal')</span>
                     </a>
                     <a class="nav-item nav-link" id="nav-pic-tab" data-toggle="tab" href="#nav-pic" role="tab"
                        aria-controls="nav-pic" aria-selected="false">
@@ -101,7 +101,29 @@
                     </form>
                 </div>
                 <div class="tab-pane fade" id="nav-pic" role="tabpanel" aria-labelledby="nav-pic-tab">
+                    <div class="pic-container">
+                        <div class="row" style="padding-left: 25px">
+                            {{--<div id="upload-demo-i" style="width:350px; margin-bottom: 20px"></div>--}}
+                            <span>
+                                <h1><i class="fas fa-user-circle"></i></h1>
+                                Imagen Actual
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div style="padding:10px; margin: auto">
+                                <strong> @lang('students.profile.pic.select'):</strong>
+                                <br/>
+                                <input type="file" id="upload">
+                            </div>
+                            <div id="upload-img"></div>
+                        </div>
+                        <div class="row" style="width: 140px; margin: auto">
+                            <button id="save-image" class="btn btn-lg btn-block btn-signin" type="button">
+                                @lang('students.profile.pic.save')
+                            </button>
+                        </div>
 
+                    </div>
                 </div>
             </div>
 
@@ -110,6 +132,11 @@
         @include('student.pages.lobby.settings')
     </div>
 @endsection
+
+@push('head')
+    <script src="{!! url('bower_components/Croppie/croppie.min.js') !!}"></script>
+    <link rel="stylesheet" href="{!! url('bower_components/Croppie/croppie.css') !!}">
+@endpush
 
 @push('scripts')
     <script>
@@ -128,5 +155,32 @@
             });
 
         })
+    </script>
+
+    <script>
+        $uploadCrop = $('#upload-img').croppie({
+            enableExif: true,
+            viewport: {
+                width: 220,
+                height: 220,
+                type: 'circle'
+            },
+            boundary: {
+                width: 300,
+                height: 300
+            }
+        });
+
+        $('#upload').on('change', function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $uploadCrop.croppie('bind', {
+                    url: e.target.result
+                }).then(function(){
+                    console.log('jQuery bind complete');
+                });
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
     </script>
 @endpush
