@@ -1,6 +1,5 @@
 @extends('student.layout.app')
 @section('title', trans('students.profile.title'))
-
 @section('content')
     <div class="wrapper">
         <div class="cn-container" id="profile-list">
@@ -167,13 +166,13 @@
         $uploadCrop = $('#upload-img').croppie({
             enableExif: true,
             viewport: {
-                width: 220,
-                height: 220,
+                width: 170,
+                height: 170,
                 type: 'circle'
             },
             boundary: {
-                width: 300,
-                height: 300
+                width: 270,
+                height: 270
             }
         });
 
@@ -200,6 +199,7 @@
                         showSuccess(response.data.message, 1500);
                         html = '<img src="' + resp + '" />';
                         $("#upload-demo-i").html(html);
+                        $("#user-picture").html(html);
                     }).catch(function (error) {
                     showAlert(error.response.data.message);
                 });

@@ -360,6 +360,10 @@ input[type="search"] {
     min-width: 300px;
 }
 
+#user-logged img{
+    border: 0.1rem solid #f0fafb;
+}
+
 #user-logged #user-info {
     padding-top: 10px;
 }
