@@ -30,6 +30,7 @@ $app->withEloquent();
 $app->configure('mail');
 $app->configure('database');
 $app->configure('session');
+$app->configure('filesystems');
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +110,7 @@ $app->routeMiddleware([
 $app->register(Collective\Html\HtmlServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
+$app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
 
 class_alias('Collective\Html\HtmlFacade', 'Html');
 class_alias('Collective\Html\FormFacade', 'Form');

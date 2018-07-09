@@ -6,6 +6,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Models\Cn2\Student;
 use App\Models\Cn2\Course;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class HomeController extends BaseController
@@ -62,13 +63,13 @@ class HomeController extends BaseController
         $course = Course::findOrFail($courseId);
         $course->initDate = $course->createdAt();
         $course->author = $course->author();
-        $data = array("alias"=>$course->alias,
-                      "descripcion"=>$course->descripcion,
-                      "id"=>$course->id,
-                      "nombre"=>$course->nombre,
-                      "init"=>$course->createdAt(),
-                      "author"=>$course->author(),
-                      "duracion"=>$course->duracion);
+        $data = array("alias" => $course->alias,
+            "descripcion" => $course->descripcion,
+            "id" => $course->id,
+            "nombre" => $course->nombre,
+            "init" => $course->createdAt(),
+            "author" => $course->author(),
+            "duracion" => $course->duracion);
 
 
         return response()->json(['status' => 'ok', 'course' => $data]);
@@ -94,7 +95,8 @@ class HomeController extends BaseController
      * @param Request $req
      * @return mixed
      */
-    public function saveMyPicture(Request $req){
+    public function saveMyPicture(Request $req)
+    {
 
         $validator = Validator::make($req->all(), [
             'foto' => 'required',
@@ -106,10 +108,18 @@ class HomeController extends BaseController
             return response()->json(['status' => 'error', 'message' => $error], 400);
         }
 
-        $this->student->foto = $req->input('foto');
-        $this->student->save();
+        try {
+            $this->student->foto = $req->input('foto');
+            $this->student->save();
+            $image = $req->input('foto');  // your base64 encoded
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            Storage::disk('students')->put("avatars/{$this->student->id}.png", base64_decode($image));
+            return response()->json(['status' => 'ok', 'message' => trans('students.profile.pic.updated')]);
+        } catch (Exception $ex) {
+            return response()->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
+        }
 
-        return response()->json(['status' => 'ok', 'message' => trans('students.profile.pic.updated')]);
 
     }
 

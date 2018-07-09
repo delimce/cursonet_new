@@ -166,13 +166,13 @@
         $uploadCrop = $('#upload-img').croppie({
             enableExif: true,
             viewport: {
-                width: 170,
-                height: 170,
+                width: 200,
+                height: 200,
                 type: 'circle'
             },
             boundary: {
-                width: 270,
-                height: 270
+                width: 300,
+                height: 300
             }
         });
 
@@ -190,8 +190,9 @@
 
         $('#save-image').on('click', function (ev) {
             $uploadCrop.croppie('result', {
-                type: 'canvas',
-                size: 'viewport'
+                type: 'base64',
+                format:'png',
+                size:  { width: 100, height: 100 }
             }).then(function (resp) {
                 axios.put('{!! url('student/profile/picture') !!}',
                     {"foto": resp})
