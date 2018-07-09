@@ -25,11 +25,12 @@ class InitialController extends BaseController
 
     //
 
-    public function index(Request $req){
+    public function index(Request $req)
+    {
 
-        if($req->session()->has("myUser")){
+        if ($req->session()->has("myUser")) {
             return redirect()->route('student.home');
-        }else{
+        } else {
             return redirect()->route('student.login');
         }
 
@@ -44,9 +45,10 @@ class InitialController extends BaseController
      * @param Request $req
      * @return mixed
      */
-    public function doLogin(Request $req){
-
-        $user = Student::where('email', $req->input('email'))->first();
+    public function doLogin(Request $req)
+    {
+        $fields = ['id', 'nombre', 'apellido', 'email', 'pass', 'activo', 'token'];
+        $user = Student::where('email', $req->input('email'))->select($fields)->first();
         if (is_null($user))
             return response()->json(['status' => 'error', 'message' => trans('students.login.email.unknown')], 401);
 
@@ -56,7 +58,6 @@ class InitialController extends BaseController
 
             DB::beginTransaction();
             $apikey = StudentController::newUserToken();
-            Student::where('email', $req->input('email'))->update(['token' => "$apikey"]);
             $log = new StudentLog();
             $log->est_id = $user->id;
             $log->ip_acc = $_SERVER['REMOTE_ADDR'];
@@ -65,6 +66,7 @@ class InitialController extends BaseController
             $log->save();
             ///new login
             $user->token = $apikey;
+            $user->save();
             $req->session()->put('myUser', $user);
             $req->session()->put('userLog', $log->id);
             DB::commit();
