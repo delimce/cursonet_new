@@ -103,9 +103,15 @@
                 <div class="tab-pane fade" id="nav-pic" role="tabpanel" aria-labelledby="nav-pic-tab">
                     <div class="pic-container">
                         <div class="row" style="padding-left: 25px">
-                            {{--<div id="upload-demo-i" style="width:350px; margin-bottom: 20px"></div>--}}
                             <span>
-                                <h1><i class="fas fa-user-circle"></i></h1>
+                                <div id="upload-demo-i">
+                                    @if($data->foto)
+                                        <img src="{!! $data->foto !!}"/>
+                                    @else
+                                        <h1><i class="fas fa-user-circle"></i></h1>
+                                    @endif
+
+                                </div>
                                 Imagen Actual
                             </span>
                         </div>
@@ -176,11 +182,28 @@
             reader.onload = function (e) {
                 $uploadCrop.croppie('bind', {
                     url: e.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
+                }).then(function () {
+                    console.log('jQuery croppie bind complete');
                 });
             }
             reader.readAsDataURL(this.files[0]);
+        });
+
+        $('#save-image').on('click', function (ev) {
+            $uploadCrop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function (resp) {
+                axios.put('{!! url('student/profile/picture') !!}',
+                    {"foto": resp})
+                    .then(function (response) {
+                        showSuccess(response.data.message, 1500);
+                        html = '<img src="' + resp + '" />';
+                        $("#upload-demo-i").html(html);
+                    }).catch(function (error) {
+                    showAlert(error.response.data.message);
+                });
+            });
         });
     </script>
 @endpush

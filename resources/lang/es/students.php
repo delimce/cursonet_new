@@ -73,6 +73,7 @@ return [
     'profile.pic' => 'Foto de perfil',
     'profile.pic.upload' => 'Subir imagen',
     'profile.pic.select' => 'Seleccione una imagen',
+    'profile.pic.updated' => 'Foto de perfil actualizada!',
     'profile.pic.save' => 'Guardar Imagen',
     'profile.save.info' => 'Guardar información',
     'profile.data.save' => 'Datos actualizados con éxito',

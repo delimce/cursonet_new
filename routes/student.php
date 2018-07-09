@@ -37,5 +37,6 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student', 'middleware'=>[
     $router->get('/logout', 'HomeController@logout');
     $router->get('/inbox', 'HomeController@getInbox');
     $router->get('/profile', 'HomeController@myProfile');
+    $router->put('/profile/picture', 'HomeController@saveMyPicture');
     $router->post('/select/course', 'HomeController@courseSelected');
 });

@@ -6,6 +6,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Models\Cn2\Student;
 use App\Models\Cn2\Course;
+use Validator;
 
 class HomeController extends BaseController
 {
@@ -87,6 +88,29 @@ class HomeController extends BaseController
     public function myProfile()
     {
         return view("student.pages.lobby.profile", ["data" => $this->student]);
+    }
+
+    /**
+     * @param Request $req
+     * @return mixed
+     */
+    public function saveMyPicture(Request $req){
+
+        $validator = Validator::make($req->all(), [
+            'foto' => 'required',
+        ], ['required' => trans('commons.validation.required'),
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response()->json(['status' => 'error', 'message' => $error], 400);
+        }
+
+        $this->student->foto = $req->input('foto');
+        $this->student->save();
+
+        return response()->json(['status' => 'ok', 'message' => trans('students.profile.pic.updated')]);
+
     }
 
 

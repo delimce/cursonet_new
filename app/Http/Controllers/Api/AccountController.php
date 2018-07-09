@@ -160,6 +160,8 @@ class AccountController extends BaseController
         $this->student->email = $req->input('email');
         if ($req->has('telefono'))
             $this->student->telefono_p = $req->input('telefono');
+        if ($req->has('foto')) //if has base64 picture
+            $this->student->foto = $req->input('foto');
         $this->student->save();
 
         return response()->json(['status' => 'ok', 'message' => trans('students.profile.data.save')]);
