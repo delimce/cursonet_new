@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use http\Env\Response;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Models\Cn2\Student;
@@ -120,6 +121,13 @@ class HomeController extends BaseController
             return response()->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
         }
 
+
+    }
+
+    public function getAvatar()
+    {
+        $picture = Storage::disk('students')->get("avatars/{$this->student->id}.png");
+        return response($picture, 200);
 
     }
 

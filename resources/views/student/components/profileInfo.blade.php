@@ -1,8 +1,8 @@
 <div class="profile-activity clearfix">
     <div id="user-logged">
         <span id="user-picture">
-            @if($data->foto)
-                <img src="{!! $data->foto !!}"/>
+            @if(Storage::disk('students')->has("avatars/".$data->id.".png"))
+                <img src="{{route('student.avatar')}}"/>
             @else
                 <h1><i class="fas fa-user-circle"></i></h1>
             @endif

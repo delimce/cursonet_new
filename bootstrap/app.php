@@ -53,6 +53,10 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+$app->singleton('filesystem.disk', function () {
+    return $this->app['filesystem']->disk($this->getDefaultDriver());
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -114,6 +118,7 @@ $app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
 
 class_alias('Collective\Html\HtmlFacade', 'Html');
 class_alias('Collective\Html\FormFacade', 'Form');
+class_alias('Illuminate\Support\Facades\Storage', 'Storage');
 $app->alias('session', \Illuminate\Session\SessionManager::class);
 $app->alias('session.store', \Illuminate\Session\Store::class);
 $app->alias('session.store', \Illuminate\Contracts\Session\Session::class);

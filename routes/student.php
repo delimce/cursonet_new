@@ -35,6 +35,7 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () us
 $router->group(['prefix' => 'student', 'namespace' => 'Student', 'middleware'=>['auth']], function () use ($router) {
     $router->get('/home', ['as' => 'student.home', 'uses' => 'HomeController@home']);
     $router->get('/logout', 'HomeController@logout');
+    $router->get('/avatar',['as' => 'student.avatar', 'uses' => 'HomeController@getAvatar']);
     $router->get('/inbox', 'HomeController@getInbox');
     $router->get('/profile', 'HomeController@myProfile');
     $router->put('/profile/picture', 'HomeController@saveMyPicture');
