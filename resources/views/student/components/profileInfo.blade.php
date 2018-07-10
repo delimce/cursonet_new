@@ -8,10 +8,10 @@
             @endif
         </span>
         <div id="user-info">
-                    <span style="text-transform: capitalize"><b>@lang('commons.student'):</b>&nbsp;
-                        <?=$data->nombre?>&nbsp;
-                        <?=$data->apellido?>
-                    </span>
+            <span style="text-transform: capitalize; display: inline"><b>@lang('commons.student'):</b>&nbsp;
+                <span style="display: inline" id="user-name"><?=$data->nombre?></span>&nbsp;
+                <span style="display: inline" id="user-lastname"><?=$data->apellido?></span>
+            </span>
             <span><a href="{!! url('student/profile') !!}">@lang('students.edit_profile')</a></span>
         </div>
     </div>

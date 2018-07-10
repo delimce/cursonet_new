@@ -14,6 +14,7 @@ use Carbon\Carbon;
 
 class InitialController extends BaseController
 {
+    static public $fields = ['id', 'nombre', 'apellido', 'email', 'pass', 'activo', 'token'];
     /**
      * Create a new controller instance.
      * @return void
@@ -47,8 +48,7 @@ class InitialController extends BaseController
      */
     public function doLogin(Request $req)
     {
-        $fields = ['id', 'nombre', 'apellido', 'email', 'pass', 'activo', 'token'];
-        $user = Student::where('email', $req->input('email'))->select($fields)->first();
+        $user = Student::where('email', $req->input('email'))->select(InitialController::$fields)->first();
         if (is_null($user))
             return response()->json(['status' => 'error', 'message' => trans('students.login.email.unknown')], 401);
 

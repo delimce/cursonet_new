@@ -154,6 +154,11 @@
                 .then(function (response) {
                     showSuccess(response.data.message, 2000)
                     $("#save").prop('disabled', false);
+                    axios.put('{!! url('student/profile/session') !!}') //refresh session data
+                        .then(function (response) {
+                            $("#user-name").html($("#nombre").val());
+                            $("#user-lastname").html($("#apellido").val());
+                        })
                 }).catch(function (error) {
                 showAlert(error.response.data.message);
                 $("#save").prop('disabled', false);
@@ -191,8 +196,8 @@
         $('#save-image').on('click', function (ev) {
             $uploadCrop.croppie('result', {
                 type: 'base64',
-                format:'png',
-                size:  { width: 100, height: 100 }
+                format: 'png',
+                size: {width: 100, height: 100}
             }).then(function (resp) {
                 axios.put('{!! url('student/profile/picture') !!}',
                     {"foto": resp})
