@@ -145,4 +145,22 @@ class HomeController extends BaseController
     }
 
 
+    /** teachers of course's groups
+     * @return mixed
+     */
+    public function getTeachers(){
+
+        $groups = $this->student->groups()->with('group')->get();
+        $teacher_array = array();
+        $groups->each(function ($value) use (&$teacher_array) {
+            $teacher_array[] = $value->group->prof_id;
+        });
+
+        ///get teachers
+        $teachers = Admin::whereIn('id', $teacher_array)->get();
+
+        return view("student.pages.lobby.teachers", ["data" => $teachers]);
+    }
+
+
 }

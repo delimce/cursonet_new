@@ -42,7 +42,7 @@
     <div class="footer">
         <div class="footer-nav-items">
             <span><a href="{!! url('student/home') !!}">@lang('students.home')</a> </span>|
-            <span><a href="#">@lang('students.teachers')</a></span>|
+            <span><a href="{!! url('student/teachers') !!}">@lang('students.teachers')</a></span>|
             <span><a href="#" data-toggle="modal" data-target="#support">
                     @lang('students.support')</a>
             </span>

@@ -39,6 +39,7 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student', 'middleware'=>[
     $router->put('/profile/session', 'HomeController@refreshSessionData');
     $router->get('/inbox', 'HomeController@getInbox');
     $router->get('/profile', 'HomeController@myProfile');
+    $router->get('/teachers', 'HomeController@getTeachers');
     $router->put('/profile/picture', 'HomeController@saveMyPicture');
     $router->post('/select/course', 'HomeController@courseSelected');
 });

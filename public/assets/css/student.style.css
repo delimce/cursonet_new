@@ -641,6 +641,13 @@ h2 {
     border-bottom: 1px solid #8c9094;
 }
 
+/*teachers*/
+
+.teachers-box{
+    max-width: 300px;
+    display: inline-block;
+}
+
 /*inbox and messages*/
 
 #inbox-list {
