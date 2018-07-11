@@ -43,7 +43,7 @@
 
             <div class="inbox-content">
                 <div style="float: right; width: 25%; margin-left: auto; ">
-                    <h1 id="inbox-picture" style="width: 80px; height: 80px"></h1>
+                    <h1 id="inbox-picture"></h1>
                 </div>
                 <div style="float: left; width: 60%">
                     <span class="subtext">@lang('commons.name'):</span>
@@ -107,7 +107,7 @@
                     $("#inbox-role").html(profile)
                     var sender = response.data.message.sender;
                     $("#inbox-name").html(sender.nombre + " " + sender.apellido)
-                    if (sender.foto.length > 5) {
+                    if (sender.foto!= null) {
                         var picture = '<img src="' + sender.foto + '" />';
                         $("#inbox-picture").html(picture)
                     } else {
