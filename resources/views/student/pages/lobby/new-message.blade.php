@@ -93,7 +93,7 @@
                 message: content
             }).then(function (response) {
                 $('#new-message').modal('hide');
-                showSuccess(response.data.message, 5000)
+                showSuccess(response.data.message, 2000)
                 $('#form-message')[0].reset();
             }).catch(function (error) {
                 showAlert(error.response.data.message)

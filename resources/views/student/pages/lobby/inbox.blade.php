@@ -43,7 +43,7 @@
 
             <div class="inbox-content">
                 <div style="float: right; width: 25%; margin-left: auto; ">
-                    <h1><i class="fas fa-user-circle"></i></h1>
+                    <h1 id="inbox-picture" style="width: 80px; height: 80px"></h1>
                 </div>
                 <div style="float: left; width: 60%">
                     <span class="subtext">@lang('commons.name'):</span>
@@ -105,7 +105,14 @@
                     $("#inbox-date").html(response.data.message.date)
                     var profile = (!response.data.message.profile) ? '@lang('commons.student')' : '@lang('commons.teacher')';
                     $("#inbox-role").html(profile)
-                    $("#inbox-name").html(response.data.message.sender.nombre + " " + response.data.message.sender.apellido)
+                    var sender = response.data.message.sender;
+                    $("#inbox-name").html(sender.nombre + " " + sender.apellido)
+                    if (sender.foto.length > 5) {
+                        var picture = '<img src="' + sender.foto + '" />';
+                        $("#inbox-picture").html(picture)
+                    } else {
+                        $("#inbox-picture").html('<i class="fas fa-user-circle"></i>');
+                    }
                     ///delelete message
                     $('#delete').data('msg-id', msgId); //setter
                 }).catch(function (error) {

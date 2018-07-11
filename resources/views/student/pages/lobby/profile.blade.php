@@ -103,7 +103,7 @@
                     <div class="pic-container">
                         <div class="row" style="padding-left: 25px">
                             <span>
-                                <div id="upload-demo-i">
+                                <div id="my-picture">
                                     @if($data->foto)
                                         <img src="{!! $data->foto !!}"/>
                                     @else
@@ -203,8 +203,8 @@
                     {"foto": resp})
                     .then(function (response) {
                         showSuccess(response.data.message, 1500);
-                        html = '<img src="' + resp + '" />';
-                        $("#upload-demo-i").html(html);
+                        var html = '<img src="' + resp + '" />';
+                        $("#my-picture").html(html);
                         $("#user-picture").html(html);
                     }).catch(function (error) {
                     showAlert(error.response.data.message);

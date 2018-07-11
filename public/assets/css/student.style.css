@@ -648,6 +648,12 @@ h2 {
     transition: all 0.3s;
 }
 
+#inbox-picture img, #my-picture img{
+    min-width: 75px;
+    height: 75px;
+    border: 1px solid #2b2b2b;
+}
+
 #inbox-read {
     min-width: 590px;
     max-width: 590px;
