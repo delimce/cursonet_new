@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\Cn2\Admin;
 use http\Env\Response;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;

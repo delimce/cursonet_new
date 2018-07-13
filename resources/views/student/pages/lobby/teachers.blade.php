@@ -2,13 +2,20 @@
 @section('title', trans('students.teachers'))
 
 @section('content')
-
     <div class="wrapper">
-        <div class="subtext" style="padding: 14px">Profesores de los cursos inscritos</div>
         @foreach($data as $teacher)
-            <div class="cn-container teacher-box">
-                {{$teacher->nombre}}
+            <div class="teacher-box">
+                <div class="card border mb-3" style="max-width: 18rem;">
+                    <div class="card-header">@lang('commons.teacher') {{$teacher->nombre}} {{$teacher->apellido}}</div>
+                    <div class="card-body">
+                        <h1>
+                            <i class="fas fa-user-circle"></i>
+                        </h1>
+                        <p class="card-text">{{$teacher->sintesis}}</p>
+                    </div>
+                </div>
             </div>
+
         @endforeach
     </div>
 @endsection

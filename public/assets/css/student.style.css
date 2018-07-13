@@ -644,8 +644,21 @@ h2 {
 /*teachers*/
 
 .teachers-box{
-    max-width: 300px;
-    display: inline-block;
+    max-width: 400px;
+    min-width: 300px;
+    float: left;
+    margin: 10px 22px 10px 22px;
+}
+
+.card{
+    padding: 12px;
+    background-color: #eff0f2;
+}
+.card-header{
+    background-color: #00ccff;
+    color: #f0fafb;
+    font-weight: bold;
+    font-size: 12px;
 }
 
 /*inbox and messages*/
