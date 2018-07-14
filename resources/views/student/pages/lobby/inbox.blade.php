@@ -28,8 +28,7 @@
                 @endslot
             @endcomponent
             <div style="width: 200px; float: right; padding: 20px">
-                <button id="btocontent" class="btn btn-lg btn-block btn-signin" type="button" data-toggle="modal"
-                        data-target="#new-message">
+                <button id="new-msg" class="btn btn-lg btn-block btn-signin" type="button">
                     @lang('students.inbox.compose')
                 </button>
             </div>
@@ -58,12 +57,13 @@
                     <span id="inbox-subject">&nbsp;</span><br>
                 </div>
                 <div id="inbox-content" class="inbox-read-content">
-
+                    &nbsp;
                 </div>
+                <input id="inbox-reply" name="inbox-reply" type="hidden">
                 <div style="float: right; width: 250px; text-align: right">
                     <button id="delete" data-msg-id="" type="button"
                             class="btn btn-danger">@lang('commons.delete')</button>
-                    <button type="button" style="width: 100px"
+                    <button type="button" id="reply-msg" style="width: 100px"
                             class="btn btn-signin">@lang('students.inbox.reply')</button>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                     $("#inbox-role").html(profile)
                     var sender = response.data.message.sender;
                     $("#inbox-name").html(sender.nombre + " " + sender.apellido)
-                    if (sender.foto!= null) {
+                    if (sender.foto != null) {
                         var picture = '<img src="' + sender.foto + '" />';
                         $("#inbox-picture").html(picture)
                     } else {
@@ -115,6 +115,8 @@
                     }
                     ///delelete message
                     $('#delete').data('msg-id', msgId); //setter
+                    ///reply message
+                    $("#inbox-reply").val(response.data.message.profile+"_"+sender.id);
                 }).catch(function (error) {
                     quitSession(error, '{!! url('student/logout') !!}');
                 });
@@ -140,5 +142,6 @@
                 }
             }
         });
+
     </script>
 @endpush    

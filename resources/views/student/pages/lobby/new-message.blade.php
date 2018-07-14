@@ -13,8 +13,9 @@
             <div class="modal-body">
                 <form id="form-message">
                     <div class="form-group">
-                        <select class="adv-select-to" name="to" id="to" class="form-control">
-                        </select>
+                        <div class="select-to">
+                           &nbsp;
+                        </div>
                         <br>
                         <input type="text" placeholder="@lang('students.inbox.subject')" class="form-control"
                                id="subject" maxlength="140"
@@ -36,36 +37,59 @@
 </div>
 @push('scripts')
     <script>
-        $('.adv-select-to').select2({
-            ajax: {
-                headers: {
-                    "Authorization": "{{session()->get("myUser")->token}}",
-                },
-                url: "{!! url('api/student/account/contacts') !!}",
-                dataType: 'json',
-                delay: 250,
 
-                processResults: function (data) {
-                    return {
-                        // Select2 requires an id, so we need to map the results and add an ID
-                        // You could instead include an id in the tsv you add to soulheart ;)
-                        results: data.contacts.map(function (item) {
-                            return {
-                                id: (item.hasOwnProperty('es_admin')) ? "1_" + item.id : "0_" + item.id,
-                                text: String(item.nombre).capitalize() + " " + String(item.apellido).capitalize()
-                            };
-                        }),
-                        pagination: {
-                            // If there are 10 matches, there's at least another page
-                            more: data.contacts.length === 10
-                        }
-                    };
+
+        $('#new-msg').on('click', function (event) {
+
+            var msg = '<select name="to" id="to" class="form-control"></select>';
+            $('.select-to').html(msg)
+
+            $('#to').select2({
+                ajax: {
+                    headers: {
+                        "Authorization": "{{session()->get("myUser")->token}}",
+                    },
+                    url: "{!! url('api/student/account/contacts') !!}",
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            // Select2 requires an id, so we need to map the results and add an ID
+                            // You could instead include an id in the tsv you add to soulheart ;)
+                            results: data.contacts.map(function (item) {
+                                return {
+                                    id: (item.hasOwnProperty('es_admin')) ? "1_" + item.id : "0_" + item.id,
+                                    text: String(item.nombre).capitalize() + " " + String(item.apellido).capitalize()
+                                };
+                            }),
+                            pagination: {
+                                // If there are 10 matches, there's at least another page
+                                more: data.contacts.length === 10
+                            }
+                        };
+                    },
+                    cache: false
                 },
-                cache: true
-            },
-            placeholder: "@lang('students.inbox.recipient')",
-            allowClear: false
+                placeholder: "@lang('students.inbox.recipient')",
+                allowClear: false
+            })
+
+            $('#subject').val('');
+            $("#new-message").modal()
+
         })
+
+        $('#reply-msg').on('click', function (event) {
+            var reply_text = '[Respuesta] ' + $("#inbox-subject").html();
+            var reply_val = $('#inbox-reply').val();
+            var name = $('#inbox-name').html()
+            var reply_contact = '<div class="contact-selected">'+name+'</div>';
+            var hidden = '<input id="to" name="to" type="hidden" value="'+reply_val+'">';
+            $('.select-to').html(hidden).append(reply_contact);
+            $('#subject').val(reply_text);
+            $("#new-message").modal()
+        })
+
 
         CKEDITOR.replace('mcontent', {
             toolbar: [
@@ -94,12 +118,12 @@
             }).then(function (response) {
                 $('#new-message').modal('hide');
                 showSuccess(response.data.message, 2000)
-                $('#form-message')[0].reset();
+                $('#subject').val('');
+                CKEDITOR.instances.mcontent.setData('');
             }).catch(function (error) {
                 showAlert(error.response.data.message)
             });
             event.preventDefault();
-
         })
 
     </script>
