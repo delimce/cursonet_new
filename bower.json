@@ -28,6 +28,7 @@
     "ckeditor": "^4.9.2",
     "jquery-confirm2": "craftpip/jquery-confirm#^3.3.2",
     "bootstrap-toggle": "^2.2.2",
-    "Croppie": "croppie#^2.6.2"
+    "Croppie": "croppie#^2.6.2",
+    "popper.js": "^1.14.3"
   }
 }

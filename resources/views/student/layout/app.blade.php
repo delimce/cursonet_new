@@ -56,6 +56,7 @@
 @stack('scripts')
 <script>
     $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip()
         @stack('scripts-ready')
     });
 </script>

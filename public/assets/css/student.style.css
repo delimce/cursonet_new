@@ -657,7 +657,17 @@ h2 {
     font-size: 12px;
 }
 
-/*inbox and messages*/
+.card-footer{
+    text-align: right;
+    padding-right: 14px;
+    font-size: 20px;
+}
+
+.card-footer .msg-to-teacher{
+    cursor: pointer;
+}
+
+    /*inbox and messages*/
 
 #inbox-list {
     width: 75%;

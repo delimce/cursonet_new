@@ -14,7 +14,7 @@
                 <form id="form-message">
                     <div class="form-group">
                         <div class="select-to">
-                           &nbsp;
+                            &nbsp;
                         </div>
                         <br>
                         <input type="text" placeholder="@lang('students.inbox.subject')" class="form-control"
@@ -83,10 +83,20 @@
             var reply_text = '[Respuesta] ' + $("#inbox-subject").html();
             var reply_val = $('#inbox-reply').val();
             var name = $('#inbox-name').html()
-            var reply_contact = '<div class="contact-selected">'+name+'</div>';
-            var hidden = '<input id="to" name="to" type="hidden" value="'+reply_val+'">';
+            var reply_contact = '<div class="contact-selected">' + name + '</div>';
+            var hidden = '<input id="to" name="to" type="hidden" value="' + reply_val + '">';
             $('.select-to').html(hidden).append(reply_contact);
             $('#subject').val(reply_text);
+            $("#new-message").modal()
+        })
+
+        $(".msg-to-teacher").on('click', function (event) {
+            var myId = $(this).data('to')
+            console.log(myId)
+            var name = $('#teacher_' + myId).html()
+            var reply_contact = '<div class="contact-selected">' + name + '</div>';
+            var hidden = '<input id="to" name="to" type="hidden" value="1_' + myId + '">';
+            $('.select-to').html(hidden).append(reply_contact);
             $("#new-message").modal()
         })
 

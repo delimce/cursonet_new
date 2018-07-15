@@ -52,6 +52,7 @@ return [
     //INBOX
     'inbox.title' => 'Mis Mensajes',
     'inbox.compose' => 'Redactar nuevo',
+    'inbox.teacher.compose' => 'Enviar mensaje al profesor',
     'inbox.send' => 'Enviar mensaje',
     'inbox.compose.title' => 'Redactar nuevo mensage',
     'inbox.recipient' => 'Seleccione el destinatario',
