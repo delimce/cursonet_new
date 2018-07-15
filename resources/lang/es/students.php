@@ -44,6 +44,7 @@ return [
     'course.info.loading' => 'cargando datos del curso',
     'course.goto' => 'Ir al Curso',
     'course.selected' => 'Curso seleccionado:',
+    'course.selected.tooltip' => 'Curso actual',
     'course.selected.error' => 'error al seleccionar un curso',
     'course.select' => 'Seleccione un curso',
     //SIGNUP
@@ -51,6 +52,7 @@ return [
     'signup.here' => 'Registrate Aquí',
     //INBOX
     'inbox.title' => 'Mis Mensajes',
+    'inbox.title.tooltip' => 'Ir al módulo de Mensajes',
     'inbox.compose' => 'Redactar nuevo',
     'inbox.teacher.compose' => 'Enviar mensaje al profesor',
     'inbox.send' => 'Enviar mensaje',
@@ -73,7 +75,7 @@ return [
     'profile.security' => 'Configuración',
     'profile.pic' => 'Foto de perfil',
     'profile.pic.upload' => 'Subir imagen',
-    'profile.pic.select' => 'Seleccione una imagen',
+    'profile.pic.select' => 'Selecciona una imagen para subir',
     'profile.pic.updated' => 'Foto de perfil actualizada!',
     'profile.pic.save' => 'Guardar Imagen',
     'profile.save.info' => 'Guardar información',

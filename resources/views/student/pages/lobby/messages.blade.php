@@ -18,7 +18,7 @@
 
     @if (count($messages)>0)
         <div style="text-align: right">
-            <a href="{!! url('student/inbox') !!}">
+            <a data-toggle="tooltip" data-placement="top" title="@lang('students.inbox.title.tooltip')"  href="{!! url('student/inbox') !!}">
                 <i class="fas fa-plus-square"></i>
                 @lang('students.inbox.all_messages')
             </a>

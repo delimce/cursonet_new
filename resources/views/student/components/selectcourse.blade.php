@@ -1,5 +1,5 @@
 <span> @lang('students.course.selected') </span>
-<div id="nav-selects">
+<div id="nav-selects" data-toggle="tooltip" data-placement="right" title="@lang('students.course.selected.tooltip')">
     <select class="adv-select" name="course" id="course">
         @if(count($courses)>0)
             @foreach ($courses as $course)

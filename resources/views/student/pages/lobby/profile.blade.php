@@ -118,7 +118,7 @@
                             <div style="padding:10px; margin: auto">
                                 <strong> @lang('students.profile.pic.select'):</strong>
                                 <br/>
-                                <input type="file" id="upload">
+                                <input data-toggle="tooltip" data-placement="top" title="@lang('students.profile.pic.select')" type="file" id="upload">
                             </div>
                             <div id="upload-img"></div>
                         </div>
