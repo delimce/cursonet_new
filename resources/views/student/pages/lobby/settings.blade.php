@@ -16,7 +16,7 @@
                     <div class="settings">
                         <div class="form-group">
                             <label for="share-info" class="control-label row">Compartir mis datos con los démas
-                                contáctos</label>
+                                Estudiantes</label>
                             <input id="share-info" class="toggle-in" data-value="share_info" data-width="90"
                                    type="checkbox" @if($data->share_info) checked @endif data-toggle="toggle"
                                    data-on="@lang('commons.enabled')"

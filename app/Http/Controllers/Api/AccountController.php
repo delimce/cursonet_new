@@ -61,6 +61,8 @@ class AccountController extends BaseController
 
         ///get teachers
         $teachers = Admin::whereIn('id', $teacher_array)->get();
+        //merge data
+        $data_student = collect($data_student)->unique()->toArray();
         $output = array_merge($data_student, $teachers->toArray());
 
         return response()->json(['status' => 'ok', 'contacts' => $output]);

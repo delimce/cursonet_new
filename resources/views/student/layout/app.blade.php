@@ -20,7 +20,7 @@
 <nav id="main-nav" class="navbar navbar-default navbar-fixed-top">
     <!-- Navbar content -->
     <div class="left-nav">
-        <div id="nav-logo">&nbsp;</div>
+        <div id="nav-logo" onclick="redirect('{!! url('student/home') !!}')">&nbsp;</div>
         @component("student.components.selectcourse",['courses' => session()->get("myCourses")])
         @endcomponent
     </div>

@@ -46,9 +46,7 @@
                 </div>
                 <div style="float: left; width: 60%">
                     <span class="subtext">@lang('commons.name'):</span>
-                    <span id="inbox-name"></span><br>
-                    <span class="subtext">@lang('commons.profile'):</span>
-                    <span id="inbox-role"></span><br>
+                    <span class="subtext" id="inbox-role"></span>&nbsp;<span id="inbox-name"></span><br>
                     <span class="subtext">@lang('commons.date'):</span>
                     <span id="inbox-date"></span>
                 </div>

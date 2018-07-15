@@ -8,7 +8,7 @@
             @endif
         </span>
         <div id="user-info">
-            <span style="text-transform: capitalize; display: inline"><b>@lang('commons.student'):</b>&nbsp;
+            <span style="text-transform: capitalize; display: inline">
                 <span style="display: inline" id="user-name"><?=$data->nombre?></span>&nbsp;
                 <span style="display: inline" id="user-lastname"><?=$data->apellido?></span>
             </span>

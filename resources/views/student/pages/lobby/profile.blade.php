@@ -197,7 +197,7 @@
             $uploadCrop.croppie('result', {
                 type: 'base64',
                 format: 'png',
-                size: {width: 100, height: 100}
+                size: {width: 89, height: 89}
             }).then(function (resp) {
                 axios.put('{!! url('student/profile/picture') !!}',
                     {"foto": resp})
