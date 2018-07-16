@@ -47,9 +47,8 @@ class StudentController extends BaseController
             return response()->json(['status' => 'fail', 'message' => trans('students.login.signin.active.error')], 401);
         } else if (Hash::check($req->input('password'), $user->pass)) {
             DB::beginTransaction();
-            $apikey = $this->newUserToken();
-            Student::where('email', $req->input('email'))->update(['token' => "$apikey"]);
-            $user->token = $apikey;
+            $user->token = $this->newUserToken();
+            $user->save();
             $log = new StudentLog();
             $log->est_id = $user->id;
             $log->ip_acc = $_SERVER['REMOTE_ADDR'];
@@ -74,7 +73,8 @@ class StudentController extends BaseController
 
         if (!is_null($user)) {
             $apikey = $this->newUserToken();
-            Student::where('email', $req->input('email'))->update(['token' => "$apikey"]);
+            $user->token = $apikey;
+            $user->save();
             Mail::send('student.emails.forgotten', ["user" => $user, "token" => $apikey], function ($m) use ($user) {
                 $m->to($user->email, $user->nombre . ' ' . $user->apellido)->subject('Recordatorio de contraseña');
             });
@@ -148,7 +148,6 @@ class StudentController extends BaseController
             $student->fecha_nac = $req->input('fecha_nac');
             $student->pass = Hash::make($req->input('pass'));
             $student->token = $this->newUserToken(); ///for email
-
             $student->save();
 
             Mail::send("student.emails.registered", ["user" => $student, "token" => $student->token], function ($m) use ($student) {
