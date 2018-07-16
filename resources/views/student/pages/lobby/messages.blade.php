@@ -3,14 +3,14 @@
 
     @foreach ($messages as $item)
         <div class="row @if (!$item->leido) subtext @endif ">
-            <div class="col-3">
+            <div class="col-2.2">
                 <i class="far @if (!$item->leido) fa-envelope @else fa-envelope-open @endif">&nbsp;</i>
                 {{$item->datetime()}}
             </div>
-            <div class="col-3">
+            <div class="col-3.2">
                 {{$item->sender()}}
             </div>
-            <div class="col-6">
+            <div class="col-5">
                 {{$item->subject}}
             </div>
         </div>

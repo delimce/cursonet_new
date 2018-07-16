@@ -12,7 +12,7 @@
                         <h1>
                             <i class="fas fa-user-circle"></i>
                         </h1>
-                        <p class="card-text">{{$teacher->sintesis}}</p>
+                        <p class="card-text">{{str_limit($teacher->sintesis,170)}}</p>
                     </div>
                     <div class="card-footer text-muted">
                         <span class="msg-to-teacher" data-toggle="tooltip" data-placement="bottom" title="@lang('students.inbox.teacher.compose')" data-to="{{$teacher->id}}"><i class="fas fa-envelope"></i></span>

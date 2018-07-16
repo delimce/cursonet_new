@@ -55,10 +55,10 @@
 <script src="{!! url('bower_components/ckeditor/ckeditor.js') !!}"></script>
 @stack('scripts')
 <script>
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-        @stack('scripts-ready')
-    });
+ (function($) {
+   $('[data-toggle="tooltip"]').tooltip()
+   @stack('scripts-ready')
+}(jQuery));
 </script>
 </body>
 </html>

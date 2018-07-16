@@ -642,11 +642,11 @@ h2 {
 
 /*teachers*/
 
-.teachers-box {
-    max-width: 400px;
-    min-width: 300px;
+.teacher-box .card{
+    height: 355px;
+    width: 340px;
     float: left;
-    margin: 10px 22px 10px 22px;
+    margin: 8px 13px 8px 13px;
 }
 
 
