@@ -27,3 +27,8 @@ $router->group(['prefix' => 'api/student/account', 'namespace' => 'Api', 'middle
     $router->put('/changePass', 'AccountController@changePassword');
     $router->put('/profile', 'AccountController@saveProfile');
 });
+
+//classroom
+$router->group(['prefix' => 'api/student/class', 'namespace' => 'Api', 'middleware' => ['api']], function () use ($router) {
+    $router->get('/topics/{course_id}', 'ClassroomController@getTopics');
+});

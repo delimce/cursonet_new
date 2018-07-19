@@ -41,6 +41,7 @@ class HomeController extends BaseController
 
         } else { ///one at least
             $currentCourse = $courses->first();
+            $req->session()->put("courseSelected",$currentCourse->id);
         }
 
         //get messages

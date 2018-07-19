@@ -1,8 +1,8 @@
 <span> @lang('students.course.selected') </span>
-<div id="nav-selects" data-toggle="tooltip" data-placement="right" title="@lang('students.course.selected.tooltip')">
+<div id="nav-selects">
     <select class="adv-select" name="course" id="course">
-        @if(count($courses)>0)
-            @foreach ($courses as $course)
+        @if(count(session()->get('myCourses'))>0)
+            @foreach (session()->get('myCourses') as $course)
                 <option value="{{ $course["id"] }}"
                         @if(session()->has("courseSelected") && (session()->get("courseSelected") == $course["id"]))
                         selected @endif>

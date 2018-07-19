@@ -7,21 +7,17 @@
         @endslot
     @endcomponent
     <div class="wrapper">
-
         <nav id="sidebar">
-            @include('student.pages.classroom.modules', ['modules' => [["selected"=>true],["selected"=>false],["selected"=>false]]])
+            @include('student.pages.classroom.modules', ['topics' => $topics])
         </nav>
         <!-- Page Content Holder -->
         <div id="content">
             @component("student.components.classroombox")
-
             @endcomponent
         </div>
     </div>
 @endsection
-@push('scripts')
-    <script type="text/javascript">
-        $(document).ready(function () {
+@push('scripts-ready')
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
@@ -31,7 +27,4 @@
                 else
                     $(".swapText").html("@lang('students.classroom.modules.hide')")
             });
-
-        });
-    </script>
 @endpush

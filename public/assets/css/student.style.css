@@ -455,8 +455,14 @@ h2 {
 }
 
 .module-item {
-    padding: 6px 2px 9px 8px;
+    padding: 10px 2px 12px 8px;
     cursor: pointer;
+}
+
+.module-item:hover {
+    color: #00ccff;
+    border: 1px solid #666;
+    border-radius: 5px;
 }
 
 .current-module {
@@ -465,6 +471,10 @@ h2 {
     cursor: default;
     border-radius: 5px;
 
+}
+
+.current-module:hover {
+    color: #000;
 }
 
 /* ---------------------------------------------------
@@ -630,14 +640,18 @@ h2 {
     border: 1px #8b8b8b solid;
 }
 
-.cn-container .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
     color: #495057;
     background-color: inherit;
     border-color: #8c9094 #8c9094 #dee2e6;
 }
 
-.cn-container .nav-tabs {
+.nav-tabs {
     border-bottom: 1px solid #8c9094;
+}
+
+.tab-content{
+    margin: 18px 8px 10px 8px;
 }
 
 /*teachers*/

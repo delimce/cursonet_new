@@ -90,5 +90,6 @@ return [
     'classroom.modules.select' => 'Seleccione el tema',
     'classroom.modules.show' => 'Mostrar temas',
     'classroom.modules.hide' => 'Ocultar temas',
+    'classroom.modules.nofound' => 'NO existen temas creados',
 
 ];

@@ -5,7 +5,7 @@
         <span class="swapText">Ocultar temas</span>
     </a>
 
-    <ul class="nav nav-tabs mb-3" id="classroom-tabs" role="tablist">
+    <ul class="nav nav-tabs" id="nav-tab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#myContent"
                role="tab" aria-controls="contenido" aria-selected="true">Contenido</a>
