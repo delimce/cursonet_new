@@ -25,13 +25,13 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () us
     $router->get('/activate/{apikey}', 'InitialController@userActivated');
     $router->get('/restore/{apikey}', 'InitialController@restoringPassword');
     $router->get('/restoring/success', 'InitialController@restored');
-    $router->get('/classroom', 'ClassRoomController@main');
     $router->get('profile', [
         'middleware' => 'auth',
         'logout' => 'AccountController@showProfile'
     ]);
 });
 
+//home
 $router->group(['prefix' => 'student', 'namespace' => 'Student', 'middleware'=>['auth']], function () use ($router) {
     $router->get('/home', ['as' => 'student.home', 'uses' => 'HomeController@home']);
     $router->get('/logout', 'HomeController@logout');
@@ -42,4 +42,9 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student', 'middleware'=>[
     $router->get('/teachers', 'HomeController@getTeachers');
     $router->put('/profile/picture', 'HomeController@saveMyPicture');
     $router->post('/select/course', 'HomeController@courseSelected');
+});
+
+//classroom
+$router->group(['prefix' => 'student/classroom', 'namespace' => 'Student', 'middleware'=>['auth']], function () use ($router) {
+    $router->get('/', 'ClassRoomController@main');
 });

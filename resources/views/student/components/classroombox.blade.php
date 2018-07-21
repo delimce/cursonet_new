@@ -1,9 +1,15 @@
 <section id="classroom-content">
 
-    <a href="#" id="sidebarCollapse">
-        <i class="plusMinus fas fa-arrow-left"></i>
-        <span class="swapText">Ocultar temas</span>
-    </a>
+    <div class="content-header">
+         <span id="topic-selected">
+            {{$content1->titulo}}
+        </span>
+        <a href="#" id="sidebarCollapse">
+            <i class="plusMinus fas fa-arrow-left"></i>
+            <span class="swapText">Ocultar temas</span>
+        </a>
+    </div>
+
 
     <ul class="nav nav-tabs" id="nav-tab" role="tablist">
         <li class="nav-item">
@@ -34,7 +40,7 @@
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="myContent" role="tabpanel"
              aria-labelledby="home-tab">
-            @include('student.pages.classroom.content', ['some' => 'data'])
+            @include('student.pages.classroom.content', ['content' => $content1])
         </div>
         <div class="tab-pane fade" id="resources" role="tabpanel" aria-labelledby="files-tab">
             ...

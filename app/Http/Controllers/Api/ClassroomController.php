@@ -31,12 +31,21 @@ class ClassroomController extends BaseController
      */
     public function getTopics($course_id)
     {
-        $topics = Topic::select('id','titulo','leido')->where("curso_id", $course_id)->where("borrador", 0)->get();
-        if ($topics->count()>0) {
+        $topics = Topic::select('id', 'titulo', 'leido')->where("curso_id", $course_id)->where("borrador", 0)->get();
+        if ($topics->count() > 0) {
             return response()->json(['status' => 'ok', 'data' => $topics]);
         } else {
             return response()->json(['status' => 'error', 'message' => trans('students.classroom.modules.nofound')], 400);
         }
+    }
+
+    public function getTopicInfo($topic_id)
+    {
+        $info = Topic::findOrFail($topic_id);
+        $info->leido++;
+        $info->save();
+        return response()->json(['status' => 'ok', 'info' => $info]);
+
     }
 
 

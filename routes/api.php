@@ -31,4 +31,5 @@ $router->group(['prefix' => 'api/student/account', 'namespace' => 'Api', 'middle
 //classroom
 $router->group(['prefix' => 'api/student/class', 'namespace' => 'Api', 'middleware' => ['api']], function () use ($router) {
     $router->get('/topics/{course_id}', 'ClassroomController@getTopics');
+    $router->get('/topic/{topic_id}', 'ClassroomController@getTopicInfo');
 });

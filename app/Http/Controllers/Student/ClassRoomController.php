@@ -22,12 +22,17 @@ class ClassRoomController extends BaseController
     }
 
     //
-
     public function main(Request $req)
     {
         $course_id = $req->session()->get('courseSelected');
-        $topics = Topic::select('id','titulo','leido')->where("curso_id", $course_id)->where("borrador", 0)->get();
-        return view('student.pages.classroom.main',["topics"=>$topics]);
+        $topics = Topic::select('id', 'titulo', 'leido')->where("curso_id", $course_id)->where("borrador", 0)->get();
+        $content = null;
+        if ($topics->count() > 0) { //more than 0
+            $content1 = $topics->first();
+            Topic::where('id', $content1->id)->update(['leido' => $content1->leido + 1]);
+            $content = Topic::findOrFail($content1->id);
+        }
+        return view('student.pages.classroom.main', ["topics" => $topics, 'content1' => $content]);
     }
 
 }

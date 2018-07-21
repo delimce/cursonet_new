@@ -17,6 +17,15 @@
             var topic_id = $(this).data('topic');
             $(".current-module").removeClass("current-module")
             $(this).addClass("current-module");
+            axios.get('{!! url('api/student/class/topic') !!}' + '/' + topic_id)
+                .then(function (response) {
+                    console.log(response)
+                    $('#myContent').html(response.data.info.contenido)
+                    $('#topic-selected').html(response.data.info.titulo)
+                }).catch(function (error) {
+                showAlert("@lang('students.course.selected.error')")
+                $("#course_button").hide();
+            });
         })
     </script>
 @endpush
