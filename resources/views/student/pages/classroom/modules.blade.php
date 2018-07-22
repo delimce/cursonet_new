@@ -1,5 +1,5 @@
 <section>
-    <h2>@lang('students.classroom.modules.select')</h2>
+    <h2>@lang('students.classroom.modules.list')</h2>
     @if($topics->count()==0)
         <span>@lang('students.classroom.modules.nofound')</span>
     @else
@@ -19,11 +19,24 @@
             $(this).addClass("current-module");
             axios.get('{!! url('api/student/class/topic') !!}' + '/' + topic_id)
                 .then(function (response) {
-                    console.log(response)
+                    console.log(response.data.info.files)
                     $('#myContent').html(response.data.info.contenido)
                     $('#topic-selected').html(response.data.info.titulo)
+                    $('#content-file').bootstrapTable('load', {
+                        columns: [{
+                            field: 'id'
+                        },{
+                            field: 'dir'
+                        }, {
+                            field: 'tipo'
+                        }, {
+                            field: 'fecha'
+                        }],
+                        data: response.data.info.files
+                    });
+
                 }).catch(function (error) {
-                showAlert("@lang('students.course.selected.error')")
+                showAlert("@lang('students.classroom.topic.select.error')")
                 $("#course_button").hide();
             });
         })

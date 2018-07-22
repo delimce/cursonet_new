@@ -43,7 +43,7 @@
             @include('student.pages.classroom.content', ['content' => $content1])
         </div>
         <div class="tab-pane fade" id="resources" role="tabpanel" aria-labelledby="files-tab">
-            ...
+            @include('student.pages.classroom.files', ['files'=>$files])
         </div>
         <div class="tab-pane fade" id="eval" role="tabpanel" aria-labelledby="eval-tab">
             @include('student.pages.classroom.exams', ['some' => 'data'])

@@ -11,6 +11,7 @@ use App\Models\Cn2\Topic;
 class ClassRoomController extends BaseController
 {
     private $student;
+
     /**
      * Create a new controller instance.
      * @return void
@@ -31,8 +32,9 @@ class ClassRoomController extends BaseController
             $content1 = $topics->first();
             Topic::where('id', $content1->id)->update(['leido' => $content1->leido + 1]);
             $content = Topic::findOrFail($content1->id);
+            $files = $content->files()->with('File')->get();
         }
-        return view('student.pages.classroom.main', ["topics" => $topics, 'content1' => $content]);
+        return view('student.pages.classroom.main', ["topics" => $topics, 'content1' => $content, 'files' => $files]);
     }
 
 }

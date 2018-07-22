@@ -8,3 +8,5 @@
 <link rel="stylesheet" href="{!! url('bower_components/roboto-fontface/css/roboto-slab/roboto-slab-fontface.css') !!}">
 <link rel="stylesheet" href="{!! url('bower_components/jquery-confirm2/css/jquery-confirm.css') !!}">
 <link rel="stylesheet" href="{!! url('bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css') !!}">
+<link rel="stylesheet" href="{!! url('bower_components/datatables/media/css/jquery.dataTables.min.css') !!}">
+<link rel="stylesheet" href="{!! url('bower_components/bootstrap-table/dist/bootstrap-table.min.css') !!}">

@@ -88,8 +88,13 @@ return [
     'classroom.title' => 'Aula Virtual',
     'classroom.modules.subject' => 'Tema',
     'classroom.modules.select' => 'Seleccione el tema',
+    'classroom.modules.list' => 'Lista de Temas',
     'classroom.modules.show' => 'Mostrar temas',
     'classroom.modules.hide' => 'Ocultar temas',
     'classroom.modules.nofound' => 'NO existen temas creados',
+    'classroom.file.type.file' => 'Archivo',
+    'classroom.file.type.link' => 'Enlace',
+    'classroom.file.type.default' => 'leible',
+    'classroom.topic.select.error' => 'No es posible seleccionar el tema',
 
 ];

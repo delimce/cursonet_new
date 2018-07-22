@@ -12,19 +12,19 @@
         </nav>
         <!-- Page Content Holder -->
         <div id="content">
-            @component("student.components.classroombox", ["content1"=>$content1])
+            @component("student.components.classroombox", ['content1'=>$content1,'files'=>$files])
             @endcomponent
         </div>
     </div>
 @endsection
 @push('scripts-ready')
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
-                $(this).find(".plusMinus").toggleClass('fa-arrow-left fa-arrow-right');
-                if ($("#sidebar").hasClass('active'))
-                    $(".swapText").html("@lang('students.classroom.modules.show')")
-                else
-                    $(".swapText").html("@lang('students.classroom.modules.hide')")
-            });
+    $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+    $(this).toggleClass('active');
+    $(this).find(".plusMinus").toggleClass('fa-arrow-left fa-arrow-right');
+    if ($("#sidebar").hasClass('active'))
+    $(".swapText").html("@lang('students.classroom.modules.show')")
+    else
+    $(".swapText").html("@lang('students.classroom.modules.hide')")
+    });
 @endpush

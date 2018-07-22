@@ -42,9 +42,23 @@ class ClassroomController extends BaseController
     public function getTopicInfo($topic_id)
     {
         $info = Topic::findOrFail($topic_id);
+        $files = $info->files()->with('File')->get();
         $info->leido++;
         $info->save();
-        return response()->json(['status' => 'ok', 'info' => $info]);
+        $data = array("id" => $info->id, "titulo" => $info->titulo, "contenido" => $info->contenido);
+        ///files
+        $resources = array();
+        $files->each(function ($item) use (&$resources) {
+            $temp = array();
+            $temp["tipo"] = $item->file->getType();
+            $temp["id"] = $item->file->id;
+            $temp["dir"] = str_limit($item->file->dir,105);
+            $temp["fecha"] = $item->file->date();
+            $resources[] = $temp;
+        });
+        $data["files"] = $resources;
+
+        return response()->json(['status' => 'ok', 'info' => $data]);
 
     }
 
