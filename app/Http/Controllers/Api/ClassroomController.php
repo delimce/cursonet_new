@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Cn2\File;
 use App\Models\Cn2\Topic;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Cn2\Student;
 use DB;
 use Carbon\Carbon;
@@ -39,6 +41,10 @@ class ClassroomController extends BaseController
         }
     }
 
+    /**get whole topic info
+     * @param $topic_id
+     * @return mixed
+     */
     public function getTopicInfo($topic_id)
     {
         $info = Topic::findOrFail($topic_id);
@@ -51,14 +57,36 @@ class ClassroomController extends BaseController
         $files->each(function ($item) use (&$resources) {
             $temp = array();
             $temp["tipo"] = $item->file->getType();
+            $temp["tipo_id"] = $item->file->tipo;
             $temp["id"] = $item->file->id;
-            $temp["dir"] = str_limit($item->file->dir,105);
+            $temp["dir"] = $item->file->dir;
             $temp["fecha"] = $item->file->date();
             $resources[] = $temp;
         });
         $data["files"] = $resources;
 
         return response()->json(['status' => 'ok', 'info' => $data]);
+
+    }
+
+
+    public function getFile($res_id)
+    {
+        try {
+            $resource = File::findOrFail($res_id);
+            //file exist
+            if ($resource->tipo == 0 && Storage::disk('courses')->has("files/{$resource->dir}")) {
+                $resource->download++;
+                $resource->save();
+                $file = Storage::disk('courses')->url("files/{$resource->dir}");
+                return response()->download($file);
+            } else {
+                return response()->json(['status' => 'error', 'message' => trans('commons.file.notfound')], 404);
+            }
+        } catch (Exception $ex) {
+            return response()->json(['status' => 'error', 'message' => $ex->getTraceAsString()], 500);
+        }
+
 
     }
 

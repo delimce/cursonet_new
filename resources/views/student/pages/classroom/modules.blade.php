@@ -19,14 +19,15 @@
             $(this).addClass("current-module");
             axios.get('{!! url('api/student/class/topic') !!}' + '/' + topic_id)
                 .then(function (response) {
-                    console.log(response.data.info.files)
                     $('#myContent').html(response.data.info.contenido)
                     $('#topic-selected').html(response.data.info.titulo)
                     $('#content-file').bootstrapTable('load', {
                         columns: [{
                             field: 'id'
-                        },{
+                        }, {
                             field: 'dir'
+                        }, {
+                            field: 'tipo_id'
                         }, {
                             field: 'tipo'
                         }, {
@@ -36,8 +37,7 @@
                     });
 
                 }).catch(function (error) {
-                showAlert("@lang('students.classroom.topic.select.error')")
-                $("#course_button").hide();
+                showAlert("@lang('students.classroom.topic.select.error')");
             });
         })
     </script>

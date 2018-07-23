@@ -23,7 +23,7 @@ var quitSession = function (error, url) {
  * @param url
  * @param back
  */
-var redirect = function (url, back=true) {
+var redirect = function (url, back = true) {
     if (back)
         window.location = url
     else location.replace(url)
@@ -83,6 +83,18 @@ var showSuccess = function (message, time = false) {
     });
 }
 
-String.prototype.capitalize = function() {
-    return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+String.prototype.capitalize = function () {
+    return this.replace(/(?:^|\s)\S/g, function (a) {
+        return a.toUpperCase();
+    });
 };
+
+var downloadFile = function (response, filename) {
+    var url = window.URL.createObjectURL(new Blob([response.data]));
+    var link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', filename); //or any other extension
+    document.body.appendChild(link);
+    link.click();
+
+}

@@ -22,6 +22,7 @@ return [
     'teacher' => 'Prof.',
     'message.deleted' => 'Mensaje borrado con exito',
     'message.notfound' => 'Mensaje no encontrado',
+    'file.notfound' => 'Archivo no encontrado',
     ///validation
     'validation.required.all' => 'Todos los campos son requeridos',
     'validation.required' => 'El campo :attribute es requerido',

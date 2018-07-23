@@ -436,6 +436,18 @@ h2 {
 }
 
 /*classroom*/
+
+.cn-grid table{
+    border: 0;
+}
+.cn-grid td{
+    cursor: pointer;
+}
+.cn-grid th{
+    color: #000;
+    font-weight: bolder;
+}
+
 .nav-link {
     font-family: 'Roboto-Regular', Helvetica, Arial, sans-serif;
 }
