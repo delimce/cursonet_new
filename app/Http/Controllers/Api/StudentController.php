@@ -39,7 +39,7 @@ class StudentController extends BaseController
             'password' => 'required'
         ]);
 
-        $user = DB::table('tbl_estudiante')->select("id","nombre","apellido","id_number","email","foto","activo","pass","token")->where('email', $req->input('email'))->first();
+        $user = Student::select("id","nombre","apellido","id_number","email","foto","activo","pass","token")->where('email', $req->input('email'))->first();
         if (is_null($user))
             return response()->json(['status' => 'error', 'message' => trans('students.login.email.unknown')], 401);
 

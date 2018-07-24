@@ -76,8 +76,8 @@ class AccountController extends BaseController
     public function setSetting(Request $req)
     {
         $validator = Validator::make($req->all(), [
-            'status' => 'required',
-            'field' => 'required'
+            'field' => 'required',
+            'status' => 'required'
         ], ['required' => trans('commons.validation.required')
         ]);
 
