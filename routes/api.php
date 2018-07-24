@@ -1,5 +1,15 @@
 <?php
 
+//***********************ADMIN************************************
+
+///classroom
+$router->group(['prefix' => 'api/admin', 'namespace' => 'Api'], function () use ($router) {
+    $router->post('/class/file', 'AdminController@saveFileResource');
+
+});
+
+//***********************STUDENTS************************************
+
 //initial
 $router->group(['prefix' => 'api/student', 'namespace' => 'Api'], function () use ($router) {
     $router->post('/login', 'StudentController@login');
