@@ -23,6 +23,8 @@ return [
     'message.deleted' => 'Mensaje borrado con exito',
     'message.notfound' => 'Mensaje no encontrado',
     'file.notfound' => 'Archivo no encontrado',
+    'file.upload.successfully' => 'Archivo súbido con éxito',
+    'file.upload.error' => 'Error al subir el archivo',
     ///validation
     'validation.required.all' => 'Todos los campos son requeridos',
     'validation.required' => 'El campo :attribute es requerido',
