@@ -14,6 +14,10 @@ class Course extends Model
         return $this->belongsTo('App\Models\Cn2\Admin','resp');
     }
 
+    public function studentGroup(){
+        return $this->hasMany('App\Models\Cn2\GroupStudent', 'curso_id');
+    }
+
     public function createdAt(){
         return Carbon::parse($this->fecha_creado)->format(env('APP_DATEFORMAT'));
     }
