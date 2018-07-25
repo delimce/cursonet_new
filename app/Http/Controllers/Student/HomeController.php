@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\Cn2\Admin;
-use http\Env\Response;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Models\Cn2\Student;
@@ -30,7 +29,11 @@ class HomeController extends BaseController
 
     public function home(Request $req)
     {
-        $courses = Course::all();
+
+        $courses = Course::whereHas('studentGroup', function ($query) {
+            $query->whereEstId($this->student->id);
+        })->whereActivo(1)->get();
+
         $req->session()->put('myCourses', $courses);
 
         if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
@@ -41,7 +44,7 @@ class HomeController extends BaseController
 
         } else { ///one at least
             $currentCourse = $courses->first();
-            $req->session()->put("courseSelected",$currentCourse->id);
+            $req->session()->put("courseSelected", $currentCourse->id);
         }
 
         //get messages
@@ -137,7 +140,8 @@ class HomeController extends BaseController
     }
 
 
-    public function refreshSessionData(Request $req){
+    public function refreshSessionData(Request $req)
+    {
 
         $req->session()->forget("myUser");
         $fields = InitialController::$fields;
@@ -150,7 +154,8 @@ class HomeController extends BaseController
     /** teachers of course's groups
      * @return mixed
      */
-    public function getTeachers(){
+    public function getTeachers()
+    {
 
         $groups = $this->student->groups()->with('group')->get();
         $teacher_array = array();
