@@ -47,7 +47,9 @@ class AdminController extends BaseController
         }
 
         try {
+
             if ($req->file('file')->isValid()) {
+                $size = bcdiv(intval($req->file('file')->getClientSize()), 1048576, 2); ///size mb
                 $file = new File();
                 $file->tipo = 0;
                 $file->add_by = "admin";
@@ -55,7 +57,7 @@ class AdminController extends BaseController
                 $file->descripcion = $req->descripcion;
                 $file->dir = $req->file('file')->getClientOriginalName();
                 $file->mime = $req->file('file')->getMimeType();
-                $file->size = $req->file('file')->getClientSize();
+                $file->size = $size.' Mb';
                 $file->extension = $req->file('file')->guessClientExtension();
                 $file->save();
                 Storage::disk('courses')->put("files/{$file->dir}", $req->file('file'));
