@@ -30,6 +30,10 @@ class AdminController extends BaseController
 
     }
 
+    /**save file to resources
+     * @param Request $req
+     * @return mixed
+     */
     public function saveFileResource(Request $req)
     {
 
@@ -59,11 +63,31 @@ class AdminController extends BaseController
                 $file->mime = $req->file('file')->getMimeType();
                 $file->size = $size.' Mb';
                 $file->extension = $req->file('file')->guessClientExtension();
+                $file->filepath = Storage::disk('courses')->putFile("files", $req->file('file'));
                 $file->save();
-                Storage::disk('courses')->put("files/{$file->dir}", $req->file('file'));
                 return response()->json(['status' => 'ok', 'message' => trans('commons.file.upload.successfully')]);
             } else {
                 return response()->json(['status' => 'error', 'message' => trans('commons.file.upload.error')], 400);
+            }
+        } catch (Exception $ex) {
+            return response()->json(['status' => 'error', 'message' => $ex->getTraceAsString()], 500);
+        }
+
+    }
+
+    /**open file of resource
+     * @param $res_id
+     * @return mixed
+     */
+    public function openFileResource($res_id){
+        try {
+            $resource = File::findOrFail($res_id);
+            //file exist
+            if ($resource->tipo == 0 && Storage::disk('courses')->has($resource->filepath)) {
+                $file = Storage::disk('courses')->url($resource->filepath);
+                return response()->download($file);
+            } else {
+                return response()->json(['status' => 'error', 'message' => trans('commons.file.notfound')], 404);
             }
         } catch (Exception $ex) {
             return response()->json(['status' => 'error', 'message' => $ex->getTraceAsString()], 500);

@@ -75,10 +75,10 @@ class ClassroomController extends BaseController
         try {
             $resource = File::findOrFail($res_id);
             //file exist
-            if ($resource->tipo == 0 && Storage::disk('courses')->has("files/{$resource->dir}")) {
+            if ($resource->tipo == 0 && Storage::disk('courses')->has($resource->filepath)) {
                 $resource->download++;
                 $resource->save();
-                $file = Storage::disk('courses')->url("files/{$resource->dir}");
+                $file = Storage::disk('courses')->url($resource->filepath);
                 return response()->download($file);
             } else {
                 return response()->json(['status' => 'error', 'message' => trans('commons.file.notfound')], 404);
