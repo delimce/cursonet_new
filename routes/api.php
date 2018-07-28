@@ -6,6 +6,7 @@
 $router->group(['prefix' => 'api/admin', 'namespace' => 'Api'], function () use ($router) {
     $router->post('/class/file', 'AdminController@saveFileResource');
     $router->get('/file/{res_id}', 'AdminController@openFileResource');
+    $router->delete('/file/delete/{res_id}', 'AdminController@deleteFileResource');
 
 });
 

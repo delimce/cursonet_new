@@ -61,7 +61,7 @@ class AdminController extends BaseController
                 $file->descripcion = $req->descripcion;
                 $file->dir = $req->file('file')->getClientOriginalName();
                 $file->mime = $req->file('file')->getMimeType();
-                $file->size = $size.' Mb';
+                $file->size = $size . ' Mb';
                 $file->extension = $req->file('file')->guessClientExtension();
                 $file->filepath = Storage::disk('courses')->putFile("files", $req->file('file'));
                 $file->save();
@@ -79,7 +79,8 @@ class AdminController extends BaseController
      * @param $res_id
      * @return mixed
      */
-    public function openFileResource($res_id){
+    public function openFileResource($res_id)
+    {
         try {
             $resource = File::findOrFail($res_id);
             //file exist
@@ -93,6 +94,22 @@ class AdminController extends BaseController
             return response()->json(['status' => 'error', 'message' => $ex->getTraceAsString()], 500);
         }
 
+    }
+
+    /**delete file resource
+     * @param $res_id
+     * @return mixed
+     */
+    public function deleteFileResource($res_id)
+    {
+        try {
+            $resource = File::findOrFail($res_id);
+            Storage::disk('courses')->delete($resource->filepath);
+            $resource->delete();
+            return response()->json(['status' => 'ok', 'message' => trans('commons.file.deleted.successfully')]);
+        } catch (Exception $ex) {
+            return response()->json(['status' => 'error', 'message' => $ex->getTraceAsString()], 500);
+        }
     }
 
 

@@ -24,6 +24,7 @@ return [
     'message.notfound' => 'Mensaje no encontrado',
     'file.notfound' => 'Archivo no encontrado',
     'file.upload.successfully' => 'Archivo súbido con éxito',
+    'file.deleted.successfully' => 'Archivo borrado con éxito',
     'file.upload.error' => 'Error al subir el archivo',
     ///validation
     'validation.required.all' => 'Todos los campos son requeridos',
