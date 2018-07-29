@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\Cn2\GroupStudent;
+use App\Models\Cn2\Forum;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -26,15 +28,22 @@ class ClassRoomController extends BaseController
     public function main(Request $req)
     {
         $course_id = $req->session()->get('courseSelected');
-        $topics = Topic::select('id', 'titulo', 'leido')->where("curso_id", $course_id)->where("borrador", 0)->get();
+        $myGroup = GroupStudent::whereCursoId($course_id)->whereEstId($this->student->id)->first();
+        ///student's group_id
+        $req->session()->put("groupId", $myGroup->grupo_id);
+        $topics = Topic::select('id', 'titulo', 'leido')->whereCursoId($course_id)->whereBorrador(0)->get();
         $content = null;
         if ($topics->count() > 0) { //more than 0
             $content1 = $topics->first();
             Topic::where('id', $content1->id)->update(['leido' => $content1->leido + 1]);
             $content = Topic::findOrFail($content1->id);
             $files = $content->files()->with('File')->get();
+            ///forums
+            $forums = Forum::whereContenidoId($content1->id)
+                ->with('Group')->whereIn("grupo_id", [0, $myGroup->grupo_id])->get();
+
         }
-        return view('student.pages.classroom.main', ["topics" => $topics, 'content1' => $content, 'files' => $files]);
+        return view('student.pages.classroom.main', ["topics" => $topics, 'content1' => $content, 'files' => $files, 'forums' => $forums]);
     }
 
 }

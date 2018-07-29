@@ -67,8 +67,6 @@ class HomeController extends BaseController
         $courseId = $req->input("courseId");
         $req->session()->put("courseSelected", $courseId);
         $course = Course::findOrFail($courseId);
-        $course->initDate = $course->createdAt();
-        $course->author = $course->author();
         $data = array("alias" => $course->alias,
             "descripcion" => $course->descripcion,
             "id" => $course->id,

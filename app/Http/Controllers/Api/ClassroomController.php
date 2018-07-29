@@ -80,7 +80,7 @@ class ClassroomController extends BaseController
             $temp["titulo"] = $item->titulo;
             $temp["grupo_id"] = $item->grupo_id;
             $temp["grupo_desc"] = $item->group->nombre ?? trans('commons.all');
-            $temp["fecha_init"] = $item->dateInit();
+            $temp["fecha_ini"] = $item->dateInit();
             $temp["fecha_fin"] = $item->dateEnd();
             $infoForums[] = $temp;
         });
