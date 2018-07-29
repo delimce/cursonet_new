@@ -17,7 +17,7 @@
             var topic_id = $(this).data('topic');
             $(".current-module").removeClass("current-module")
             $(this).addClass("current-module");
-            axios.get('{!! url('api/student/class/topic') !!}' + '/' + topic_id)
+            axios.get('{!! url('api/student/class/topic') !!}' + '/' + topic_id + '/group/' + '{{session()->get('groupId')}}' )
                 .then(function (response) {
                     $('#myContent').html(response.data.info.contenido)
                     $('#topic-selected').html(response.data.info.titulo)
@@ -34,6 +34,21 @@
                             field: 'fecha'
                         }],
                         data: response.data.info.files
+                    });
+
+                    $('#content-forum').bootstrapTable('load', {
+                        columns: [{
+                            field: 'id'
+                        }, {
+                            field: 'titulo'
+                        }, {
+                            field: 'grupo_desc'
+                        }, {
+                            field: 'fecha_ini'
+                        }, {
+                            field: 'fecha_fin'
+                        }],
+                        data: response.data.info.forums
                     });
 
                 }).catch(function (error) {
