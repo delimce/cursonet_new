@@ -20,6 +20,7 @@ return [
     'go_main' => 'Ingresar a la página ',
     'student' => 'Est.',
     'teacher' => 'Prof.',
+    'all' => 'Todos',
     'message.deleted' => 'Mensaje borrado con exito',
     'message.notfound' => 'Mensaje no encontrado',
     'file.notfound' => 'Archivo no encontrado',
