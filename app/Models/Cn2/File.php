@@ -25,8 +25,10 @@ class File extends Model
         }
     }
 
-    public function date(){
-        return Carbon::parse($this->fecha)->format(env('APP_DATEFORMAT'));
+    public function date()
+    {
+        $theDate = $this->created_at ?? $this->fecha;
+        return Carbon::parse($theDate)->format(env('APP_DATEFORMAT'));
     }
 
 }

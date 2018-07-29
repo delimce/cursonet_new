@@ -19,6 +19,11 @@ class Topic extends Model
         return $this->hasMany('App\Models\Cn2\TopicFile','contenido_id');
     }
 
+    public function forums()
+    {
+        return $this->hasMany('App\Models\Cn2\Forum','contenido_id');
+    }
+
     public function createdAt(){
         return Carbon::parse($this->fecha_creado)->format(env('APP_DATEFORMAT'));
     }

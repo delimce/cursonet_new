@@ -12,4 +12,11 @@ class StudentForum extends Model
     {
         return $this->belongsTo('App\Models\Cn2\Student','est_id');
     }
+
+    public function forum()
+    {
+        return $this->belongsTo('App\Models\Cn2\Forum','foro_id');
+    }
+
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Cn2\File;
 use App\Models\Cn2\Topic;
+use App\Models\Cn2\Forum;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -43,12 +44,19 @@ class ClassroomController extends BaseController
 
     /**get whole topic info
      * @param $topic_id
+     * @param $group_id
      * @return mixed
      */
-    public function getTopicInfo($topic_id)
+    public function getTopicInfo($topic_id, $group_id = false)
     {
         $info = Topic::findOrFail($topic_id);
         $files = $info->files()->with('File')->get();
+        if ($group_id) {
+            $forums = Forum::whereContenidoId($info->id)
+            ->with('Group')->whereIn("grupo_id", [0, $group_id])->get();
+        } else {
+            $forums = $info->forums()->with('Group')->get();
+        }
         $info->leido++;
         $info->save();
         $data = array("id" => $info->id, "titulo" => $info->titulo, "contenido" => $info->contenido);
@@ -64,7 +72,19 @@ class ClassroomController extends BaseController
             $resources[] = $temp;
         });
         $data["files"] = $resources;
-
+        ///forums
+        $infoForums = array();
+        $forums->each(function ($item) use (&$infoForums) {
+            $temp = array();
+            $temp["id"] = $item->id;
+            $temp["titulo"] = $item->titulo;
+            $temp["grupo_id"] = $item->grupo_id;
+            $temp["grupo_desc"] = $item->group->nombre ?? trans('commons.all');
+            $temp["fecha_init"] = $item->dateInit();
+            $temp["fecha_fin"] = $item->dateEnd();
+            $infoForums[] = $temp;
+        });
+        $data["forums"] = $infoForums;
         return response()->json(['status' => 'ok', 'info' => $data]);
 
     }

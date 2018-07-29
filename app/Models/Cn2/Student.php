@@ -29,6 +29,6 @@ class Student extends Model
      * @var array
      */
     protected $hidden = [
-        'pass', 'token', 'clave_preg', 'clave_resp',
+        'pass', 'clave_preg', 'clave_resp',
     ];
 }
