@@ -14,30 +14,42 @@
     <ul class="nav nav-tabs" id="nav-tab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#myContent"
-               role="tab" aria-controls="contenido" aria-selected="true">Contenido</a>
+               role="tab" aria-controls="contenido" aria-selected="true">
+                <span class="subtext">Contenido</span>
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="files-tab" data-toggle="tab" href="#resources" role="tab"
-               aria-controls="recursos" aria-selected="false">Recursos</a>
+               aria-controls="recursos" aria-selected="false">
+                <span class="subtext">Recursos</span>
+            </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" id="forum-tab" data-toggle="tab" href="#forum" role="tab"
-               aria-controls="foros" aria-selected="false">Foros</a>
+               aria-controls="foros" aria-selected="false">
+                <span class="subtext">Foros</span>
+            </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" id="eval-tab" data-toggle="tab" href="#eval" role="tab"
-               aria-controls="evaluaciones" aria-selected="false">Evaluaciones</a>
+               aria-controls="evaluaciones" aria-selected="false">
+                <span class="subtext">Evaluaciones</span>
+            </a>
         </li>
-   
+
         <li class="nav-item">
             <a class="nav-link" id="project-tab" data-toggle="tab" href="#project" role="tab"
-               aria-controls="proyectos" aria-selected="false">Proyectos</a>
+               aria-controls="proyectos" aria-selected="false">
+                <span class="subtext">Proyectos</span>
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="request-tab" data-toggle="tab" href="#request" role="tab"
-               aria-controls="consultar" aria-selected="false">Consultas</a>
+               aria-controls="consultar" aria-selected="false">
+                <span class="subtext"> Consultas </span>
+            </a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -52,11 +64,11 @@
         <div class="tab-pane fade" id="forum" role="tabpanel" aria-labelledby="forum-tab">
             @include('student.pages.classroom.forums', ['forums' => $forums])
         </div>
-        
+
         <div class="tab-pane fade" id="eval" role="tabpanel" aria-labelledby="eval-tab">
             @include('student.pages.classroom.exams', ['some' => 'data'])
         </div>
-       
+
         <div class="tab-pane fade" id="project" role="tabpanel" aria-labelledby="project-tab">
             ...
         </div>
