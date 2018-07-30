@@ -49,10 +49,14 @@ class HomeController extends BaseController
 
         //get messages
         $messages = $this->student->messages()->with("student")->orderBy('id', 'desc')->take(4)->get();
+        ///total topics
+        $ntopics = $currentCourse->topics()->count();
+        $course1 = $currentCourse->toArray();
+        $course1["ntopics"] = $ntopics;
 
         return view('student.pages.lobby.home',
             ["myCourses" => $courses,
-                "current" => $currentCourse->toArray(),
+                "current" => $course1,
                 "messages" => $messages]);
     }
 
@@ -67,13 +71,16 @@ class HomeController extends BaseController
         $courseId = $req->input("courseId");
         $req->session()->put("courseSelected", $courseId);
         $course = Course::findOrFail($courseId);
+        $ntopics = $course->topics()->count();
         $data = array("alias" => $course->alias,
             "descripcion" => $course->descripcion,
             "id" => $course->id,
             "nombre" => $course->nombre,
             "init" => $course->createdAt(),
             "author" => $course->author(),
-            "duracion" => $course->duracion);
+            "duracion" => $course->duracion,
+            "ntopics" => $ntopics,
+        );
 
 
         return response()->json(['status' => 'ok', 'course' => $data]);

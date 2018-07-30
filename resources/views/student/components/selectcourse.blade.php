@@ -28,8 +28,13 @@
                 $("#course_name").html(response.data.course.nombre);
                 $("#course_duration").html(response.data.course.duracion);
                 $("#course_description").html(response.data.course.descripcion);
-                $("#course_initdate").html(response.data.course.init)
-                $("#course_button").show();
+                $("#course_initdate").html(response.data.course.init);
+                $("#course_ntopics").html(response.data.course.ntopics);
+                if(response.data.course.ntopics>0){
+                    $("#course_button").show();
+                }else{
+                    $("#course_button").hide();
+                }
                 @else
                 redirect('{!! url('student/home') !!}', false)
                 @endif

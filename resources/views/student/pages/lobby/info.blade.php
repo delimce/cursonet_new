@@ -19,18 +19,22 @@
             <span id="course_initdate">10/11/2018</span>
         </div>
         <div>
+            <span class="subtext">n# de temas:</span>
+            <span id="course_ntopics">{{$current["ntopics"]}}</span>
+        </div>
+        <div>
             <span class="subtext">Facilitador:</span>
             <span id="course_professor"><a href="#">Luis De Lima</a></span>
         </div>
     </div>
 
-    @if (!is_null($current["id"]))
-    <div id="course_button" style="float: right; width: 50%; padding-top: 20px">
+    <div id="course_button" style="float: right; width: 50%; padding-top: 20px;
+    @if (intval($current["ntopics"])==0) display:none @endif">
         <div class="col-sm-auto">
-            <button id="btocontent" class="btn btn-lg btn-block btn-signin" type="submit">@lang('students.course.goto')</button>
+            <button id="btocontent" class="btn btn-lg btn-block btn-signin"
+                    type="submit">@lang('students.course.goto')</button>
         </div>
     </div>
-    @endif
 
 </section>
 @push('scripts')
