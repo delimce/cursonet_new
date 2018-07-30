@@ -33,6 +33,8 @@ class ClassRoomController extends BaseController
         $req->session()->put("groupId", $myGroup->grupo_id);
         $topics = Topic::select('id', 'titulo', 'leido')->whereCursoId($course_id)->whereBorrador(0)->get();
         $content = null;
+        $files = null;
+        $forums = null;
         if ($topics->count() > 0) { //more than 0
             $content1 = $topics->first();
             Topic::where('id', $content1->id)->update(['leido' => $content1->leido + 1]);
