@@ -42,7 +42,7 @@ class ClassRoomController extends BaseController
             $files = $content->files()->with('File')->get();
             ///forums
             $forums = Forum::whereContenidoId($content1->id)
-                ->with('Group')->whereIn("grupo_id", [0, $myGroup->grupo_id])->get();
+                ->with(['Group'])->whereIn("grupo_id", [0, $myGroup->grupo_id])->get();
 
         }
         return view('student.pages.classroom.main', ["topics" => $topics, 'content1' => $content, 'files' => $files, 'forums' => $forums]);

@@ -13,6 +13,10 @@ class Forum extends Model
     {
         return $this->belongsTo('App\Models\Cn2\Group','grupo_id');
     }
+
+    public function posts(){
+        return $this->hasMany('App\Models\Cn2\ForumPost', 'foro_id');
+    }
  
     public function dateInit(){
         return Carbon::parse($this->fecha_post)->format(env('APP_DATEFORMAT'));
