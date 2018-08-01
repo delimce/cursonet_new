@@ -1,4 +1,7 @@
-<table class="cn-grid" id="content-forum" class="table table-striped">
+<div id="forum-wrapper">
+
+</div>
+<table id="forum-list" class="table table-striped cn-grid">
     <thead>
     <tr>
         <th data-field="id" data-visible="false"></th>
@@ -23,5 +26,32 @@
     </tbody>
 </table>
 @push('scripts-ready')
-    $('#content-forum').bootstrapTable();
+    $('#forum-list').bootstrapTable();
+@endpush
+
+@push('scripts')
+    <script>
+        const switchForumView = function (mode = true) {
+            if (mode) {
+                $('#forum-wrapper').hide();
+                $('#forum-list').show()
+            } else {
+                $('#forum-wrapper').show();
+                $('#forum-list').hide();
+            }
+        };
+        $('#forum-list').on('click-cell.bs.table', function (field, value, row, $element) {
+            axios.request({
+                responseType: 'html',
+                url: '{!! url('student/classroom/forum/') !!}' + '/' + $element.id,
+                method: 'get',
+            }).then(function (response) {
+                switchForumView(false)
+                $('#forum-wrapper').html(response.data)
+            }).catch(function (error) {
+                showAlert("no es posible encontrar el foro")
+            });
+        });
+
+    </script>
 @endpush

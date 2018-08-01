@@ -21,11 +21,12 @@
                 .then(function (response) {
                     $('#myContent').html(response.data.info.contenido)
                     $('#topic-selected').html(response.data.info.titulo)
-                    $('#content-file').bootstrapTable('load', {
+                    $('#file-list').bootstrapTable('load', {
                         data: response.data.info.files
                     });
 
-                    $('#content-forum').bootstrapTable('load', {
+                    switchForumView();
+                    $('#forum-list').bootstrapTable('load', {
                         data: response.data.info.forums
                     });
 

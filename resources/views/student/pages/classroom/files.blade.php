@@ -1,4 +1,4 @@
-<table class="cn-grid" id="content-file" data-search="true" class="table table-striped">
+<table id="file-list" data-search="true" class="cn-grid table table-striped">
     <thead>
     <tr>
         <th data-field="id" data-visible="false"></th>
@@ -21,24 +21,28 @@
     </tbody>
 </table>
 @push('scripts-ready')
-    $('#content-file').bootstrapTable();
+    $('#file-list').bootstrapTable();
 @endpush
-<script>
-    $('#content-file').on('click-cell.bs.table', function (field, value, row, $element) {
-        if (Number($element.tipo_id) === 0) {
-            axios.request({
-                responseType: 'blob',
-                url: '{!! url('api/student/class/file') !!}' + '/' + $element.id,
-                method: 'get',
-            }).then(function (response) {
-                downloadFile(response,String($element.dir))
-            }).catch(function (error) {
-                showAlert("no es posible encontrar el archivo")
-            });
-        } else {
-            window.open(String($element.dir), '_blank');
-        }
 
-    });
-</script>
+@push('scripts')
+    <script>
+        $('#file-list').on('click-cell.bs.table', function (field, value, row, $element) {
+            if (Number($element.tipo_id) === 0) {
+                axios.request({
+                    responseType: 'blob',
+                    url: '{!! url('api/student/class/file') !!}' + '/' + $element.id,
+                    method: 'get',
+                }).then(function (response) {
+                    downloadFile(response,String($element.dir))
+                }).catch(function (error) {
+                    showAlert("no es posible encontrar el archivo")
+                });
+            } else {
+                window.open(String($element.dir), '_blank');
+            }
+
+        });
+    </script>
+@endpush
+
 

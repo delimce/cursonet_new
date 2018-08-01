@@ -47,4 +47,5 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student', 'middleware'=>[
 //classroom
 $router->group(['prefix' => 'student/classroom', 'namespace' => 'Student', 'middleware'=>['auth']], function () use ($router) {
     $router->get('/', 'ClassRoomController@main');
+    $router->get('/forum/{forum_id}', 'ClassRoomController@getForumById');
 });
