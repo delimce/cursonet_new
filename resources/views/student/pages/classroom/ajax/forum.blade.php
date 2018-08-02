@@ -13,9 +13,10 @@
                 <i class="fas fa-pen-square"></i>
             </span>
     </div>
-
-    <h2>{!! $content->titulo !!}</h2>
-    <span>{!! $content->content !!}</span>
+    <div class="forum-content">
+        <h2>{!! $content->titulo !!}</h2>
+        <span>{!! $content->content !!}</span>
+    </div>
 
     @foreach($content->posts()->get() as $post)
         <div class="forum-post">
