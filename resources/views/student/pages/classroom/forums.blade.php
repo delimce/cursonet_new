@@ -1,6 +1,4 @@
-<div id="forum-wrapper">
-
-</div>
+<div id="forum-wrapper">&nbsp;</div>
 <table id="forum-list" class="table table-striped cn-grid">
     <thead>
     <tr>
@@ -25,6 +23,11 @@
     @endforeach
     </tbody>
 </table>
+
+@push('head')
+<link rel="stylesheet" href="{!! url('assets/css/forum.style.css') !!}">
+@endpush
+
 @push('scripts-ready')
     $('#forum-list').bootstrapTable();
 @endpush
@@ -49,9 +52,8 @@
                 switchForumView(false)
                 $('#forum-wrapper').html(response.data)
             }).catch(function (error) {
-                showAlert("no es posible encontrar el foro")
+                showAlert("no es posible cargar el foro")
             });
         });
-
     </script>
 @endpush

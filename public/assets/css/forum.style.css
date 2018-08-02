@@ -1,0 +1,27 @@
+.forum-toolbox {
+    float: right;
+    top: 9px;
+    position: sticky;
+    font-size: 23px;
+    color: #5ED2F1;
+    margin-right: 17px;
+    background-color: #eff0f2;
+    border-bottom: 2px solid #5ED2F1;
+    padding: 4px;
+}
+
+.forum-toolbox span {
+    padding-right: 10px;
+    cursor: pointer;
+    width: 20px;
+}
+
+.forum-post {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 7px 8px 7px 11px;
+    border: 0.08em #8b8b8b solid;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}

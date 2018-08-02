@@ -96,5 +96,9 @@ return [
     'classroom.file.type.link' => 'Enlace',
     'classroom.file.type.default' => 'leible',
     'classroom.topic.select.error' => 'No es posible seleccionar el tema',
+    //FORUMS
+    'classroom.forum.showlist' => 'Volver a la lista de foros',
+    'classroom.forum.reload' => 'Recargar contenido y comentarios',
+    'classroom.forum.post.new' => 'Redactar comentario',
 
 ];
