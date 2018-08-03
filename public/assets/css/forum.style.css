@@ -29,3 +29,7 @@
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
+
+.forum-post .post{
+    padding-top: 9px;
+}

@@ -21,9 +21,13 @@
     @foreach($content->posts()->get() as $post)
         <div class="forum-post">
             <div class="student-data">
-                <span>Est</span><br>
+             <?php $person = $post->person()->first() ?>
+             @component("student.components.avatar",['data' => $person])
+             @endcomponent
                 <span class="subtext">Nombre:</span>
-                <span>estudiante</span><br>
+                <span>{{$person->nombre.' '.$person->apellido }}</span><br>
+                <span class="subtext">Perfil</span>   
+                <span>{{$post->tipo_sujeto}}</span><br>
             </div>
             <div class="post">
                 {!! $post->content !!}

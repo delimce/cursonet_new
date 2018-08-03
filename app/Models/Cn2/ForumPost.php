@@ -11,10 +11,19 @@ class ForumPost extends Model
 
     public function forum()
     {
-        return $this->belongsTo('App\Models\Cn2\Forum','foro_id');
+        return $this->belongsTo('App\Models\Cn2\Forum', 'foro_id');
     }
 
-    public function date(){
+    public function person()
+    {
+        if ($this->tipo_sujeto == 'est')
+            return $this->belongsTo('App\Models\Cn2\Student', 'sujeto_id', 'id');
+        else
+            return $this->belongsTo('App\Models\Cn2\Admin', 'sujeto_id', 'id');
+    }
+
+    public function date()
+    {
         return Carbon::parse($this->create_at)->format(env('APP_DATEFORMAT'));
     }
 
