@@ -81,6 +81,7 @@ $app->singleton('filesystem.disk', function () {
 $app->middleware([
     \Illuminate\Session\Middleware\StartSession::class,
     \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    \Barryvdh\Cors\HandleCors::class,
 ]);
 
 $app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
@@ -106,7 +107,7 @@ $app->withFacades(true, [
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(\Illuminate\Session\SessionServiceProvider::class);
-$app->register(Barryvdh\Cors\ServiceProvider::class);
+$app->register(\Barryvdh\Cors\ServiceProvider::class);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
