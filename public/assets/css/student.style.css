@@ -775,3 +775,11 @@ h2 {
 .select2-container {
     min-width: 240px;
 }
+
+.est-color{
+    color: #00B0E8;
+}
+
+.admin-color{
+    color: #df553d;
+}

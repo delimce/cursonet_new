@@ -21,17 +21,35 @@
     @foreach($content->posts()->get() as $post)
         <div class="forum-post">
             <div class="student-data">
-             <?php $person = $post->person()->first() ?>
-             @component("student.components.avatar",['data' => $person])
-             @endcomponent
+                <?php $person = $post->person()->first() ?>
+                @component("student.components.avatar",['data' => $person])
+                @endcomponent
                 <span class="subtext">Nombre:</span>
                 <span>{{$person->nombre.' '.$person->apellido }}</span><br>
-                <span class="subtext">Perfil</span>   
+                <span class="subtext">Perfil</span>
                 <span>{{$post->tipo_sujeto}}</span><br>
             </div>
             <div class="post">
                 {!! $post->content !!}
             </div>
+
+            <div class="tools">
+                 <span class="forum-tools-msg" data-toggle="tooltip" data-placement="top"
+                       title="@lang('students.classroom.forum.post.message')">
+                       <i class="far fa-envelope"></i>
+                </span>
+
+                <span class="forum-tools-reply" data-toggle="tooltip" data-placement="top"
+                      title="@lang('students.classroom.forum.post.reply')">
+                       <i class="far fa-comment"></i>
+                </span>
+                <span class="forum-tools-like" data-toggle="tooltip" data-placement="top"
+                      title="@lang('students.classroom.forum.post.like')">
+                        <i class="far fa-thumbs-up"></i>
+                </span>
+
+            </div>
+
         </div>
     @endforeach
 

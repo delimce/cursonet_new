@@ -100,5 +100,8 @@ return [
     'classroom.forum.showlist' => 'Volver a la lista de foros',
     'classroom.forum.reload' => 'Recargar contenido y comentarios',
     'classroom.forum.post.new' => 'Redactar comentario',
+    'classroom.forum.post.reply' => 'Responder comentario',
+    'classroom.forum.post.like' => 'Me gustó',
+    'classroom.forum.post.message' => 'Enviar mensaje privado',
 
 ];

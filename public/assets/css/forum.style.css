@@ -10,7 +10,7 @@
     padding: 4px;
 }
 
-.forum-content{
+.forum-content {
     padding-top: 28px;
 }
 
@@ -23,13 +23,34 @@
 .forum-post {
     margin-top: 15px;
     margin-bottom: 15px;
-    padding: 7px 8px 7px 11px;
+    padding: 7px 8px 7px 13px;
     border: 0.08em #8b8b8b solid;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
 
-.forum-post .post{
+.forum-post .post {
     padding-top: 9px;
+    padding-bottom: 10px;
+}
+
+.forum-post .tools {
+    display: block;
+    position: relative;
+    border-top: 0.08em #8b8b8b solid;
+    padding-top: 4px;
+    margin-bottom: 30px;
+    margin-left: 15px;
+    margin-right: 5px;
+    text-align: center;
+    width: 94%;
+}
+
+.tools span {
+    float: right;
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 9px;
+
 }
