@@ -1,12 +1,7 @@
 <div class="profile-activity clearfix">
     <div id="user-logged">
-        <span id="user-picture">
-            @if(Storage::disk('students')->has("avatars/".$data->id.".png"))
-                <img src="{{route('student.avatar')}}"/>
-            @else
-                <h1><i class="fas fa-user-circle"></i></h1>
-            @endif
-        </span>
+        @component("student.components.avatar",['data' => $data])
+        @endcomponent
         <div id="user-info">
             <span style="text-transform: capitalize; display: inline">
                 <span style="display: inline" id="user-name"><?=$data->nombre?></span>&nbsp;
