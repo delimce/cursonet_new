@@ -1,6 +1,7 @@
 .forum-toolbox {
     float: right;
     top: 9px;
+    z-index: 9999;
     position: sticky;
     font-size: 23px;
     color: #5ED2F1;

@@ -45,7 +45,6 @@
         };
         $('#forum-list').on('click-cell.bs.table', function (field, value, row, $element) {
             axios.request({
-                responseType: 'html',
                 url: '{!! url('student/classroom/forum/') !!}' + '/' + $element.id,
                 method: 'get',
             }).then(function (response) {
