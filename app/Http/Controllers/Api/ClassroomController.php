@@ -116,14 +116,19 @@ class ClassroomController extends BaseController
             'person' => 'required',
             'forum' => 'required',
             'type' => 'required',
-            'content' => 'required|min:5',
+            'content' => 'required',
         ], ['required' => trans('commons.validation.required'),
-            'min' => trans('commons.validation.min'),
         ]);
 
         if ($validator->fails()) {
             $error = $validator->errors()->first();
             return response()->json(['status' => 'error', 'message' => $error], 400);
+        }
+
+        ///forum post >= 5
+        $content = strip_tags($req->content);
+        if(strlen($content)<5){
+            return response()->json(['status' => 'error', 'message' => trans('students.classroom.forum.post.tooshort')], 400);
         }
 
         try {
