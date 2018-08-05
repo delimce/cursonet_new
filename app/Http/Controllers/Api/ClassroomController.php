@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Cn2\File;
+use App\Models\Cn2\ForumPost;
 use App\Models\Cn2\Topic;
 use App\Models\Cn2\Forum;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -53,7 +54,7 @@ class ClassroomController extends BaseController
         $files = $info->files()->with('File')->get();
         if ($group_id) {
             $forums = Forum::whereContenidoId($info->id)
-            ->with('Group')->whereIn("grupo_id", [0, $group_id])->get();
+                ->with('Group')->whereIn("grupo_id", [0, $group_id])->get();
         } else {
             $forums = $info->forums()->with('Group')->get();
         }
@@ -104,6 +105,37 @@ class ClassroomController extends BaseController
             } else {
                 return response()->json(['status' => 'error', 'message' => trans('commons.file.notfound')], 404);
             }
+        } catch (Exception $ex) {
+            return response()->json(['status' => 'error', 'message' => $ex->getTraceAsString()], 500);
+        }
+    }
+
+    public function saveForumPost(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'person' => 'required',
+            'forum' => 'required',
+            'type' => 'required',
+            'content' => 'required|min:5',
+        ], ['required' => trans('commons.validation.required'),
+            'min' => trans('commons.validation.min'),
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response()->json(['status' => 'error', 'message' => $error], 400);
+        }
+
+        try {
+
+            $post = new ForumPost();
+            $post->foro_id = $req->forum;
+            $post->sujeto_id = $req->person;
+            $post->tipo_sujeto = $req->type;
+            $post->content = trim($req->content);
+            $post->save();
+            return response()->json(['status' => 'ok', 'message' => trans('students.classroom.forum.post.save.success')]);
+
         } catch (Exception $ex) {
             return response()->json(['status' => 'error', 'message' => $ex->getTraceAsString()], 500);
         }

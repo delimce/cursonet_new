@@ -46,4 +46,5 @@ $router->group(['prefix' => 'api/student/class', 'namespace' => 'Api', 'middlewa
     $router->get('/topic/{topic_id}', 'ClassroomController@getTopicInfo');
     $router->get('/topic/{topic_id}/group/{group_id}', 'ClassroomController@getTopicInfo');
     $router->get('/file/{res_id}', 'ClassroomController@getFile');
+    $router->post('/forum/post', 'ClassroomController@saveForumPost');
 });

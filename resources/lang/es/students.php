@@ -103,5 +103,8 @@ return [
     'classroom.forum.post.reply' => 'Responder comentario',
     'classroom.forum.post.like' => 'Me gustó',
     'classroom.forum.post.message' => 'Enviar mensaje privado',
+    'classroom.forum.post.title' => 'Nuevo comentario:',
+    'classroom.forum.post.save' => 'Guardar comentario',
+    'classroom.forum.post.save.success' => 'Comentario guardado con éxito',
 
 ];
