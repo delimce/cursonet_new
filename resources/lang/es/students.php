@@ -106,5 +106,6 @@ return [
     'classroom.forum.post.title' => 'Nuevo comentario:',
     'classroom.forum.post.save' => 'Guardar comentario',
     'classroom.forum.post.save.success' => 'Comentario guardado con éxito',
+    'classroom.forum.post.tooshort' => 'El contenido debe ser mayor o igual a 5 caracteres',
 
 ];
