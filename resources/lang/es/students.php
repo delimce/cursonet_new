@@ -101,7 +101,7 @@ return [
     'classroom.forum.reload' => 'Recargar contenido y comentarios',
     'classroom.forum.post.new' => 'Redactar comentario',
     'classroom.forum.post.reply' => 'Responder comentario',
-    'classroom.forum.post.like' => 'Me gustó',
+    'classroom.forum.post.like' => 'Me gusta',
     'classroom.forum.post.message' => 'Enviar mensaje privado',
     'classroom.forum.post.title' => 'Nuevo comentario:',
     'classroom.forum.post.save' => 'Guardar comentario',

@@ -19,7 +19,7 @@
     </div>
 
     @foreach($content->posts()->get() as $post)
-        <div class="forum-post">
+        <div class="forum-post @if($post->tipo_sujeto=='admin') admin-border @endif">
             <div class="student-data">
                 <?php $person = $post->person()->first() ?>
                 @component("student.components.avatar",['data' => $person])

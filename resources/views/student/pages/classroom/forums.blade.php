@@ -37,6 +37,7 @@
 
         const switchForumView = function (mode = true) {
             if (mode) {
+                //todo:actualizar la lista de foros del tema con numero de comentarios
                 $('#forum-wrapper').hide();
                 $('#forum-list').show()
             } else {

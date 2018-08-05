@@ -31,9 +31,13 @@
     border-radius: 10px;
 }
 
+.admin-border{
+    border: 1px #df553d solid;
+}
+
 .forum-post .post {
-    padding-top: 9px;
-    padding-bottom: 10px;
+    display: flex;
+    padding: 9px 16px 10px 0;
 }
 
 .forum-post .tools {

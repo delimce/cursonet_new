@@ -373,6 +373,15 @@ input[type="search"] {
     display: block;
 }
 
+#user-picture{
+    float: left;
+    padding:8px
+}
+#user-picture img{
+    display: inline;
+    margin: 2px;
+}
+
 #app2 {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#383a46+0,eff0f2+100 */
     background: #383a46; /* Old browsers */
