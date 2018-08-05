@@ -25,7 +25,7 @@
 </table>
 
 @push('head')
-<link rel="stylesheet" href="{!! url('assets/css/forum.style.css') !!}">
+    <link rel="stylesheet" href="{!! url('assets/css/forum.style.css') !!}">
 @endpush
 
 @push('scripts-ready')
@@ -34,6 +34,7 @@
 
 @push('scripts')
     <script>
+
         const switchForumView = function (mode = true) {
             if (mode) {
                 $('#forum-wrapper').hide();
@@ -43,6 +44,7 @@
                 $('#forum-list').hide();
             }
         };
+
         $('#forum-list').on('click-cell.bs.table', function (field, value, row, $element) {
             axios.request({
                 url: '{!! url('student/classroom/forum/') !!}' + '/' + $element.id,
@@ -54,5 +56,6 @@
                 showAlert("no es posible cargar el foro")
             });
         });
+
     </script>
 @endpush

@@ -1,7 +1,7 @@
 .forum-toolbox {
     float: right;
     top: 9px;
-    z-index: 9999;
+    z-index: 999;
     position: sticky;
     font-size: 23px;
     color: #5ED2F1;
@@ -53,5 +53,25 @@
     font-size: 18px;
     cursor: pointer;
     margin-right: 9px;
+}
 
+#new-post {
+    display: none;
+    bottom: 4%;
+    position: sticky;
+    width: 70%;
+    float: right;
+    background-color: #eff0f2;
+    margin: 6px 10px 0 6px;
+    padding: 18px;
+}
+
+#new-post .content {
+    padding-top: 10px;
+    display: block;
+}
+
+#new-post .footer button {
+    float: right;
+    margin-bottom: 10px;
 }

@@ -4,11 +4,11 @@
                title="@lang('students.classroom.forum.showlist')">
         <i class="fas fa-arrow-alt-circle-left"></i>
     </span>
-     <span class="forum-list-refresh" data-toggle="tooltip" data-forum="{{$content->id}}" data-placement="bottom"
+        <span class="forum-list-refresh" data-toggle="tooltip" data-forum="{{$content->id}}" data-placement="bottom"
               title="@lang('students.classroom.forum.reload')">
         <i class="fas fa-sync-alt"></i>
      </span>
-     <span class="forum-list-post" data-toggle="tooltip" data-placement="bottom"
+        <span class="forum-list-post" data-toggle="tooltip" data-placement="bottom"
               title="@lang('students.classroom.forum.post.new')">
                 <i class="fas fa-edit"></i>
       </span>
@@ -55,28 +55,106 @@
         </div>
     @endforeach
 
+    <div id="new-post">
+        <div>
+            <span>@lang('students.classroom.forum.post.title')&nbsp;<span
+                        class="subtext">{!! $content->titulo !!}</span></span>
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="content">
+            <textarea name="post_content" id="post_content"></textarea>
+        </div>
+        <div class="footer">
+            <button id="save-post" data-forum="{{$content->id}}" data-person="{{session()->get("myUser")->id}}"
+                    data-type="est" type="button" style="width: 150px"
+                    class="btn btn-lg btn-block btn-signin">
+                <span class="glyphicon glyphicon-search"></span>
+                @lang('students.classroom.forum.post.save')
+            </button>
+        </div>
+    </div><!-- modal-content -->
+
 </div>
 
 <script>
     (function ($) {
         $('[data-toggle="tooltip"]').tooltip()
+
         $('.forum-list-back').on('click', function () {
             switchForumView();
         })
 
+        $('.close').on('click', function () {
+            $('#new-post').hide();
+        })
+
+        $('.forum-list-post').on('click', function () {
+            $('#new-post').show();
+            $('#forum-title').html($(".forum-content").find("h2").html())
+        })
+
         $('.forum-list-refresh').on('click', function () {
             $(this).tooltip('hide');
-           var forum_id = $(this).data("forum");
-           axios.request({
-                url: '{!! url('student/classroom/forum/') !!}' + '/' + forum_id,
-                method: 'get',
-            }).then(function (response) {
-                switchForumView(false)
-                $('#forum-wrapper').html(response.data)
-                showSuccess("Foro actualizado con éxito!",900)
-            }).catch(function (error) {
-                showAlert("no es posible recargar el foro")
-            });
+            var forum_id = $(this).data("forum");
+            forumReload(forum_id);
+
         })
+
+        $('#save-post').on('click', function () {
+            $(this).prop('disabled', true);
+            var dataPost = {};
+            dataPost.forum = $(this).data("forum");
+            dataPost.person = $(this).data("person");
+            dataPost.type = $(this).data("type");
+            dataPost.content = CKEDITOR.instances.post_content.getData();
+            saveForumPost(dataPost);
+            $(this).prop('disabled', false);
+        })
+
+        CKEDITOR.replace('post_content', {
+            width: '100%',
+            height: 110,
+            toolbar: [
+                {name: 'mode', items: ['Source']},
+                {name: 'clipboard', items: ['PasteText', 'Undo', 'Redo']},
+                {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
+                {name: 'basicstyles', items: ['Bold', 'Italic', 'Subscript', 'Superscript', 'RemoveFormat']},
+                {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
+                {name: 'tools', items: ['Maximize', 'ShowBlocks']},
+            ],
+            language: 'es'
+        });
+
+
     }(jQuery));
+
+
+    var saveForumPost = function (dataPost) {
+        axios.request({
+            method: 'post',
+            url: '{!! url('api/student/class/forum/post') !!}',
+            data: dataPost
+        }).then(function (response) {
+            CKEDITOR.instances.post_content.setData('');
+            forumReload(dataPost.forum);
+        }).catch(function (error) {
+            showAlert(error.response.data.message)
+        })
+    }
+
+    var forumReload = function (forum_id) {
+        axios.request({
+            url: '{!! url('student/classroom/forum/') !!}' + '/' + forum_id,
+            method: 'get',
+        }).then(function (response) {
+            switchForumView(false)
+            $('#forum-wrapper').html(response.data)
+            showSuccess("El foro ha sido actualizado!", 900)
+        }).catch(function (error) {
+            showAlert("no es posible recargar el foro")
+        });
+    }
+
 </script>
