@@ -3,7 +3,13 @@
          <span class="forum-list-back" data-toggle="tooltip" data-placement="bottom"
                title="@lang('students.classroom.forum.showlist')">
         <i class="fas fa-arrow-alt-circle-left"></i>
-    </span>
+        </span>
+
+        <span class="forum-list-top" data-toggle="tooltip" data-placement="bottom"
+              title="@lang('students.classroom.forum.top')">
+        <i class="fas fa-arrow-alt-circle-up"></i>
+        </span>
+
         <span class="forum-list-refresh" data-toggle="tooltip" data-forum="{{$content->id}}" data-placement="bottom"
               title="@lang('students.classroom.forum.reload')">
         <i class="fas fa-sync-alt"></i>
@@ -95,6 +101,12 @@
         $('.close').on('click', function () {
             $('#new-post').hide();
         })
+
+        $(".forum-list-top").click(function(event) {
+            event.preventDefault();
+            $("html, body").animate({ scrollTop: 0 }, 800);
+            return false;
+        });
 
         $('.forum-list-post').on('click', function () {
             $('#new-post').show();

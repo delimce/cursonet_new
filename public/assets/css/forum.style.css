@@ -48,20 +48,27 @@
     margin-bottom: 30px;
     margin-left: 15px;
     margin-right: 5px;
-    text-align: center;
     width: 94%;
 }
 
-.post-footer .tools span {
-    float: right;
-    font-size: 18px;
-    cursor: pointer;
-    margin-right: 9px;
+.post-footer .status{
+    float: left;
+    width: 40%;
+    padding-left: 34px;
 }
-
 .post-footer .status span {
     float: left;
     margin-left: 9px;
+}
+.post-footer .tools{
+    float:right;
+    width: 40%;
+    text-align: right;
+}
+.post-footer .tools span {
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 9px;
 }
 
 #new-post {
