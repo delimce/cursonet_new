@@ -35,21 +35,27 @@
                 {!! $post->content !!}
             </div>
 
-            <div class="tools">
-                 <span class="forum-tools-msg" data-toggle="tooltip" data-placement="top"
-                       title="@lang('students.classroom.forum.post.message')">
+            <div class="post-footer">
+                @if($post->tipo_sujeto=='est')
+                    <div class="status">
+                        <span class="subtext">@lang('students.classroom.forum.post.status')</span>&nbsp;
+                        <span>{{$post->statusName()}}</span>
+                    </div>
+                @endif
+                <div class="tools">
+                     <span class="forum-tools-msg" data-toggle="tooltip" data-placement="top"
+                           title="@lang('students.classroom.forum.post.message')">
                        <i class="far fa-envelope"></i>
-                </span>
-
-                <span class="forum-tools-reply" data-toggle="tooltip" data-placement="top"
-                      title="@lang('students.classroom.forum.post.reply')">
+                    </span>
+                    <span class="forum-tools-reply" data-toggle="tooltip" data-placement="top"
+                          title="@lang('students.classroom.forum.post.reply')">
                        <i class="far fa-comment"></i>
-                </span>
-                <span class="forum-tools-like" data-toggle="tooltip" data-placement="top"
-                      title="@lang('students.classroom.forum.post.like')">
+                    </span>
+                    <span class="forum-tools-like" data-toggle="tooltip" data-placement="top"
+                          title="@lang('students.classroom.forum.post.like')">
                         <i class="far fa-thumbs-up"></i>
-                </span>
-
+                    </span>
+                </div>
             </div>
 
         </div>

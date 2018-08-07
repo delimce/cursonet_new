@@ -105,6 +105,9 @@ return [
     'classroom.forum.post.message' => 'Enviar mensaje privado',
     'classroom.forum.post.title' => 'Nuevo comentario:',
     'classroom.forum.post.save' => 'Guardar comentario',
+    'classroom.forum.post.status' => 'Estatus:',
+    'classroom.forum.post.status.confirmed' => 'Válidado',
+    'classroom.forum.post.status.unconfirmed' => 'No válidado',
     'classroom.forum.post.save.success' => 'Comentario guardado con éxito',
     'classroom.forum.post.tooshort' => 'El contenido debe ser mayor o igual a 5 caracteres',
 

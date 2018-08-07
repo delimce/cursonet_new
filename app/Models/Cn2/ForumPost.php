@@ -22,6 +22,11 @@ class ForumPost extends Model
             return $this->belongsTo('App\Models\Cn2\Admin', 'sujeto_id', 'id');
     }
 
+    public function statusName()
+    {
+        return ($this->valido) ? trans('students.classroom.forum.post.status.confirmed') : trans('students.classroom.forum.post.status.unconfirmed');
+    }
+
     public function date()
     {
         return Carbon::parse($this->create_at)->format(env('APP_DATEFORMAT'));
