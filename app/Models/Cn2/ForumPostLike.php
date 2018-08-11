@@ -5,17 +5,13 @@ namespace App\Models\Cn2;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class ForumPost extends Model
+class ForumPostLike extends Model
 {
-    protected $table = 'tbl_foro_comentario';
+    protected $table = 'tbl_foro_comentario_like';
 
-    public function likes(){
-        return $this->hasMany('App\Models\Cn2\ForumPostLike', 'comentario_id');
-    }
- 
-    public function forum()
+    public function post()
     {
-        return $this->belongsTo('App\Models\Cn2\Forum', 'foro_id');
+        return $this->belongsTo('App\Models\Cn2\ForumPost', 'comentario_id');
     }
 
     public function person()
@@ -24,11 +20,6 @@ class ForumPost extends Model
             return $this->belongsTo('App\Models\Cn2\Student', 'sujeto_id', 'id');
         else
             return $this->belongsTo('App\Models\Cn2\Admin', 'sujeto_id', 'id');
-    }
-
-    public function statusName()
-    {
-        return ($this->valido) ? trans('students.classroom.forum.post.status.confirmed') : trans('students.classroom.forum.post.status.unconfirmed');
     }
 
     public function date()
