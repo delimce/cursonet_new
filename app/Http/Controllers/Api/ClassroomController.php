@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Cn2\File;
 use App\Models\Cn2\ForumPost;
+use App\Models\Cn2\ForumPostLike;
 use App\Models\Cn2\Topic;
 use App\Models\Cn2\Forum;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -127,12 +128,11 @@ class ClassroomController extends BaseController
 
         ///forum post >= 5
         $content = strip_tags($req->content);
-        if(strlen($content)<5){
+        if (strlen($content) < 5) {
             return response()->json(['status' => 'error', 'message' => trans('students.classroom.forum.post.tooshort')], 400);
         }
 
         try {
-
             $post = new ForumPost();
             $post->foro_id = $req->forum;
             $post->sujeto_id = $req->person;
@@ -141,11 +141,48 @@ class ClassroomController extends BaseController
             $post->save();
             return response()->json(['status' => 'ok', 'message' => trans('students.classroom.forum.post.save.success')]);
 
-        } catch (Exception $ex) {
-            return response()->json(['status' => 'error', 'message' => $ex->getTraceAsString()], 500);
+        } catch (\PDOException $ex) {
+            return response()->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
         }
 
+    }
 
+    /**
+     * rating forum post
+     */
+    public function forumPostLike(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'post' => 'required',
+        ], ['required' => trans('commons.validation.required'),
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response()->json(['status' => 'error', 'message' => $error], 400);
+        }
+
+        $like = ForumPostLike::whereComentarioId($req->post)
+            ->whereTipoSujeto('est')->whereSujetoId($this->student->id)->first();
+        $my_like = false;
+
+        if (is_null($like)) {
+
+            try {
+                $toLike = new ForumPostLike();
+                $toLike->comentario_id = $req->post;
+                $toLike->tipo_sujeto = 'est';
+                $toLike->sujeto_id = $this->student->id;
+                $toLike->save();
+                $my_like = true;
+            } catch (\PDOException $ex) {
+                return response()->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
+            }
+
+        } else {
+            $like->delete();
+        }
+        return response()->json(['status' => 'ok', 'message' => $my_like]);
     }
 
 

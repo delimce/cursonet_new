@@ -24,7 +24,7 @@
         <span>{!! $content->content !!}</span>
     </div>
 
-    @foreach($content->posts()->get() as $post)
+    @foreach($content->getPostsByPersonLikes(session()->get('myUser')->id) as $post)
         <div class="forum-post @if($post->tipo_sujeto=='admin') admin-border @endif">
             <div class="student-data">
                 <?php $person = $post->person()->first() ?>
@@ -48,7 +48,7 @@
                         <span>{{$post->statusName()}}</span>
                     </div>
                 @endif
-                <div class="tools">
+                <div class="tools" data-post-id="{{$post->id}}">
                      <span class="forum-tools-msg" data-toggle="tooltip" data-placement="top"
                            title="@lang('students.classroom.forum.post.message')">
                        <i class="far fa-envelope"></i>
@@ -57,9 +57,11 @@
                           title="@lang('students.classroom.forum.post.reply')">
                        <i class="far fa-comment"></i>
                     </span>
-                    <span class="forum-tools-like" data-toggle="tooltip" data-placement="top"
+                    <span class="forum-tools-like"
+                          data-toggle="tooltip" data-placement="top"
                           title="@lang('students.classroom.forum.post.like')">
-                        <i class="far fa-thumbs-up"></i>
+                        <i class="@if(!is_null($post->opinion)) fas fa-thumbs-up @else far fa-thumbs-up @endif"></i>
+                        <span class="nlikes">@if($post->likes>0){{$post->likes}} @endif</span>
                     </span>
                 </div>
             </div>
@@ -102,9 +104,9 @@
             $('#new-post').hide();
         })
 
-        $(".forum-list-top").click(function(event) {
+        $(".forum-list-top").click(function (event) {
             event.preventDefault();
-            $("html, body").animate({ scrollTop: 0 }, 800);
+            $("html, body").animate({scrollTop: 0}, 800);
             return false;
         });
 
@@ -118,6 +120,27 @@
             var forum_id = $(this).data("forum");
             forumReload(forum_id);
 
+        })
+
+        ///forum tools
+        $('.forum-tools-like').on('click', function () {
+            var me = $(this);
+            var like = me.find(".nlikes")
+            var current = Number(like.html());
+            me.tooltip('hide');
+            var post_id = me.parent().data('post-id');
+            axios.request({
+                method: 'put',
+                url: '{!! url('api/student/class/forum/post/like') !!}',
+                data: {"post": post_id}
+            }).then(function (response) {
+                $("i", me).toggleClass("far fas");
+                current = (Boolean(response.data.message)) ? current + 1 : current - 1;
+                current = (current === 0) ? "" : current
+                like.html(current)
+            }).catch(function (error) {
+                showAlert(error.response.data.message)
+            })
         })
 
         $('#save-post').on('click', function () {

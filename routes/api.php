@@ -42,9 +42,19 @@ $router->group(['prefix' => 'api/student/account', 'namespace' => 'Api', 'middle
 
 //classroom
 $router->group(['prefix' => 'api/student/class', 'namespace' => 'Api', 'middleware' => ['api']], function () use ($router) {
-    $router->get('/topics/{course_id}', 'ClassroomController@getTopics');
-    $router->get('/topic/{topic_id}', 'ClassroomController@getTopicInfo');
-    $router->get('/topic/{topic_id}/group/{group_id}', 'ClassroomController@getTopicInfo');
-    $router->get('/file/{res_id}', 'ClassroomController@getFile');
-    $router->post('/forum/post', 'ClassroomController@saveForumPost');
+      $router->get('/file/{res_id}', 'ClassroomController@getFile');
+
+     //topic
+    $router->group(['prefix' => '/topic'], function () use ($router) {
+        $router->get('/all/{course_id}', 'ClassroomController@getTopics');
+        $router->get('/{topic_id}', 'ClassroomController@getTopicInfo');
+        $router->get('/{topic_id}/group/{group_id}', 'ClassroomController@getTopicInfo');
+    });
+
+    ///forum
+    $router->group(['prefix' => '/forum'], function () use ($router) {
+        $router->post('/post', 'ClassroomController@saveForumPost');
+        $router->put('/post/like', 'ClassroomController@forumPostLike');
+    });
+
 });

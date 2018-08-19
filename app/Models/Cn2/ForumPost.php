@@ -9,6 +9,7 @@ class ForumPost extends Model
 {
     protected $table = 'tbl_foro_comentario';
 
+
     public function likes(){
         return $this->hasMany('App\Models\Cn2\ForumPostLike', 'comentario_id');
     }
@@ -33,7 +34,7 @@ class ForumPost extends Model
 
     public function date()
     {
-        return Carbon::parse($this->create_at)->format(env('APP_DATEFORMAT'));
+        return Carbon::parse($this->created_at)->format(env('APP_DATEFORMAT'));
     }
 
 }
