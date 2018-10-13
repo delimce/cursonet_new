@@ -5,28 +5,27 @@
     <div class="wrapper">
         <div class="cn-container" id="inbox-list">
             <h2>@lang('students.inbox.title')</h2>
-            @component("student.components.dataTable")
-                @slot("id")
-                    inbox
-                @endslot
-                @slot("head")
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Asunto</th>
-                        <th>Fecha</th>
+            <table id="inbox" data-search="true" class="table table-striped cn-grid">
+                <thead>
+                <tr>
+                    <th data-field="id" data-visible="false"></th>
+                    <th data-field="nombre" data-sortable="true" scope="col">Nombre</th>
+                    <th data-field="asunto" data-sortable="true" scope="col">Mensaje</th>
+                    <th data-field="fecha" data-sortable="true" scope="col">Ingreso</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($messages as $message)
+                    <tr class="@if (!$message->leido) subtext @endif my-inbox">
+                        <td>{{$message->id}}</td>
+                        <td>{{$message->sender()}}</td>
+                        <td>{{$message->subject}}</td>
+                        <td>{{$message->datetime()}}</td>
                     </tr>
-                @endslot
-                @slot("body")
-                    @foreach($messages as $message)
-                        <tr class="@if (!$message->leido) subtext @endif my-inbox"
-                            style="cursor: pointer" data-id="{{$message->id}}">
-                            <td>{{$message->sender()}}</td>
-                            <td>{{$message->subject}}</td>
-                            <td>{{$message->datetime()}}</td>
-                        </tr>
-                    @endforeach
-                @endslot
-            @endcomponent
+                @endforeach
+                </tbody>
+            </table>
+
             <div style="width: 200px; float: right; padding: 20px">
                 <button id="new-msg" class="btn btn-lg btn-block btn-signin" type="button">
                     @lang('students.inbox.compose')
@@ -66,33 +65,27 @@
                 </div>
             </div>
         </div>
-
     </div>
     @include('student.pages.lobby.new-message')
 @endsection
 
 @push('scripts-ready')
+    $('#inbox').bootstrapTable();
     $('.readCollapse').on('click', function () {
-
     $('#inbox-read').hide();
-
     });
-
 @endpush
 
 @push('scripts')
     <script>
-
-        $('#inbox tbody').on('click', 'tr', function () {
+        //behavior
+        $('#inbox').on('click-cell.bs.table', function (field, value, row, $element) {
             var me = $(this);
-            var msgId = me.data('id');
+            var msgId = $element.id;
             if (me.hasClass('selected')) {
                 me.removeClass('selected');
                 $('#inbox-read').hide();
             } else if (msgId != undefined) {
-                var table = $('#inbox').DataTable();
-                table.$('tr.selected').removeClass('selected');
-                me.addClass('selected');
                 axios.get('{!! url('api/student/message') !!}/' + msgId
                 ).then(function (response) {
                     $('#inbox-read').show();
@@ -114,12 +107,13 @@
                     ///delelete message
                     $('#delete').data('msg-id', msgId); //setter
                     ///reply message
-                    $("#inbox-reply").val(response.data.message.profile+"_"+sender.id);
+                    $("#inbox-reply").val(response.data.message.profile + "_" + sender.id);
                 }).catch(function (error) {
                     quitSession(error, '{!! url('student/logout') !!}');
                 });
             }
-        })
+        });
+
 
         $('#delete').confirm({
             title: '@lang('students.inbox.delete')',
@@ -130,8 +124,9 @@
                     axios.delete('{!! url('api/student/message') !!}/' + msgId
                     ).then(function (response) {
                         $('#inbox-read').hide();
-                        var table = $('#inbox').DataTable();
-                        table.row('.selected').remove().draw(false);
+                        //todo: refresh msg list
+
+
                     }).catch(function (error) {
                         quitSession(error, '{!! url('student/logout') !!}');
                     });
