@@ -7,7 +7,7 @@
         <th data-field="grupo_desc" data-sortable="true" scope="col">Sección</th>
         <th data-field="posts" data-sortable="true" scope="col">Comentarios</th>
         <th data-field="fecha_ini" data-sortable="true" scope="col">Fecha inicio</th>
-        <th data-field="fecha_fin" scope="col">Fecha fin</th>
+        <th data-field="fecha_fin" data-sortable="true" scope="col">Fecha fin</th>
     </tr>
     </thead>
     <tbody>
