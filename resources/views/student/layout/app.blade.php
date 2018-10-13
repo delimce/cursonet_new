@@ -8,13 +8,8 @@
     <meta name="my-token" content="{!! session()->get("myUser")->token !!}">
     <link rel="shortcut icon" href="{!! url('assets/img/favicon.png') !!}">
     <title>Cursonet 2.0 - @yield('title')</title>
-    {{--ccs files--}}
-    @include('student.layout.css')
-    {{--js files--}}
-    @include('student.layout.js')
     @stack('head')
-    <link rel="stylesheet" href="{!! url('assets/css/commons.css') !!}">
-    <link rel="stylesheet" href="{!! url('assets/css/student.style.css') !!}">
+    <link rel="stylesheet" href="{!! url('assets/css/app.css') !!}">
 </head>
 <body>
 <nav id="main-nav" class="navbar navbar-default navbar-fixed-top">
@@ -50,9 +45,10 @@
     </div>
 </div>
 @include('student.pages.lobby.support')
-<script src="{!! url('assets/js/functions.js') !!}"></script>
-<script src="{!! url('bower_components/select2/dist/js/select2.min.js') !!}"></script>
-<script src="{!! url('bower_components/ckeditor/ckeditor.js') !!}"></script>
+<script src="{!! url('assets/js/app.js') !!}"></script>
+<script src="{!! url('assets/js/vendor.js') !!}"></script>
+<script src="{!! url('assets/js/modules.js') !!}"></script>
+<script src="{!! url('assets/ckeditor/ckeditor.js') !!}"></script>
 @stack('scripts')
 <script>
  (function($) {

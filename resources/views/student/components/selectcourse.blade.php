@@ -13,10 +13,10 @@
 </div>
 @push('scripts')
     <script>
-        $('.adv-select').select2({
+       /* $('.adv-select').select2({
             placeholder: "@lang('students.course.select')",
             allowClear: false
-        });
+        });*/
 
         $('#course').on('change', function () {
             console.log(this.value)

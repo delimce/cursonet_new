@@ -8,13 +8,8 @@
     <meta name="my-token" content="null">
     <link rel="shortcut icon" href="{!! url('assets/img/favicon.png') !!}">
     <title>Cursonet 2.0 - @yield('title')</title>
-    {{--ccs files--}}
-    @include('student.layout.css')
-    {{--js files--}}
-    @include('student.layout.js')
     @stack('head')
-    <link rel="stylesheet" href="{!! url('assets/css/commons.css') !!}">
-    <link rel="stylesheet" href="{!! url('assets/css/student.style.css') !!}">
+    <link rel="stylesheet" href="{!! url('assets/css/app.css') !!}">
 </head>
 <body>
 
@@ -31,7 +26,9 @@
     <!--/.Copyright-->
 </footer>
 <!--/.Footer-->
-<script src="{!! url('assets/js/functions.js') !!}"></script>
+<script src="{!! url('assets/js/app.js') !!}"></script>
+<script src="{!! url('assets/js/vendor.js') !!}"></script>
+<script src="{!! url('assets/js/modules.js') !!}"></script>
 @stack('scripts')
 </body>
 </html>

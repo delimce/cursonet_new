@@ -11,7 +11,7 @@ axios.defaults.headers.common['Authorization'] = document.querySelector('meta[na
  * @param error
  * @param url
  */
-var quitSession = function (error, url) {
+let quitSession = function (error, url) {
     if (error.status == 401)
         redirect(url, false)
     else
@@ -23,14 +23,14 @@ var quitSession = function (error, url) {
  * @param url
  * @param back
  */
-var redirect = function (url, back = true) {
+let redirect = function (url, back = true) {
     if (back)
         window.location = url
     else location.replace(url)
 }
 
 
-var showAlert = function (message) {
+let showAlert = function (message) {
     $.notify({
         // options
         icon: 'fas fa-exclamation-circle',
@@ -48,7 +48,7 @@ var showAlert = function (message) {
     });
 }
 
-var showInfo = function (message) {
+let showInfo = function (message) {
     $.notify({
         // options
         icon: 'fas fa-question-circle',
@@ -66,7 +66,7 @@ var showInfo = function (message) {
     });
 }
 
-var showSuccess = function (message, time = false) {
+let showSuccess = function (message, time = false) {
     $.notify({
         // options
         icon: 'fas fa-check-circle',
@@ -89,9 +89,9 @@ String.prototype.capitalize = function () {
     });
 };
 
-var downloadFile = function (response, filename) {
-    var url = window.URL.createObjectURL(new Blob([response.data]));
-    var link = document.createElement('a');
+let downloadFile = function (response, filename) {
+    let url = window.URL.createObjectURL(new Blob([response.data]));
+    let link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', filename); //or any other extension
     document.body.appendChild(link);

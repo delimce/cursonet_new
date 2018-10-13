@@ -1,0 +1,24 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Bootstrap table
+@import "~bootstrap-table/dist/bootstrap-table.min.css";
+
+// bootstrap-select
+@import "~bootstrap-select-v4/sass/bootstrap-select";
+
+//fontawesome
+$fa-font-path: "../fonts/font-awesome" !default;
+@import "~font-awesome/scss/font-awesome.scss";
+
+//my styles
+@import "commons.css";
+@import "student.style.css";
+@import "forum.style.css";
