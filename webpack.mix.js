@@ -32,10 +32,6 @@ mix.scripts([
     'node_modules/croppie/croppie.min.js',
 ], 'public/assets/js/vendor.js');
 
-//fontawesome
-mix.copyDirectory('resources/assets/img', 'public/img', false);
-mix.copyDirectory('node_modules/font-awesome/fonts', 'public/assets/fonts/font-awesome');
-
 //CKEDITOR
 mix.copy('node_modules/ckeditor/config.js', 'public/assets/ckeditor/config.js')
     .copy('node_modules/ckeditor/styles.js', 'public/assets/ckeditor/styles.js')
