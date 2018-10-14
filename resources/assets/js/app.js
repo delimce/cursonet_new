@@ -1,6 +1,7 @@
 import 'bootstrap/dist/js/bootstrap.min';
 import 'popper.js';
 import 'bootstrap-select-v4/dist/js/bootstrap-select.min'
+import 'bootstrap4-notify'
 
 window.api_url = process.env.MIX_API_URL;
 global.axios = require('axios');

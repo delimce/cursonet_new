@@ -138,11 +138,6 @@
     </div>
 @endsection
 
-@push('head')
-    <script src="{!! url('bower_components/Croppie/croppie.min.js') !!}"></script>
-    <link rel="stylesheet" href="{!! url('bower_components/Croppie/croppie.css') !!}">
-@endpush
-
 @push('scripts')
     <script>
         $('#form-profile').bootstrapValidator().on('success.form.bv', function (e) {

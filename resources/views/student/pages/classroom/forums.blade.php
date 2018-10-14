@@ -24,10 +24,6 @@
     </tbody>
 </table>
 
-@push('head')
-    <link rel="stylesheet" href="{!! url('assets/css/forum.style.css') !!}">
-@endpush
-
 @push('scripts-ready')
     $('#forum-list').bootstrapTable();
 @endpush

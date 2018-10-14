@@ -27,7 +27,12 @@ mix.babel([
 mix.scripts([
     'node_modules/bootstrap-table/dist/bootstrap-table.min.js',
     'node_modules/jquery-confirm/dist/jquery-confirm.min.js',
+    'node_modules/croppie/croppie.min.js',
 ], 'public/assets/js/vendor.js');
+
+//fontawesome
+mix.copyDirectory('resources/assets/img', 'public/img', false);
+mix.copyDirectory('node_modules/font-awesome/fonts', 'public/assets/fonts/font-awesome');
 
 //CKEDITOR
 mix.copy('node_modules/ckeditor/config.js', 'public/assets/ckeditor/config.js')
