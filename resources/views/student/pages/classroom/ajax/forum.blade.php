@@ -20,7 +20,7 @@
       </span>
     </div>
     <div class="forum-content">
-        <h2>{!! $content->titulo !!}</h2>
+        <span class="in-title">{!! $content->titulo !!}</span>
         <span>{!! $content->content !!}</span>
     </div>
 
@@ -112,7 +112,7 @@
 
         $('.forum-list-post').on('click', function () {
             $('#new-post').show();
-            $('#forum-title').html($(".forum-content").find("h2").html())
+            $('#forum-title').html($(".forum-content").find(".in-title").html())
         })
 
         $('.forum-list-refresh').on('click', function () {

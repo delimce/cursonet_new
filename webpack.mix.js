@@ -17,6 +17,8 @@ mix.js('resources/assets/js/app.js', 'public/assets/js')
     processCssUrls: false
 });
 
+mix.copyDirectory('resources/assets/img', 'public/assets/img', false);
+
 //modules
 mix.babel([
     'resources/assets/js/functions.js',

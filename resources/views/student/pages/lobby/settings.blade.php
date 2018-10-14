@@ -1,7 +1,7 @@
 <div class="cn-container" id="security-list">
     <div class="row">
         <div class="col-md-11 mx-auto">
-            <h2>@lang('students.profile.security')</h2>
+            <span class="in-title">@lang('students.profile.security')</span>
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="v-pills-privacy-tab" data-toggle="pill" href="#v-pills-privacy"
                    role="tab" aria-controls="v-pills-privacy" aria-selected="true">Privacidad</a>

@@ -1,5 +1,5 @@
 <section>
-    <h2>@lang('students.classroom.modules.list')</h2>
+    <span class="in-title">@lang('students.classroom.modules.list')</span>
     @if($topics->count()==0)
         <span>@lang('students.classroom.modules.nofound')</span>
     @else

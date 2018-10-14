@@ -4,7 +4,6 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    font-family: 'Roboto-Light', Helvetica, Arial, sans-serif;
     font-style: normal;
     font-size: 12px;
 }
@@ -233,7 +232,6 @@ input[type="search"] {
     -moz-transition: all 0.218s;
     -webkit-transition: all 0.218s;
     transition: all 0.218s;
-    font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
 }
 
 .footer {
@@ -426,20 +424,17 @@ input[type="search"] {
 }
 
 .subtext {
-    font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
     text-transform: capitalize;
 }
 
 .reactive {
-    font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
     color: #00ccff;
 }
 
-h2 {
-    text-transform: capitalize;
-    font-size: 13px;
+.in-title {
+    font-size: medium;
     text-decoration: underline;
-    font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
+    font-weight: bold;
     margin: 0 0 14px 8px;
 }
 
@@ -454,10 +449,6 @@ h2 {
 .cn-grid th{
     color: #000;
     font-weight: bolder;
-}
-
-.nav-link {
-    font-family: 'Roboto-Regular', Helvetica, Arial, sans-serif;
 }
 
 #classroom-content {
@@ -568,7 +559,6 @@ h2 {
 .modal-title {
     font-size: 14px;
     color: #000;
-    font-family: 'Roboto-Bold', Helvetica, Arial, sans-serif;
     padding-top: 5px;
 }
 

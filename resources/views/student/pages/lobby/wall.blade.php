@@ -1,3 +1,3 @@
 <section>
-    <h2>{{ trans('students.wall.title') }}</h2>
+    <span class="in-title">{{ trans('students.wall.title') }}</span>
 </section>

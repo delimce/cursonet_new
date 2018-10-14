@@ -4,7 +4,7 @@
 @section('content')
     <div class="wrapper">
         <div class="cn-container" id="inbox-list">
-            <h2>@lang('students.inbox.title')</h2>
+            <span class="in-title">@lang('students.inbox.title')</span>
             <table id="inbox" data-search="true" class="table table-striped cn-grid">
                 <thead>
                 <tr>
