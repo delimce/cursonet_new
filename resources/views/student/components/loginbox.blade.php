@@ -10,9 +10,7 @@
         {{$info}}
     @endif
     @if(isset($form))
-        <form id="main_form" class="form-signin">
-            {{$form}}
-        </form>
+        {{$form}}
     @endif
 </div>
 <!-- /card-container -->

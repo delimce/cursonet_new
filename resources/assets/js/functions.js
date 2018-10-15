@@ -33,7 +33,6 @@ let redirect = function (url, back = true) {
 let showAlert = function (message) {
     $.notify({
         // options
-        icon: 'fas fa-exclamation-circle',
         title: 'Error:',
         message: message
     }, {
@@ -46,12 +45,12 @@ let showAlert = function (message) {
             align: "right"
         },
     });
+
 }
 
 let showInfo = function (message) {
     $.notify({
         // options
-        icon: 'fas fa-question-circle',
         title: 'Información:',
         message: message
     }, {
@@ -69,7 +68,6 @@ let showInfo = function (message) {
 let showSuccess = function (message, time = false) {
     $.notify({
         // options
-        icon: 'fas fa-check-circle',
         message: message
     }, {
         // settings

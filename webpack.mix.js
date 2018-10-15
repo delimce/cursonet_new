@@ -22,7 +22,7 @@ mix.copyDirectory('resources/assets/img', 'public/assets/img', false);
 //modules
 mix.babel([
     'resources/assets/js/functions.js',
-
+    'resources/assets/js/modules/initial.js',
 ], 'public/assets/js/modules.js');
 
 //vendor libs
