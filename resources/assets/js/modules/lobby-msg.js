@@ -76,20 +76,6 @@ $(".msg-to-teacher").on('click', function (event) {
     $("#new-message").modal()
 })
 
-
-CKEDITOR.replace('mcontent', {
-    toolbar: [
-        {name: 'mode', items: ['Source']},
-        {name: 'clipboard', items: ['PasteText', 'Undo', 'Redo']},
-        {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
-        {name: 'basicstyles', items: ['Bold', 'Italic', 'Subscript', 'Superscript', 'RemoveFormat']},
-        {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
-        {name: 'tools', items: ['Maximize', 'ShowBlocks']},
-    ],
-    language: 'es'
-});
-
-
 $("#msg-send").on('click', function (event) {
     let to = $('#to').val();
     let destiny = to.split("_");

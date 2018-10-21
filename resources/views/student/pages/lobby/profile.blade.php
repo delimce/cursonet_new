@@ -118,7 +118,7 @@
                             <div style="padding:10px; margin: auto">
                                 <strong> @lang('students.profile.pic.select'):</strong>
                                 <br/>
-                                <input data-toggle="tooltip" data-placement="top" title="@lang('students.profile.pic.select')" type="file" id="upload">
+                                <input id="upload-profile-img" data-toggle="tooltip" data-placement="top" title="@lang('students.profile.pic.select')" type="file">
                             </div>
                             <div id="upload-img"></div>
                         </div>
@@ -140,29 +140,6 @@
 
 @push('scripts')
     <script>
-        $('#form-profile').bootstrapValidator().on('success.form.bv', function (e) {
-            // Prevent form submission
-            e.preventDefault();
-            // Get the form instance
-            var $form = $(e.target);
-            axios.put('{!! url('api/student/account/profile') !!}', $form.serialize())
-                .then(function (response) {
-                    showSuccess(response.data.message, 2000)
-                    $("#save").prop('disabled', false);
-                    axios.put('{!! url('student/profile/session') !!}') //refresh session data
-                        .then(function (response) {
-                            $("#user-name").html($("#nombre").val());
-                            $("#user-lastname").html($("#apellido").val());
-                        })
-                }).catch(function (error) {
-                showAlert(error.response.data.message);
-                $("#save").prop('disabled', false);
-            });
-
-        })
-    </script>
-
-    <script>
         $uploadCrop = $('#upload-img').croppie({
             enableExif: true,
             viewport: {
@@ -174,37 +151,6 @@
                 width: 300,
                 height: 300
             }
-        });
-
-        $('#upload').on('change', function () {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $uploadCrop.croppie('bind', {
-                    url: e.target.result
-                }).then(function () {
-                    console.log('jQuery croppie bind complete');
-                });
-            }
-            reader.readAsDataURL(this.files[0]);
-        });
-
-        $('#save-image').on('click', function (ev) {
-            $uploadCrop.croppie('result', {
-                type: 'base64',
-                format: 'png',
-                size: {width: 89, height: 89}
-            }).then(function (resp) {
-                axios.put('{!! url('student/profile/picture') !!}',
-                    {"foto": resp})
-                    .then(function (response) {
-                        showSuccess(response.data.message, 1500);
-                        var html = '<img src="' + resp + '" />';
-                        $("#my-picture").html(html);
-                        $("#user-picture").html(html);
-                    }).catch(function (error) {
-                    showAlert(error.response.data.message);
-                });
-            });
         });
     </script>
 @endpush

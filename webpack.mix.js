@@ -24,6 +24,7 @@ mix.babel([
     'resources/assets/js/functions.js',
     'resources/assets/js/modules/initial.js',
     'resources/assets/js/modules/lobby-msg.js',
+    'resources/assets/js/modules/lobby-profile.js',
 ], 'public/assets/js/modules.js');
 
 //vendor libs
