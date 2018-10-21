@@ -58,7 +58,7 @@
                 </div>
                 <input id="inbox-reply" name="inbox-reply" type="hidden">
                 <div style="float: right; width: 250px; text-align: right">
-                    <button id="delete" data-msg-id="" type="button"
+                    <button id="delete-msg" data-msg-id="" type="button"
                             class="btn btn-danger">@lang('commons.delete')</button>
                     <button type="button" id="reply-msg" style="width: 100px"
                             class="btn btn-signin">@lang('students.inbox.reply')</button>
@@ -75,66 +75,3 @@
     $('#inbox-read').hide();
     });
 @endpush
-
-@push('scripts')
-    <script>
-        //behavior
-        $('#inbox').on('click-cell.bs.table', function (field, value, row, $element) {
-            var me = $(this);
-            var msgId = $element.id;
-            if (me.hasClass('selected')) {
-                me.removeClass('selected');
-                $('#inbox-read').hide();
-            } else if (msgId != undefined) {
-                axios.get('{!! url('api/student/message') !!}/' + msgId
-                ).then(function (response) {
-                    $('#inbox-read').show();
-                    me.removeClass('subtext');
-                    console.log(response.data)
-                    $("#inbox-subject").html(response.data.message.subject)
-                    $("#inbox-content").html(response.data.message.content)
-                    $("#inbox-date").html(response.data.message.date)
-                    var profile = (!response.data.message.profile) ? '@lang('commons.student')' : '@lang('commons.teacher')';
-                    $("#inbox-role").html(profile)
-                    var sender = response.data.message.sender;
-                    $("#inbox-name").html(sender.nombre + " " + sender.apellido)
-                    if (sender.foto != null) {
-                        var picture = '<img src="' + sender.foto + '" />';
-                        $("#inbox-picture").html(picture)
-                    } else {
-                        $("#inbox-picture").html('<i class="fas fa-user-circle"></i>');
-                    }
-                    ///delelete message
-                    $('#delete').data('msg-id', msgId); //setter
-                    ///reply message
-                    $("#inbox-reply").val(response.data.message.profile + "_" + sender.id);
-                }).catch(function (error) {
-                    quitSession(error, '{!! url('student/logout') !!}');
-                });
-            }
-        });
-
-
-        $('#delete').confirm({
-            title: '@lang('students.inbox.delete')',
-            content: '@lang('students.inbox.delete.message')',
-            buttons: {
-                confirm: function () {
-                    var msgId = $('#delete').data("msg-id");
-                    axios.delete('{!! url('api/student/message') !!}/' + msgId
-                    ).then(function (response) {
-                        $('#inbox-read').hide();
-                        //todo: refresh msg list
-
-
-                    }).catch(function (error) {
-                        quitSession(error, '{!! url('student/logout') !!}');
-                    });
-                },
-                cancel: function () {
-                }
-            }
-        });
-
-    </script>
-@endpush    

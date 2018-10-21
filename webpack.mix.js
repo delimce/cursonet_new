@@ -23,6 +23,7 @@ mix.copyDirectory('resources/assets/img', 'public/assets/img', false);
 mix.babel([
     'resources/assets/js/functions.js',
     'resources/assets/js/modules/initial.js',
+    'resources/assets/js/modules/lobby-msg.js',
 ], 'public/assets/js/modules.js');
 
 //vendor libs

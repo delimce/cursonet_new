@@ -47,8 +47,9 @@
 @include('student.pages.lobby.support')
 <script src="{!! url('assets/js/app.js') !!}"></script>
 <script src="{!! url('assets/js/vendor.js') !!}"></script>
-<script src="{!! url('assets/js/modules.js') !!}"></script>
 <script src="{!! url('assets/ckeditor/ckeditor.js') !!}"></script>
+<script src="{!! url('assets/js/modules.js') !!}"></script>
+
 @stack('scripts')
 <script>
  (function($) {

@@ -5,7 +5,11 @@
  */
 axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 axios.defaults.headers.common['Authorization'] = document.querySelector('meta[name="my-token"]').getAttribute('content');
-
+$.fn.selectpicker.Constructor.BootstrapVersion = '4';
+$.fn.selectpicker.defaults = {
+    iconBase: 'none', // the font family for the checkmark
+    tickIcon: 'none', // classname for the checkmark
+};
 /**
  * if token is invalid, then quit session
  * @param error
