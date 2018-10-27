@@ -113,3 +113,16 @@ let preload = function () {
     $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
     $('body').delay(350).css({'overflow': 'visible'});
 }
+
+
+const reloadList = function (url,list_id) {
+    axios.get(api_url + url)
+        .then(function (response) {
+            $(list_id).bootstrapTable('removeAll').bootstrapTable('load', {
+                data: response.data.list
+            });
+        }).catch(function (error) {
+            console.log(error)
+        showAlert(error.response.data.message)
+    });
+}

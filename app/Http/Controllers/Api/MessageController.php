@@ -40,15 +40,14 @@ class MessageController extends BaseController
             foreach ($messages as $message) {
                 $data[] = array(
                     "id" => $message->id,
-                    "subject" => $message->subject,
-                    "sender" => $message->sender(),
-                    "date" => $message->datetime(),
-                    "leido" => $message->leido,
+                    "asunto" => $message->subject,
+                    "nombre" => $message->sender(),
+                    "fecha" => $message->datetime()
                 );
             }
 
         }
-        return response()->json(['status' => 'ok', 'messages' => $data]);
+        return response()->json(['status' => 'ok', 'list' => $data]);
 
     }
 

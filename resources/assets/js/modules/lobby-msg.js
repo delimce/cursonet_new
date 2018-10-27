@@ -44,9 +44,7 @@ $('#delete-msg').confirm({
             axios.delete(api_url + 'api/student/message/' + msgId
             ).then(function (response) {
                 $('#inbox-read').hide();
-                //todo: refresh msg list
-
-
+                reloadList('api/student/message/all', '#inbox');
             }).catch(function (error) {
                 quitSession(error, api_url + 'student / logout');
             });
@@ -115,7 +113,7 @@ const reloadToSelectBox = function () {
             $('.selectpickerTo').append(options);
             $('.selectpickerTo').selectpicker({
                 showTick: false,
-                showIcon:false
+                showIcon: false
             });
 
         }).catch(function (error) {
