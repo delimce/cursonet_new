@@ -24,25 +24,4 @@
     $('#file-list').bootstrapTable();
 @endpush
 
-@push('scripts')
-    <script>
-        $('#file-list').on('click-cell.bs.table', function (field, value, row, $element) {
-            if (Number($element.tipo_id) === 0) {
-                axios.request({
-                    responseType: 'blob',
-                    url: '{!! url('api/student/class/file') !!}' + '/' + $element.id,
-                    method: 'get',
-                }).then(function (response) {
-                    downloadFile(response,String($element.dir))
-                }).catch(function (error) {
-                    showAlert("no es posible encontrar el archivo")
-                });
-            } else {
-                window.open(String($element.dir), '_blank');
-            }
-
-        });
-    </script>
-@endpush
-
 
