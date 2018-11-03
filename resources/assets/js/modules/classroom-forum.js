@@ -1,6 +1,5 @@
 const switchForumView = function (mode = true) {
     if (mode) {
-        //todo:actualizar la lista de foros del tema con numero de comentarios
         let topic = $('.module-item.current-module').data('topic');
         let group = $('.module-item.current-module').data('group');
         reloadList('api/student/class/forum/topic/' + topic + '/group/' + group, '#forum-list')
