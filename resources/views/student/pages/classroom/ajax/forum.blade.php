@@ -117,18 +117,18 @@
 
         $('.forum-list-refresh').on('click', function () {
             $(this).tooltip('hide');
-            var forum_id = $(this).data("forum");
+            let forum_id = $(this).data("forum");
             forumReload(forum_id);
 
         })
 
         ///forum tools
         $('.forum-tools-like').on('click', function () {
-            var me = $(this);
-            var like = me.find(".nlikes")
-            var current = Number(like.html());
+            let me = $(this);
+            let like = me.find(".nlikes")
+            let current = Number(like.html());
             me.tooltip('hide');
-            var post_id = me.parent().data('post-id');
+            let post_id = me.parent().data('post-id');
             axios.request({
                 method: 'put',
                 url: '{!! url('api/student/class/forum/post/like') !!}',
@@ -145,7 +145,7 @@
 
         $('#save-post').on('click', function () {
             $(this).prop('disabled', true);
-            var dataPost = {};
+            let dataPost = {};
             dataPost.forum = $(this).data("forum");
             dataPost.person = $(this).data("person");
             dataPost.type = $(this).data("type");
@@ -168,34 +168,6 @@
             language: 'es'
         });
 
-
     }(jQuery));
-
-
-    var saveForumPost = function (dataPost) {
-        axios.request({
-            method: 'post',
-            url: '{!! url('api/student/class/forum/post') !!}',
-            data: dataPost
-        }).then(function (response) {
-            CKEDITOR.instances.post_content.setData('');
-            forumReload(dataPost.forum);
-        }).catch(function (error) {
-            showAlert(error.response.data.message)
-        })
-    }
-
-    var forumReload = function (forum_id) {
-        axios.request({
-            url: '{!! url('student/classroom/forum/') !!}' + '/' + forum_id,
-            method: 'get',
-        }).then(function (response) {
-            switchForumView(false)
-            $('#forum-wrapper').html(response.data)
-            showSuccess("El foro ha sido actualizado!", 900)
-        }).catch(function (error) {
-            showAlert("no es posible recargar el foro")
-        });
-    }
 
 </script>

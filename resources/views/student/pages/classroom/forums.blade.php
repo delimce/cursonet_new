@@ -23,36 +23,6 @@
     @endforeach
     </tbody>
 </table>
-
 @push('scripts-ready')
     $('#forum-list').bootstrapTable();
-@endpush
-
-@push('scripts')
-    <script>
-
-        const switchForumView = function (mode = true) {
-            if (mode) {
-                //todo:actualizar la lista de foros del tema con numero de comentarios
-                $('#forum-wrapper').hide();
-                $('#forum-list').show()
-            } else {
-                $('#forum-wrapper').show();
-                $('#forum-list').hide();
-            }
-        };
-
-        $('#forum-list').on('click-cell.bs.table', function (field, value, row, $element) {
-            axios.request({
-                url: '{!! url('student/classroom/forum/') !!}' + '/' + $element.id,
-                method: 'get',
-            }).then(function (response) {
-                switchForumView(false)
-                $('#forum-wrapper').html(response.data)
-            }).catch(function (error) {
-                showAlert("no es posible cargar el foro")
-            });
-        });
-
-    </script>
 @endpush

@@ -54,7 +54,7 @@ $('.module-item').on('click', function (event) {
                 data: response.data.info.files
             });
 
-            switchForumView();
+          //  switchForumView();
             $('#forum-list').bootstrapTable('load', {
                 data: response.data.info.forums
             });

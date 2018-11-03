@@ -76,17 +76,20 @@ class ClassroomController extends BaseController
         $data["files"] = $resources;
         ///forums
         $infoForums = array();
-        $forums->each(function ($item) use (&$infoForums) {
-            $temp = array();
-            $temp["id"] = $item->id;
-            $temp["titulo"] = $item->titulo;
-            $temp["grupo_id"] = $item->grupo_id;
-            $temp["grupo_desc"] = $item->group->nombre ?? trans('commons.all');
-            $temp["posts"] = $item->posts->count();
-            $temp["fecha_ini"] = $item->dateInit();
-            $temp["fecha_fin"] = $item->dateEnd();
-            $infoForums[] = $temp;
-        });
+        $forums->each(/**
+         * @param $item
+         */
+            function ($item) use (&$infoForums) {
+                $temp = array();
+                $temp["id"] = $item->id;
+                $temp["titulo"] = $item->titulo;
+                $temp["grupo_id"] = $item->grupo_id;
+                $temp["grupo_desc"] = $item->group->nombre ?? trans('commons.all');
+                $temp["posts"] = $item->posts->count();
+                $temp["fecha_ini"] = $item->dateInit();
+                $temp["fecha_fin"] = $item->dateEnd();
+                $infoForums[] = $temp;
+            });
         $data["forums"] = $infoForums;
         return response()->json(['status' => 'ok', 'info' => $data]);
 
@@ -183,6 +186,25 @@ class ClassroomController extends BaseController
             $like->delete();
         }
         return response()->json(['status' => 'ok', 'message' => $my_like]);
+    }
+
+    public function getForumByTopic($topic_id, $group_id)
+    {
+        $forums = Forum::whereContenidoId($topic_id)
+            ->with(['Group','posts'])->whereIn("grupo_id", [0, $group_id])->get();
+
+        $list = array();
+        $forums->each(function ($item) use (&$list) {
+            $list[] = array(
+                "id" => $item->id,
+                "titulo" => $item->titulo,
+                "grupo_desc" => isset($item->group->id)?$item->group->nombre:trans('commons.all'),
+                "posts" => $item->posts->count(),
+                "fecha_ini" => $item->dateInit(),
+                "fecha_fin" => $item->dateEnd());
+        });
+
+        return response()->json(['status' => 'ok', 'list' => $list]);
     }
 
 

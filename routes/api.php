@@ -54,6 +54,7 @@ $router->group(['prefix' => 'api/student/class', 'namespace' => 'Api', 'middlewa
     ///forum
     $router->group(['prefix' => '/forum'], function () use ($router) {
         $router->post('/post', 'ClassroomController@saveForumPost');
+        $router->get('/topic/{topic_id}/group/{group_id}', 'ClassroomController@getForumByTopic');
         $router->put('/post/like', 'ClassroomController@forumPostLike');
     });
 
