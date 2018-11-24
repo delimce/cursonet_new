@@ -48,3 +48,30 @@
 div.dataTables_wrapper {
     margin-bottom: 0;
 }
+
+/*prelading*/
+
+.loading-indicator:before {
+    content: '';
+    background: rgba(195, 195, 195, 0.8);
+    position: fixed;
+    width: 20%;
+    height: 70px;
+    top: 47%;
+    left: 40%;
+    text-align:center;
+    z-index: 1000;
+    border-radius: 11px;
+}
+
+.loading-indicator:after {
+    content: 'Espere por favor...';
+    position: fixed;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    z-index: 1001;
+    color:black;
+    text-align:center;
+    font-size:17px;
+}
