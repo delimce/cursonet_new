@@ -44,6 +44,7 @@
         </div>
     </div>
 </div>
+<div id="axios-loader" class="lds-loading"></div>
 @include('student.pages.lobby.support')
 <script src="{!! url('assets/js/app.js') !!}"></script>
 <script src="{!! url('assets/js/vendor.js') !!}"></script>
@@ -52,10 +53,11 @@
 
 @stack('scripts')
 <script>
- (function($) {
-   $('[data-toggle="tooltip"]').tooltip()
-   @stack('scripts-ready')
-}(jQuery));
+    (function ($) {
+        $('[data-toggle="tooltip"]').tooltip()
+        $('#axios-loader').hide();
+        @stack('scripts-ready')
+    }(jQuery));
 </script>
 </body>
 </html>

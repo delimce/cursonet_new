@@ -51,27 +51,33 @@ div.dataTables_wrapper {
 
 /*prelading*/
 
-.loading-indicator:before {
-    content: '';
-    background: rgba(195, 195, 195, 0.8);
+.lds-loading {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
     position: fixed;
+    z-index: 1001;
     width: 20%;
     height: 70px;
-    top: 47%;
-    left: 40%;
-    text-align:center;
-    z-index: 1000;
-    border-radius: 11px;
-}
-
-.loading-indicator:after {
-    content: 'Espere por favor...';
-    position: fixed;
-    width: 100%;
     top: 50%;
-    left: 0;
-    z-index: 1001;
-    color:black;
-    text-align:center;
-    font-size:17px;
+    left: 50%;
+}
+.lds-loading:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    border-color: #000 transparent #000 transparent;
+    animation: lds-loading 1.2s linear infinite;
+}
+@keyframes lds-loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

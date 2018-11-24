@@ -10,9 +10,8 @@ global.$ = global.jQuery = require('jquery');
 global.axios.interceptors.request.use(function (config) {
     // spinning start to show
     // UPDATE: Add this code to show global loading indicator
-    document.body.classList.add('loading-indicator');
+    $('#axios-loader').show();
     return config;
-
 }, function (error) {
     return Promise.reject(error);
 });
@@ -20,10 +19,10 @@ global.axios.interceptors.request.use(function (config) {
 global.axios.interceptors.response.use(function (response) {
     // spinning hide
     // UPDATE: Add this code to hide global loading indicator
-    document.body.classList.remove('loading-indicator');
+    $('#axios-loader').hide();
     return response;
 }, function (error) {
-    document.body.classList.remove('loading-indicator');
+    $('#axios-loader').hide();
     return Promise.reject(error);
 });
 

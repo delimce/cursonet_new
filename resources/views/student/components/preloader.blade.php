@@ -1,7 +1,6 @@
 <!-- Preloader -->
 <div id="preloader">
     <div id="status">
-        <i class="fa fa-spinner fa-pulse"></i>
         @if(isset($text))
             <span>{{$text}}</span>
         @else

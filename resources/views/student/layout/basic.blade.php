@@ -25,10 +25,16 @@
     </div>
     <!--/.Copyright-->
 </footer>
+<div id="axios-loader" class="lds-loading"></div>
 <!--/.Footer-->
 <script src="{!! url('assets/js/app.js') !!}"></script>
 <script src="{!! url('assets/js/vendor.js') !!}"></script>
 <script src="{!! url('assets/js/modules.js') !!}"></script>
 @stack('scripts')
+<script>
+    (function ($) {
+        $('#axios-loader').hide();
+    }(jQuery));
+</script>
 </body>
 </html>
