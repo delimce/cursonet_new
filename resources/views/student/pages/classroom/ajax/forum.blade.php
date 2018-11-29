@@ -2,7 +2,7 @@
     <div class="forum-toolbox">
          <span class="forum-list-back" data-toggle="tooltip" data-placement="bottom"
                title="@lang('students.classroom.forum.showlist')">
-        <i class="fas fa-arrow-alt-circle-left"></i>
+             <i class="fas fa-list-ol"></i>
         </span>
 
         <span class="forum-list-top" data-toggle="tooltip" data-placement="bottom"
@@ -48,11 +48,15 @@
                         <span>{{$post->statusName()}}</span>
                     </div>
                 @endif
+
                 <div class="tools" data-post-id="{{$post->id}}">
-                     <span class="forum-tools-msg" data-toggle="tooltip" data-placement="top"
-                           title="@lang('students.classroom.forum.post.message')">
+
+                    @if($person->id!=session()->get('myUser')->id)
+                        <span class="forum-tools-msg" data-toggle="tooltip" data-placement="top"
+                              title="@lang('students.classroom.forum.post.message')">
                        <i class="far fa-envelope"></i>
                     </span>
+                    @endif
                     <span class="forum-tools-reply" data-toggle="tooltip" data-placement="top"
                           title="@lang('students.classroom.forum.post.reply')">
                        <i class="far fa-comment"></i>
@@ -64,7 +68,10 @@
                         <span class="nlikes">@if($post->likes>0){{$post->likes}} @endif</span>
                     </span>
                 </div>
+
             </div>
+            <span id="post-replies-<?=$post->id?>"></span>
+            <span id="post-new-reply-<?=$post->id?>"></span>
 
         </div>
     @endforeach
@@ -72,7 +79,7 @@
     <div id="new-post">
         <div>
             <span>@lang('students.classroom.forum.post.title')&nbsp;<span
-                        class="subtext">{!! $content->titulo !!}</span></span>
+                  class="subtext">{!! $content->titulo !!}</span></span>
             <button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -93,81 +100,99 @@
 </div>
 
 <script>
-    (function ($) {
-        $('[data-toggle="tooltip"]').tooltip()
+  (function($) {
+    $('[data-toggle="tooltip"]').tooltip();
 
-        $('.forum-list-back').on('click', function () {
-            switchForumView();
-        })
+    $('.forum-list-back').on('click', function() {
+      switchForumView();
+    });
 
-        $('.close').on('click', function () {
-            $('#new-post').hide();
-        })
+    $('.close').on('click', function() {
+      $('#new-post').hide();
+    });
 
-        $(".forum-list-top").click(function (event) {
-            event.preventDefault();
-            $("html, body").animate({scrollTop: 0}, 800);
-            return false;
-        });
+    $(".forum-list-top").click(function(event) {
+      event.preventDefault();
+      $("html, body").animate({scrollTop: 0}, 800);
+      return false;
+    });
 
-        $('.forum-list-post').on('click', function () {
-            $('#new-post').show();
-            $('#forum-title').html($(".forum-content").find(".in-title").html())
-        })
+    $('.forum-list-post').on('click', function() {
+      $('#new-post').show();
+      $('#forum-title').html($(".forum-content").find(".in-title").html());
+    });
 
-        $('.forum-list-refresh').on('click', function () {
-            $(this).tooltip('hide');
-            let forum_id = $(this).data("forum");
-            forumReload(forum_id);
+    $('.forum-list-refresh').on('click', function() {
+      $(this).tooltip('hide');
+      let forum_id = $(this).data("forum");
+      forumReload(forum_id);
 
-        })
+    });
 
-        ///forum tools
-        $('.forum-tools-like').on('click', function () {
-            let me = $(this);
-            let like = me.find(".nlikes")
-            let current = Number(like.html());
-            me.tooltip('hide');
-            let post_id = me.parent().data('post-id');
-            axios.request({
-                method: 'put',
-                url: '{!! url('api/student/class/forum/post/like') !!}',
-                data: {"post": post_id}
-            }).then(function (response) {
-                $("i", me).toggleClass("far fas");
-                current = (Boolean(response.data.message)) ? current + 1 : current - 1;
-                current = (current === 0) ? "" : current
-                like.html(current)
-            }).catch(function (error) {
-                showAlert(error.response.data.message)
-            })
-        })
+    ///forum tools
+    $('.forum-tools-like').on('click', function() {
+      let me = $(this);
+      let like = me.find(".nlikes");
+      let current = Number(like.html());
+      me.tooltip('hide');
+      let post_id = me.parent().data('post-id');
+      axios.request({
+                      method: 'put',
+                      url:    '{!! url('api/student/class/forum/post/like') !!}',
+                      data:   {"post": post_id}
+                    }).then(function(response) {
+        $("i", me).toggleClass("far fas");
+        current = (Boolean(response.data.message)) ? current + 1 : current - 1;
+        current = (current === 0) ? "" : current;
+        like.html(current);
+      }).catch(function(error) {
+        showAlert(error.response.data.message);
+      });
+    });
 
-        $('#save-post').on('click', function () {
-            $(this).prop('disabled', true);
-            let dataPost = {};
-            dataPost.forum = $(this).data("forum");
-            dataPost.person = $(this).data("person");
-            dataPost.type = $(this).data("type");
-            dataPost.content = CKEDITOR.instances.post_content.getData();
-            saveForumPost(dataPost);
-            $(this).prop('disabled', false);
-        })
+    ///new reply
+    $('.forum-tools-reply').on('click', function() {
+      let me = $(this);
+      let post_id = me.parent().data('post-id');
+      let user_id = $('#save-post').data("person");
+      let reply = $("#post-new-reply-" + post_id);
+      let comment = '<span class="new-reply-'+post_id+'">';
+      comment += '<textarea id="my-reply-' + post_id + '" cols="40" rows="2"></textarea><br>';
+      comment += '<button onClick="javascript:clearReply(' + post_id +')" class="btn btn-secondary">@lang('commons.close')</button>&nbsp;&nbsp;';
+      comment += '<button onClick="javascript:sendPostReply(' + post_id + ',' + user_id + ')" class="btn btn-lg btn-signin" style="width: 200px">' +
+        '@lang('students.classroom.forum.post.reply')' +
+        '</button>';
+      comment += '</span>';
+      reply.html(comment);
+      me.tooltip('hide');
 
-        CKEDITOR.replace('post_content', {
-            width: '100%',
-            height: 110,
-            toolbar: [
-                {name: 'mode', items: ['Source']},
-                {name: 'clipboard', items: ['PasteText', 'Undo', 'Redo']},
-                {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
-                {name: 'basicstyles', items: ['Bold', 'Italic', 'Subscript', 'Superscript', 'RemoveFormat']},
-                {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
-                {name: 'tools', items: ['Maximize', 'ShowBlocks']},
-            ],
-            language: 'es'
-        });
+    });
 
-    }(jQuery));
+    $('#save-post').on('click', function() {
+      $(this).prop('disabled', true);
+      let dataPost = {};
+      dataPost.forum = $(this).data("forum");
+      dataPost.person = $(this).data("person");
+      dataPost.type = $(this).data("type");
+      dataPost.content = CKEDITOR.instances.post_content.getData();
+      saveForumPost(dataPost);
+      $(this).prop('disabled', false);
+    });
+
+    CKEDITOR.replace('post_content', {
+      width:    '100%',
+      height:   110,
+      toolbar:  [
+        {name: 'mode', items: ['Source']},
+        {name: 'clipboard', items: ['PasteText', 'Undo', 'Redo']},
+        {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
+        {name: 'basicstyles', items: ['Bold', 'Italic', 'Subscript', 'Superscript', 'RemoveFormat']},
+        {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
+        {name: 'tools', items: ['Maximize', 'ShowBlocks']},
+      ],
+      language: 'es'
+    });
+
+  }(jQuery));
 
 </script>

@@ -19,6 +19,11 @@ class ForumPost extends Model
         return $this->belongsTo('App\Models\Cn2\Forum', 'foro_id');
     }
 
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Cn2\ForumPostReply', 'comentario_id');
+    }
+
     public function person()
     {
         if ($this->tipo_sujeto == 'est')

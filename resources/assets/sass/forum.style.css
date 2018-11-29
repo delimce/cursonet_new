@@ -95,8 +95,25 @@
     margin-bottom: 10px;
 }
 
-.post-footer .tools span .nlikes{
+.post-footer .tools span .nlikes {
     font-weight: inherit;
     display: inline;
     font-size: 9px;
+}
+
+[class*='new-reply-'] {
+    display: block;
+    padding: 10px 34px 13px 10px;
+    text-align: right;
+}
+
+[class*='new-reply-'] textarea {
+    width: 96%;
+    border-radius: 7px;
+    margin-bottom: 4px;
+    padding: 5px;
+}
+
+[class*='new-reply-'] button {
+    max-width: 100px;
 }

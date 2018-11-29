@@ -424,6 +424,7 @@ input[type="search"] {
 }
 
 .subtext {
+    font-weight: bold;
     text-transform: capitalize;
 }
 

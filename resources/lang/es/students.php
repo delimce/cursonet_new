@@ -100,8 +100,8 @@ return [
     'classroom.forum.showlist' => 'Volver a la lista de foros',
     'classroom.forum.top' => 'Ir al inicio del foro',
     'classroom.forum.reload' => 'Recargar contenido y comentarios',
-    'classroom.forum.post.new' => 'Redactar comentario',
-    'classroom.forum.post.reply' => 'Responder comentario',
+    'classroom.forum.post.new' => 'Redactar Nuevo comentario',
+    'classroom.forum.post.reply' => 'Responder',
     'classroom.forum.post.like' => 'Me gusta',
     'classroom.forum.post.message' => 'Enviar mensaje privado',
     'classroom.forum.post.title' => 'Nuevo comentario:',
@@ -110,6 +110,7 @@ return [
     'classroom.forum.post.status.confirmed' => 'Válidado',
     'classroom.forum.post.status.unconfirmed' => 'No válidado',
     'classroom.forum.post.save.success' => 'Comentario guardado con éxito',
+    'classroom.forum.post.reply.save.success' => 'respuesta guardada con éxito',
     'classroom.forum.post.tooshort' => 'El contenido debe ser mayor o igual a 5 caracteres',
 
 ];
