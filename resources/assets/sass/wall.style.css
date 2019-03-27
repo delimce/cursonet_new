@@ -1,0 +1,52 @@
+.wall-container {
+    height: 462px;
+    background-color: transparent;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.marquee {
+    top: 6em;
+    position: relative;
+    box-sizing: border-box;
+    animation: marquee 15s linear infinite;
+}
+
+.marquee:hover {
+    animation-play-state: paused;
+}
+
+/* Make it move! */
+@keyframes marquee {
+    0%   { top:   8em }
+    100% { top: -11em }
+}
+
+/* Make it look pretty */
+.wall .marquee {
+	margin: 0;
+    padding: 0 1em;
+    line-height: 1.5em;
+    font: 1em 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+}
+
+.wall:before, .wall::before,
+.wall:after,  .wall::after {
+    left: 0;
+    z-index: 1;
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    width: 100%; height: 2em;
+    background-image: linear-gradient(180deg, #eff0f2, rgba(255,255,255,0));
+}
+
+.wall:after, .wall::after {
+    bottom: 0;
+    transform: rotate(180deg);
+}
+
+.wall:before, .wall::before {
+    top: 0;
+}

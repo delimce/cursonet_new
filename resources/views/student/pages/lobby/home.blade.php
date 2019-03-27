@@ -6,23 +6,26 @@
     @component("student.components.preloader")
     @endcomponent
     <div class="home-page">
-        <div class="row">
-            <div class="col-md-7 card-border">
-                @include('student.pages.lobby.info')
-            </div>
-            <div class="col-md-5 card-border">
-                @include('student.pages.lobby.wall')
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-7 card-border">
-                @include('student.pages.lobby.messages', ['messages' => $messages])
-            </div>
-
-            <div class="col-md-5 card-border">
-                @include('student.pages.lobby.activity', ['some' => 'data'])
-            </div>
-        </div>
+            <div class="row justify-content-md-center">
+                    <div class="col col-home">
+                            <div class="col card-border">
+                                    @include('student.pages.lobby.info')
+                                </div>
+                            
+                                <div class="col card-border">
+                                    @include('student.pages.lobby.messages', ['messages' => $messages])
+                                </div>
+                    </div>
+                    <div class="col col-home">
+                            <div class="col card-border">
+                                    @include('student.pages.lobby.wall')
+                                </div>
+                    
+                                {{-- <div class="colcard-border">
+                                    @include('student.pages.lobby.activity', ['some' => 'data'])
+                                </div> --}}
+                    </div>
+                  </div>
     </div>
 @endsection
