@@ -6,6 +6,7 @@ import 'bootstrap4-notify'
 window.api_url = process.env.MIX_API_URL;
 global.axios = require('axios');
 global.$ = global.jQuery = require('jquery');
+window._ = require('lodash'); //lodash library
 
 global.axios.interceptors.request.use(function (config) {
     // spinning start to show

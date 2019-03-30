@@ -29,3 +29,6 @@
                   </div>
     </div>
 @endsection
+@push('scripts-ready')
+    loadCourseInformation($('.selectpickerCourse').val())
+@endpush
