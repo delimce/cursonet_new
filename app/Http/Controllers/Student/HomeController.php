@@ -9,6 +9,7 @@ use App\Models\Cn2\Student;
 use App\Models\Cn2\Course;
 use Illuminate\Support\Facades\Storage;
 use Validator;
+use App\Models\Cn2\GroupStudent;
 
 class HomeController extends BaseController
 {
@@ -39,9 +40,8 @@ class HomeController extends BaseController
         if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
 
             $currentCourse = $courses->filter(function ($value) use ($req) {
-                return ($value->id == $req->session()->get("courseSelected"));
+                return ($value->id === intval($req->session()->get("courseSelected")));
             })->first();
-
         } else { ///one at least
             $currentCourse = $courses->first();
             $req->session()->put("courseSelected", $currentCourse->id);
@@ -49,20 +49,19 @@ class HomeController extends BaseController
 
         //get messages
         $messages = $this->student->messages()->with("student")->orderBy('id', 'desc')->take(4)->get();
-        ///total topics
-        $ntopics = $currentCourse->topics()->count();
-        $course1 = $currentCourse->toArray();
-        $course1["ntopics"] = $ntopics;
-
-        return view('student.pages.lobby.home',
-            ["myCourses" => $courses,
-                "current" => $course1,
-                "messages" => $messages]);
+        return view(
+            'student.pages.lobby.home',
+            [
+                "myCourses" => $courses,
+                "messages" => $messages
+            ]
+        );
     }
 
 
     /**
      * select course method
+     * todo: add this method as restful endpoint, for course information object
      * @param Request $req
      * @return mixed
      */
@@ -71,14 +70,18 @@ class HomeController extends BaseController
         $courseId = $req->input("courseId");
         $req->session()->put("courseSelected", $courseId);
         $course = Course::findOrFail($courseId);
+        $estGroup = GroupStudent::whereEstId($this->student->id)->whereCursoId($courseId)->first();
+        $wallMessages = $course->walls()->wherein("grupo_id", ["0", $estGroup->id])->get();
         $ntopics = $course->topics()->count();
-        $data = array("alias" => $course->alias,
+        $data = array(
+            "alias" => $course->alias,
             "descripcion" => $course->descripcion,
             "id" => $course->id,
             "nombre" => $course->nombre,
             "init" => $course->createdAt(),
             "author" => $course->author(),
             "duracion" => $course->duracion,
+            "wall" => $wallMessages,
             "ntopics" => $ntopics,
         );
 
@@ -111,7 +114,8 @@ class HomeController extends BaseController
 
         $validator = Validator::make($req->all(), [
             'foto' => 'required',
-        ], ['required' => trans('commons.validation.required'),
+        ], [
+            'required' => trans('commons.validation.required'),
         ]);
 
         if ($validator->fails()) {
@@ -130,8 +134,6 @@ class HomeController extends BaseController
         } catch (Exception $ex) {
             return response()->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
         }
-
-
     }
 
     /**get student's avatar
@@ -141,7 +143,6 @@ class HomeController extends BaseController
     {
         $picture = Storage::disk('students')->get("avatars/{$student_id}.png");
         return response($picture, 200);
-
     }
 
     public function refreshSessionData(Request $req)
@@ -151,7 +152,6 @@ class HomeController extends BaseController
         $fields = InitialController::$fields;
         $user = Student::where('id', $this->student->id)->select($fields)->first();
         $req->session()->put('myUser', $user);
-
     }
 
 
@@ -172,6 +172,4 @@ class HomeController extends BaseController
 
         return view("student.pages.lobby.teachers", ["data" => $teachers]);
     }
-
-
 }

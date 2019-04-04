@@ -7,7 +7,7 @@ use Carbon\Carbon;
 class Wall extends Model
 {
     protected $table = 'tbl_cartelera';
-    protected $visible = array('id','mensaje'); ///only fields that return
+    protected $visible = array('id','mensaje','fecha_c'); ///only fields that return
 
     public function course()
     {
@@ -15,8 +15,14 @@ class Wall extends Model
     }
 
     public function createdAt(){
-        return Carbon::parse($this->fecha_creado)->format(env('APP_DATEFORMAT'));
+        return Carbon::parse($this->fecha_c)->format(env('APP_DATEFORMAT'));
     }
+
+    public function detDate(){
+        return (is_null($this->update_at))?$this->fecha_c:$this->updated_at;
+    }
+
+    
 
 
 }
