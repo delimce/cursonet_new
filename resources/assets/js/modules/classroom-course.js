@@ -49,6 +49,7 @@ $('.module-item').on('click', function (event) {
 const parseCourseWall = function (wall) {
 
     let messages = '<b>No existen mensajes en la cartelera</b>'
+  //  $("#course_wall").animate({"animation-play-state":"initial"});
     if (wall.length > 0) {
         messages = '';
         _.forEach(_.orderBy(wall, ['id'], ['desc']), function (item) {

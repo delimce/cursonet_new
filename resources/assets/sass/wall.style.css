@@ -7,28 +7,33 @@
 }
 
 .marquee {
-    top: 6em;
-    position: relative;
-    box-sizing: border-box;
-    animation: marquee 15s linear infinite;
+    display: inline-block;
+    height:460px;
+   width:100%;
+   animation: marquee 30s linear infinite;
 }
 
 .marquee:hover {
-    animation-play-state: paused;
+    /* animation-play-state: paused; */
+   animation-play-state:unset;
 }
 
-/* Make it move! */
+
 @keyframes marquee {
-    0%   { top:   8em }
-    100% { top: -11em }
-}
+    from {
+      transform: translateY(80%);
+    }
+    to {
+      transform: translateY(-100%);
+    }
+  }
+
 
 /* Make it look pretty */
 .wall .marquee {
 	margin: 0;
     padding: 0 1em;
     line-height: 1.5em;
-    font: 1em 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
 }
 
 .wall:before, .wall::before,
