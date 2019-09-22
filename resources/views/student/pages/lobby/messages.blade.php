@@ -1,5 +1,5 @@
 <section>
-    <h2 class="content-home">Bandeja de entrada </h2>
+    <span class="in-title content-home">Bandeja de entrada </span>
 
     @foreach ($messages as $item)
         <div class="row @if (!$item->leido) subtext @endif ">

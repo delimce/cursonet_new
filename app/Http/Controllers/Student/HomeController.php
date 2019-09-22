@@ -137,13 +137,12 @@ class HomeController extends BaseController
     /**get student's avatar
      * @return mixed
      */
-    public function getAvatar()
+    public function getAvatar($student_id)
     {
-        $picture = Storage::disk('students')->get("avatars/{$this->student->id}.png");
+        $picture = Storage::disk('students')->get("avatars/{$student_id}.png");
         return response($picture, 200);
 
     }
-
 
     public function refreshSessionData(Request $req)
     {

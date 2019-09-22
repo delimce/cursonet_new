@@ -102,28 +102,4 @@
         </form><!-- /form -->
     </div><!-- /card-container -->
 @endsection
-@push('scripts')
-    <script>
-        $(document).ready(function () {
-            $('#register_form').bootstrapValidator().on('success.form.bv', function (e) {
-                // Prevent form submission
-                $("#bregister").html('Enviando...');
-                e.preventDefault();
-                // Get the form instance
-                var $form = $(e.target);
-                axios.post('{!! url('api/student/signup') !!}', $form.serialize())
-                .then(function (response) {
-                   redirect("{!! url('student/register/success') !!}/"+$("#email").val(),false)
-                }).catch(function (error) {
-                    console.log(error);
-                    grecaptcha.reset();
-                    showAlert(error.response.data.message);
-                    $("#bregister").html('Registrar').prop('disabled', false);
-                });
-
-            })
-        });
-
-    </script>
-@endpush
 

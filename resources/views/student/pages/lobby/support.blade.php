@@ -18,7 +18,11 @@
                     </div>
 
                     <div class="form-group">
-                        <textarea name="msupport" id="msupport"></textarea>
+                        @component("student.components.richText")
+                            @slot("id")
+                                msupport
+                            @endslot
+                        @endcomponent
                     </div>
                 </form>
             </div>
@@ -32,18 +36,3 @@
         </div>
     </div>
 </div>
-@push('scripts')
-    <script>
-        CKEDITOR.replace('msupport',  {
-            toolbar: [
-                { name: 'mode', items : [ 'Source'] },
-                { name: 'clipboard', items : [ 'PasteText','Undo','Redo' ] },
-                { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-                { name: 'basicstyles', items : [ 'Bold','Italic','Subscript','Superscript','RemoveFormat' ] },
-                { name: 'paragraph', items : [ 'NumberedList','BulletedList'] },
-                { name: 'tools', items : [ 'Maximize', 'ShowBlocks' ] },
-            ],
-            language: 'es'
-        });
-    </script>
-@endpush

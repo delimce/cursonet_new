@@ -11,11 +11,14 @@
 |
 */
 
-$router->get('/', function () use ($router) {
+$router->get(
+    '/', function () use ($router) {
     return $router->app->version();
-});
+}
+);
 
-$router->group(['prefix' => 'student', 'namespace' => 'Student'], function () use ($router) {
+$router->group(
+    ['prefix' => 'student', 'namespace' => 'Student'], function () use ($router) {
     $router->get('/login', ['as' => 'student.login', 'uses' => 'InitialController@login']);
     $router->get('/', ['as' => 'student.in', 'uses' => 'InitialController@index']);
     $router->get('/forgotten', 'InitialController@forgotPassword');
@@ -25,26 +28,39 @@ $router->group(['prefix' => 'student', 'namespace' => 'Student'], function () us
     $router->get('/activate/{apikey}', 'InitialController@userActivated');
     $router->get('/restore/{apikey}', 'InitialController@restoringPassword');
     $router->get('/restoring/success', 'InitialController@restored');
-    $router->get('profile', [
-        'middleware' => 'auth',
-        'logout' => 'AccountController@showProfile'
-    ]);
-});
+    $router->get(
+        'profile', [
+                     'middleware' => 'auth',
+                     'logout'     => 'AccountController@showProfile'
+                 ]
+    );
 
-//home
-$router->group(['prefix' => 'student', 'namespace' => 'Student', 'middleware'=>['auth']], function () use ($router) {
-    $router->get('/home', ['as' => 'student.home', 'uses' => 'HomeController@home']);
-    $router->get('/logout', 'HomeController@logout');
-    $router->get('/avatar',['as' => 'student.avatar', 'uses' => 'HomeController@getAvatar']);
-    $router->put('/profile/session', 'HomeController@refreshSessionData');
-    $router->get('/inbox', 'HomeController@getInbox');
-    $router->get('/profile', 'HomeController@myProfile');
-    $router->get('/teachers', 'HomeController@getTeachers');
-    $router->put('/profile/picture', 'HomeController@saveMyPicture');
-    $router->post('/select/course', 'HomeController@courseSelected');
-});
+    //home
+    $router->group(
+        ['middleware' => ['auth']], function () use ($router) {
+        $router->get('/home', ['as' => 'student.home', 'uses' => 'HomeController@home']);
+        $router->get('/logout', 'HomeController@logout');
+        $router->get('/avatar/{student_id}', ['as' => 'student.avatar', 'uses' => 'HomeController@getAvatar']);
+        $router->put('/profile/session', 'HomeController@refreshSessionData');
+        $router->get('/inbox', 'HomeController@getInbox');
+        $router->get('/profile', 'HomeController@myProfile');
+        $router->get('/teachers', 'HomeController@getTeachers');
+        $router->put('/profile/picture', 'HomeController@saveMyPicture');
+        $router->post('/select/course', 'HomeController@courseSelected');
 
-//classroom
-$router->group(['prefix' => 'student/classroom', 'namespace' => 'Student', 'middleware'=>['auth']], function () use ($router) {
-    $router->get('/', 'ClassRoomController@main');
-});
+        //classroom
+        $router->group(
+            ['prefix' => 'classroom'], function () use ($router) {
+            $router->get('/', 'ClassRoomController@main');
+            $router->get('/forum/{forum_id}', 'ClassRoomController@getForumById');
+        }
+        );
+
+    }
+    );
+
+
+}
+);
+
+

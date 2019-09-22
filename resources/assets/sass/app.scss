@@ -1,0 +1,35 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// jquery-confirm
+@import "~jquery-confirm/dist/jquery-confirm.min.css";
+
+// animate.css
+@import "~animate.css/animate.min.css";
+
+// Bootstrap table
+@import "~bootstrap-table/dist/bootstrap-table.min.css";
+
+// bootstrap-select
+@import "~bootstrap-select-v4/sass/bootstrap-select";
+
+// bootstrap-validator
+@import "~bootstrapvalidator/dist/css/bootstrapValidator.min.css";
+
+// bootstrap-toggle
+@import "~bootstrap-toggle/css/bootstrap-toggle.min.css";
+
+// croppie js
+@import "~croppie/croppie.css";
+
+//my styles
+@import "commons.css";
+@import "student.style.css";
+@import "forum.style.css";

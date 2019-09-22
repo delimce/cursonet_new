@@ -4,29 +4,28 @@
 @section('content')
     <div class="wrapper">
         <div class="cn-container" id="inbox-list">
-            <h2>@lang('students.inbox.title')</h2>
-            @component("student.components.dataTable")
-                @slot("id")
-                    inbox
-                @endslot
-                @slot("head")
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Asunto</th>
-                        <th>Fecha</th>
+            <span class="in-title">@lang('students.inbox.title')</span>
+            <table id="inbox" data-search="true" class="table table-striped cn-grid">
+                <thead>
+                <tr>
+                    <th data-field="id" data-visible="false"></th>
+                    <th data-field="nombre" data-sortable="true" scope="col">Nombre</th>
+                    <th data-field="asunto" data-sortable="true" scope="col">Mensaje</th>
+                    <th data-field="fecha" data-sortable="true" scope="col">Ingreso</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($messages as $message)
+                    <tr class="@if (!$message->leido) subtext @endif my-inbox">
+                        <td>{{$message->id}}</td>
+                        <td>{{$message->sender()}}</td>
+                        <td>{{$message->subject}}</td>
+                        <td>{{$message->datetime()}}</td>
                     </tr>
-                @endslot
-                @slot("body")
-                    @foreach($messages as $message)
-                        <tr class="@if (!$message->leido) subtext @endif my-inbox"
-                            style="cursor: pointer" data-id="{{$message->id}}">
-                            <td>{{$message->sender()}}</td>
-                            <td>{{$message->subject}}</td>
-                            <td>{{$message->datetime()}}</td>
-                        </tr>
-                    @endforeach
-                @endslot
-            @endcomponent
+                @endforeach
+                </tbody>
+            </table>
+
             <div style="width: 200px; float: right; padding: 20px">
                 <button id="new-msg" class="btn btn-lg btn-block btn-signin" type="button">
                     @lang('students.inbox.compose')
@@ -59,87 +58,34 @@
                 </div>
                 <input id="inbox-reply" name="inbox-reply" type="hidden">
                 <div style="float: right; width: 250px; text-align: right">
-                    <button id="delete" data-msg-id="" type="button"
+                    <button id="delete-msg" data-msg-id="" type="button"
                             class="btn btn-danger">@lang('commons.delete')</button>
                     <button type="button" id="reply-msg" style="width: 100px"
                             class="btn btn-signin">@lang('students.inbox.reply')</button>
                 </div>
             </div>
         </div>
-
     </div>
     @include('student.pages.lobby.new-message')
 @endsection
-
-@push('scripts-ready')
-    $('.readCollapse').on('click', function () {
-
-    $('#inbox-read').hide();
-
-    });
-
-@endpush
-
 @push('scripts')
     <script>
-
-        $('#inbox tbody').on('click', 'tr', function () {
-            var me = $(this);
-            var msgId = me.data('id');
-            if (me.hasClass('selected')) {
-                me.removeClass('selected');
-                $('#inbox-read').hide();
-            } else if (msgId != undefined) {
-                var table = $('#inbox').DataTable();
-                table.$('tr.selected').removeClass('selected');
-                me.addClass('selected');
-                axios.get('{!! url('api/student/message') !!}/' + msgId
-                ).then(function (response) {
-                    $('#inbox-read').show();
-                    me.removeClass('subtext');
-                    console.log(response.data)
-                    $("#inbox-subject").html(response.data.message.subject)
-                    $("#inbox-content").html(response.data.message.content)
-                    $("#inbox-date").html(response.data.message.date)
-                    var profile = (!response.data.message.profile) ? '@lang('commons.student')' : '@lang('commons.teacher')';
-                    $("#inbox-role").html(profile)
-                    var sender = response.data.message.sender;
-                    $("#inbox-name").html(sender.nombre + " " + sender.apellido)
-                    if (sender.foto != null) {
-                        var picture = '<img src="' + sender.foto + '" />';
-                        $("#inbox-picture").html(picture)
-                    } else {
-                        $("#inbox-picture").html('<i class="fas fa-user-circle"></i>');
-                    }
-                    ///delelete message
-                    $('#delete').data('msg-id', msgId); //setter
-                    ///reply message
-                    $("#inbox-reply").val(response.data.message.profile+"_"+sender.id);
-                }).catch(function (error) {
-                    quitSession(error, '{!! url('student/logout') !!}');
-                });
-            }
-        })
-
-        $('#delete').confirm({
-            title: '@lang('students.inbox.delete')',
-            content: '@lang('students.inbox.delete.message')',
-            buttons: {
-                confirm: function () {
-                    var msgId = $('#delete').data("msg-id");
-                    axios.delete('{!! url('api/student/message') !!}/' + msgId
-                    ).then(function (response) {
-                        $('#inbox-read').hide();
-                        var table = $('#inbox').DataTable();
-                        table.row('.selected').remove().draw(false);
-                    }).catch(function (error) {
-                        quitSession(error, '{!! url('student/logout') !!}');
-                    });
-                },
-                cancel: function () {
-                }
-            }
+        CKEDITOR.replace('mcontent', {
+            toolbar: [
+                {name: 'mode', items: ['Source']},
+                {name: 'clipboard', items: ['PasteText', 'Undo', 'Redo']},
+                {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
+                {name: 'basicstyles', items: ['Bold', 'Italic', 'Subscript', 'Superscript', 'RemoveFormat']},
+                {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
+                {name: 'tools', items: ['Maximize', 'ShowBlocks']},
+            ],
+            language: 'es'
         });
-
     </script>
-@endpush    
+@endpush
+@push('scripts-ready')
+    $('#inbox').bootstrapTable();
+    $('.readCollapse').on('click', function () {
+    $('#inbox-read').hide();
+    });
+@endpush

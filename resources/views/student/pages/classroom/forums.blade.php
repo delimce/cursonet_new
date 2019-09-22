@@ -1,4 +1,5 @@
-<table class="cn-grid" id="content-forum" class="table table-striped">
+<div id="forum-wrapper">&nbsp;</div>
+<table id="forum-list" class="table table-striped cn-grid">
     <thead>
     <tr>
         <th data-field="id" data-visible="false"></th>
@@ -6,7 +7,7 @@
         <th data-field="grupo_desc" data-sortable="true" scope="col">Sección</th>
         <th data-field="posts" data-sortable="true" scope="col">Comentarios</th>
         <th data-field="fecha_ini" data-sortable="true" scope="col">Fecha inicio</th>
-        <th data-field="fecha_fin" scope="col">Fecha fin</th>
+        <th data-field="fecha_fin" data-sortable="true" scope="col">Fecha fin</th>
     </tr>
     </thead>
     <tbody>
@@ -23,5 +24,5 @@
     </tbody>
 </table>
 @push('scripts-ready')
-    $('#content-forum').bootstrapTable();
+    $('#forum-list').bootstrapTable();
 @endpush

@@ -40,15 +40,14 @@ class MessageController extends BaseController
             foreach ($messages as $message) {
                 $data[] = array(
                     "id" => $message->id,
-                    "subject" => $message->subject,
-                    "sender" => $message->sender(),
-                    "date" => $message->datetime(),
-                    "leido" => $message->leido,
+                    "asunto" => $message->subject,
+                    "nombre" => $message->sender(),
+                    "fecha" => $message->datetime()
                 );
             }
 
         }
-        return response()->json(['status' => 'ok', 'messages' => $data]);
+        return response()->json(['status' => 'ok', 'list' => $data]);
 
     }
 
@@ -84,8 +83,7 @@ class MessageController extends BaseController
     public function deleteMessage($id)
     {
         try {
-            $message = StudentMessage::where("id", $id)->where("para", $this->student->id)->first();
-            $message->delete();
+             StudentMessage::where("id", $id)->where("para", $this->student->id)->delete();
             return response()->json(['status' => 'ok', 'message' => trans('commons.message.deleted')]);
         } catch (\Exception $ex) {
             return response()->json(['status' => 'error', 'message' => trans('commons.message.notfound')], 500);

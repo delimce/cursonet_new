@@ -1,7 +1,7 @@
 <div class="cn-container" id="security-list">
     <div class="row">
         <div class="col-md-11 mx-auto">
-            <h2>@lang('students.profile.security')</h2>
+            <span class="in-title">@lang('students.profile.security')</span>
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="v-pills-privacy-tab" data-toggle="pill" href="#v-pills-privacy"
                    role="tab" aria-controls="v-pills-privacy" aria-selected="true">Privacidad</a>
@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <label for="share-info" class="control-label row">Compartir mis datos con los démas
                                 Estudiantes</label>
-                            <input id="share-info" class="toggle-in" data-value="share_info" data-width="90"
+                            <input id="share-info" class="toggle-setting" data-value="share_info" data-width="90"
                                    type="checkbox" @if($data->share_info) checked @endif data-toggle="toggle"
                                    data-on="@lang('commons.enabled')"
                                    data-off="@lang('commons.disabled')">
@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label for="notify-msg" class="control-label row">Notificar mis mensajes por
                                 Email</label>
-                            <input id="notify-msg" class="toggle-in" data-value="notify_msg" data-size="small"
+                            <input id="notify-msg" class="toggle-setting" data-value="notify_msg" data-size="small"
                                    type="checkbox" @if($data->notify_msg) checked @endif data-toggle="toggle"
                                    data-on="@lang('commons.yes')"
                                    data-off="@lang('commons.no')">
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label for="notify-forum" class="control-label row">Recibir notificaciones de los
                                 foros</label>
-                            <input id="notify-forum" class="toggle-in" data-value="notify_forum" data-size="small"
+                            <input id="notify-forum" class="toggle-setting" data-value="notify_forum" data-size="small"
                                    type="checkbox" @if($data->notify_forum) checked @endif data-toggle="toggle"
                                    data-on="@lang('commons.yes')"
                                    data-off="@lang('commons.no')">
@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <label for="notify-exam" class="control-label row">Recibir notificaciones de los
                                 Examenes</label>
-                            <input id="notify-exam" class="toggle-in" data-value="notify_exam" data-size="small"
+                            <input id="notify-exam" class="toggle-setting" data-value="notify_exam" data-size="small"
                                    type="checkbox" @if($data->notify_exam) checked @endif data-toggle="toggle"
                                    data-on="@lang('commons.yes')"
                                    data-off="@lang('commons.no')">
@@ -88,34 +88,3 @@
         </div>
     </div>
 </div>
-@push('scripts')
-    <script>
-        $('.toggle-in').on('change', function (event) {
-            var status = $(this).prop('checked');
-            var value = $(this).data('value');
-            axios.put('{!! url('api/student/account/settings') !!}', {
-                status: status,
-                field: value
-            }).then(function (response) {
-                showSuccess(response.data.message, 2000)
-            }).catch(function (error) {
-                showAlert(error.response.data.message)
-            });
-        })
-
-        $('#form_pass').bootstrapValidator().on('success.form.bv', function (e) {
-            // Prevent form submission
-            e.preventDefault();
-            // Get the form instance
-            var $form = $(e.target);
-            axios.put('{!! url('api/student/account/changePass') !!}', $form.serialize())
-                .then(function (response) {
-                    showSuccess(response.data.message, 2000)
-                }).catch(function (error) {
-                showAlert(error.response.data.message);
-                $("#savepass").prop('disabled', false);
-            });
-
-        })
-    </script>
-@endpush

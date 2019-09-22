@@ -1,5 +1,5 @@
 <section>
-    <h2>Actividad reciente</h2>
+    <span class="in-title">Actividad reciente</span>
     <div class="row">
         <div class="col-4">
             <i class="fas fa-pencil-alt">&nbsp;</i>

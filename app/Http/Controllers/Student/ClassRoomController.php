@@ -48,4 +48,11 @@ class ClassRoomController extends BaseController
         return view('student.pages.classroom.main', ["topics" => $topics, 'content1' => $content, 'files' => $files, 'forums' => $forums]);
     }
 
+
+    public function getForumById($forum_id)
+    {
+        $forum = Forum::findOrFail($forum_id);
+        return view('student.pages.classroom.ajax.forum', ["content" => $forum]);
+    }
+
 }
