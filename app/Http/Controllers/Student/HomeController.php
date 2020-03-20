@@ -10,6 +10,7 @@ use App\Models\Cn2\Course;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\Models\Cn2\GroupStudent;
+use Exception;
 
 class HomeController extends BaseController
 {
@@ -73,7 +74,7 @@ class HomeController extends BaseController
         $estGroup = GroupStudent::whereEstId($this->student->id)->whereCursoId($courseId)->first();
         $wallMessages = $course->walls()->wherein("grupo_id", ["0", $estGroup->id])->get();
         $ntopics = $course->topics()->count();
-        $data = array(
+        $data = [
             "alias" => $course->alias,
             "descripcion" => $course->descripcion,
             "id" => $course->id,
@@ -83,7 +84,9 @@ class HomeController extends BaseController
             "duracion" => $course->duracion,
             "wall" => $wallMessages,
             "ntopics" => $ntopics,
-        );
+        ];
+
+
 
 
         return response()->json(['status' => 'ok', 'course' => $data]);

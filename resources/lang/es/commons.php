@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'created_by' => 'Creado por:',
     'search' => 'Buscar',
     'name' => 'Nombre',
     'profile' => 'Perfil',

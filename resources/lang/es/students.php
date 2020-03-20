@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'created_by' => 'Creado por:',
     'home' => 'Inicio',
     'nofound' => 'no existen registros disponibles',
     'paging' => 'Mostrando página _PAGE_ de _PAGES_',

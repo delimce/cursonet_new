@@ -49,7 +49,6 @@ $('.module-item').on('click', function (event) {
 const parseCourseWall = function (wall) {
 
     let messages = '<b>No existen mensajes en la cartelera</b>'
-  //  $("#course_wall").animate({"animation-play-state":"initial"});
     if (wall.length > 0) {
         messages = '';
         _.forEach(_.orderBy(wall, ['id'], ['desc']), function (item) {
@@ -72,13 +71,14 @@ const loadCourseInformation = function (courseId) {
         let current = baseName($(location).attr('href'));
         if (current === "home") {
             if (!_.isUndefined(response.data.course)) {
-                $("#course_wall").html(parseCourseWall(response.data.course.wall))
-                $("#course_name").html(response.data.course.nombre);
-                $("#course_duration").html(response.data.course.duracion);
-                $("#course_description").html(response.data.course.descripcion);
-                $("#course_initdate").html(response.data.course.init);
-                $("#course_ntopics").html(response.data.course.ntopics);
-                if (response.data.course.ntopics > 0) {
+                let detail = response.data.course
+                $("#course_wall").html(parseCourseWall(detail.wall))
+                $("#course_name").html(detail.nombre);
+                $("#course_duration").html(detail.duracion);
+                $("#course_description").html(detail.descripcion);
+                $("#course_initdate").html(detail.init);
+                $("#course_ntopics").html(detail.ntopics);
+                if (detail.ntopics > 0) {
                     $("#course_button").show();
                 } else {
                     $("#course_button").hide();

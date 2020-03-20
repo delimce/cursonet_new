@@ -41,6 +41,9 @@
     "jquery-confirm": "^3.3.2",
     "laravel-mix": "^4.0.15",
     "popper.js": "^1.14.4",
-    "timeago": "^1.6.5"
+    "sass": "^1.26.3",
+    "sass-loader": "^7.3.1",
+    "timeago": "^1.6.5",
+    "vue-template-compiler": "^2.6.11"
   }
 }
