@@ -9,7 +9,7 @@ body {
 }
 
 a {
-    color: #5ED2F1;
+    color: #00B0E8;
     cursor: pointer;
 }
 
@@ -189,7 +189,8 @@ input[type="search"] {
 
 .form-signin label {
     text-transform: capitalize;
-    color: #5ED2F1 !important;
+    font-weight: bold;
+    color: #00B0E8 !important;
     line-height: 1px;
     margin-left: 20px;
     float: left;
