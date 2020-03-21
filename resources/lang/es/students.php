@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'created_by' => 'Creado por:',
     'home' => 'Inicio',
     'nofound' => 'no existen registros disponibles',
     'paging' => 'Mostrando página _PAGE_ de _PAGES_',
@@ -47,6 +46,7 @@ return [
     'course.selected.tooltip' => 'Curso actual',
     'course.selected.error' => 'error al seleccionar un curso',
     'course.select' => 'Seleccione un curso',
+    'course.wall.empty' => 'No existen mensajes en la cartelera',
     //SIGNUP
     'signup.noaccount' => '¿No tienes una cuenta? ',
     'signup.here' => 'Registrate Aquí',

@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => 'smtp.sendgrid.net',
+    'host' => env('MAIL_HOST', 'smtp.delimce.com'),
 
     /*
     |--------------------------------------------------------------------------

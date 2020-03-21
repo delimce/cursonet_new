@@ -20,8 +20,8 @@
 <footer class="page-footer font-small blue pt-4 mt-4">
     <!--Copyright-->
     <div class="footer-copyright py-3 text-center">
-        {{ trans('students.created_by') }}<br>
-        <a target="_blank" href="http://develemento.com.ve">devElemento</a>
+        {{ trans('commons.created_by') }}<br>
+        <a target="_blank" href="http://delimce.com">devElemento</a>
     </div>
     <!--/.Copyright-->
 </footer>

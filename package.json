@@ -12,7 +12,12 @@
     "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "production": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
-  "keywords": ["cursonet","easy-elearning","teach-me","i-learn-on-line"],
+  "keywords": [
+    "cursonet",
+    "easy-elearning",
+    "teach-me",
+    "i-learn-on-line"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -35,6 +40,10 @@
     "jquery": "^3.3.1",
     "jquery-confirm": "^3.3.2",
     "laravel-mix": "^4.0.15",
-    "popper.js": "^1.14.4"
+    "popper.js": "^1.14.4",
+    "sass": "^1.26.3",
+    "sass-loader": "^7.3.1",
+    "timeago": "^1.6.5",
+    "vue-template-compiler": "^2.6.11"
   }
 }

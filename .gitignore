@@ -2,3 +2,6 @@
 /.idea
 /.vscode
 /node_modules
+/public/assets/
+/public/mix-manifest.json
+.env

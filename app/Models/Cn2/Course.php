@@ -18,6 +18,10 @@ class Course extends Model
         return $this->hasMany('App\Models\Cn2\Topic', 'curso_id');
     }
 
+    public function walls(){
+        return $this->hasMany('App\Models\Cn2\Wall', 'curso_id');
+    }
+
     public function studentGroup(){
         return $this->hasMany('App\Models\Cn2\GroupStudent', 'curso_id');
     }
