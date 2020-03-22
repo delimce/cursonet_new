@@ -99,6 +99,11 @@ class HomeController extends BaseController
         return redirect()->route('student.login');
     }
 
+    public function myRatings()
+    {
+        return view("student.pages.lobby.ratings", ["messages" => $this->student->messages()->with('student')->get()]);
+    }
+
     public function getInbox()
     {
         return view("student.pages.lobby.inbox", ["messages" => $this->student->messages()->with('student')->get()]);

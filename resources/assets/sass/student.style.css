@@ -303,14 +303,10 @@ input[type="search"] {
     }
 }
 
-.right-nav {
-
-}
 
 .nav-items {
     color: #eff0f2;
     display: inline;
-    float: left;
 }
 
 .nav-items span, .footer-nav-items span {
@@ -715,6 +711,14 @@ input[type="search"] {
 .card-footer .msg-to-teacher {
     cursor: pointer;
 }
+
+/*ratings*/
+#rating-list {
+    width: 75%;
+    transition: all 0.3s;
+    min-height: 460px;
+}
+
 
 /*inbox and messages*/
 

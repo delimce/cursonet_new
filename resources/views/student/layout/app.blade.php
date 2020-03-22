@@ -27,7 +27,7 @@
         @endcomponent
         <div class="nav-items">
             <span><a href="{!! url('student/home') !!}">@lang('students.home')</a> </span>|
-            <span><a href="#">@lang('students.my_results')</a></span>|
+            <span><a href="{!! url('student/ratings') !!}">@lang('students.my_ratings')</a></span>|
             <span><a href="{!! url('student/inbox') !!}">@lang('commons.messages')</a></span>|
             <span><a style="color: #00ccff" href="{!! url('student/logout') !!}">@lang('commons.logout')</a></span>
         </div>
