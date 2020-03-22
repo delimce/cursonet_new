@@ -9,16 +9,18 @@
 
             <div class="row justify-content-md-center">
                     <div class="col col-home">
-                            <div class="col card-border">
-                                    @include('student.pages.lobby.info')
-                                </div>
+                                @if(session()->has('courseSelected'))
+                                    <div class="col card-border">
+                                        @include('student.pages.lobby.course')
+                                    </div> 
+                                @endif
                             
                                 <div class="col card-border">
                                     @include('student.pages.lobby.messages', ['messages' => $messages])
                                 </div>
                     </div>
                     <div class="col col-home">
-                            <div class="col card-border">
+                                <div class="col card-border">
                                     @include('student.pages.lobby.wall')
                                 </div>
                     
@@ -29,6 +31,9 @@
                   </div>
     </div>
 @endsection
-@push('scripts-ready')
-    loadCourseInformation($('.selectpickerCourse').val())
-@endpush
+
+@if(session()->has('courseSelected'))
+    @push('scripts-ready')
+        loadCourseInformation($('.selectpickerCourse').val())
+    @endpush
+@endif     

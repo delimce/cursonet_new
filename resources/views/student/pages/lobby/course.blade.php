@@ -1,5 +1,5 @@
 <section>
-    <span class="in-title">{{ trans('students.course.info') }}</span>
+    <span class="in-title">@lang('students.course.info')</span>
 
     <div>
         <span class="subtext">@lang('students.course.name'):</span>

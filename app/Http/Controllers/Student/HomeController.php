@@ -37,7 +37,6 @@ class HomeController extends BaseController
         })->whereActivo(1)->get();
 
         $req->session()->put('myCourses', $courses);
-
         if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
 
             $currentCourse = $courses->filter(function ($value) use ($req) {
@@ -45,7 +44,9 @@ class HomeController extends BaseController
             })->first();
         } else { ///one at least
             $currentCourse = $courses->first();
-            $req->session()->put("courseSelected", $currentCourse->id);
+            if (!is_null($currentCourse)) {
+                $req->session()->put("courseSelected", $currentCourse->id);
+            }
         }
 
         //get messages

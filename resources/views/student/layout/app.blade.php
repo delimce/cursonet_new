@@ -16,8 +16,10 @@
     <!-- Navbar content -->
     <div class="left-nav">
         <div id="nav-logo" onclick="redirect('{!! url('student/home') !!}')">&nbsp;</div>
-        @component("student.components.selectcourse",['courses' => session()->get("myCourses")])
-        @endcomponent
+        @if(session()->has('courseSelected'))
+            @component("student.components.selectcourse",['courses' => session()->get("myCourses")])
+            @endcomponent
+        @endif    
     </div>
 
     <div class="right-nav">
