@@ -27,7 +27,7 @@
             </table>
 
             <div style="width: 200px; float: right; padding: 20px">
-                <button id="new-msg" class="btn btn-lg btn-block btn-signin" type="button">
+                <button id="new-msg" class="btn btn-lg btn-block btn-primary" type="button">
                     @lang('students.inbox.compose')
                 </button>
             </div>
@@ -61,7 +61,7 @@
                     <button id="delete-msg" data-msg-id="" type="button"
                             class="btn btn-danger">@lang('commons.delete')</button>
                     <button type="button" id="reply-msg" style="width: 100px"
-                            class="btn btn-signin">@lang('students.inbox.reply')</button>
+                            class="btn btn-primary">@lang('students.inbox.reply')</button>
                 </div>
             </div>
         </div>

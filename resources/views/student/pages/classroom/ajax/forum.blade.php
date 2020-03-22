@@ -90,7 +90,7 @@
         <div class="footer">
             <button id="save-post" data-forum="{{$content->id}}" data-person="{{session()->get("myUser")->id}}"
                     data-type="est" type="button" style="width: 150px"
-                    class="btn btn-lg btn-block btn-signin">
+                    class="btn btn-lg btn-block btn-primary">
                 <span class="glyphicon glyphicon-search"></span>
                 @lang('students.classroom.forum.post.save')
             </button>
@@ -159,7 +159,7 @@
       let comment = '<span class="new-reply-'+post_id+'">';
       comment += '<textarea id="my-reply-' + post_id + '" cols="40" rows="2"></textarea><br>';
       comment += '<button onClick="javascript:clearReply(' + post_id +')" class="btn btn-secondary">@lang('commons.close')</button>&nbsp;&nbsp;';
-      comment += '<button onClick="javascript:sendPostReply(' + post_id + ',' + user_id + ')" class="btn btn-lg btn-signin" style="width: 200px">' +
+      comment += '<button onClick="javascript:sendPostReply(' + post_id + ',' + user_id + ')" class="btn btn-lg btn-primary" style="width: 200px">' +
         '@lang('students.classroom.forum.post.reply')' +
         '</button>';
       comment += '</span>';

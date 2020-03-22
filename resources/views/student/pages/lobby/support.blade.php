@@ -28,7 +28,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" style="width: 150px"
-                        class="btn btn-lg btn-block btn-signin">
+                        class="btn btn-lg btn-block btn-primary">
                     <span class="glyphicon glyphicon-search"></span>
                     @lang('students.inbox.send')
                 </button>

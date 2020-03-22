@@ -29,7 +29,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('commons.close')</button>
                 <button id="msg-send" type="button" style="width: 150px"
-                        class="btn btn-lg btn-block btn-signin">@lang('students.inbox.send')</button>
+                        class="btn btn-lg btn-primary">@lang('students.inbox.send')</button>
             </div>
         </div>
     </div>

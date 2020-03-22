@@ -38,7 +38,7 @@
                            data-bv-identical-message="@lang('students.register.password.error.equal')"
                            placeholder="@lang('students.register.new_password.repeat')" required>
                 </div>
-                <button class="btn btn-lg btn-block btn-signin" type="submit">
+                <button class="btn btn-lg btn-block btn-primary" type="submit">
                     @lang('students.login.reset_password')
                 </button>
             </form>

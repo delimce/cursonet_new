@@ -30,7 +30,7 @@
 
     <div id="course_button" style="float: right; width: 50%; padding-top: 20px;display:none">
         <div class="col-sm-auto">
-            <button id="btocontent" class="btn btn-lg btn-block btn-signin"
+            <button id="btocontent" class="btn btn-lg btn-block btn-primary"
                     type="submit">@lang('students.course.goto')</button>
         </div>
     </div>
