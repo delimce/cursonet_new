@@ -15,8 +15,9 @@
                 </div>
                 <input type="password" id="password" class="form-control" placeholder="@lang('students.password')"
                        autocomplete="my-password" required>
-                <button id="blogin" class="btn btn-lg btn-block btn-signin"
-                        type="submit">@lang('students.login.login')</button>
+                <button id="blogin" class="btn btn-lg btn-block btn-primary" type="submit"
+                    >@lang('students.login.login')
+                </button>
                 @component("student.components.tosignup")
                 @endcomponent
             </form>

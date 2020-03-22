@@ -77,7 +77,7 @@
                                        placeholder="confirme la clave" required>
                             </div>
                             <div style="width: 180px; float: left; padding: 15px">
-                                <button id="savepass" class="btn btn-lg btn-block btn-signin" type="submit">
+                                <button id="savepass" class="btn btn-lg btn-block btn-primary" type="submit">
                                     @lang('students.profile.save.password')
                                 </button>
                             </div>

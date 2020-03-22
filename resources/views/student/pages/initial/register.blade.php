@@ -91,7 +91,7 @@
                              <div class="g-recaptcha" data-sitekey="{{env('RECAPTCHA_SITE_KEY')}}"></div>
                         </div>
                         <div class="col-sm-6">
-                            <button id="bregister" class="btn btn-lg btn-block btn-signin" type="submit">Registrar
+                            <button id="bregister" class="btn btn-lg btn-block btn-primary" type="submit">Registrar
                             </button>
                         </div>
                     </div>

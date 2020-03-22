@@ -89,8 +89,8 @@
                                     </div>
                                 </div>
 
-                                <div style="width: 200px; float: right; padding: 15px">
-                                    <button id="save" class="btn btn-lg btn-block btn-signin" type="submit">
+                                <div style="width: 250px; float: right; padding: 15px">
+                                    <button id="save" class="btn btn-lg btn-block btn-primary" type="submit">
                                         @lang('students.profile.save.info')
                                     </button>
                                 </div>
@@ -122,8 +122,8 @@
                             </div>
                             <div id="upload-img"></div>
                         </div>
-                        <div class="row" style="width: 140px; margin: auto">
-                            <button id="save-image" class="btn btn-lg btn-block btn-signin" type="button">
+                        <div class="row" style="width: 200px; margin: auto">
+                            <button id="save-image" class="btn btn-lg btn-block btn-primary" type="button">
                                 @lang('students.profile.pic.save')
                             </button>
                         </div>
