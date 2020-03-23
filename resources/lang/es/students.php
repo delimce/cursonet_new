@@ -114,5 +114,8 @@ return [
     'classroom.forum.post.tooshort' => 'El contenido debe ser mayor o igual a 5 caracteres',
      //RATINGS
      'ratings.title' => 'Mis Notas',
+     'ratings.noregs' => 'No hay notas disponibles.',
+     'ratings.select' => 'Seleccione un plan de evaluación',
+     'ratings.detail.title' => 'Detalles del plan de evaluación',
 
 ];

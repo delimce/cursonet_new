@@ -13,6 +13,12 @@ a {
     cursor: pointer;
 }
 
+.section-info-text{
+    font-size: 16px;
+    padding: 12px 0 0 12px;
+    font-weight: lighter;
+}
+
 .card-container {
     min-height: 300px;
     margin: auto;
@@ -713,10 +719,11 @@ input[type="search"] {
 }
 
 /*ratings*/
+
 #rating-list {
-    width: 75%;
+    width: 98%;
     transition: all 0.3s;
-    min-height: 460px;
+    min-height: 500px;
 }
 
 

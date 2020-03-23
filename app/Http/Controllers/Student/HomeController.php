@@ -10,7 +10,9 @@ use App\Models\Cn2\Course;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\Models\Cn2\GroupStudent;
+use App\Models\Cn2\Plan;
 use Exception;
+use DB;
 
 class HomeController extends BaseController
 {
@@ -70,8 +72,11 @@ class HomeController extends BaseController
     public function courseSelected(Request $req)
     {
         $courseId = $req->input("courseId");
-        $req->session()->put("courseSelected", $courseId);
+
         $course = Course::findOrFail($courseId);
+        $req->session()->put("courseSelected", $course->id);
+        $req->session()->put("courseName", $course->nombre);
+
         $estGroup = GroupStudent::whereEstId($this->student->id)->whereCursoId($courseId)->first();
         $wallMessages = $course->walls()->wherein("grupo_id", ["0", $estGroup->id])->get();
         $ntopics = $course->topics()->count();
@@ -101,7 +106,20 @@ class HomeController extends BaseController
 
     public function myRatings()
     {
-        return view("student.pages.lobby.ratings", ["messages" => $this->student->messages()->with('student')->get()]);
+        $plans = DB::table('tbl_plan_evaluador')
+            ->join('tbl_grupo_estudiante', 'tbl_plan_evaluador.grupo_id', '=', 'tbl_grupo_estudiante.grupo_id')
+            ->join('tbl_grupo', 'tbl_grupo.id', '=', 'tbl_grupo_estudiante.grupo_id')
+            ->join('tbl_curso', 'tbl_curso.id', '=', 'tbl_grupo.curso_id')
+            ->join('tbl_plan_item', 'tbl_plan_evaluador.id', '=', 'tbl_plan_item.plan_id')
+            ->groupBy('plan_id')
+            ->select('tbl_plan_evaluador.*', 'tbl_grupo.nombre as grupo','tbl_curso.alias as curso')
+            ->selectRaw('count(tbl_plan_item.id) as items')
+            ->whereEstId($this->student->id)
+            ->get();
+
+
+
+        return view("student.pages.lobby.ratings", ["results" => $plans]);
     }
 
     public function getInbox()
