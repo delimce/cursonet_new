@@ -104,8 +104,9 @@ const reloadToSelectBox = function () {
             let data = response.data.contacts;
             let len = data.length;
             for (let i = 0; i < len; i++) {
-                let id = (data[i].es_admin) ? "1_" + data[i].id : "0_" + data[i].id;
-                let profile = (data[i].es_admin) ? "Profesor" : "Estudiante";
+                let isTeacher = _.has(data[i], 'es_admin');
+                let id = (isTeacher) ? "1_" + data[i].id : "0_" + data[i].id;
+                let profile = (isTeacher) ? "Profesor" : "Estudiante";
                 let guy = String(data[i].nombre).capitalize() + " " + String(data[i].apellido).capitalize();
                 options += '<option data-subtext="' + profile + '" value="' + id + '">' + guy + '</option>';
             }

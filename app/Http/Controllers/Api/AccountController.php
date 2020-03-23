@@ -53,7 +53,7 @@ class AccountController extends BaseController
             $q->where('id', '!=', $estId)->where("share_info", 1);
         }])->whereIn('grupo_id', $group_array)->get();
 
-        $data_student = array();
+        $data_student = [];
 
         $students->each(function ($item) use (&$data_student) {
             if ($item->Student != null) $data_student[] = $item->Student->only(['id', 'nombre', 'apellido', 'email', 'foto', 'sexo', 'fecha_nac', 'telefono_p']);
