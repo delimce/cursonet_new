@@ -73,7 +73,7 @@ class HomeController extends BaseController
         $req->session()->put("courseSelected", $courseId);
         $course = Course::findOrFail($courseId);
         $estGroup = GroupStudent::whereEstId($this->student->id)->whereCursoId($courseId)->first();
-        $wallMessages = $course->walls()->wherein("grupo_id", ["0", $estGroup->id])->get();
+        $wallMessages = $course->walls()->wherein("grupo_id", ["0", $estGroup->grupo_id])->orderBy('fecha_c','desc')->get();
         $ntopics = $course->topics()->count();
         $data = [
             "alias" => $course->alias,
