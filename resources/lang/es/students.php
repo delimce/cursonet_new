@@ -5,7 +5,7 @@ return [
     'nofound' => 'no existen registros disponibles',
     'paging' => 'Mostrando página _PAGE_ de _PAGES_',
     'filtered' => 'filtrados  de _MAX_ en total',
-    'my_results' => 'Mis notas',
+    'my_ratings' => 'Mis notas',
     'edit_profile' => 'Editar perfil',
     'email' => 'Email',
     'token_unknown' => 'token incorrecto',
@@ -112,5 +112,10 @@ return [
     'classroom.forum.post.save.success' => 'Comentario guardado con éxito',
     'classroom.forum.post.reply.save.success' => 'respuesta guardada con éxito',
     'classroom.forum.post.tooshort' => 'El contenido debe ser mayor o igual a 5 caracteres',
+     //RATINGS
+     'ratings.title' => 'Mis Notas',
+     'ratings.noregs' => 'No hay notas disponibles.',
+     'ratings.select' => 'Seleccione un plan de evaluación',
+     'ratings.detail.title' => 'Detalles del plan de evaluación',
 
 ];
