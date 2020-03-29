@@ -13,6 +13,12 @@ a {
     cursor: pointer;
 }
 
+.section-info-text{
+    font-size: 16px;
+    padding: 12px 0 0 12px;
+    font-weight: lighter;
+}
+
 .card-container {
     min-height: 300px;
     margin: auto;
@@ -303,14 +309,10 @@ input[type="search"] {
     }
 }
 
-.right-nav {
-
-}
 
 .nav-items {
     color: #eff0f2;
     display: inline;
-    float: left;
 }
 
 .nav-items span, .footer-nav-items span {
@@ -715,6 +717,15 @@ input[type="search"] {
 .card-footer .msg-to-teacher {
     cursor: pointer;
 }
+
+/*ratings*/
+
+#rating-list {
+    width: 98%;
+    transition: all 0.3s;
+    min-height: 500px;
+}
+
 
 /*inbox and messages*/
 

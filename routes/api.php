@@ -42,8 +42,13 @@ $router->group(
             $router->put('/settings', 'AccountController@setSetting');
             $router->put('/changePass', 'AccountController@changePassword');
             $router->put('/profile', 'AccountController@saveProfile');
-        }
-        );
+        });
+        //ratings
+        $router->group(
+            ['prefix' => 'ratings'], function () use ($router) {
+            $router->get('/', 'RatingsController@list');
+            $router->get('/{id}', 'RatingsController@getDetail');
+        });
 
         //classroom
         $router->group(

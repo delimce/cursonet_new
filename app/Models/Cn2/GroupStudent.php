@@ -21,4 +21,9 @@ class GroupStudent extends Model
     {
         return $this->belongsTo('App\Models\Cn2\Student','est_id');
     }
+
+    public function plan()
+    {
+        return $this->hasOne('App\Models\Cn2\Plan', 'grupo_id');
+    }
 }

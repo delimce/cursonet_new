@@ -46,6 +46,7 @@ $router->group(
                 $router->get('/logout', 'HomeController@logout');
                 $router->get('/avatar/{student_id}', ['as' => 'student.avatar', 'uses' => 'HomeController@getAvatar']);
                 $router->put('/profile/session', 'HomeController@refreshSessionData');
+                $router->get('/ratings', 'HomeController@myRatings');
                 $router->get('/inbox', 'HomeController@getInbox');
                 $router->get('/profile', 'HomeController@myProfile');
                 $router->get('/teachers', 'HomeController@getTeachers');
