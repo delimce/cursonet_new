@@ -21,8 +21,7 @@
     "cosmicvelocity/lumen-helpers": ">=1.0",
     "nesbot/carbon": "^1.27",
     "doctrine/dbal": "^2.5",
-    "league/flysystem": " ~1.0",
-    "barryvdh/laravel-cors": "^0.11.0"
+    "league/flysystem": " ~1.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
