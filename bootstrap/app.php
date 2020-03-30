@@ -81,7 +81,7 @@ $app->singleton('filesystem.disk', function () {
 $app->middleware([
     \Illuminate\Session\Middleware\StartSession::class,
     \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-    \Barryvdh\Cors\HandleCors::class,
+    App\Http\Middleware\CorsMiddleware::class,
 ]);
 
 $app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
