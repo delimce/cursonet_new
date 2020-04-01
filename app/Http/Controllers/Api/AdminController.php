@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Validator;
 
 class AdminController extends BaseController
@@ -47,6 +48,7 @@ class AdminController extends BaseController
 
         if ($validator->fails()) {
             $error = $validator->errors()->first();
+            Log::warning($error);
             return response()->json(['status' => 'error', 'message' => $error], 400);
         }
 

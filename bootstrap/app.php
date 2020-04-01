@@ -31,7 +31,7 @@ $app->configure('mail');
 $app->configure('database');
 $app->configure('session');
 $app->configure('filesystems');
-$app->configure('cors');
+$app->configure('logging');
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +81,7 @@ $app->singleton('filesystem.disk', function () {
 $app->middleware([
     \Illuminate\Session\Middleware\StartSession::class,
     \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-    App\Http\Middleware\CorsMiddleware::class,
+    \Vluzrmos\LumenCors\CorsMiddleware::class
 ]);
 
 $app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
@@ -107,12 +107,10 @@ $app->withFacades(true, [
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(\Illuminate\Session\SessionServiceProvider::class);
-$app->register(\Barryvdh\Cors\ServiceProvider::class);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'api' => App\Http\Middleware\ApiMiddleware::class,
-    'cors' => \Barryvdh\Cors\HandleCors::class,
 ]);
 
 $app->register(Collective\Html\HtmlServiceProvider::class);
