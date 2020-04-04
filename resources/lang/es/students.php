@@ -66,6 +66,8 @@ return [
     'inbox.delete' => 'Borrar mensaje',
     'inbox.delete.message' => 'Esta seguro que desea borrar el mensaje?',
     'inbox.new.success' => 'Mensaje enviado con exito',
+    'inbox.sent' => 'Enviados',
+    'inbox.sent.delete' => 'Borrar mensaje enviado',
     //WALL
     'wall.title' => 'Cartelera',
     //PROFILE

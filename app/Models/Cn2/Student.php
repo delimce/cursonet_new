@@ -18,6 +18,11 @@ class Student extends Model
         return $this->hasMany('App\Models\Cn2\StudentMessage', 'para');
     }
 
+    public function messagesSent()
+    {
+        return $this->hasMany('App\Models\Cn2\StudentMessageSent', 'est_id');
+    }
+
     public function groups()
     {
         return $this->hasMany('App\Models\Cn2\GroupStudent', 'est_id');

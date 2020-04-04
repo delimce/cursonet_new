@@ -78,7 +78,7 @@ class HomeController extends BaseController
         $req->session()->put("courseName", $course->nombre);
 
         $estGroup = GroupStudent::whereEstId($this->student->id)->whereCursoId($courseId)->first();
-        $wallMessages = $course->walls()->wherein("grupo_id", ["0", $estGroup->grupo_id])->orderBy('fecha_c','desc')->get();
+        $wallMessages = $course->walls()->wherein("grupo_id", ["0", $estGroup->grupo_id])->orderBy('fecha_c', 'desc')->get();
         $ntopics = $course->topics()->count();
         $data = [
             "alias" => $course->alias,
@@ -91,10 +91,6 @@ class HomeController extends BaseController
             "wall" => $wallMessages,
             "ntopics" => $ntopics,
         ];
-
-
-
-
         return response()->json(['status' => 'ok', 'course' => $data]);
     }
 
@@ -112,7 +108,7 @@ class HomeController extends BaseController
             ->join('tbl_curso', 'tbl_curso.id', '=', 'tbl_grupo.curso_id')
             ->join('tbl_plan_item', 'tbl_plan_evaluador.id', '=', 'tbl_plan_item.plan_id')
             ->groupBy('plan_id')
-            ->select('tbl_plan_evaluador.*', 'tbl_grupo.nombre as grupo','tbl_curso.alias as curso')
+            ->select('tbl_plan_evaluador.*', 'tbl_grupo.nombre as grupo', 'tbl_curso.alias as curso')
             ->selectRaw('count(tbl_plan_item.id) as items')
             ->whereEstId($this->student->id)
             ->get();
@@ -124,7 +120,9 @@ class HomeController extends BaseController
 
     public function getInbox()
     {
-        return view("student.pages.lobby.inbox", ["messages" => $this->student->messages()->with('student')->get()]);
+        $msgs = $this->student->messages()->with('student')->get();
+        $sent = $this->student->messagesSent()->with('student')->get();
+        return view("student.pages.lobby.msgs", ["messages" => $msgs, "sent" => $sent]);
     }
 
     public function myProfile()

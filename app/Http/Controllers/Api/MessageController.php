@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Cn2\AdminMessage;
 use App\Models\Cn2\StudentMessage;
+use App\Models\Cn2\StudentMessageSent;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -32,24 +33,42 @@ class MessageController extends BaseController
      */
     public function getMessages()
     {
-
         $messages = $this->student->messages()->orderBy("id", "DESC")->get();
-        $data = array();
+        $data = [];
         if (count($messages) > 0) {
-
             foreach ($messages as $message) {
-                $data[] = array(
+                $data[] = [
                     "id" => $message->id,
                     "asunto" => $message->subject,
                     "nombre" => $message->sender(),
                     "fecha" => $message->datetime()
-                );
+                ];
             }
-
         }
         return response()->json(['status' => 'ok', 'list' => $data]);
-
     }
+
+    /**
+     * 
+     */
+    public function getMessagesSent()
+    {
+        $messages = $this->student->messagesSent()->orderBy("id", "DESC")->get();
+        $data = [];
+        if (count($messages) > 0) {
+            foreach ($messages as $msg) {
+                $data[] = [
+                    "id" => $msg->id,
+                    "name" => $msg->sender(),
+                    "subject" => $msg->subject,
+                    "datetime" => $msg->datetime()
+                ];
+            }
+        }
+        return response()->json(['status' => 'ok', 'list' => $data]);
+    }
+
+
 
     /** get message by id
      * @param $id
@@ -76,6 +95,29 @@ class MessageController extends BaseController
         }
     }
 
+
+    /**
+     * get message sent
+     */
+    public function getMessageSent($id)
+    {
+        $sent = StudentMessageSent::where("id", $id)->whereEstId($this->student->id)->first();
+        if (isset($sent->id)) {
+            $data = [
+                "id" => $sent->id,
+                "content" => $sent->content,
+                "subject" => $sent->subject,
+                "profile" => $sent->tipo,
+                "sender" => $sent->senderObject(),
+                "datetime" => $sent->datetime()
+            ];
+            return response()->json(['status' => 'ok', 'message' => $data]);
+        } else {
+            return response()->json(['status' => 'error', 'message' => trans('students.inbox.no_message')], 403);
+        }
+    }
+
+
     /** delete message by id
      * @param $id
      * @return mixed
@@ -83,15 +125,29 @@ class MessageController extends BaseController
     public function deleteMessage($id)
     {
         try {
-             StudentMessage::where("id", $id)->where("para", $this->student->id)->delete();
+            StudentMessage::where("id", $id)->wherePara($this->student->id)->delete();
             return response()->json(['status' => 'ok', 'message' => trans('commons.message.deleted')]);
         } catch (\Exception $ex) {
-            return response()->json(['status' => 'error', 'message' => trans('commons.message.notfound')], 500);
+            return response()->json(['status' => 'error', 'message' => trans('commons.message.notfound')], 403);
         }
-
     }
 
-    /**create new message
+    /**
+     * delete message sent
+     * @param $id
+     */
+    public function deleteMessageSent($id)
+    {
+        try {
+            StudentMessageSent::where("id", $id)->whereEstId($this->student->id)->delete();
+            return response()->json(['status' => 'ok', 'message' => trans('commons.message.deleted')]);
+        } catch (\Exception $ex) {
+            return response()->json(['status' => 'error', 'message' => trans('commons.message.notfound')], 403);
+        }
+    }
+
+
+    /** create new message
      * @param Request $req
      * @return mixed
      */
@@ -103,17 +159,20 @@ class MessageController extends BaseController
             'type' => 'required|numeric',
             'to' => 'required|numeric',
             'message' => 'required|min:5'
-        ], ['required' => trans('commons.validation.required.all'),
+        ], [
+            'required' => trans('commons.validation.required.all'),
             'numeric' => trans('commons.validation.numeric'),
             'min' => trans('commons.validation.min'),
             'max' => trans('commons.validation.max'),
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails()) 
+        {
             $error = $validator->errors()->first();
             return response()->json(['status' => 'error', 'message' => $error], 400);
         }
 
+        DB::beginTransaction();
 
         if ($req->type) {
             $message = new AdminMessage();
@@ -129,8 +188,16 @@ class MessageController extends BaseController
         $message->fecha = Carbon::now();
         $message->save();
 
+        // create message sent
+        StudentMessageSent::create([
+            'est_id' => $this->student->id,
+            'tipo' => $req->type,
+            'para' => $req->to,
+            'subject' => $req->subject,
+            'content' => $req->message,
+        ]);
+        DB::commit();
+
         return response()->json(['status' => 'ok', 'message' => trans('students.inbox.new.success')]);
-
     }
-
 }

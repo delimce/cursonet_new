@@ -1,5 +1,5 @@
 <section>
-    <span class="in-title content-home">Bandeja de entrada </span>
+    <span class="in-title content-home">@lang('students.inbox.title')</span>
 
     @foreach ($messages as $item)
         <div class="row @if (!$item->leido) subtext @endif ">
