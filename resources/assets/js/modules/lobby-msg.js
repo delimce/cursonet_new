@@ -16,7 +16,9 @@ $("#inbox").on("click-cell.bs.table", function (field, value, row, $element) {
         ///delelete message
         $("#delete-msg").data("msg-id", msgId); //setter
         ///reply message
-        $("#inbox-reply").val(response.data.message.profile + "_" + sender.id);
+        let sender = response.data.message.sender
+        let reply = response.data.message.profile + "_" + sender.id;
+        $("#inbox-reply").val(reply);
       })
       .catch(function (error) {
         quitSession(error, api_url + "student / logout");
@@ -45,26 +47,25 @@ $("#delete-msg").confirm({
   },
 });
 
-
 $("#delete-sent").confirm({
-    title: "Borrar mensaje Enviado",
-    content: "Esta seguro de borrar este mensaje?",
-    buttons: {
-      confirm: function () {
-        let msgId = $("#delete-sent").data("msg-id");
-        axios
-          .delete(api_url + "api/student/message/sent/" + msgId)
-          .then(function (response) {
-            $("#inbox-read").hide();
-            reloadList("api/student/message/sent/all", "#sent");
-          })
-          .catch(function (error) {
-            quitSession(error, api_url + "student / logout");
-          });
-      },
-      cancel: function () {},
+  title: "Borrar mensaje Enviado",
+  content: "Esta seguro de borrar este mensaje?",
+  buttons: {
+    confirm: function () {
+      let msgId = $("#delete-sent").data("msg-id");
+      axios
+        .delete(api_url + "api/student/message/sent/" + msgId)
+        .then(function (response) {
+          $("#inbox-read").hide();
+          reloadList("api/student/message/sent/all", "#sent");
+        })
+        .catch(function (error) {
+          quitSession(error, api_url + "student / logout");
+        });
     },
-  });
+    cancel: function () {},
+  },
+});
 
 $("#reply-msg").on("click", function (event) {
   let reply_text = "[Respuesta] " + $("#inbox-subject").html();
@@ -204,7 +205,4 @@ const showContentMessage = function (response) {
   $("#user-img").on("error", function () {
     $("#inbox-picture").html('<i class="fas fa-user-circle"></i>');
   });
-
 };
-
-
