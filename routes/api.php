@@ -35,6 +35,14 @@ $router->group(
             $router->delete('/{id}', 'MessageController@deleteMessage');
         }
         );
+        ///messages sent
+        $router->group(
+            ['prefix' => 'message/sent'], function () use ($router) {
+            $router->get('/all', 'MessageController@getMessagesSent');
+            $router->get('/{id}', 'MessageController@getMessageSent');
+            $router->delete('/{id}', 'MessageController@deleteMessageSent');
+        }
+        );
         //account
         $router->group(
             ['prefix' => 'account'], function () use ($router) {

@@ -117,7 +117,7 @@ class ClassroomController extends BaseController
             $resource = File::findOrFail($res_id);
             //file exist
             if ($resource->tipo == 0 && Storage::disk('courses')->has($resource->filepath)) {
-                $resource->download++;
+                $resource->downloads++;
                 $resource->save();
                 $file = Storage::disk('courses')->url($resource->filepath);
 
