@@ -2,6 +2,7 @@
 
 return [
     'created_by' => 'Creado por:',
+    'created_at' => 'Fecha Creado',
     'search' => 'Buscar',
     'name' => 'Nombre',
     'group' => 'Sección',

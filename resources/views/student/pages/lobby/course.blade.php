@@ -15,15 +15,19 @@
 
     <div style="float: left; width: 50%">
         <div>
-            <span class="subtext">Fecha creado:</span>
+            <span class="subtext">@lang('commons.created_at')</span>
             <span id="course_initdate"></span>
         </div>
         <div>
-            <span class="subtext">n# de temas:</span>
+            <span class="subtext">@lang('commons.group')</span>
+            <span id="course_group"></span>
+        </div>
+        <div>
+            <span class="subtext">@lang('students.classroom.modules.ntopics')</span>
             <span id="course_ntopics"></span>
         </div>
         <div>
-            <span class="subtext">Facilitador:</span>
+            <span class="subtext">@lang('commons.teacher')</span>
             <span id="course_professor"><a href="#">Luis De Lima</a></span>
         </div>
     </div>

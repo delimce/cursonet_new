@@ -10,6 +10,7 @@ return [
     'email' => 'Email',
     'token_unknown' => 'token incorrecto',
     'password' => 'Contraseña',
+    'teacher' => 'Profesor',
     'teachers' => 'Profesores',
     'support' => 'Soporte técnico',
     'support.message' => 'Su mensaje para nosostros Aquí',
@@ -89,6 +90,7 @@ return [
     //CLASSROOM
     'classroom.title' => 'Aula Virtual',
     'classroom.modules.subject' => 'Tema',
+    'classroom.modules.ntopics' => 'Nº temas',
     'classroom.modules.select' => 'Seleccione el tema',
     'classroom.modules.list' => 'Lista de Temas',
     'classroom.modules.show' => 'Mostrar temas',

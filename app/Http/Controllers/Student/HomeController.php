@@ -86,6 +86,7 @@ class HomeController extends BaseController
             "id" => $course->id,
             "nombre" => $course->nombre,
             "init" => $course->createdAt(),
+            "group" =>  $estGroup->group->nombre,
             "author" => $course->author(),
             "duracion" => $course->duracion,
             "wall" => $wallMessages,
