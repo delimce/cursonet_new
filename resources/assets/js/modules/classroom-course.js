@@ -75,6 +75,7 @@ const loadCourseInformation = function (courseId) {
                 $("#course_wall").html(parseCourseWall(detail.wall))
                 $("#course_name").html(detail.nombre);
                 $("#course_duration").html(detail.duracion);
+                $("#course_group").html(detail.group);
                 $("#course_description").html(detail.descripcion);
                 $("#course_initdate").html(detail.init);
                 $("#course_ntopics").html(detail.ntopics);
