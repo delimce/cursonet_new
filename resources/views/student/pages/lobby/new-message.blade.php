@@ -34,3 +34,18 @@
         </div>
     </div>
 </div>
+@push('scripts')
+    <script>
+        CKEDITOR.replace('mcontent', {
+            toolbar: [
+                {name: 'mode', items: ['Source']},
+                {name: 'clipboard', items: ['PasteText', 'Undo', 'Redo']},
+                {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
+                {name: 'basicstyles', items: ['Bold', 'Italic', 'Subscript', 'Superscript', 'RemoveFormat']},
+                {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
+                {name: 'tools', items: ['Maximize', 'ShowBlocks']},
+            ],
+            language: 'es'
+        });
+    </script>
+@endpush

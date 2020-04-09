@@ -31,8 +31,6 @@
             </div>
         </div>
 
-
-
         <div class="cn-container" id="inbox-read">
 
             <button type="button" class="close to-close readCollapse" aria-label="Close">
@@ -71,21 +69,6 @@
     </div>
     @include('student.pages.lobby.new-message')
 @endsection
-@push('scripts')
-    <script>
-        CKEDITOR.replace('mcontent', {
-            toolbar: [
-                {name: 'mode', items: ['Source']},
-                {name: 'clipboard', items: ['PasteText', 'Undo', 'Redo']},
-                {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
-                {name: 'basicstyles', items: ['Bold', 'Italic', 'Subscript', 'Superscript', 'RemoveFormat']},
-                {name: 'paragraph', items: ['NumberedList', 'BulletedList']},
-                {name: 'tools', items: ['Maximize', 'ShowBlocks']},
-            ],
-            language: 'es'
-        });
-    </script>
-@endpush
 @push('scripts-ready')
     $('#inbox').bootstrapTable();
     $('#sent').bootstrapTable();

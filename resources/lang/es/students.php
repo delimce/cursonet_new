@@ -86,6 +86,8 @@ return [
     'profile.change.password.success' => 'Cambio de clave exitoso',
     'profile.change.password.nomatch' => 'Las claves no coinciden',
     'profile.change.exist' => 'Email o Cédula se encuentran en uso',
+    //TEACHERS
+    'teachers.notfound' => 'No tiene profesores asignados',
     //CLASSROOM
     'classroom.title' => 'Aula Virtual',
     'classroom.modules.subject' => 'Tema',
