@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\Cn2\Admin;
+use App\Models\Cn2\AdminCourse;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Models\Cn2\Student;
@@ -184,17 +185,24 @@ class HomeController extends BaseController
     /** teachers of course's groups
      * @return mixed
      */
-    public function getTeachers()
+    public function getTeachers(Request $req)
     {
 
+        $teachers = [];
+        if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
+
+            $courseId = $req->session()->get("courseSelected");
+            $teachers = AdminCourse::with('admin')->whereCursoId($courseId)->get();
+        }
+        /* 
         $groups = $this->student->groups()->with('group')->get();
-        $teacher_array = array();
+        $teacher_array = [];
         $groups->each(function ($value) use (&$teacher_array) {
             $teacher_array[] = $value->group->prof_id;
         });
 
         ///get teachers
-        $teachers = Admin::whereIn('id', $teacher_array)->get();
+        $teachers = Admin::whereIn('id', $teacher_array)->get(); */
 
         return view("student.pages.lobby.teachers", ["data" => $teachers]);
     }

@@ -12,4 +12,9 @@ class Admin extends Model
         'pass',
     ];
 
+    public function courses()
+    {
+        return $this->hasMany('App\Models\Cn2\AdminCourse', 'admin_id');
+    }
+
 }
