@@ -12,9 +12,13 @@
                         <div class="card-header black">@lang('commons.teacher') 
                             <span id="teacher_{{$teacher->admin->id}}">{{$teacher->admin->nombre}} {{$teacher->admin->apellido}}</span></div>
                         <div class="card-body">
-                            <h1>
-                                <i class="fas fa-user-circle"></i>
-                            </h1>
+                            @if($teacher->admin->img!=null)
+                                <img src="{{$teacher->admin->img}}">
+                            @else
+                                <h1>
+                                    <i class="fas fa-user-circle"></i>
+                                </h1>
+                            @endif
                             <p class="card-text">{{str_limit($teacher->admin->sintesis,200)}}</p>
                         </div>
                         <div class="card-footer text-muted">

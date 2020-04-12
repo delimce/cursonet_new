@@ -197,12 +197,14 @@ const showContentMessage = function(response) {
   $("#inbox-subject").html(response.data.message.subject);
   $("#inbox-content").html(response.data.message.content);
   $("#inbox-date").html(response.data.message.date);
-  let profile = !response.data.message.profile ? "Est." : "Prof.";
-  $("#inbox-role").html(profile);
   let sender = response.data.message.sender;
+  let profile = !response.data.message.profile ? "Est." : "Prof.";
+  let img = !response.data.message.profile ? sender.foto : sender.img;
+  $("#inbox-role").html(profile);
+  
   $("#inbox-name").html(sender.nombre + " " + sender.apellido);
-  if (sender.foto != null) {
-    let picture = '<img id="user-img" src="' + sender.foto + '" />';
+  if (img != null) {
+    let picture = '<img id="user-img" src="' + img + '" />';
     $("#inbox-picture").html(picture);
   } else {
     $("#inbox-picture").html('<i class="fas fa-user-circle"></i>');
