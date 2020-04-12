@@ -194,16 +194,6 @@ class HomeController extends BaseController
             $courseId = $req->session()->get("courseSelected");
             $teachers = AdminCourse::with('admin')->whereCursoId($courseId)->get();
         }
-        /* 
-        $groups = $this->student->groups()->with('group')->get();
-        $teacher_array = [];
-        $groups->each(function ($value) use (&$teacher_array) {
-            $teacher_array[] = $value->group->prof_id;
-        });
-
-        ///get teachers
-        $teachers = Admin::whereIn('id', $teacher_array)->get(); */
-
         return view("student.pages.lobby.teachers", ["data" => $teachers]);
     }
 }
