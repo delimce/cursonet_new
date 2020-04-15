@@ -4,93 +4,98 @@
 
 ///classroom
 $router->group(
-    ['prefix' => 'api/admin', 'namespace' => 'Api'], function () use ($router) {
-    $router->post('/class/file', 'AdminController@saveFileResource');
-    $router->get('/file/{res_id}', 'AdminController@openFileResource');
-    $router->delete('/file/delete/{res_id}', 'AdminController@deleteFileResource');
-
-}
+    ['prefix' => 'api/admin', 'namespace' => 'Api'],
+    function () use ($router) {
+        $router->post('/class/file', 'AdminController@saveFileResource');
+        $router->get('/file/{res_id}', 'AdminController@openFileResource');
+        $router->delete('/file/delete/{res_id}', 'AdminController@deleteFileResource');
+    }
 );
 
 //***********************STUDENTS************************************
 
 //initial
 $router->group(
-    ['prefix' => 'api/student', 'namespace' => 'Api'], function () use ($router) {
-    $router->post('/login', 'StudentController@login');
-    $router->post('/signup', 'StudentController@signUp');
-    $router->get('/email', 'StudentController@testEmail');
-    $router->post('/email/validate', 'StudentController@emailValidation');
-    $router->post('/forgotten', 'StudentController@forgotten');
-    $router->post('/restore', 'StudentController@restorePassword');
+    ['prefix' => 'api/student', 'namespace' => 'Api'],
+    function () use ($router) {
+        $router->post('/login', 'StudentController@login');
+        $router->post('/signup', 'StudentController@signUp');
+        $router->get('/email', 'StudentController@testEmail');
+        $router->post('/email/validate', 'StudentController@emailValidation');
+        $router->post('/forgotten', 'StudentController@forgotten');
+        $router->post('/restore', 'StudentController@restorePassword');
 
-    $router->group(
-        ['middleware' => ['api']], function () use ($router) {
-        ///messages
         $router->group(
-            ['prefix' => 'message'], function () use ($router) {
-            $router->put('/', 'MessageController@createMessage');
-            $router->get('/all', 'MessageController@getMessages');
-            $router->get('/{id}', 'MessageController@getMessage');
-            $router->delete('/{id}', 'MessageController@deleteMessage');
-        }
-        );
-        ///messages sent
-        $router->group(
-            ['prefix' => 'message/sent'], function () use ($router) {
-            $router->get('/all', 'MessageController@getMessagesSent');
-            $router->get('/{id}', 'MessageController@getMessageSent');
-            $router->delete('/{id}', 'MessageController@deleteMessageSent');
-        }
-        );
-        //account
-        $router->group(
-            ['prefix' => 'account'], function () use ($router) {
-            $router->get('/contacts', 'AccountController@getContacts');
-            $router->put('/settings', 'AccountController@setSetting');
-            $router->put('/changePass', 'AccountController@changePassword');
-            $router->put('/profile', 'AccountController@saveProfile');
-        });
-        //ratings
-        $router->group(
-            ['prefix' => 'ratings'], function () use ($router) {
-            $router->get('/', 'RatingsController@list');
-            $router->get('/{id}', 'RatingsController@getDetail');
-        });
+            ['middleware' => ['api']],
+            function () use ($router) {
+                ///messages
+                $router->group(
+                    ['prefix' => 'message'],
+                    function () use ($router) {
+                        $router->put('/', 'MessageController@createMessage');
+                        $router->get('/all', 'MessageController@getMessages');
+                        $router->get('/{id}', 'MessageController@getMessage');
+                        $router->delete('/{id}', 'MessageController@deleteMessage');
+                    }
+                );
+                ///messages sent
+                $router->group(
+                    ['prefix' => 'message/sent'],
+                    function () use ($router) {
+                        $router->get('/all', 'MessageController@getMessagesSent');
+                        $router->get('/{id}', 'MessageController@getMessageSent');
+                        $router->delete('/{id}', 'MessageController@deleteMessageSent');
+                    }
+                );
+                //account
+                $router->group(
+                    ['prefix' => 'account'],
+                    function () use ($router) {
+                        $router->get('/contacts', 'AccountController@getContacts');
+                        $router->put('/settings', 'AccountController@setSetting');
+                        $router->put('/changePass', 'AccountController@changePassword');
+                        $router->put('/profile', 'AccountController@saveProfile');
+                        $router->post('/support', 'AccountController@sendSupportMessage');
+                    }
+                );
+                //ratings
+                $router->group(
+                    ['prefix' => 'ratings'],
+                    function () use ($router) {
+                        $router->get('/', 'RatingsController@list');
+                        $router->get('/{id}', 'RatingsController@getDetail');
+                    }
+                );
 
-        //classroom
-        $router->group(
-            ['prefix' => 'class'], function () use ($router) {
-            $router->get('/file/{res_id}', 'ClassroomController@getFile');
+                //classroom
+                $router->group(
+                    ['prefix' => 'class'],
+                    function () use ($router) {
+                        $router->get('/file/{res_id}', 'ClassroomController@getFile');
 
-            //topic
-            $router->group(
-                ['prefix' => '/topic'], function () use ($router) {
-                $router->get('/all/{course_id}', 'ClassroomController@getTopics');
-                $router->get('/{topic_id}', 'ClassroomController@getTopicInfo');
-                $router->get('/{topic_id}/group/{group_id}', 'ClassroomController@getTopicInfo');
+                        //topic
+                        $router->group(
+                            ['prefix' => '/topic'],
+                            function () use ($router) {
+                                $router->get('/all/{course_id}', 'ClassroomController@getTopics');
+                                $router->get('/{topic_id}', 'ClassroomController@getTopicInfo');
+                                $router->get('/{topic_id}/group/{group_id}', 'ClassroomController@getTopicInfo');
+                            }
+                        );
+
+                        ///forum
+                        $router->group(
+                            ['prefix' => '/forum'],
+                            function () use ($router) {
+                                $router->post('/post', 'ClassroomController@saveForumPost');
+                                $router->get('/topic/{topic_id}/group/{group_id}', 'ClassroomController@getForumByTopic');
+                                $router->put('/post/like', 'ClassroomController@forumPostLike');
+                                $router->put('/post/reply', 'ClassroomController@saveForumPostReply');
+                            }
+                        );
+                    }
+                );
             }
-            );
-
-            ///forum
-            $router->group(
-                ['prefix' => '/forum'], function () use ($router) {
-                $router->post('/post', 'ClassroomController@saveForumPost');
-                $router->get('/topic/{topic_id}/group/{group_id}', 'ClassroomController@getForumByTopic');
-                $router->put('/post/like', 'ClassroomController@forumPostLike');
-                $router->put('/post/reply', 'ClassroomController@saveForumPostReply');
-            }
-            );
-
-        }
         );
-
     }
-    );
-}
 );
-
-
-
-
-

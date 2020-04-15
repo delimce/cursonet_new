@@ -1,5 +1,5 @@
 //behavior inbox
-$("#inbox").on("click-cell.bs.table", function(field, value, row, $element) {
+$("#inbox").on("click-cell.bs.table", function (field, value, row, $element) {
   let me = $(this);
   let msgId = $element.id;
   if (me.hasClass("selected")) {
@@ -8,7 +8,7 @@ $("#inbox").on("click-cell.bs.table", function(field, value, row, $element) {
   } else if (msgId != undefined) {
     axios
       .get(api_url + "api/student/message/" + msgId)
-      .then(function(response) {
+      .then(function (response) {
         showContentMessage(response);
         $("#reply-msg").show();
         $("#delete-msg").show();
@@ -20,7 +20,7 @@ $("#inbox").on("click-cell.bs.table", function(field, value, row, $element) {
         let reply = response.data.message.profile + "_" + sender.id;
         $("#inbox-reply").val(reply);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         quitSession(error, api_url + "student / logout");
       });
   }
@@ -30,20 +30,20 @@ $("#delete-msg").confirm({
   title: "Borrar mensaje",
   content: "Esta seguro de borrar este mensaje?",
   buttons: {
-    confirm: function() {
+    confirm: function () {
       let msgId = $("#delete-msg").data("msg-id");
       console.log(msgId);
       axios
         .delete(api_url + "api/student/message/" + msgId)
-        .then(function(response) {
+        .then(function (response) {
           $("#inbox-read").hide();
           reloadList("api/student/message/all", "#inbox");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           quitSession(error, api_url + "student / logout");
         });
     },
-    cancel: function() {}
+    cancel: function () { }
   }
 });
 
@@ -51,23 +51,23 @@ $("#delete-sent").confirm({
   title: "Borrar mensaje Enviado",
   content: "Esta seguro de borrar este mensaje?",
   buttons: {
-    confirm: function() {
+    confirm: function () {
       let msgId = $("#delete-sent").data("msg-id");
       axios
         .delete(api_url + "api/student/message/sent/" + msgId)
-        .then(function(response) {
+        .then(function (response) {
           $("#inbox-read").hide();
           reloadList("api/student/message/sent/all", "#sent");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           quitSession(error, api_url + "student / logout");
         });
     },
-    cancel: function() {}
+    cancel: function () { }
   }
 });
 
-$("#reply-msg").on("click", function(event) {
+$("#reply-msg").on("click", function (event) {
   let reply_text = "[Respuesta] " + $("#inbox-subject").html();
   let reply_val = $("#inbox-reply").val();
   let name = $("#inbox-name").html();
@@ -81,7 +81,7 @@ $("#reply-msg").on("click", function(event) {
   $("#new-message").modal();
 });
 
-$(".msg-to-teacher").on("click", function(event) {
+$(".msg-to-teacher").on("click", function (event) {
   let myId = $(this).data("to");
   let name = $("#teacher_" + myId).html();
   let reply_contact = '<div class="contact-selected">' + name + "</div>";
@@ -93,7 +93,7 @@ $(".msg-to-teacher").on("click", function(event) {
   $("#new-message").modal();
 });
 
-$("#msg-send").on("click", function(event) {
+$("#msg-send").on("click", function (event) {
   let to = $("#to").val();
   let destiny = to.split("_");
   let subject = $("#subject").val();
@@ -105,27 +105,27 @@ $("#msg-send").on("click", function(event) {
       subject: subject,
       message: content
     })
-    .then(function(response) {
+    .then(function (response) {
       $("#new-message").modal("hide");
       showSuccess(response.data.message, 2000);
       reloadList("api/student/message/sent/all", "#sent");
       $("#subject").val("");
       CKEDITOR.instances.mcontent.setData("");
     })
-    .catch(function(error) {
+    .catch(function (error) {
       showAlert(error.response.data.message);
     });
   event.preventDefault();
 });
 
 ///reload select list
-const reloadToSelectBox = function() {
+const reloadToSelectBox = function () {
   axios
     .get(api_url + "api/student/account/contacts")
-    .then(function(response) {
+    .then(function (response) {
       let options = '<option value="">Seleccione</option>';
       let data = response.data.contacts;
-      _.each(data, function(item) {
+      _.each(data, function (item) {
         let isTeacher = _.has(item, "es_admin");
         let id = isTeacher ? "1_" + item.id : "0_" + item.id;
         let profile = isTeacher ? "Profesor" : "Estudiante";
@@ -150,12 +150,12 @@ const reloadToSelectBox = function() {
         showIcon: false
       });
     })
-    .catch(function(error) {
+    .catch(function (error) {
       showAlert(error.response.data.message);
     });
 };
 
-$("#new-msg").on("click", function(event) {
+$("#new-msg").on("click", function (event) {
   let select =
     '<select name="to" id="to" data-style="form-select" data-live-search-placeholder="Buscar contacto" data-live-search="true" class="selectpickerTo"  data-width="320px"></select>';
   $(".select-to").html(select);
@@ -166,7 +166,7 @@ $("#new-msg").on("click", function(event) {
 });
 
 //behavior sent
-$("#sent").on("click-cell.bs.table", function(field, value, row, $element) {
+$("#sent").on("click-cell.bs.table", function (field, value, row, $element) {
   let me = $(this);
   let msgId = $element.id;
   if (me.hasClass("selected")) {
@@ -175,7 +175,7 @@ $("#sent").on("click-cell.bs.table", function(field, value, row, $element) {
   } else if (msgId != undefined) {
     axios
       .get(api_url + "api/student/message/sent/" + msgId)
-      .then(function(response) {
+      .then(function (response) {
         showContentMessage(response);
         $("#reply-msg").hide();
         $("#delete-msg").hide();
@@ -183,7 +183,7 @@ $("#sent").on("click-cell.bs.table", function(field, value, row, $element) {
         ///delelete message
         $("#delete-sent").data("msg-id", msgId); //setter
       })
-      .catch(function(error) {
+      .catch(function (error) {
         quitSession(error, api_url + "student / logout");
       });
   }
@@ -192,7 +192,7 @@ $("#sent").on("click-cell.bs.table", function(field, value, row, $element) {
 /**
  * function
  */
-const showContentMessage = function(response) {
+const showContentMessage = function (response) {
   $("#inbox-read").show();
   $("#inbox-subject").html(response.data.message.subject);
   $("#inbox-content").html(response.data.message.content);
@@ -201,7 +201,7 @@ const showContentMessage = function(response) {
   let profile = !response.data.message.profile ? "Est." : "Prof.";
   let img = !response.data.message.profile ? sender.foto : sender.img;
   $("#inbox-role").html(profile);
-  
+
   $("#inbox-name").html(sender.nombre + " " + sender.apellido);
   if (img != null) {
     let picture = '<img id="user-img" src="' + img + '" />';
@@ -209,7 +209,23 @@ const showContentMessage = function(response) {
   } else {
     $("#inbox-picture").html('<i class="fas fa-user-circle"></i>');
   }
-  $("#user-img").on("error", function() {
+  $("#user-img").on("error", function () {
     $("#inbox-picture").html('<i class="fas fa-user-circle"></i>');
   });
 };
+
+/**
+ * tech support message
+ */
+$("#support-message").on("click", function (event) {
+  let message = CKEDITOR.instances.msupport.getData();
+  axios.post(api_url + 'api/student/account/support', { "contenido": message })
+    .then(function (response) {
+      showSuccess(response.data.message, 2000)
+      $("#support").modal("hide");
+      CKEDITOR.instances.msupport.setData("");
+    }).catch(function (error) {
+      showAlert(error.response.data.message);
+    });
+    event.preventDefault();
+});
