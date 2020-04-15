@@ -28,6 +28,7 @@ return [
     'student' => 'Est.',
     'teacher' => 'Prof.',
     'all' => 'Todos',
+    'message.sent' => 'Mensaje enviado con éxito',
     'message.deleted' => 'Mensaje borrado con exito',
     'message.notfound' => 'Mensaje no encontrado',
     'file.notfound' => 'Archivo no encontrado',

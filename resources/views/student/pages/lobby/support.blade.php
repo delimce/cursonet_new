@@ -27,7 +27,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" style="width: 150px"
+                <button type="button" style="width: 150px" id="support-message"
                         class="btn btn-lg btn-block btn-primary">
                     <span class="glyphicon glyphicon-search"></span>
                     @lang('students.inbox.send')

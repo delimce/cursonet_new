@@ -15,6 +15,7 @@ return [
     'support' => 'Soporte técnico',
     'support.message' => 'Su mensaje para nosostros Aquí',
     'support.title' => 'Ante cualquier inconveniente, Escribanos a soporte técnico',
+    'support.request' => 'Solicitud de soporte técnico',
     'preloader' => 'cargando...',
     'sending' => 'Enviando...',
     //LOGIN

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Luis De Lima
@@ -16,11 +17,13 @@ use DB;
 use Carbon\Carbon;
 use App\Models\Cn2\Student;
 use App\Models\Cn2\GroupStudent;
+use App\Models\Cn2\TechSupport;
 use Validator;
 
 class AccountController extends BaseController
 {
     private $student;
+    const PREF_STUDENT = 'est';
 
     /**
      * Create a new controller instance.
@@ -48,7 +51,7 @@ class AccountController extends BaseController
             $teacher_array[] = $value->group->prof_id;
         });
 
-        $students = GroupStudent:: with(['Student' => function ($q) use ($estId) {
+        $students = GroupStudent::with(['Student' => function ($q) use ($estId) {
             // Query the name field in status table
             $q->where('id', '!=', $estId)->where("share_info", 1);
         }])->whereIn('grupo_id', $group_array)->get();
@@ -78,7 +81,8 @@ class AccountController extends BaseController
         $validator = Validator::make($req->all(), [
             'field' => 'required',
             'status' => 'required'
-        ], ['required' => trans('commons.validation.required')
+        ], [
+            'required' => trans('commons.validation.required')
         ]);
 
         if ($validator->fails()) {
@@ -94,7 +98,6 @@ class AccountController extends BaseController
         } catch (Exception $ex) {
             return response()->json(['status' => 'error', 'message' => "setting do not exists"], 500);
         }
-
     }
 
 
@@ -103,7 +106,8 @@ class AccountController extends BaseController
         $validator = Validator::make($req->all(), [
             'pass' => 'required|min:5',
             'pass2' => 'required|min:5'
-        ], ['required' => trans('commons.validation.required'),
+        ], [
+            'required' => trans('commons.validation.required'),
             'min' => trans('commons.validation.min'),
         ]);
 
@@ -119,8 +123,6 @@ class AccountController extends BaseController
         } else {
             return response()->json(['status' => 'error', 'message' => trans('students.profile.change.password.nomatch')], 400);
         }
-
-
     }
 
     public function saveProfile(Request $req)
@@ -133,7 +135,8 @@ class AccountController extends BaseController
             'sexo' => 'required',
             'fecha_nac' => 'required|date',
             'email' => 'required|email',
-        ], ['required' => trans('commons.validation.required'),
+        ], [
+            'required' => trans('commons.validation.required'),
             'min' => trans('commons.validation.min'),
             'email' => trans('commons.validation.email'),
             'date' => trans('commons.validation.date'),
@@ -167,7 +170,30 @@ class AccountController extends BaseController
         $this->student->save();
 
         return response()->json(['status' => 'ok', 'message' => trans('students.profile.data.save')]);
-
     }
 
+
+
+    public function sendSupportMessage(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'contenido' => 'required|min:5',
+        ], [
+            'required' => trans('commons.validation.required'),
+            'min' => trans('commons.validation.min'),
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response()->json(['status' => 'error', 'message' => $error], 400);
+        }
+
+        TechSupport::create([
+            'persona_id' => $this->student->id,
+            'tipo' => self::PREF_STUDENT,
+            'titulo' => trans('students.support.request'),
+            'contenido' => $req->contenido,
+        ]);
+        return response()->json(['status' => 'ok', 'message' => trans('commons.message.sent')]);
+    }
 }
