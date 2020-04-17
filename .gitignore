@@ -5,3 +5,4 @@
 /public/assets/
 /public/mix-manifest.json
 .env
+.phpunit.result.cache
