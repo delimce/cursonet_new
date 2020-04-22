@@ -29,6 +29,14 @@ class Student extends Model
     }
 
     /**
+     * @return string
+     */
+    public function fullname()
+    {
+        return $this->nombre." ".$this->apellido;
+    }
+
+    /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array

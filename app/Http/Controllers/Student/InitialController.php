@@ -34,7 +34,6 @@ class InitialController extends BaseController
         } else {
             return redirect()->route('student.login');
         }
-
     }
 
     public function login()
@@ -75,7 +74,6 @@ class InitialController extends BaseController
         } else {
             return response()->json(['status' => 'fail', 'message' => trans('students.login.password.error')], 401);
         }
-
     }
 
     public function forgotPassword()
@@ -88,14 +86,21 @@ class InitialController extends BaseController
         return view('student.pages.initial.register');
     }
 
-    public function userActivated($apikey)
+    public function userActivate($apikey)
     {
-        $user = Student::where('token', $apikey)->first();
+        $token = trim($apikey);
+        $user = Student::where('token', $token)->first();
         if (!is_null($user)) {
-            $newapikey = StudentController::newUserToken();
-            Student::where('email', $user->email)->update(['token' => $newapikey, "activo" => 1]);
+            $newApikey = StudentController::newUserToken();
+            Student::where('email', $user->email)->update(['token' => $newApikey, "activo" => 1]);
+            return redirect()->route('activated', ['username' => $user->fullname()]);
         }
-        return view('student.pages.initial.activated', ['user' => $user]);
+        return response(view('errors.403'), 403);
+    }
+
+    public function userActivatedSuccess(Request $req)
+    {
+        return view('student.pages.initial.activated', ['username' => $req->username]);
     }
 
     public function restoringPassword($apikey)
