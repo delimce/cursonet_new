@@ -27,6 +27,7 @@ return [
     'go_main' => 'Ingresar a la página ',
     'student' => 'Est.',
     'teacher' => 'Prof.',
+    'unknow' => 'Desconocid@',
     'all' => 'Todos',
     'message.sent' => 'Mensaje enviado con éxito',
     'message.deleted' => 'Mensaje borrado con exito',
