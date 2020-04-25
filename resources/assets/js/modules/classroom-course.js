@@ -19,7 +19,7 @@ $('#file-list').on('click-cell.bs.table', function (field, value, row, $element)
     }
 });
 
-$('.module-item').on('click', function (event) {
+$('.module-item').on('click', function (e) {
     let topic_id = $(this).data('topic');
     let group_id = $(this).data('group');
     $(".current-module").removeClass("current-module")
@@ -29,9 +29,9 @@ $('.module-item').on('click', function (event) {
             $('#myContent').html(response.data.info.contenido)
             $('#topic-selected').html(response.data.info.titulo)
             $('#file-list').bootstrapTable('load', response.data.info.files);
-
             //  switchForumView();
             $('#forum-list').bootstrapTable('load', response.data.info.forums);
+            goToContent()
 
         }).catch(function (error) {
             showAlert("error al seleccionar el curso");
@@ -90,4 +90,10 @@ const loadCourseInformation = function (courseId) {
         showAlert("Error al seleccionar el curso")
         $("#course_button").hide();
     });
+}
+
+const goToContent = function()
+{
+    $('.active').removeClass('active'); 
+    $('#myContent').tab('show')
 }
