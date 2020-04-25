@@ -28,14 +28,10 @@ $('.module-item').on('click', function (event) {
         .then(function (response) {
             $('#myContent').html(response.data.info.contenido)
             $('#topic-selected').html(response.data.info.titulo)
-            $('#file-list').bootstrapTable('load', {
-                data: response.data.info.files
-            });
+            $('#file-list').bootstrapTable('load', response.data.info.files);
 
             //  switchForumView();
-            $('#forum-list').bootstrapTable('load', {
-                data: response.data.info.forums
-            });
+            $('#forum-list').bootstrapTable('load', response.data.info.forums);
 
         }).catch(function (error) {
             showAlert("error al seleccionar el curso");
