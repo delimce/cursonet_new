@@ -427,6 +427,7 @@ input[type="search"] {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    border: #666 1px solid;
 }
 
 .home-page section div {
@@ -474,6 +475,7 @@ input[type="search"] {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    border: #666 1px solid;
 }
 
 #classroom-tabs {
@@ -523,6 +525,7 @@ input[type="search"] {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    border: #666 1px solid;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
     height: 100%;
@@ -623,6 +626,7 @@ input[type="search"] {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    border: #666 1px solid;
 
 }
 

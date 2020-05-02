@@ -29,7 +29,25 @@ class StudentController extends BaseController
      */
     static function newUserToken()
     {
-        return md5(str_random(40));
+        return sprintf(
+            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            // 32 bits for "time_low"
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            // 16 bits for "time_mid"
+            mt_rand(0, 0xffff),
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 4
+            mt_rand(0, 0x0fff) | 0x4000,
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+            mt_rand(0, 0x3fff) | 0x8000,
+            // 48 bits for "node"
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff)
+        );
     }
 
     public function login(Request $req)
@@ -39,7 +57,7 @@ class StudentController extends BaseController
             'password' => 'required'
         ]);
 
-        $user = Student::select("id","nombre","apellido","id_number","email","foto","activo","pass","token")->where('email', $req->input('email'))->first();
+        $user = Student::select("id", "nombre", "apellido", "id_number", "email", "foto", "activo", "pass", "token")->where('email', $req->input('email'))->first();
         if (is_null($user))
             return response()->json(['status' => 'error', 'message' => trans('students.login.email.unknown')], 401);
 
@@ -82,7 +100,6 @@ class StudentController extends BaseController
         } else {
             return response()->json(['status' => 'error', 'message' => trans('students.login.email.unknown')], 401);
         }
-
     }
 
 
@@ -104,7 +121,6 @@ class StudentController extends BaseController
         } else {
             return response()->json(['status' => 'error', 'message' => trans('students.token_unknown')], 401);
         }
-
     }
 
 
@@ -156,13 +172,8 @@ class StudentController extends BaseController
             });
 
             return response()->json(['status' => 'ok', 'message' => trans('students.register.success')]);
-
         } else {
             return response()->json(['status' => 'error', 'message' => trans('students.register.already')], 422);
         }
-
-
     }
-
-
 }

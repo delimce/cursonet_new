@@ -27,6 +27,7 @@ return [
     'go_main' => 'Ingresar a la página ',
     'student' => 'Est.',
     'teacher' => 'Prof.',
+    'unknow' => 'Desconocid@',
     'all' => 'Todos',
     'message.sent' => 'Mensaje enviado con éxito',
     'message.deleted' => 'Mensaje borrado con exito',
@@ -47,6 +48,7 @@ return [
     'error.401.title' => 'Error, usuario no autenticado.',
     'error.401.token' => 'token de usuario inválido',
     'error.404.title' => 'Página no encontrada',
+    'error.403.title' => 'Página no disponible',
     'error.404.subtitle' => 'Upps, la página que estas buscando no existe.',
     'error.404.message' => 'puedes intentar ingresar nuevamente a la página principal de la plataforma:',
 ];

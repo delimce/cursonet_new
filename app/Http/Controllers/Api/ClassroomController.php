@@ -46,7 +46,7 @@ class ClassroomController extends BaseController
             return response()->json(['status' => 'ok', 'data' => $topics]);
         } else {
             return response()->json(
-                ['status' => 'error', 'message' => trans('students.classroom.modules.nofound')], 400
+                ['status' => 'error', 'message' => __('students.classroom.modules.nofound')], 400
             );
         }
     }
@@ -97,7 +97,7 @@ class ClassroomController extends BaseController
                 $temp["id"]         = $item->id;
                 $temp["titulo"]     = $item->titulo;
                 $temp["grupo_id"]   = $item->grupo_id;
-                $temp["grupo_desc"] = $item->group->nombre ?? trans('commons.all');
+                $temp["grupo_desc"] = $item->group->nombre ?? __('commons.all');
                 $temp["posts"]      = $item->posts->count();
                 $temp["fecha_ini"]  = $item->dateInit();
                 $temp["fecha_fin"]  = $item->dateEnd();
@@ -123,7 +123,7 @@ class ClassroomController extends BaseController
 
                 return response()->download($file);
             } else {
-                return response()->json(['status' => 'error', 'message' => trans('commons.file.notfound')], 404);
+                return response()->json(['status' => 'error', 'message' => __('commons.file.notfound')], 404);
             }
         } catch (Exception $ex) {
             return response()->json(['status' => 'error', 'message' => $ex->getTraceAsString()], 500);
@@ -140,7 +140,7 @@ class ClassroomController extends BaseController
             'type'    => 'required',
             'content' => 'required',
         ], [
-                'required' => trans('commons.validation.required'),
+                'required' => __('commons.validation.required'),
             ]
         );
 
@@ -154,7 +154,7 @@ class ClassroomController extends BaseController
         $content = strip_tags($req->content);
         if (strlen($content) < 5) {
             return response()->json(
-                ['status' => 'error', 'message' => trans('students.classroom.forum.post.tooshort')], 400
+                ['status' => 'error', 'message' => __('students.classroom.forum.post.tooshort')], 400
             );
         }
 
@@ -167,7 +167,7 @@ class ClassroomController extends BaseController
             $post->save();
 
             return response()->json(
-                ['status' => 'ok', 'message' => trans('students.classroom.forum.post.save.success')]
+                ['status' => 'ok', 'message' => __('students.classroom.forum.post.save.success')]
             );
 
         } catch (\PDOException $ex) {
@@ -186,8 +186,8 @@ class ClassroomController extends BaseController
             'person'  => 'required|numeric',
             'message' => 'required',
         ], [
-                'required' => trans('commons.validation.required.all'),
-                'numeric'  => trans('commons.validation.numeric'),
+                'required' => __('commons.validation.required.all'),
+                'numeric'  => __('commons.validation.numeric'),
             ]
         );
 
@@ -206,7 +206,7 @@ class ClassroomController extends BaseController
             $reply->save();
 
             return response()->json(
-                ['status' => 'ok', 'message' => trans('students.classroom.forum.post.reply.save.success')]
+                ['status' => 'ok', 'message' => __('students.classroom.forum.post.reply.save.success')]
             );
 
         } catch (\PDOException $ex) {
@@ -226,7 +226,7 @@ class ClassroomController extends BaseController
             $req->all(), [
             'post' => 'required',
         ], [
-                'required' => trans('commons.validation.required'),
+                'required' => __('commons.validation.required'),
             ]
         );
 
@@ -272,7 +272,7 @@ class ClassroomController extends BaseController
                 $list[] = [
                     "id"         => $item->id,
                     "titulo"     => $item->titulo,
-                    "grupo_desc" => isset($item->group->id) ? $item->group->nombre : trans('commons.all'),
+                    "grupo_desc" => isset($item->group->id) ? $item->group->nombre : __('commons.all'),
                     "posts"      => $item->posts->count(),
                     "fecha_ini"  => $item->dateInit(),
                     "fecha_fin"  => $item->dateEnd()

@@ -27,7 +27,8 @@ $router->group(
         $router->post('/doLogin', 'InitialController@doLogin');
         $router->get('/register', 'InitialController@register');
         $router->get('/register/success/{email}', 'InitialController@registerSuccess');
-        $router->get('/activate/{apikey}', 'InitialController@userActivated');
+        $router->get('/activate/{apikey}', 'InitialController@userActivate');
+        $router->get('/activated', ['as' => 'activated', 'uses' => 'InitialController@userActivatedSuccess']);
         $router->get('/restore/{apikey}', 'InitialController@restoringPassword');
         $router->get('/restoring/success', 'InitialController@restored');
         $router->get(
