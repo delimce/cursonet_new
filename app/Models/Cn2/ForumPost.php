@@ -10,10 +10,11 @@ class ForumPost extends Model
     protected $table = 'tbl_foro_comentario';
 
 
-    public function likes(){
+    public function likes()
+    {
         return $this->hasMany('App\Models\Cn2\ForumPostLike', 'comentario_id');
     }
- 
+
     public function forum()
     {
         return $this->belongsTo('App\Models\Cn2\Forum', 'foro_id');
@@ -37,9 +38,14 @@ class ForumPost extends Model
         return ($this->valido) ? trans('students.classroom.forum.post.status.confirmed') : trans('students.classroom.forum.post.status.unconfirmed');
     }
 
+    public function publishedDate()
+    {
+        $published = (isset($this->created_at)) ? $this->created_at : $this->fecha_post;
+        return Carbon::parse($published)->format(env('APP_DATETIMEFORMAT'));
+    }
+
     public function date()
     {
         return Carbon::parse($this->created_at)->format(env('APP_DATEFORMAT'));
     }
-
 }

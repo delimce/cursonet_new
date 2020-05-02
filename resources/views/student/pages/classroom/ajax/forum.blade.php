@@ -35,7 +35,7 @@
                 <span class="subtext">Perfil</span>
                 <span>{{$post->tipo_sujeto}}</span><br>
                 <span class="subtext">Publicado</span>
-                <span>{{$post->created_at}}</span><br>
+                <span>{{$post->publishedDate()}}</span><br>
             </div>
             <div class="post">
                 {!! $post->content !!}
