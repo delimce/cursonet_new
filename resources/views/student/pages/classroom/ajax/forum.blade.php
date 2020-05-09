@@ -70,7 +70,19 @@
                 </div>
 
             </div>
-            <span id="post-replies-<?=$post->id?>"></span>
+            <span id="post-replies-<?=$post->id?>">
+              <ol>
+                @foreach($post->replies()->get() as $reply)
+                <li>
+                  <div class="post-reply">
+                    <span class="subtext">Respuesta el {{$reply->date()}}</span><br>
+                    <span class="subtext">Por. </span>&nbsp;<span>{{$reply->person->fullname()}}</span><br>
+                    <span class="subtext">Contenido:</span>&nbsp;<span>{{$reply->content}}</span><br>
+                  </div>
+                </li>
+                @endforeach
+              </ol>
+            </span>
             <span id="post-new-reply-<?=$post->id?>"></span>
 
         </div>
@@ -153,13 +165,14 @@
     ///new reply
     $('.forum-tools-reply').on('click', function() {
       let me = $(this);
+      let forum_id = $('.forum-list-refresh').data("forum");
       let post_id = me.parent().data('post-id');
       let user_id = $('#save-post').data("person");
       let reply = $("#post-new-reply-" + post_id);
       let comment = '<span class="new-reply-'+post_id+'">';
       comment += '<textarea id="my-reply-' + post_id + '" cols="40" rows="2"></textarea><br>';
       comment += '<button onClick="javascript:clearReply(' + post_id +')" class="btn btn-secondary">@lang('commons.close')</button>&nbsp;&nbsp;';
-      comment += '<button onClick="javascript:sendPostReply(' + post_id + ',' + user_id + ')" class="btn btn-lg btn-primary" style="width: 200px">' +
+      comment += '<button onClick="javascript:sendPostReply(' + post_id + ',' + user_id + ',' + forum_id + ')" class="btn btn-lg btn-primary" style="width: 200px">' +
         '@lang('students.classroom.forum.post.reply')' +
         '</button>';
       comment += '</span>';

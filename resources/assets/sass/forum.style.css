@@ -101,6 +101,13 @@
     font-size: 9px;
 }
 
+.post-reply{
+    margin: 9px 24px 15px 10px;
+    background-color:rgb(225, 242, 245);
+    padding: 17px;
+    border-radius:1ex;
+}
+
 [class*='new-reply-'] {
     display: block;
     padding: 10px 34px 13px 10px;
