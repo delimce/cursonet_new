@@ -17,4 +17,13 @@ class Admin extends Model
         return $this->hasMany('App\Models\Cn2\AdminCourse', 'admin_id');
     }
 
+     /**
+     * @return string
+     */
+    public function fullname()
+    {
+        return $this->nombre." ".$this->apellido;
+    }
+
+
 }
