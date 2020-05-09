@@ -3,5 +3,7 @@
 /.vscode
 /node_modules
 /public/assets/
+/storage/app/courses/files
 /public/mix-manifest.json
 .env
+.phpunit.result.cache

@@ -4,7 +4,7 @@
 
 ///classroom
 $router->group(
-    ['prefix' => 'api/admin', 'namespace' => 'Api'],
+    ['prefix' => 'api/admin', 'namespace' => 'Api', 'middleware' => ['cors']],
     function () use ($router) {
         $router->post('/class/file', 'AdminController@saveFileResource');
         $router->get('/file/{res_id}', 'AdminController@openFileResource');
