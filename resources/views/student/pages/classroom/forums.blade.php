@@ -8,6 +8,7 @@
         <th data-field="posts" data-sortable="true" scope="col">Comentarios</th>
         <th data-field="fecha_ini" data-sortable="true" scope="col">Fecha inicio</th>
         <th data-field="fecha_fin" data-sortable="true" scope="col">Fecha fin</th>
+        <th data-field="status" data-sortable="true" scope="col">Estatus</th>
     </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
             <td>{{$item->posts->count()}}</td>
             <td>{{$item->dateInit()}}</td>
             <td>{{$item->dateEnd()}}</td>
+            <td>{{$item->statusName()}}</td>
         </tr>
     @endforeach
     </tbody>

@@ -29,10 +29,8 @@ $('.module-item').on('click', function (e) {
             $('#myContent').html(response.data.info.contenido)
             $('#topic-selected').html(response.data.info.titulo)
             $('#file-list').bootstrapTable('load', response.data.info.files);
-            //  switchForumView();
             $('#forum-list').bootstrapTable('load', response.data.info.forums);
             goToContent()
-
         }).catch(function (error) {
             showAlert("error al seleccionar el curso");
         });

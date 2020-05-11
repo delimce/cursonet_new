@@ -1,25 +1,40 @@
 <div>
-    <div class="forum-toolbox">
-         <span class="forum-list-back" data-toggle="tooltip" data-placement="bottom"
-               title="@lang('students.classroom.forum.showlist')">
-             <i class="fas fa-list-ol"></i>
-        </span>
 
-        <span class="forum-list-top" data-toggle="tooltip" data-placement="bottom"
-              title="@lang('students.classroom.forum.top')">
+  <div class="forum-toolbox">
+    <span class="forum-list-back" data-toggle="tooltip" data-placement="bottom"
+      title="@lang('students.classroom.forum.showlist')">
+      <i class="fas fa-list-ol"></i>
+    </span>
+
+    <span class="forum-list-top" data-toggle="tooltip" data-placement="bottom"
+        title="@lang('students.classroom.forum.top')">
         <i class="fas fa-arrow-alt-circle-up"></i>
-        </span>
+    </span>
 
-        <span class="forum-list-refresh" data-toggle="tooltip" data-forum="{{$content->id}}" data-placement="bottom"
-              title="@lang('students.classroom.forum.reload')">
+    <span class="forum-list-refresh" data-toggle="tooltip" data-forum="{{$content->id}}" data-placement="bottom"
+        title="@lang('students.classroom.forum.reload')">
         <i class="fas fa-sync-alt"></i>
-     </span>
+    </span>
+
+      @if($content->status()===$content::STATUS_ACTIVE)
         <span class="forum-list-post" data-toggle="tooltip" data-placement="bottom"
-              title="@lang('students.classroom.forum.post.new')">
-                <i class="fas fa-edit"></i>
-      </span>
-    </div>
+            title="@lang('students.classroom.forum.post.new')">
+            <i class="fas fa-edit"></i>
+        </span> 
+      @else  
+      <div class="row">
+        {{__('students.classroom.forum.status.message', ['status' => $content->statusName()])}}
+      </div>
+      @endif 
+
+   </div>
+
     <div class="forum-content">
+        <div class="forum-list-back">
+          <p>
+           <a href="#">@lang('students.classroom.forum.showlist')</a>
+          </p>
+        </div>
         <span class="in-title">{!! $content->titulo !!}</span>
         <span>{!! $content->content !!}</span>
     </div>
@@ -108,7 +123,6 @@
             </button>
         </div>
     </div><!-- modal-content -->
-
 </div>
 
 <script>
