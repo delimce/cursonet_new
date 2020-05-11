@@ -101,6 +101,7 @@ class ClassroomController extends BaseController
                 $temp["posts"]      = $item->posts->count();
                 $temp["fecha_ini"]  = $item->dateInit();
                 $temp["fecha_fin"]  = $item->dateEnd();
+                $temp["status"]  = $item->statusName();
                 $infoForums[]       = $temp;
             }
         );
@@ -275,7 +276,8 @@ class ClassroomController extends BaseController
                     "grupo_desc" => isset($item->group->id) ? $item->group->nombre : __('commons.all'),
                     "posts"      => $item->posts->count(),
                     "fecha_ini"  => $item->dateInit(),
-                    "fecha_fin"  => $item->dateEnd()
+                    "fecha_fin"  => $item->dateEnd(),
+                    "status"  => $item->statusName()
                 ];
             }
         );

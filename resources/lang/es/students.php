@@ -119,10 +119,14 @@ return [
     'classroom.forum.post.save.success' => 'Comentario guardado con éxito',
     'classroom.forum.post.reply.save.success' => 'respuesta guardada con éxito',
     'classroom.forum.post.tooshort' => 'El contenido debe ser mayor o igual a 5 caracteres',
-     //RATINGS
-     'ratings.title' => 'Mis Notas',
-     'ratings.noregs' => 'No hay notas disponibles.',
-     'ratings.select' => 'Seleccione un plan de evaluación',
-     'ratings.detail.title' => 'Detalles del plan de evaluación',
+    'classroom.forum.status.pending' => 'Pendiente',
+    'classroom.forum.status.progress' => 'En Progreso',
+    'classroom.forum.status.ended' => 'Finalizado',
+    'classroom.forum.status.message' => 'Foro :status',
+    //RATINGS
+    'ratings.title' => 'Mis Notas',
+    'ratings.noregs' => 'No hay notas disponibles.',
+    'ratings.select' => 'Seleccione un plan de evaluación',
+    'ratings.detail.title' => 'Detalles del plan de evaluación',
 
 ];

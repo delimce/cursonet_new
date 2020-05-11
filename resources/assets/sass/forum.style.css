@@ -1,126 +1,134 @@
 .forum-toolbox {
-    float: right;
-    top: 9px;
-    z-index: 999;
-    position: sticky;
-    font-size: 23px;
-    color: #5ED2F1;
-    margin-right: 17px;
-    background-color: #eff0f2;
-    border-bottom: 2px solid #5ED2F1;
-    padding: 4px;
+  float: right;
+  top: 9px;
+  z-index: 999;
+  position: sticky;
+  font-size: 23px;
+  color: #5ed2f1;
+  margin-right: 17px;
+  background-color: #eff0f2;
+  border-bottom: 2px solid #5ed2f1;
+  padding: 4px;
 }
 
 .forum-content {
-    padding-top: 28px;
+  padding-top: 28px;
 }
 
 .forum-toolbox span {
-    padding-right: 10px;
-    cursor: pointer;
-    width: 20px;
+  padding-right: 10px;
+  cursor: pointer;
+  width: 20px;
+}
+
+.forum-toolbox .row {
+  color: #000;
+  font-size: small;
+  float: none;
+  font-weight: bold;
+  margin: auto;
 }
 
 .forum-post {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding: 7px 8px 7px 13px;
-    border: 0.08em #8b8b8b solid;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 7px 8px 7px 13px;
+  border: 0.08em #8b8b8b solid;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 
 .admin-border {
-    border: 1px #df553d solid;
+  border: 1px #df553d solid;
 }
 
 .forum-post .post {
-    display: flex;
-    padding: 9px 16px 10px 0;
+  display: flex;
+  padding: 9px 16px 10px 0;
 }
 
 .forum-post .post-footer {
-    display: block;
-    position: relative;
-    border-top: 0.08em #8b8b8b solid;
-    padding-top: 4px;
-    margin-bottom: 30px;
-    margin-left: 15px;
-    margin-right: 5px;
-    width: 94%;
+  display: block;
+  position: relative;
+  border-top: 0.08em #8b8b8b solid;
+  padding-top: 4px;
+  margin-bottom: 30px;
+  margin-left: 15px;
+  margin-right: 5px;
+  width: 94%;
 }
 
 .post-footer .status {
-    float: left;
-    width: 40%;
-    padding-left: 34px;
+  float: left;
+  width: 40%;
+  padding-left: 34px;
 }
 
 .post-footer .status span {
-    float: left;
-    margin-left: 9px;
+  float: left;
+  margin-left: 9px;
 }
 
 .post-footer .tools {
-    float: right;
-    width: 40%;
-    text-align: right;
+  float: right;
+  width: 40%;
+  text-align: right;
 }
 
 .post-footer .tools span {
-    font-size: 18px;
-    cursor: pointer;
-    margin-right: 9px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-right: 9px;
 }
 
 #new-post {
-    display: none;
-    bottom: 4%;
-    position: sticky;
-    width: 70%;
-    float: right;
-    background-color: #eff0f2;
-    margin: 6px 10px 0 6px;
-    padding: 18px;
+  display: none;
+  bottom: 4%;
+  position: sticky;
+  width: 70%;
+  float: right;
+  background-color: #eff0f2;
+  margin: 6px 10px 0 6px;
+  padding: 18px;
 }
 
 #new-post .content {
-    padding-top: 10px;
-    display: block;
+  padding-top: 10px;
+  display: block;
 }
 
 #new-post .footer button {
-    float: right;
-    margin-bottom: 10px;
+  float: right;
+  margin-bottom: 10px;
 }
 
 .post-footer .tools span .nlikes {
-    font-weight: inherit;
-    display: inline;
-    font-size: 9px;
+  font-weight: inherit;
+  display: inline;
+  font-size: 9px;
 }
 
-.post-reply{
-    margin: 9px 24px 15px 10px;
-    background-color:rgb(225, 242, 245);
-    padding: 17px;
-    border-radius:1ex;
+.post-reply {
+  margin: 9px 24px 15px 10px;
+  background-color: rgb(225, 242, 245);
+  padding: 17px;
+  border-radius: 1ex;
 }
 
-[class*='new-reply-'] {
-    display: block;
-    padding: 10px 34px 13px 10px;
-    text-align: right;
+[class*="new-reply-"] {
+  display: block;
+  padding: 10px 34px 13px 10px;
+  text-align: right;
 }
 
-[class*='new-reply-'] textarea {
-    width: 96%;
-    border-radius: 7px;
-    margin-bottom: 4px;
-    padding: 5px;
+[class*="new-reply-"] textarea {
+  width: 96%;
+  border-radius: 7px;
+  margin-bottom: 4px;
+  padding: 5px;
 }
 
-[class*='new-reply-'] button {
-    max-width: 100px;
+[class*="new-reply-"] button {
+  max-width: 100px;
 }
