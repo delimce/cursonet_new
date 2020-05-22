@@ -44,13 +44,16 @@ class AccountController extends BaseController
         $estId = $this->student->id;
         ///student's groups
         $groups = $this->student->groups()->with('group')->get();
-        $teacher_array = array();
-        $group_array = array();
+        $teacher_array = [];
+        $group_array = [];
         $groups->each(function ($value) use (&$group_array, &$teacher_array) {
             $group_array[] = $value->grupo_id;
-            $teacher_array[] = $value->group->prof_id;
+            $tempAdmins = $value->group->course->admins()->get();
+            // obtaining admin ids of student courses
+            $tempAdmins->pluck('admin_id')->each(function ($adminId) use (&$teacher_array) {
+                $teacher_array[] = $adminId;
+            });
         });
-
         $students = GroupStudent::with(['Student' => function ($q) use ($estId) {
             // Query the name field in status table
             $q->where('id', '!=', $estId)->where("share_info", 1);

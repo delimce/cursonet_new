@@ -30,5 +30,10 @@ class Course extends Model
         return Carbon::parse($this->fecha_creado)->format(env('APP_DATEFORMAT'));
     }
 
+    public function admins()
+    {
+        return $this->hasMany('App\Models\Cn2\AdminCourse', 'curso_id'); 
+    }
+
 
 }
