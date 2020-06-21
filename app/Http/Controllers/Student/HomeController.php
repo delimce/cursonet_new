@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Models\Cn2\Admin;
-use App\Models\Cn2\AdminCourse;
+
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Models\Cn2\Student;
-use App\Models\Cn2\Course;
 use Illuminate\Support\Facades\Storage;
 use Validator;
-use App\Models\Cn2\GroupStudent;
-use App\Models\Cn2\Plan;
+use App\Services\CourseService;
 use Exception;
 use DB;
 
@@ -23,22 +20,20 @@ class HomeController extends BaseController
      */
 
     private $student;
+    private $courseService;
 
-    public function __construct(Request $req)
+    public function __construct(Request $req, CourseService $course)
     {
         $myUser = $req->session()->get("myUser");
+        $this->courseService = $course;
         $this->student = Student::findOrFail($myUser->id);
     }
 
-    //
 
     public function home(Request $req)
     {
 
-        $courses = Course::whereHas('studentGroup', function ($query) {
-            $query->whereEstId($this->student->id);
-        })->whereActivo(1)->get();
-
+        $courses = $this->courseService->getCoursesByStudent($this->student->id);
         $req->session()->put('myCourses', $courses);
         if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
 
@@ -73,26 +68,9 @@ class HomeController extends BaseController
     public function courseSelected(Request $req)
     {
         $courseId = $req->input("courseId");
-
-        $course = Course::findOrFail($courseId);
-        $req->session()->put("courseSelected", $course->id);
-        $req->session()->put("courseName", $course->nombre);
-
-        $estGroup = GroupStudent::whereEstId($this->student->id)->whereCursoId($courseId)->first();
-        $wallMessages = $course->walls()->wherein("grupo_id", ["0", $estGroup->grupo_id])->orderBy('fecha_c', 'desc')->get();
-        $ntopics = $course->topics()->count();
-        $data = [
-            "alias" => $course->alias,
-            "descripcion" => $course->descripcion,
-            "id" => $course->id,
-            "nombre" => $course->nombre,
-            "init" => $course->createdAt(),
-            "group" =>  $estGroup->group->nombre,
-            "author" => $course->author(),
-            "duracion" => $course->duracion,
-            "wall" => $wallMessages,
-            "ntopics" => $ntopics,
-        ];
+        $data = $this->courseService->getMainDataByStudent($courseId, $this->student->id);
+        $req->session()->put("courseSelected", $data["id"]);
+        $req->session()->put("courseName", $data["nombre"]);
         return response()->json(['status' => 'ok', 'course' => $data]);
     }
 
@@ -182,18 +160,29 @@ class HomeController extends BaseController
     }
 
 
-    /** teachers of course's groups
-     * @return mixed
+       
+    /**
+     * getTeachers
+     * teachers of course's groups
+     * @param  mixed $req
+     * @return void
      */
     public function getTeachers(Request $req)
     {
-
         $teachers = [];
         if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
 
             $courseId = $req->session()->get("courseSelected");
-            $teachers = AdminCourse::with('admin')->whereCursoId($courseId)->get();
+            $teachers = $this->courseService->getAdminsByCourseId($courseId);
         }
         return view("student.pages.lobby.teachers", ["data" => $teachers]);
+    }
+
+
+
+    public function getPublicCourses()
+    {
+        $courses = $this->courseService->getPublicCoursesByStudent($this->student->id);
+        return view("student.pages.lobby.publics", ["publics"=>$courses]);
     }
 }

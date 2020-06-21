@@ -122,8 +122,6 @@ $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
 $app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
 
-class_alias('Collective\Html\HtmlFacade', 'Html');
-class_alias('Collective\Html\FormFacade', 'Form');
 $app->alias('session', \Illuminate\Session\SessionManager::class);
 $app->alias('session.store', \Illuminate\Session\Store::class);
 $app->alias('session.store', \Illuminate\Contracts\Session\Session::class);

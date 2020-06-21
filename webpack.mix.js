@@ -25,6 +25,7 @@ mix.babel([
     'resources/assets/js/modules/lobby-msg.js',
     'resources/assets/js/modules/lobby-profile.js',
     'resources/assets/js/modules/lobby-ratings.js',
+    'resources/assets/js/modules/lobby-course.js',
     'resources/assets/js/modules/classroom-course.js',
     'resources/assets/js/modules/classroom-forum.js',
 ], 'public/assets/js/modules.js');

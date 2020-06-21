@@ -67,6 +67,15 @@ $router->group(
                     }
                 );
 
+                //course
+                $router->group(
+                    ['prefix' => 'course'],
+                    function () use ($router) {
+                        $router->get('/{id}', 'CourseController@getDetail');
+                        $router->post('/enroll', 'CourseController@enrollInCourse');
+                    }
+                );
+
                 //classroom
                 $router->group(
                     ['prefix' => 'class'],
