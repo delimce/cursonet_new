@@ -51,6 +51,7 @@ $router->group(
                 $router->get('/inbox', 'HomeController@getInbox');
                 $router->get('/profile', 'HomeController@myProfile');
                 $router->get('/teachers', 'HomeController@getTeachers');
+                $router->get('/publics', 'HomeController@getPublicCourses');
                 $router->put('/profile/picture', 'HomeController@saveMyPicture');
                 $router->post('/select/course', 'HomeController@courseSelected');
 

@@ -24,6 +24,7 @@ return [
     'disabled' => 'Inactivo',
     'enabled' => 'Activo',
     'messages' => 'Mensajes',
+    'details' => 'Ver detalles',
     'go_main' => 'Ingresar a la página ',
     'student' => 'Est.',
     'teacher' => 'Prof.',
