@@ -194,12 +194,14 @@ $("#sent").on("click-cell.bs.table", function (field, value, row, $element) {
  */
 const showContentMessage = function (response) {
   $("#inbox-read").show();
-  $("#inbox-subject").html(response.data.message.subject);
-  $("#inbox-content").html(response.data.message.content);
-  $("#inbox-date").html(response.data.message.date);
-  let sender = response.data.message.sender;
-  let profile = !response.data.message.profile ? "Est." : "Prof.";
-  let img = !response.data.message.profile ? sender.foto : sender.img;
+  let message = response.data.message;
+  $("#inbox-subject").html(message.subject);
+  $("#inbox-content").html(message.content);
+  let msgDate = (message.date) ? message.date : message.datetime;
+  $("#inbox-date").html(msgDate);
+  let sender = message.sender;
+  let profile = !message.profile ? "Est." : "Prof.";
+  let img = !message.profile ? sender.foto : sender.img;
   $("#inbox-role").html(profile);
 
   $("#inbox-name").html(sender.nombre + " " + sender.apellido);
@@ -227,5 +229,5 @@ $("#support-message").on("click", function (event) {
     }).catch(function (error) {
       showAlert(error.response.data.message);
     });
-    event.preventDefault();
+  event.preventDefault();
 });
