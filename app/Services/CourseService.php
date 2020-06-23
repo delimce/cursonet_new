@@ -96,14 +96,16 @@ class CourseService
     {
         $result = true;
         try {
-            //create o retrieve new course for course
-            $group = Group::firstOrCreate(['curso_id' => $courseId, 'nombre' => 'auto', 'turno' => 0]);
-            // enroll student to course
-            GroupStudent::create([
-                "curso_id" => $courseId,
-                "est_id" => $studentId,
-                "grupo_id" => $group->id,
-            ]);
+            DB::transaction(function () use ($courseId, $studentId) {
+                //create o retrieve new course for course
+                $group = Group::firstOrCreate(['curso_id' => $courseId, 'nombre' => 'auto', 'turno' => 0]);
+                // enroll student to course
+                GroupStudent::create([
+                    "curso_id" => $courseId,
+                    "est_id" => $studentId,
+                    "grupo_id" => $group->id,
+                ]); //
+            });
         } catch (PDOException $ex) {
             Log::error($ex);
             $result = false;
