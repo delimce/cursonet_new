@@ -197,8 +197,7 @@ const showContentMessage = function (response) {
   let message = response.data.message;
   $("#inbox-subject").html(message.subject);
   $("#inbox-content").html(message.content);
-  let msgDate = (message.date) ? message.date : message.datetime;
-  $("#inbox-date").html(msgDate);
+  $("#inbox-date").html(message.date);
   let sender = message.sender;
   let profile = !message.profile ? "Est." : "Prof.";
   let img = !message.profile ? sender.foto : sender.img;
