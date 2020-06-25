@@ -9,6 +9,7 @@ use App\Models\Cn2\Student;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\Services\CourseService;
+use App\Services\StudentService;
 use Exception;
 use DB;
 
@@ -154,7 +155,7 @@ class HomeController extends BaseController
     {
 
         $req->session()->forget("myUser");
-        $fields = InitialController::$fields;
+        $fields = StudentService::FIELDS;
         $user = Student::where('id', $this->student->id)->select($fields)->first();
         $req->session()->put('myUser', $user);
     }

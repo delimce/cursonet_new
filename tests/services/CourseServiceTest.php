@@ -28,11 +28,11 @@ class CourseServiceTest extends TestCase
 
         $fakeId = 0;
         $courses = $this->courseService->getPublicCoursesByStudent($fakeId);
-        $this->assertCount(0, $courses);
+        $this->assertCount(1, $courses);
 
         $fakeId = 476;
         $courses = $this->courseService->getPublicCoursesByStudent($fakeId);
-        $this->assertCount(2, $courses);
+        $this->assertCount(0, $courses);
     }
 
     public function testEnrollInCourse()

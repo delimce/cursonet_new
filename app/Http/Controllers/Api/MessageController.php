@@ -109,7 +109,7 @@ class MessageController extends BaseController
                 "subject" => $sent->subject,
                 "profile" => $sent->tipo,
                 "sender" => $sent->senderObject(),
-                "datetime" => $sent->datetime()
+                "date" => $sent->datetime()
             ];
             return response()->json(['status' => 'ok', 'message' => $data]);
         } else {
