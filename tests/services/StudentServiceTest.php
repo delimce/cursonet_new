@@ -35,5 +35,18 @@ class StudentServiceTest extends TestCase
         $this->assertFalse($result);
     }
 
+    
+    public function testStudentGetById()
+    {
+        $studentId =4000;
+        $result = $this->studentService->getStudentById($studentId);
+        $this->assertNull($result);
+
+        $studentId =490;
+        $result = $this->studentService->getStudentById($studentId);
+        $this->assertIsObject($result);
+
+    }
+
 }
 
