@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Student;
 
-
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Models\Cn2\Student;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\Services\CourseService;
 use App\Services\StudentService;
 use Exception;
-use DB;
 
 class HomeController extends BaseController
 {
@@ -22,12 +19,14 @@ class HomeController extends BaseController
 
     private $student;
     private $courseService;
+    private $studentService;
 
-    public function __construct(Request $req, CourseService $course)
+    public function __construct(Request $req, CourseService $course, StudentService $student)
     {
         $myUser = $req->session()->get("myUser");
         $this->courseService = $course;
-        $this->student = Student::findOrFail($myUser->id);
+        $this->studentService = $student;
+        $this->student = $this->studentService->getStudentById($myUser->id);
     }
 
 
@@ -83,19 +82,7 @@ class HomeController extends BaseController
 
     public function myRatings()
     {
-        $plans = DB::table('tbl_plan_evaluador')
-            ->join('tbl_grupo_estudiante', 'tbl_plan_evaluador.grupo_id', '=', 'tbl_grupo_estudiante.grupo_id')
-            ->join('tbl_grupo', 'tbl_grupo.id', '=', 'tbl_grupo_estudiante.grupo_id')
-            ->join('tbl_curso', 'tbl_curso.id', '=', 'tbl_grupo.curso_id')
-            ->join('tbl_plan_item', 'tbl_plan_evaluador.id', '=', 'tbl_plan_item.plan_id')
-            ->groupBy('plan_id')
-            ->select('tbl_plan_evaluador.*', 'tbl_grupo.nombre as grupo', 'tbl_curso.alias as curso')
-            ->selectRaw('count(tbl_plan_item.id) as items')
-            ->whereEstId($this->student->id)
-            ->get();
-
-
-
+        $plans = $this->studentService->getPlansByStudentId($this->student->id);
         return view("student.pages.lobby.ratings", ["results" => $plans]);
     }
 
@@ -153,15 +140,13 @@ class HomeController extends BaseController
 
     public function refreshSessionData(Request $req)
     {
-
         $req->session()->forget("myUser");
-        $fields = StudentService::FIELDS;
-        $user = Student::where('id', $this->student->id)->select($fields)->first();
+        $user = $this->studentService->getStudentById($this->student->id);
         $req->session()->put('myUser', $user);
     }
 
 
-       
+
     /**
      * getTeachers
      * teachers of course's groups
@@ -181,9 +166,13 @@ class HomeController extends BaseController
 
 
 
+    /**
+     * getPublicCourses
+     * @return void
+     */
     public function getPublicCourses()
     {
         $courses = $this->courseService->getPublicCoursesByStudent($this->student->id);
-        return view("student.pages.lobby.publics", ["publics"=>$courses]);
+        return view("student.pages.lobby.publics", ["publics" => $courses]);
     }
 }

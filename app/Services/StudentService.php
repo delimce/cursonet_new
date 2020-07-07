@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
-use App\Models\Cn2\Student;
 use DB;
-use Illuminate\Support\Facades\Log;
-use PDOException;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Cn2\StudentLog;
+use App\Models\Cn2\Student;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Ramsey\Uuid\Uuid;
 
 class StudentService
@@ -124,5 +123,41 @@ class StudentService
     {
         $uuid = Uuid::uuid6();
         return $uuid->toString();
+    }
+
+
+
+    /**
+     * getStudentById
+     *
+     * @param  int $studentId
+     * @return Collection
+     */
+    public function getStudentById($studentId)
+    {
+        return Student::find($studentId, static::FIELDS);
+    }
+
+
+    /**
+     * getPlansByStudentId
+     *
+     * @param  int $studentId
+     * @return Collection
+     */
+    public function getPlansByStudentId($studentId)
+    {
+        $plans = DB::table('tbl_plan_evaluador')
+            ->join('tbl_grupo_estudiante', 'tbl_plan_evaluador.grupo_id', '=', 'tbl_grupo_estudiante.grupo_id')
+            ->join('tbl_grupo', 'tbl_grupo.id', '=', 'tbl_grupo_estudiante.grupo_id')
+            ->join('tbl_curso', 'tbl_curso.id', '=', 'tbl_grupo.curso_id')
+            ->join('tbl_plan_item', 'tbl_plan_evaluador.id', '=', 'tbl_plan_item.plan_id')
+            ->groupBy('plan_id')
+            ->select('tbl_plan_evaluador.*', 'tbl_grupo.nombre as grupo', 'tbl_curso.alias as curso')
+            ->selectRaw('count(tbl_plan_item.id) as items')
+            ->whereEstId($studentId)
+            ->get();
+
+        return $plans;
     }
 }
