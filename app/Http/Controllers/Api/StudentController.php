@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 use Vinkla\Recaptcha\Recaptcha;
 use App\Models\Cn2\Student;
 use App\Models\Cn2\StudentLog;
-use App\Services\StudentService;
+use App\Repositories\StudentRepository;
 use DB;
 use Carbon\Carbon;
 
@@ -40,7 +40,7 @@ class StudentController extends BaseController
             return response()->json(['status' => 'fail', 'message' => trans('students.login.signin.active.error')], 401);
         } else if (Hash::check($req->input('password'), $user->pass)) {
             DB::beginTransaction();
-            $user->token = StudentService::userNewToken();
+            $user->token = StudentRepository::userNewToken();
             $user->save();
             $log = new StudentLog();
             $log->est_id = $user->id;
@@ -65,7 +65,7 @@ class StudentController extends BaseController
         $user = Student::where('email', $req->input('email'))->first();
 
         if (!is_null($user)) {
-            $apikey = StudentService::userNewToken();
+            $apikey = StudentRepository::userNewToken();
             $user->token = $apikey;
             $user->save();
             Mail::send('student.emails.forgotten', ["user" => $user, "token" => $apikey], function ($m) use ($user) {
@@ -88,7 +88,7 @@ class StudentController extends BaseController
 
         $user = Student::where('token', $req->input('token'))->first();
         if (!is_null($user)) {
-            $apikey = StudentService::userNewToken();
+            $apikey = StudentRepository::userNewToken();
             $newPass = Hash::make($req->input('pass'));
             Student::where('token', $req->input('token'))->update(['token' => "$apikey", "pass" => $newPass]);
 
@@ -138,7 +138,7 @@ class StudentController extends BaseController
             $student->email = $req->input('email');
             $student->fecha_nac = $req->input('fecha_nac');
             $student->pass = Hash::make($req->input('pass'));
-            $student->token = StudentService::userNewToken(); ///for email
+            $student->token = StudentRepository::userNewToken(); ///for email
             $student->save();
 
             Mail::send("student.emails.registered", ["user" => $student, "token" => $student->token], function ($m) use ($student) {

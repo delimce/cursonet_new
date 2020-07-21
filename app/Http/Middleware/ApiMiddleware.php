@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\StudentService;
+use App\Repositories\StudentRepository;
 use Closure;
 use \Illuminate\Http\Request;
 
@@ -21,7 +21,7 @@ class ApiMiddleware
         if (!$token) {
             return response()->json(['status' => 'error', 'message' => trans('commons.error.401.title')], 401);
         }
-        if (!StudentService::isTokenActive($token)) {
+        if (!StudentRepository::isTokenActive($token)) {
             return response()->json(['status' => 'error', 'message' => trans('commons.error.401.token')], 401);
         }
         return $next($request);

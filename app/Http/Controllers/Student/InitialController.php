@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Services\StudentService;
+use App\Repositories\StudentRepository;
 
 class InitialController extends BaseController
 {
@@ -15,7 +15,7 @@ class InitialController extends BaseController
 
     private $studentService;
 
-    public function __construct(StudentService $student)
+    public function __construct(StudentRepository $student)
     {
         $this->studentService = $student;
     }
