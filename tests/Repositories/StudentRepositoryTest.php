@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Services;
+namespace Tests\Repositories;
 
 use Tests\TestCase;
-use App\Services\StudentService;
+use App\Repositories\StudentRepository;
 
-class StudentServiceTest extends TestCase
+class StudentRepositoryTest extends TestCase
 {
 
     protected $studentService;
@@ -13,7 +13,7 @@ class StudentServiceTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->studentService = new StudentService();
+        $this->studentService = new StudentRepository();
     }
 
     public function testStudentDoLogin()

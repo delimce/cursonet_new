@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use DB;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Ramsey\Uuid\Uuid;
 
-class StudentService
+class StudentRepository
 {
 
     const FIELDS = ['id', 'nombre', 'apellido', 'email', 'pass', 'activo', 'token'];

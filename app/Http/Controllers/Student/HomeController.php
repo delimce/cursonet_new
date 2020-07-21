@@ -6,8 +6,8 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Validator;
-use App\Services\CourseService;
-use App\Services\StudentService;
+use App\Repositories\CourseRepository;
+use App\Repositories\StudentRepository;
 use Exception;
 
 class HomeController extends BaseController
@@ -21,7 +21,7 @@ class HomeController extends BaseController
     private $courseService;
     private $studentService;
 
-    public function __construct(Request $req, CourseService $course, StudentService $student)
+    public function __construct(Request $req, CourseRepository $course, StudentRepository $student)
     {
         $myUser = $req->session()->get("myUser");
         $this->courseService = $course;

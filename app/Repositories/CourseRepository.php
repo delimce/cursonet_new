@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Models\Cn2\Course;
 use App\Models\Cn2\GroupStudent;
@@ -10,7 +10,7 @@ use DB;
 use Illuminate\Support\Facades\Log;
 use PDOException;
 
-class CourseService
+class CourseRepository
 {
 
     /**
