@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
 class StudentRepository
 {
 
-    const FIELDS = ['id', 'nombre', 'apellido', 'email', 'pass', 'activo', 'token'];
+    const FIELDS = ['id', 'id_number', 'nombre', 'apellido', 'email', 'pass', 'activo', 'token', 'sexo', 'telefono_p', 'fecha_nac', 'share_info', 'notify_msg', 'notify_forum', 'notify_exam'];
 
 
     /**

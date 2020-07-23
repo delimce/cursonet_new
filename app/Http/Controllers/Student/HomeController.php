@@ -18,22 +18,22 @@ class HomeController extends BaseController
      */
 
     private $student;
-    private $courseService;
-    private $studentService;
+    private $courseRepository;
+    private $studentRepository;
 
     public function __construct(Request $req, CourseRepository $course, StudentRepository $student)
     {
         $myUser = $req->session()->get("myUser");
-        $this->courseService = $course;
-        $this->studentService = $student;
-        $this->student = $this->studentService->getStudentById($myUser->id);
+        $this->courseRepository = $course;
+        $this->studentRepository = $student;
+        $this->student = $this->studentRepository->getStudentById($myUser->id);
     }
 
 
     public function home(Request $req)
     {
 
-        $courses = $this->courseService->getCoursesByStudent($this->student->id);
+        $courses = $this->courseRepository->getCoursesByStudent($this->student->id);
         $req->session()->put('myCourses', $courses);
         if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
 
@@ -68,7 +68,7 @@ class HomeController extends BaseController
     public function courseSelected(Request $req)
     {
         $courseId = $req->input("courseId");
-        $data = $this->courseService->getMainDataByStudent($courseId, $this->student->id);
+        $data = $this->courseRepository->getMainDataByStudent($courseId, $this->student->id);
         $req->session()->put("courseSelected", $data["id"]);
         $req->session()->put("courseName", $data["nombre"]);
         return response()->json(['status' => 'ok', 'course' => $data]);
@@ -82,7 +82,7 @@ class HomeController extends BaseController
 
     public function myRatings()
     {
-        $plans = $this->studentService->getPlansByStudentId($this->student->id);
+        $plans = $this->studentRepository->getPlansByStudentId($this->student->id);
         return view("student.pages.lobby.ratings", ["results" => $plans]);
     }
 
@@ -141,7 +141,7 @@ class HomeController extends BaseController
     public function refreshSessionData(Request $req)
     {
         $req->session()->forget("myUser");
-        $user = $this->studentService->getStudentById($this->student->id);
+        $user = $this->studentRepository->getStudentById($this->student->id);
         $req->session()->put('myUser', $user);
     }
 
@@ -159,7 +159,7 @@ class HomeController extends BaseController
         if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
 
             $courseId = $req->session()->get("courseSelected");
-            $teachers = $this->courseService->getAdminsByCourseId($courseId);
+            $teachers = $this->courseRepository->getAdminsByCourseId($courseId);
         }
         return view("student.pages.lobby.teachers", ["data" => $teachers]);
     }
@@ -172,7 +172,7 @@ class HomeController extends BaseController
      */
     public function getPublicCourses()
     {
-        $courses = $this->courseService->getPublicCoursesByStudent($this->student->id);
+        $courses = $this->courseRepository->getPublicCoursesByStudent($this->student->id);
         return view("student.pages.lobby.publics", ["publics" => $courses]);
     }
 }

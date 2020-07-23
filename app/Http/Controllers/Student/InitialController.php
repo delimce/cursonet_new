@@ -13,11 +13,11 @@ class InitialController extends BaseController
      * @return void
      */
 
-    private $studentService;
+    private $studentRepository;
 
     public function __construct(StudentRepository $student)
     {
-        $this->studentService = $student;
+        $this->studentRepository = $student;
     }
 
     public function index(Request $req)
@@ -47,7 +47,7 @@ class InitialController extends BaseController
         $email = $req->input('email');
         $pass = $req->input('password');
 
-        $result = $this->studentService->doLogin($email, $pass);
+        $result = $this->studentRepository->doLogin($email, $pass);
 
         if (!$result["ok"]) {
             return response()->json(['status' => 'error', 'message' => $result["message"]], 401);
@@ -77,7 +77,7 @@ class InitialController extends BaseController
     public function userActivate($apikey)
     {
         $token = trim($apikey);
-        $user = $this->studentService->activeUser($token);
+        $user = $this->studentRepository->activeUser($token);
         if ($user) {
             return redirect()->route('activated', ['username' => $user->fullname()]);
         }
@@ -105,7 +105,7 @@ class InitialController extends BaseController
      */
     public function restoringPassword($apikey)
     {
-        $user = $this->studentService->getUserByToken($apikey);
+        $user = $this->studentRepository->getUserByToken($apikey);
         if (!$user) { //invalid token
             return response(view('errors.403'), 403);
         }
