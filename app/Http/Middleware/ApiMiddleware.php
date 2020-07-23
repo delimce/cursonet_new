@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Cn2\Student;
+use App\Repositories\StudentRepository;
 use Closure;
 use \Illuminate\Http\Request;
 
@@ -15,15 +15,14 @@ class ApiMiddleware
      * @param  \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         $token = $request->header('Authorization');
         if (!$token) {
             return response()->json(['status' => 'error', 'message' => trans('commons.error.401.title')], 401);
-        } else {
-            $user = Student::where("token", $token)->where("activo",1)->first();
-            if (!isset($user->id))
-                return response()->json(['status' => 'error', 'message' => trans('commons.error.401.token')], 401);
+        }
+        if (!StudentRepository::isTokenActive($token)) {
+            return response()->json(['status' => 'error', 'message' => trans('commons.error.401.token')], 401);
         }
         return $next($request);
     }

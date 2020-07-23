@@ -6,7 +6,6 @@ use App\Models\Cn2\GroupStudent;
 use App\Models\Cn2\Forum;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use App\Models\Cn2\Student;
 use App\Models\Cn2\Topic;
 

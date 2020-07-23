@@ -2,29 +2,23 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Http\Controllers\Api\StudentController;
-use App\Models\Cn2\StudentLog;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use App\Models\Cn2\Student;
-use DB;
-use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
+use App\Repositories\StudentRepository;
 
 class InitialController extends BaseController
 {
-    static public $fields = ['id', 'nombre', 'apellido', 'email', 'pass', 'activo', 'token'];
     /**
      * Create a new controller instance.
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
 
-    //
+    private $studentRepository;
+
+    public function __construct(StudentRepository $student)
+    {
+        $this->studentRepository = $student;
+    }
 
     public function index(Request $req)
     {
@@ -41,39 +35,27 @@ class InitialController extends BaseController
         return view('student.pages.initial.login');
     }
 
-    /**login website
-     * @param Request $req
-     * @return mixed
+
+    /**
+     * doLogin
+     * login website
+     * @param  mixed $req
+     * @return void
      */
     public function doLogin(Request $req)
     {
-        $user = Student::where('email', $req->input('email'))->select(InitialController::$fields)->first();
-        if (is_null($user))
-            return response()->json(['status' => 'error', 'message' => trans('students.login.email.unknown')], 401);
+        $email = $req->input('email');
+        $pass = $req->input('password');
 
-        if (!$user->activo) {
-            return response()->json(['status' => 'fail', 'message' => trans('students.login.signin.active.error')], 401);
-        } else if (Hash::check($req->input('password'), $user->pass)) {
+        $result = $this->studentRepository->doLogin($email, $pass);
 
-            DB::beginTransaction();
-            $apikey = StudentController::newUserToken();
-            $log = new StudentLog();
-            $log->est_id = $user->id;
-            $log->ip_acc = $_SERVER['REMOTE_ADDR'];
-            $log->info_cliente = $_SERVER['HTTP_USER_AGENT'];
-            $log->fecha_in = Carbon::now();
-            $log->save();
-            ///new login
-            $user->token = $apikey;
-            $user->save();
-            $req->session()->put('myUser', $user);
-            $req->session()->put('userLog', $log->id);
-            DB::commit();
-
-            return response()->json(['status' => 'ok', 'user' => $user]);
+        if (!$result["ok"]) {
+            return response()->json(['status' => 'error', 'message' => $result["message"]], 401);
         } else {
-            return response()->json(['status' => 'fail', 'message' => trans('students.login.password.error')], 401);
+            $req->session()->put('myUser', $result["user"]);
+            $req->session()->put('userLog', $result["userLog"]);
         }
+        return response()->json(['status' => 'ok', 'user' => $result["user"]]);
     }
 
     public function forgotPassword()
@@ -86,28 +68,46 @@ class InitialController extends BaseController
         return view('student.pages.initial.register');
     }
 
+
+    /**
+     * userActivate
+     * @param  string $apikey
+     * @return void
+     */
     public function userActivate($apikey)
     {
         $token = trim($apikey);
-        $user = Student::where('token', $token)->first();
-        if (!is_null($user)) {
-            $newApikey = StudentController::newUserToken();
-            Student::where('email', $user->email)->update(['token' => $newApikey, "activo" => 1]);
+        $user = $this->studentRepository->activeUser($token);
+        if ($user) {
             return redirect()->route('activated', ['username' => $user->fullname()]);
         }
         return response(view('errors.403'), 403);
     }
 
+
+    /**
+     * userActivatedSuccess
+     * @param  mixed $req
+     * @return void
+     */
     public function userActivatedSuccess(Request $req)
     {
         return view('student.pages.initial.activated', ['username' => $req->username]);
     }
 
+
+        
+    /**
+     * restoringPassword
+     *
+     * @param  string $apikey
+     * @return void
+     */
     public function restoringPassword($apikey)
     {
-        $user = Student::where('token', $apikey)->first();
-        if (is_null($user)) { //invalid token
-
+        $user = $this->studentRepository->getUserByToken($apikey);
+        if (!$user) { //invalid token
+            return response(view('errors.403'), 403);
         }
         return view('student.pages.initial.restoring', ['user' => $user]);
     }

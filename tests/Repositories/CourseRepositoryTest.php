@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Services;
+namespace Tests\Repositories;
 
 use Tests\TestCase;
-use App\Services\CourseService;
+use App\Repositories\CourseRepository;
 
-class CourseServiceTest extends TestCase
+class CourseRepositoryTest extends TestCase
 {
 
     protected $courseService;
@@ -13,7 +13,7 @@ class CourseServiceTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->courseService = new CourseService();
+        $this->courseService = new CourseRepository();
     }
 
     public function testGetCoursesByStudent()
@@ -28,11 +28,11 @@ class CourseServiceTest extends TestCase
 
         $fakeId = 0;
         $courses = $this->courseService->getPublicCoursesByStudent($fakeId);
-        $this->assertCount(0, $courses);
+        $this->assertCount(1, $courses);
 
         $fakeId = 476;
         $courses = $this->courseService->getPublicCoursesByStudent($fakeId);
-        $this->assertCount(2, $courses);
+        $this->assertCount(0, $courses);
     }
 
     public function testEnrollInCourse()

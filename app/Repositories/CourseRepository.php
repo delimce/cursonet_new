@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Models\Cn2\Course;
 use App\Models\Cn2\GroupStudent;
@@ -10,7 +10,7 @@ use DB;
 use Illuminate\Support\Facades\Log;
 use PDOException;
 
-class CourseService
+class CourseRepository
 {
 
     /**
@@ -96,14 +96,16 @@ class CourseService
     {
         $result = true;
         try {
-            //create o retrieve new course for course
-            $group = Group::firstOrCreate(['curso_id' => $courseId, 'nombre' => 'auto', 'turno' => 0]);
-            // enroll student to course
-            GroupStudent::create([
-                "curso_id" => $courseId,
-                "est_id" => $studentId,
-                "grupo_id" => $group->id,
-            ]);
+            DB::transaction(function () use ($courseId, $studentId) {
+                //create o retrieve new course for course
+                $group = Group::firstOrCreate(['curso_id' => $courseId, 'nombre' => 'auto', 'turno' => 0]);
+                // enroll student to course
+                GroupStudent::create([
+                    "curso_id" => $courseId,
+                    "est_id" => $studentId,
+                    "grupo_id" => $group->id,
+                ]); //
+            });
         } catch (PDOException $ex) {
             Log::error($ex);
             $result = false;

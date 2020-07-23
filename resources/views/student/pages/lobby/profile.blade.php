@@ -131,10 +131,8 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-        @include('student.pages.lobby.settings')
+        @include('student.pages.lobby.settings',["data"=> $data])
     </div>
 @endsection
 

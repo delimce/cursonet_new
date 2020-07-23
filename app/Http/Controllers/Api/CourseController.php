@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Services\CourseService;
+use App\Repositories\CourseRepository;
 use App\Models\Cn2\Student;
 use DB;
 use Carbon\Carbon;
@@ -16,7 +16,7 @@ class CourseController extends BaseController
     private $student;
     private $courseService;
 
-    public function __construct(Request $req, CourseService $course)
+    public function __construct(Request $req, CourseRepository $course)
     {
         $token         = $req->header('Authorization');
         $this->student = Student::where("token", $token)->first();

@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Student;
 
-
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Models\Cn2\Student;
 use Illuminate\Support\Facades\Storage;
 use Validator;
-use App\Services\CourseService;
+use App\Repositories\CourseRepository;
+use App\Repositories\StudentRepository;
 use Exception;
-use DB;
 
 class HomeController extends BaseController
 {
@@ -20,20 +18,22 @@ class HomeController extends BaseController
      */
 
     private $student;
-    private $courseService;
+    private $courseRepository;
+    private $studentRepository;
 
-    public function __construct(Request $req, CourseService $course)
+    public function __construct(Request $req, CourseRepository $course, StudentRepository $student)
     {
         $myUser = $req->session()->get("myUser");
-        $this->courseService = $course;
-        $this->student = Student::findOrFail($myUser->id);
+        $this->courseRepository = $course;
+        $this->studentRepository = $student;
+        $this->student = $this->studentRepository->getStudentById($myUser->id);
     }
 
 
     public function home(Request $req)
     {
 
-        $courses = $this->courseService->getCoursesByStudent($this->student->id);
+        $courses = $this->courseRepository->getCoursesByStudent($this->student->id);
         $req->session()->put('myCourses', $courses);
         if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
 
@@ -68,7 +68,7 @@ class HomeController extends BaseController
     public function courseSelected(Request $req)
     {
         $courseId = $req->input("courseId");
-        $data = $this->courseService->getMainDataByStudent($courseId, $this->student->id);
+        $data = $this->courseRepository->getMainDataByStudent($courseId, $this->student->id);
         $req->session()->put("courseSelected", $data["id"]);
         $req->session()->put("courseName", $data["nombre"]);
         return response()->json(['status' => 'ok', 'course' => $data]);
@@ -82,19 +82,7 @@ class HomeController extends BaseController
 
     public function myRatings()
     {
-        $plans = DB::table('tbl_plan_evaluador')
-            ->join('tbl_grupo_estudiante', 'tbl_plan_evaluador.grupo_id', '=', 'tbl_grupo_estudiante.grupo_id')
-            ->join('tbl_grupo', 'tbl_grupo.id', '=', 'tbl_grupo_estudiante.grupo_id')
-            ->join('tbl_curso', 'tbl_curso.id', '=', 'tbl_grupo.curso_id')
-            ->join('tbl_plan_item', 'tbl_plan_evaluador.id', '=', 'tbl_plan_item.plan_id')
-            ->groupBy('plan_id')
-            ->select('tbl_plan_evaluador.*', 'tbl_grupo.nombre as grupo', 'tbl_curso.alias as curso')
-            ->selectRaw('count(tbl_plan_item.id) as items')
-            ->whereEstId($this->student->id)
-            ->get();
-
-
-
+        $plans = $this->studentRepository->getPlansByStudentId($this->student->id);
         return view("student.pages.lobby.ratings", ["results" => $plans]);
     }
 
@@ -152,15 +140,13 @@ class HomeController extends BaseController
 
     public function refreshSessionData(Request $req)
     {
-
         $req->session()->forget("myUser");
-        $fields = InitialController::$fields;
-        $user = Student::where('id', $this->student->id)->select($fields)->first();
+        $user = $this->studentRepository->getStudentById($this->student->id);
         $req->session()->put('myUser', $user);
     }
 
 
-       
+
     /**
      * getTeachers
      * teachers of course's groups
@@ -173,16 +159,20 @@ class HomeController extends BaseController
         if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
 
             $courseId = $req->session()->get("courseSelected");
-            $teachers = $this->courseService->getAdminsByCourseId($courseId);
+            $teachers = $this->courseRepository->getAdminsByCourseId($courseId);
         }
         return view("student.pages.lobby.teachers", ["data" => $teachers]);
     }
 
 
 
+    /**
+     * getPublicCourses
+     * @return void
+     */
     public function getPublicCourses()
     {
-        $courses = $this->courseService->getPublicCoursesByStudent($this->student->id);
-        return view("student.pages.lobby.publics", ["publics"=>$courses]);
+        $courses = $this->courseRepository->getPublicCoursesByStudent($this->student->id);
+        return view("student.pages.lobby.publics", ["publics" => $courses]);
     }
 }
