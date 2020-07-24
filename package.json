@@ -39,7 +39,7 @@
     "ckeditor": "^4.10.1",
     "croppie": "^2.6.2",
     "imagemin": "^5.0.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "jquery-confirm": "^3.3.2",
     "laravel-mix": "^5.0.0",
     "laravel-mix-purgecss": "^5.0.0-rc.1",
