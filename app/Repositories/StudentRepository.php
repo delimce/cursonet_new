@@ -2,10 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Models\Cn2\Admin;
+use App\Models\Cn2\GroupStudent;
 use DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Cn2\StudentLog;
 use App\Models\Cn2\Student;
+use App\Models\Cn2\TechSupport;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Ramsey\Uuid\Uuid;
@@ -13,8 +16,7 @@ use Ramsey\Uuid\Uuid;
 class StudentRepository
 {
 
-    const FIELDS = ['id', 'id_number', 'nombre', 'apellido', 'email', 'pass', 'activo', 'token', 'sexo', 'telefono_p', 'fecha_nac', 'share_info', 'notify_msg', 'notify_forum', 'notify_exam'];
-
+    const PREF_STUDENT = 'est';
 
     /**
      * doLogin
@@ -27,8 +29,7 @@ class StudentRepository
     {
         // student doesn't exist
         $result = ["ok" => false, "message" => ""];
-
-        $user = Student::where('email', $email)->select(static::FIELDS)->first();
+        $user = Student::whereEmail($email)->first();
 
         if (is_null($user)) {
             $result["message"] = __('students.login.email.unknown');
@@ -125,8 +126,6 @@ class StudentRepository
         return $uuid->toString();
     }
 
-
-
     /**
      * getStudentById
      *
@@ -135,7 +134,8 @@ class StudentRepository
      */
     public function getStudentById($studentId)
     {
-        return Student::find($studentId, static::FIELDS);
+        $student = Student::find($studentId);
+        return ($student) ? $student->makeHidden(['token', 'foto']) : null;
     }
 
 
@@ -159,5 +159,82 @@ class StudentRepository
             ->get();
 
         return $plans;
+    }
+
+
+
+    /**
+     * isEmailOrIdNumberExist
+     *
+     * @param  int $studentId
+     * @param  string $email
+     * @param  int $idnumber
+     * @return bool
+     */
+    public function isEmailOrIdNumberExist($studentId, $email, $idnumber)
+    {
+        //if email or ci exists
+        $exist = Student::where("id", "!=", $studentId)->where(function ($query) use ($email, $idnumber) {
+            $query->where("email", $email)
+                ->orWhere("id_number", $idnumber);
+        })->count();
+
+        return ($exist > 0);
+    }
+
+
+    /**
+     * getUserContacts
+     *
+     * @param  int $studentId
+     * @return array
+     */
+    public function getUserContacts($studentId)
+    {
+        $est = Student::find($studentId);
+        ///student's groups
+        $groups = $est->groups()->with('group')->get();
+        $teacher_array = [];
+        $group_array = [];
+        $groups->each(function ($value) use (&$group_array, &$teacher_array) {
+            $group_array[] = $value->grupo_id;
+            $tempAdmins = $value->group->course->admins()->get();
+            // obtaining admin ids of student courses
+            $tempAdmins->pluck('admin_id')->each(function ($adminId) use (&$teacher_array) {
+                $teacher_array[] = $adminId;
+            });
+        });
+
+        $students = GroupStudent::with(['Student' => function ($q) use ($studentId) {
+            // Query the name field in status table
+            $q->where('id', '!=', $studentId)->where("share_info", 1);
+        }])->whereIn('grupo_id', $group_array)->get();
+
+        $data_student = [];
+
+        $students->each(function ($item) use (&$data_student) {
+            if ($item->Student != null) $data_student[] = $item
+                ->Student->only(['id', 'nombre', 'apellido', 'email', 'foto', 'sexo', 'fecha_nac', 'telefono_p']);
+        });
+
+        ///get teachers
+        $teachers = Admin::whereIn('id', $teacher_array)->get();
+        // get students
+        $data_student = collect($data_student)->unique()->toArray();
+        //merge data (teachers & students)
+        return array_merge($data_student, $teachers->toArray());
+    }
+
+
+    public function techSupportMessage($data)
+    {
+        
+        TechSupport::create([
+            'persona_id' => $data['studentId'],
+            'tipo' => self::PREF_STUDENT,
+            'titulo' => __('students.support.request'),
+            'contenido' => $data['message'],
+        ]);
+        //todo: send email to tech support
     }
 }

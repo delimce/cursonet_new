@@ -44,4 +44,6 @@ class Student extends Model
     protected $hidden = [
         'pass', 'clave_preg', 'clave_resp',
     ];
+
+    protected $fillable = ['share_info','notify_msg','notify_forum','notify_exam'];
 }

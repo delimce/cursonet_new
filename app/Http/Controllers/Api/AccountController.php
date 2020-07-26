@@ -9,30 +9,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Cn2\Admin;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use DB;
-use Carbon\Carbon;
-use App\Models\Cn2\Student;
-use App\Models\Cn2\GroupStudent;
-use App\Models\Cn2\TechSupport;
+use App\Repositories\StudentRepository;
 use Validator;
 
 class AccountController extends BaseController
 {
     private $student;
-    const PREF_STUDENT = 'est';
+    private $studentRepository;
 
     /**
      * Create a new controller instance.
      * @return void
      */
-    public function __construct(Request $req)
+    public function __construct(Request $req, StudentRepository $repository)
     {
         $token = $req->header('Authorization');
-        $this->student = Student::where("token", $token)->first();
+        $this->studentRepository = $repository;
+        $this->student = $this->studentRepository->getUserByToken($token);
     }
 
 
@@ -42,36 +38,8 @@ class AccountController extends BaseController
     public function getContacts()
     {
         $estId = $this->student->id;
-        ///student's groups
-        $groups = $this->student->groups()->with('group')->get();
-        $teacher_array = [];
-        $group_array = [];
-        $groups->each(function ($value) use (&$group_array, &$teacher_array) {
-            $group_array[] = $value->grupo_id;
-            $tempAdmins = $value->group->course->admins()->get();
-            // obtaining admin ids of student courses
-            $tempAdmins->pluck('admin_id')->each(function ($adminId) use (&$teacher_array) {
-                $teacher_array[] = $adminId;
-            });
-        });
-        $students = GroupStudent::with(['Student' => function ($q) use ($estId) {
-            // Query the name field in status table
-            $q->where('id', '!=', $estId)->where("share_info", 1);
-        }])->whereIn('grupo_id', $group_array)->get();
-
-        $data_student = [];
-
-        $students->each(function ($item) use (&$data_student) {
-            if ($item->Student != null) $data_student[] = $item->Student->only(['id', 'nombre', 'apellido', 'email', 'foto', 'sexo', 'fecha_nac', 'telefono_p']);
-        });
-
-        ///get teachers
-        $teachers = Admin::whereIn('id', $teacher_array)->get();
-        //merge data
-        $data_student = collect($data_student)->unique()->toArray();
-        $output = array_merge($data_student, $teachers->toArray());
-
-        return response()->json(['status' => 'ok', 'contacts' => $output]);
+        $contacts = $this->studentRepository->getUserContacts($estId);
+        return response()->json(['status' => 'ok', 'contacts' => $contacts]);
     }
 
 
@@ -85,7 +53,7 @@ class AccountController extends BaseController
             'field' => 'required',
             'status' => 'required'
         ], [
-            'required' => trans('commons.validation.required')
+            'required' => __('commons.validation.required')
         ]);
 
         if ($validator->fails()) {
@@ -96,8 +64,8 @@ class AccountController extends BaseController
         $field = $req->field;
 
         try {
-            Student::where("id", $this->student->id)->update(array("$field" => $status));
-            return response()->json(['status' => 'ok', 'message' => trans('students.profile.setting.success')]);
+            $this->student->update(["$field" => $status]);
+            return response()->json(['status' => 'ok', 'message' => __('students.profile.setting.success')]);
         } catch (Exception $ex) {
             return response()->json(['status' => 'error', 'message' => "setting do not exists"], 500);
         }
@@ -110,8 +78,8 @@ class AccountController extends BaseController
             'pass' => 'required|min:5',
             'pass2' => 'required|min:5'
         ], [
-            'required' => trans('commons.validation.required'),
-            'min' => trans('commons.validation.min'),
+            'required' => __('commons.validation.required'),
+            'min' => __('commons.validation.min'),
         ]);
 
         if ($validator->fails()) {
@@ -122,15 +90,15 @@ class AccountController extends BaseController
         if ($req->input('pass') === $req->input('pass2')) {
             $this->student->pass = Hash::make($req->input('pass'));
             $this->student->save();
-            return response()->json(['status' => 'ok', 'message' => trans('students.profile.change.password.success')]);
+            return response()->json(['status' => 'ok', 'message' => __('students.profile.change.password.success')]);
         } else {
-            return response()->json(['status' => 'error', 'message' => trans('students.profile.change.password.nomatch')], 400);
+            return response()->json(['status' => 'error', 'message' => __('students.profile.change.password.nomatch')], 400);
         }
     }
 
+    
     public function saveProfile(Request $req)
     {
-
         $validator = Validator::make($req->all(), [
             'id_number' => 'required|min:5',
             'nombre' => 'required|min:2',
@@ -139,10 +107,10 @@ class AccountController extends BaseController
             'fecha_nac' => 'required|date',
             'email' => 'required|email',
         ], [
-            'required' => trans('commons.validation.required'),
-            'min' => trans('commons.validation.min'),
-            'email' => trans('commons.validation.email'),
-            'date' => trans('commons.validation.date'),
+            'required' => __('commons.validation.required'),
+            'min' => __('commons.validation.min'),
+            'email' => __('commons.validation.email'),
+            'date' => __('commons.validation.date'),
         ]);
 
         if ($validator->fails()) {
@@ -151,13 +119,11 @@ class AccountController extends BaseController
         }
 
         //if email or ci exists
-        $exist = Student::where("id", "!=", $this->student->id)->where(function ($query) use ($req) {
-            $query->where("email", $req->input('email'))
-                ->orWhere("id_number", $req->input('id_number'));
-        })->count();
+        $exist = $this->studentRepository
+            ->isEmailOrIdNumberExist($this->student->id, $req->input('email'), $req->input('id_number'));
 
-        if ($exist > 0) {
-            return response()->json(['status' => 'error', 'message' => trans('students.profile.change.exist')], 400);
+        if ($exist) {
+            return response()->json(['status' => 'error', 'message' => __('students.profile.change.exist')], 400);
         }
 
         $this->student->id_number = $req->input('id_number');
@@ -172,7 +138,7 @@ class AccountController extends BaseController
             $this->student->foto = $req->input('foto');
         $this->student->save();
 
-        return response()->json(['status' => 'ok', 'message' => trans('students.profile.data.save')]);
+        return response()->json(['status' => 'ok', 'message' => __('students.profile.data.save')]);
     }
 
 
@@ -182,8 +148,8 @@ class AccountController extends BaseController
         $validator = Validator::make($req->all(), [
             'contenido' => 'required|min:5',
         ], [
-            'required' => trans('commons.validation.required'),
-            'min' => trans('commons.validation.min'),
+            'required' => __('commons.validation.required'),
+            'min' => __('commons.validation.min'),
         ]);
 
         if ($validator->fails()) {
@@ -191,12 +157,10 @@ class AccountController extends BaseController
             return response()->json(['status' => 'error', 'message' => $error], 400);
         }
 
-        TechSupport::create([
-            'persona_id' => $this->student->id,
-            'tipo' => self::PREF_STUDENT,
-            'titulo' => trans('students.support.request'),
-            'contenido' => $req->contenido,
-        ]);
-        return response()->json(['status' => 'ok', 'message' => trans('commons.message.sent')]);
+        $data["studentId"] = $this->student->id;
+        $data["message"] = $req->contenido;
+        $this->studentRepository->techSupportMessage($data);
+
+        return response()->json(['status' => 'ok', 'message' => __('commons.message.sent')]);
     }
 }

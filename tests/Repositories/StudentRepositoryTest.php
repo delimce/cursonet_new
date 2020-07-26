@@ -8,22 +8,22 @@ use App\Repositories\StudentRepository;
 class StudentRepositoryTest extends TestCase
 {
 
-    protected $studentService;
+    protected $studentRepository;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->studentService = new StudentRepository();
+        $this->studentRepository = new StudentRepository();
     }
 
     public function testStudentDoLogin()
     {
         $email = 'ldelima@zoho.com';
         $pass = '1234';
-        $resp = $this->studentService->doLogin($email,$pass);
+        $resp = $this->studentRepository->doLogin($email,$pass);
         $this->assertFalse($resp["ok"]);
         $pass = '12345';
-        $resp = $this->studentService->doLogin($email,$pass);
+        $resp = $this->studentRepository->doLogin($email,$pass);
         $this->assertTrue($resp["ok"]);
 
     }
@@ -31,20 +31,24 @@ class StudentRepositoryTest extends TestCase
     public function testStudentActivateUser()
     {
         $fakeToken = '12345';
-        $result = $this->studentService->isTokenActive($fakeToken);
+        $result = $this->studentRepository->isTokenActive($fakeToken);
         $this->assertFalse($result);
     }
 
     
-    public function testStudentGetById()
+    public function testGetStudentById()
     {
         $studentId =4000;
-        $result = $this->studentService->getStudentById($studentId);
+        $result = $this->studentRepository->getStudentById($studentId);
         $this->assertNull($result);
 
         $studentId =490;
-        $result = $this->studentService->getStudentById($studentId);
+        $result = collect($this->studentRepository->getStudentById($studentId));
         $this->assertIsObject($result);
+
+        $this->assertTrue($result->has("id"));
+        $this->assertFalse($result->has("token"));
+        $this->assertFalse($result->has("foto"));
 
     }
 
