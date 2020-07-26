@@ -16,18 +16,23 @@ class StudentRepositoryTest extends TestCase
         $this->studentRepository = new StudentRepository();
     }
 
+    /**
+     * @test
+     */
     public function testStudentDoLogin()
     {
         $email = 'ldelima@zoho.com';
         $pass = '1234';
-        $resp = $this->studentRepository->doLogin($email,$pass);
+        $resp = $this->studentRepository->doLogin($email, $pass);
         $this->assertFalse($resp["ok"]);
         $pass = '12345';
-        $resp = $this->studentRepository->doLogin($email,$pass);
+        $resp = $this->studentRepository->doLogin($email, $pass);
         $this->assertTrue($resp["ok"]);
-
     }
 
+    /**
+     * @test
+     */
     public function testStudentActivateUser()
     {
         $fakeToken = '12345';
@@ -35,22 +40,40 @@ class StudentRepositoryTest extends TestCase
         $this->assertFalse($result);
     }
 
-    
+    /**
+     * @test
+     */
     public function testGetStudentById()
     {
-        $studentId =4000;
+        $studentId = 0;
         $result = $this->studentRepository->getStudentById($studentId);
         $this->assertNull($result);
 
-        $studentId =490;
+        $studentId = 490;
         $result = collect($this->studentRepository->getStudentById($studentId));
         $this->assertIsObject($result);
 
         $this->assertTrue($result->has("id"));
         $this->assertFalse($result->has("token"));
         $this->assertFalse($result->has("foto"));
-
     }
 
-}
+    /**
+     * @test
+     */
+    public function testGetUserContacts()
+    {
+        $fakeId = 0;
+        $result = $this->studentRepository->getUserContacts($fakeId);
+        $this->assertFalse($result);
 
+        $userId = 476;
+        $result = $this->studentRepository->getUserContacts($userId);
+        $this->assertIsArray($result);
+
+        if (count($result) > 0) {
+            $contact = $result[0];
+            $this->assertArrayHasKey("email", $contact);
+        }
+    }
+}

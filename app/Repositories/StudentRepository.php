@@ -10,6 +10,7 @@ use App\Models\Cn2\StudentLog;
 use App\Models\Cn2\Student;
 use App\Models\Cn2\TechSupport;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Ramsey\Uuid\Uuid;
 
@@ -187,11 +188,16 @@ class StudentRepository
      * getUserContacts
      *
      * @param  int $studentId
-     * @return array
+     * @return array|bool
      */
     public function getUserContacts($studentId)
     {
         $est = Student::find($studentId);
+
+        if (is_null($est)) {
+            return false;
+        }
+
         ///student's groups
         $groups = $est->groups()->with('group')->get();
         $teacher_array = [];
@@ -220,15 +226,15 @@ class StudentRepository
         ///get teachers
         $teachers = Admin::whereIn('id', $teacher_array)->get();
         // get students
-        $data_student = collect($data_student)->unique()->toArray();
+        $data_student = collect($data_student)->unique();
         //merge data (teachers & students)
-        return array_merge($data_student, $teachers->toArray());
+        return array_merge($data_student->toArray(), $teachers->toArray());
     }
 
 
     public function techSupportMessage($data)
     {
-        
+
         TechSupport::create([
             'persona_id' => $data['studentId'],
             'tipo' => self::PREF_STUDENT,

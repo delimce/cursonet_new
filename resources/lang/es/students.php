@@ -137,5 +137,7 @@ return [
     'ratings.noregs' => 'No hay notas disponibles.',
     'ratings.select' => 'Seleccione un plan de evaluación',
     'ratings.detail.title' => 'Detalles del plan de evaluación',
+    // STUDENT
+    'user.notfound' => 'El estudiante no existe',
 
 ];

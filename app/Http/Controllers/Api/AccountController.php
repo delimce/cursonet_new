@@ -39,6 +39,10 @@ class AccountController extends BaseController
     {
         $estId = $this->student->id;
         $contacts = $this->studentRepository->getUserContacts($estId);
+        if (!$contacts) {
+            $error = __('students.user.notfound');
+            return response()->json(['status' => 'error', 'message' => $error], 400);
+        }
         return response()->json(['status' => 'ok', 'contacts' => $contacts]);
     }
 
@@ -96,7 +100,7 @@ class AccountController extends BaseController
         }
     }
 
-    
+
     public function saveProfile(Request $req)
     {
         $validator = Validator::make($req->all(), [
