@@ -28,6 +28,7 @@ mix.babel([
     'resources/assets/js/modules/lobby-course.js',
     'resources/assets/js/modules/classroom-course.js',
     'resources/assets/js/modules/classroom-forum.js',
+    'resources/assets/js/modules/classroom-project.js',
 ], 'public/assets/js/modules.js');
 
 //vendor libs
@@ -39,6 +40,7 @@ mix.scripts([
     'node_modules/bootstrapvalidator/dist/js/bootstrapValidator.min.js',
     'node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js',
     'node_modules/jquery-confirm/dist/jquery-confirm.min.js',
+    'node_modules/dropzone/dist/min/dropzone.min.js',
     'node_modules/croppie/croppie.min.js',
 ], 'public/assets/js/vendor.js');
 

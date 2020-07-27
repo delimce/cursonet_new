@@ -87,8 +87,7 @@ $router->group(
                             ['prefix' => '/topic'],
                             function () use ($router) {
                                 $router->get('/all/{course_id}', 'ClassroomController@getTopics');
-                                $router->get('/{topic_id}', 'ClassroomController@getTopicInfo');
-                                $router->get('/{topic_id}/group/{group_id}', 'ClassroomController@getTopicInfo');
+                                $router->get('/{topicId}', 'ClassroomController@getTopicDataById');
                             }
                         );
 
@@ -100,6 +99,16 @@ $router->group(
                                 $router->get('/topic/{topic_id}/group/{group_id}', 'ClassroomController@getForumByTopic');
                                 $router->put('/post/like', 'ClassroomController@forumPostLike');
                                 $router->put('/post/reply', 'ClassroomController@saveForumPostReply');
+                            }
+                        );
+
+                        ///projects
+                        $router->group(
+                            ['prefix' => '/project'],
+                            function () use ($router) {
+                                $router->get('/{project_id}', 'ClassroomController@getProjectById');
+                                $router->get('/topic/{topic_id}/group/{group_id}', 'ClassroomController@getProjectsByTopic');
+                                $router->post('/upload/','ClassroomController@uploadProject');
                             }
                         );
                     }

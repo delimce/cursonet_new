@@ -24,9 +24,16 @@ class Topic extends Model
         return $this->hasMany('App\Models\Cn2\Forum','contenido_id');
     }
 
+    public function projects()
+    {
+        return $this->hasMany('App\Models\Cn2\Project','contenido_id');
+    }
+
     public function createdAt(){
         return Carbon::parse($this->fecha_creado)->format(env('APP_DATEFORMAT'));
     }
+
+    protected $fillable = ['leido'];
 
 
 }

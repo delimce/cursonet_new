@@ -19,6 +19,11 @@ class Forum extends Model
         return $this->belongsTo('App\Models\Cn2\Group', 'grupo_id');
     }
 
+    public function topic()
+    {
+        return $this->belongsTo('App\Models\Cn2\Topic', 'contenido_id');
+    }
+
     public function posts()
     {
         return $this->hasMany('App\Models\Cn2\ForumPost', 'foro_id');
@@ -51,19 +56,17 @@ class Forum extends Model
 
     public function statusName()
     {
-        $name='';
-        switch($this->status())
-        {
-            case 0:
+        $name = '';
+        switch ($this->status()) {
+            case static::STATUS_PENDING:
                 $name = __('students.classroom.forum.status.pending');
                 break;
-            case 1:
+            case static::STATUS_ACTIVE:
                 $name = __('students.classroom.forum.status.progress');
                 break;
-            case 2:
+            case static::STATUS_ENDED:
                 $name = __('students.classroom.forum.status.ended');
                 break;
-
         }
         return $name;
     }

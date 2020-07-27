@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Cn2\File;
+use App\Decorators\ClassroomDecorator;
 use App\Models\Cn2\ForumPost;
 use App\Models\Cn2\ForumPostLike;
 use App\Models\Cn2\ForumPostReply;
@@ -10,26 +10,36 @@ use App\Models\Cn2\Topic;
 use App\Models\Cn2\Forum;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Cn2\Student;
-use DB;
-use Carbon\Carbon;
+use App\Repositories\ClassroomRepository;
+use App\Repositories\ResourceRepository;
+use App\Repositories\StudentRepository;
+use App\Services\ResourceMediaService;
+use Exception;
 use Validator;
 
 class ClassroomController extends BaseController
 {
     private $student;
+    private ClassroomRepository $classroomRepository;
+    private ResourceRepository $resourceRepository;
+    private StudentRepository $studentRepository;
 
 
     /**
      * Create a new controller instance.
      * @return void
      */
-    public function __construct(Request $req)
-    {
+    public function __construct(
+        Request $req,
+        ClassroomRepository $classroom,
+        ResourceRepository $resource,
+        StudentRepository $student
+    ) {
         $token         = $req->header('Authorization');
-        $this->student = Student::where("token", $token)->first();
+        $this->studentRepository = $student;
+        $this->student = $this->studentRepository->getUserByToken($token);
+        $this->classroomRepository = $classroom;
+        $this->resourceRepository = $resource;
     }
 
 
@@ -46,82 +56,39 @@ class ClassroomController extends BaseController
             return response()->json(['status' => 'ok', 'data' => $topics]);
         } else {
             return response()->json(
-                ['status' => 'error', 'message' => __('students.classroom.modules.nofound')], 400
+                ['status' => 'error', 'message' => __('students.classroom.modules.nofound')],
+                400
             );
         }
     }
 
 
-    /**get whole topic info
+    /**
+     * getTopicDataById
      *
-     * @param $topic_id
-     * @param $group_id
-     *
-     * @return mixed
+     * @param  int $topicId
+     * @param  ClassroomDecorator $decorator
+     * @return void
      */
-    public function getTopicInfo($topic_id, $group_id = false)
+    public function getTopicDataById($topicId, ClassroomDecorator $decorator)
     {
-        $info  = Topic::findOrFail($topic_id);
-        $files = $info->files()->with('File')->get();
-        if ($group_id) {
-            $forums = Forum::whereContenidoId($info->id)
-                           ->with('Group')->whereIn("grupo_id", [0, $group_id])->get();
-        } else {
-            $forums = $info->forums()->with('Group')->get();
-        }
-        $info->leido++;
-        $info->save();
-        $data = ["id" => $info->id, "titulo" => $info->titulo, "contenido" => $info->contenido];
-        ///files
-        $resources = [];
-        $files->each(
-            function ($item) use (&$resources) {
-                $temp            = [];
-                $temp["tipo"]    = $item->file->getType();
-                $temp["tipo_id"] = $item->file->tipo;
-                $temp["id"]      = $item->file->id;
-                $temp["dir"]     = $item->file->dir;
-                $temp["fecha"]   = $item->file->date();
-                $resources[]     = $temp;
-            }
-        );
-        $data["files"] = $resources;
-        ///forums
-        $infoForums = [];
-        $forums->each(
-        /**
-         * @param $item
-         */
-            function ($item) use (&$infoForums) {
-                $temp               = [];
-                $temp["id"]         = $item->id;
-                $temp["titulo"]     = $item->titulo;
-                $temp["grupo_id"]   = $item->grupo_id;
-                $temp["grupo_desc"] = $item->group->nombre ?? __('commons.all');
-                $temp["posts"]      = $item->posts->count();
-                $temp["fecha_ini"]  = $item->dateInit();
-                $temp["fecha_fin"]  = $item->dateEnd();
-                $temp["status"]  = $item->statusName();
-                $infoForums[]       = $temp;
-            }
-        );
-        $data["forums"] = $infoForums;
-
+        $data = $this->classroomRepository->getTopicElementsByIdAndStudentId($topicId,  $this->student->id);
+        $data["files"] = $decorator->resourcesApiList($data["files"]);
+        $data["forums"] = $decorator->forumsApiList($data["forums"]);
+        $data["projects"] = $decorator->projectsApiList($data["projects"]);
         return response()->json(['status' => 'ok', 'info' => $data]);
-
     }
 
 
-    public function getFile($res_id)
+    public function getFile($res_id, ResourceMediaService $media)
     {
         try {
-            $resource = File::findOrFail($res_id);
+            $resource = $this->resourceRepository->getResourceById($res_id);
             //file exist
-            if ($resource->tipo == 0 && Storage::disk('courses')->has($resource->filepath)) {
+            if ($resource->tipo == 0 && $media->hasPath($resource->filepath)) {
                 $resource->downloads++;
                 $resource->save();
-                $file = Storage::disk('courses')->url($resource->filepath);
-
+                $file = $media->getFromResourcePath($resource->filepath);
                 return response()->download($file);
             } else {
                 return response()->json(['status' => 'error', 'message' => __('commons.file.notfound')], 404);
@@ -135,12 +102,14 @@ class ClassroomController extends BaseController
     public function saveForumPost(Request $req)
     {
         $validator = Validator::make(
-            $req->all(), [
-            'person'  => 'required',
-            'forum'   => 'required',
-            'type'    => 'required',
-            'content' => 'required',
-        ], [
+            $req->all(),
+            [
+                'person'  => 'required',
+                'forum'   => 'required',
+                'type'    => 'required',
+                'content' => 'required',
+            ],
+            [
                 'required' => __('commons.validation.required'),
             ]
         );
@@ -155,7 +124,8 @@ class ClassroomController extends BaseController
         $content = strip_tags($req->content);
         if (strlen($content) < 5) {
             return response()->json(
-                ['status' => 'error', 'message' => __('students.classroom.forum.post.tooshort')], 400
+                ['status' => 'error', 'message' => __('students.classroom.forum.post.tooshort')],
+                400
             );
         }
 
@@ -170,23 +140,23 @@ class ClassroomController extends BaseController
             return response()->json(
                 ['status' => 'ok', 'message' => __('students.classroom.forum.post.save.success')]
             );
-
         } catch (\PDOException $ex) {
             return response()->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
         }
-
     }
 
 
     public function saveForumPostReply(Request $req)
     {
         $validator = Validator::make(
-            $req->all(), [
-            'post'    => 'required|numeric',
-            'type'    => 'required',
-            'person'  => 'required|numeric',
-            'message' => 'required',
-        ], [
+            $req->all(),
+            [
+                'post'    => 'required|numeric',
+                'type'    => 'required',
+                'person'  => 'required|numeric',
+                'message' => 'required',
+            ],
+            [
                 'required' => __('commons.validation.required.all'),
                 'numeric'  => __('commons.validation.numeric'),
             ]
@@ -209,12 +179,9 @@ class ClassroomController extends BaseController
             return response()->json(
                 ['status' => 'ok', 'message' => __('students.classroom.forum.post.reply.save.success')]
             );
-
         } catch (\PDOException $ex) {
             return response()->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
         }
-
-
     }
 
 
@@ -224,9 +191,11 @@ class ClassroomController extends BaseController
     public function forumPostLike(Request $req)
     {
         $validator = Validator::make(
-            $req->all(), [
-            'post' => 'required',
-        ], [
+            $req->all(),
+            [
+                'post' => 'required',
+            ],
+            [
                 'required' => __('commons.validation.required'),
             ]
         );
@@ -238,7 +207,7 @@ class ClassroomController extends BaseController
         }
 
         $like    = ForumPostLike::whereComentarioId($req->post)
-                                ->whereTipoSujeto('est')->whereSujetoId($this->student->id)->first();
+            ->whereTipoSujeto('est')->whereSujetoId($this->student->id)->first();
         $my_like = false;
 
         if (is_null($like)) {
@@ -253,7 +222,6 @@ class ClassroomController extends BaseController
             } catch (\PDOException $ex) {
                 return response()->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
             }
-
         } else {
             $like->delete();
         }
@@ -265,7 +233,7 @@ class ClassroomController extends BaseController
     public function getForumByTopic($topic_id, $group_id)
     {
         $forums = Forum::whereContenidoId($topic_id)
-                       ->with(['Group', 'posts'])->whereIn("grupo_id", [0, $group_id])->get();
+            ->with(['Group', 'posts'])->whereIn("grupo_id", [0, $group_id])->get();
 
         $list = [];
         $forums->each(
@@ -286,4 +254,65 @@ class ClassroomController extends BaseController
     }
 
 
+    /**
+     * getProjectsByTopic
+     *
+     * @param  int $topic_id
+     * @param  int $group_id
+     * @param  ClassroomDecorator $decorator
+     * @return void
+     */
+    public function getProjectsByTopic($topic_id, $group_id, ClassroomDecorator $decorator)
+    {
+        $projects = $this->classroomRepository
+            ->getProjectsByTopicAndStudentId($topic_id, $group_id, $this->student->id);
+        $list = $decorator->projectsApiList($projects);
+
+        return response()->json(['status' => 'ok', 'list' => $list]);
+    }
+
+
+
+    public function uploadProject(Request $req, ResourceMediaService $mediaService)
+    {
+        $validator = Validator::make(
+            $req->all(),
+            [
+                'projectId'    => 'required|numeric',
+                'file' => 'required|file',
+            ],
+            [
+                'required' => __('commons.validation.required.all'),
+                'numeric'  => __('commons.validation.numeric'),
+            ]
+        );
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return response()->json(['status' => 'error', 'message' =>  $error], 400);
+        }
+
+        try {
+            if ($req->file('file')->isValid()) {
+                $data = $mediaService->getMetadata($req->file('file'));
+                $data["type"] = 0;
+                $data["addBy"] = 'est';
+                $data["personId"] = $this->student->id;
+                $data["desc"] = __('students.classroom.project.answer');
+                $data["path"] = $mediaService->moveToResourcesPath($req->file('file'));
+                $this->classroomRepository->saveStudentProject($req->projectId, $this->student->id, $data);
+                return response()->json(
+                    [
+                        'status' => 'ok',
+                        'statusname' => __('students.classroom.project.status.answered'),
+                        'message' => __('commons.file.upload.successfully')
+                    ]
+                );
+            } else {
+                return response()->json(['status' => 'error', 'message' => __('commons.file.upload.error')], 400);
+            }
+        } catch (Exception $ex) {
+            return response()->json(['status' => 'error', 'message' => $ex->getTraceAsString()], 500);
+        }
+    }
 }

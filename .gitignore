@@ -4,6 +4,7 @@
 /node_modules
 /public/assets/
 /storage/app/courses/files
+/storage/app/students/avatars
 /public/mix-manifest.json
 .env
 .phpunit.result.cache

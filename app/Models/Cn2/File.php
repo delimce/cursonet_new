@@ -13,14 +13,14 @@ class File extends Model
     {
         switch ($this->tipo) {
             case 0:
-                return trans('students.classroom.file.type.file');
+                return __('students.classroom.file.type.file');
                 break;
 
             case 1:
-                return trans('students.classroom.file.type.link');
+                return __('students.classroom.file.type.link');
                 break;
             default:
-                return trans('students.classroom.file.type.default');
+                return __('students.classroom.file.type.default');
                 break;
         }
     }

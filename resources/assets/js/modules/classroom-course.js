@@ -21,15 +21,17 @@ $('#file-list').on('click-cell.bs.table', function (field, value, row, $element)
 
 $('.module-item').on('click', function (e) {
     let topic_id = $(this).data('topic');
-    let group_id = $(this).data('group');
     $(".current-module").removeClass("current-module")
     $(this).addClass("current-module");
-    axios.get(api_url + 'api/student/class/topic' + '/' + topic_id + '/group/' + group_id)
+    axios.get(api_url + 'api/student/class/topic' + '/' + topic_id)
         .then(function (response) {
-            $('#myContent').html(response.data.info.contenido)
-            $('#topic-selected').html(response.data.info.titulo)
+            $('#myContent').html(response.data.info.content)
+            $('#topic-selected').html(response.data.info.title)
             $('#file-list').bootstrapTable('load', response.data.info.files);
             $('#forum-list').bootstrapTable('load', response.data.info.forums);
+            $('#project-list').bootstrapTable('load', response.data.info.projects);
+            switchForumView();
+            switchProjectView();
             goToContent()
         }).catch(function (error) {
             showAlert("error al seleccionar el curso");
@@ -90,8 +92,7 @@ const loadCourseInformation = function (courseId) {
     });
 }
 
-const goToContent = function()
-{
-    $('.active').removeClass('active'); 
+const goToContent = function () {
+    $('.active').removeClass('active');
     $('#myContent').tab('show')
 }
