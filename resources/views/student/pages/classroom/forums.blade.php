@@ -16,7 +16,7 @@
         <tr>
             <td>{{$item->id}}</td>
             <td>{{str_limit($item->titulo,105)}}</td>
-            <td>{{$item->group->nombre}}</td>
+            <td>{{ isset($item->group) ? $item->group->nombre :  __('commons.all') }}</td>
             <td>{{$item->posts->count()}}</td>
             <td>{{$item->dateInit()}}</td>
             <td>{{$item->dateEnd()}}</td>
