@@ -65,13 +65,6 @@
                 @endif
 
                 <div class="tools" data-post-id="{{$post->id}}">
-
-                    @if($person->id!=session()->get('myUser')->id)
-                        <span class="forum-tools-msg" data-toggle="tooltip" data-placement="top"
-                              title="@lang('students.classroom.forum.post.message')">
-                       <i class="far fa-envelope"></i>
-                    </span>
-                    @endif
                     <span class="forum-tools-reply" data-toggle="tooltip" data-placement="top"
                           title="@lang('students.classroom.forum.post.reply')">
                        <i class="far fa-comment"></i>
