@@ -9,7 +9,7 @@ use App\Repositories\StudentRepository;
 
 class ClassRoomController extends BaseController
 {
-    private $student;
+    private  $student;
     private  $classroomRepository;
     private  $studentRepository;
 

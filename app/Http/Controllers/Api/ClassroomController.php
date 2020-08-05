@@ -20,9 +20,9 @@ use Validator;
 class ClassroomController extends BaseController
 {
     private $student;
-    private ClassroomRepository $classroomRepository;
-    private ResourceRepository $resourceRepository;
-    private StudentRepository $studentRepository;
+    private $classroomRepository;
+    private $resourceRepository;
+    private $studentRepository;
 
 
     /**

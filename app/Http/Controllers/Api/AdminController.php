@@ -20,8 +20,8 @@ use Exception;
 class AdminController extends BaseController
 {
 
-    private ResourceMediaService $mediaService;
-    private ResourceRepository $resourceRepository;
+    private $mediaService;
+    private $resourceRepository;
 
     /**
      * Create a new controller instance.
