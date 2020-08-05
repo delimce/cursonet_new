@@ -10,8 +10,8 @@ use App\Repositories\StudentRepository;
 class ClassRoomController extends BaseController
 {
     private $student;
-    private ClassroomRepository $classroomRepository;
-    private StudentRepository $studentRepository;
+    private  $classroomRepository;
+    private  $studentRepository;
 
     /**
      * Create a new controller instance.
