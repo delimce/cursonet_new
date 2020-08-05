@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Repositories\ClassroomRepository;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Repositories\ClassroomRepository;
 use App\Repositories\StudentRepository;
 
 class ClassRoomController extends BaseController
