@@ -61,6 +61,7 @@ $router->group(
                     function () use ($router) {
                         $router->get('/', 'ClassRoomController@main');
                         $router->get('/forum/{forum_id}', 'ClassRoomController@getForumById');
+                        $router->get('/project/{project_id}', 'ClassRoomController@getProjectById');
                     }
                 );
             }

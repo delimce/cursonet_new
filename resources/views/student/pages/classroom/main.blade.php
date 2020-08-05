@@ -12,7 +12,14 @@
         </nav>
         <!-- Page Content Holder -->
         <div id="content">
-            @component("student.components.classroombox", ['content1'=>$content1,'files'=>$files, 'forums'=>$forums])
+            @component("student.components.classroombox", 
+            [
+             'content'=>$content,
+             'title'=>$title,
+             'files'=>$files,
+             'forums'=>$forums,
+             'projects'=>$projects
+             ])
             @endcomponent
         </div>
     </div>

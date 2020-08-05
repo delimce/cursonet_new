@@ -38,17 +38,18 @@
     "bootstrapvalidator": "^0.5.4",
     "ckeditor": "^4.10.1",
     "croppie": "^2.6.2",
+    "dropzone": "^5.7.2",
     "imagemin": "^5.0.0",
     "jquery": ">=3.5.0",
     "jquery-confirm": "^3.3.2",
     "laravel-mix": "^5.0.0",
     "laravel-mix-purgecss": "^5.0.0-rc.1",
+    "lodash": ">=4.17.19",
     "popper.js": "^1.14.4",
     "sass": "^1.26.3",
     "sass-loader": "^7.3.1",
     "timeago": "^1.6.5",
     "vue-template-compiler": "^2.6.11",
-    "lodash": ">=4.17.19",
     "websocket-extensions": ">=0.1.4"
   }
 }
