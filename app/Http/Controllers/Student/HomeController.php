@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\Repositories\CourseRepository;
+use App\Repositories\MessageRepository;
 use App\Repositories\StudentRepository;
 use Exception;
 
@@ -20,12 +21,14 @@ class HomeController extends BaseController
     private $student;
     private $courseRepository;
     private $studentRepository;
+    private $messageRepository;
 
-    public function __construct(Request $req, CourseRepository $course, StudentRepository $student)
+    public function __construct(Request $req, CourseRepository $course, StudentRepository $student, MessageRepository $msg)
     {
         $myUser = $req->session()->get("myUser");
         $this->courseRepository = $course;
         $this->studentRepository = $student;
+        $this->messageRepository = $msg;
         $this->student = $this->studentRepository->getStudentById($myUser->id);
     }
 
@@ -48,12 +51,16 @@ class HomeController extends BaseController
         }
 
         //get messages
-        $messages = $this->student->messages()->with("student")->orderBy('id', 'desc')->take(4)->get();
+        $messages = $this->student->messages()->with("student")->orderBy('id', 'desc')->get();
+
+        $unreads = $this->messageRepository->getTotalUnread($messages);
+        $req->session()->put("unreadMessages", $unreads);
+
         return view(
             'student.pages.lobby.home',
             [
                 "myCourses" => $courses,
-                "messages" => $messages
+                "messages" => $messages->take(4)
             ]
         );
     }
@@ -80,21 +87,26 @@ class HomeController extends BaseController
         return redirect()->route('student.login');
     }
 
-    public function myRatings()
+    public function myRatings(Request $req)
     {
+        $this->refreshSessionData($req);
         $plans = $this->studentRepository->getPlansByStudentId($this->student->id);
         return view("student.pages.lobby.ratings", ["results" => $plans]);
     }
 
-    public function getInbox()
+    public function getInbox(Request $req)
     {
-        $msgs = $this->student->messages()->with('student')->get();
+        $msgs = $this->student->messages()->with('student')->orderBy('id', 'desc')->get();
+        $unreads = $this->messageRepository->getTotalUnread($msgs);
+        $req->session()->put("unreadMessages", $unreads);
+
         $sent = $this->student->messagesSent()->with('student')->get();
         return view("student.pages.lobby.msgs", ["messages" => $msgs, "sent" => $sent]);
     }
 
-    public function myProfile()
+    public function myProfile(Request $req)
     {
+        $this->refreshSessionData($req);
         return view("student.pages.lobby.profile", ["data" => $this->student]);
     }
 
@@ -143,6 +155,8 @@ class HomeController extends BaseController
         $req->session()->forget("myUser");
         $user = $this->studentRepository->getStudentById($this->student->id);
         $req->session()->put('myUser', $user);
+        $unreads = $this->messageRepository->getTotalUnread($user->messages()->get());
+        $req->session()->put("unreadMessages", $unreads);
     }
 
 
@@ -155,6 +169,7 @@ class HomeController extends BaseController
      */
     public function getTeachers(Request $req)
     {
+        $this->refreshSessionData($req);
         $teachers = [];
         if ($req->session()->has("courseSelected") && !empty($req->session()->get("courseSelected"))) {
 
@@ -170,8 +185,9 @@ class HomeController extends BaseController
      * getPublicCourses
      * @return void
      */
-    public function getPublicCourses()
+    public function getPublicCourses(Request $req)
     {
+        $this->refreshSessionData($req);
         $courses = $this->courseRepository->getPublicCoursesByStudent($this->student->id);
         return view("student.pages.lobby.publics", ["publics" => $courses]);
     }

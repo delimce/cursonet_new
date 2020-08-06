@@ -22,16 +22,8 @@
         @endif    
     </div>
 
-    <div class="right-nav">
-        @component("student.components.profileInfo",['data' => session()->get("myUser")])
-        @endcomponent
-        <div class="nav-items">
-            <span><a href="{!! url('student/home') !!}">@lang('students.home')</a> </span>|
-            <span><a href="{!! url('student/ratings') !!}">@lang('students.my_ratings')</a></span>|
-            <span><a href="{!! url('student/inbox') !!}">@lang('commons.messages')</a></span>|
-            <span><a style="color: #00ccff" href="{!! url('student/logout') !!}">@lang('commons.logout')</a></span>
-        </div>
-    </div>
+    @component("student.components.menubar",['data' => session()->get("myCourses")])
+    @endcomponent
 
 </nav>
 <div id="app2" class="container-fluid">
