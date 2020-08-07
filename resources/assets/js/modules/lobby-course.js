@@ -26,6 +26,7 @@ $("#enroll-in-course").on("click", _.debounce(function (event) {
         .post(api_url + "api/student/course/enroll/",
             { "course": courseId })
         .then(function (response) {
+            $("#enroll-in-course").prop('disabled', true);
             showSuccess(response.data.message, 1000);
             setTimeout(function () {
                 redirect(api_url + 'student/home', false);
@@ -34,4 +35,4 @@ $("#enroll-in-course").on("click", _.debounce(function (event) {
         }).catch(function (error) {
             showAlert(error.response.data.message);
         });
-}, 250));
+}, 200));
