@@ -43,8 +43,15 @@
         <div class="forum-post @if($post->tipo_sujeto=='admin') admin-border @endif">
             <div class="student-data">
                 <?php $person = $post->person()->first() ?>
-                @component("student.components.avatar",['data' => $person])
-                @endcomponent
+
+                @if($post->tipo_sujeto=='est') 
+                  @component("student.components.avatar",['data' => $person])
+                  @endcomponent
+                @else  
+                  @component("admin.components.avatar",['data' => $person])
+                  @endcomponent
+                @endif
+
                 <span class="subtext">Nombre:</span>
                 <span>{{$person->nombre.' '.$person->apellido }}</span><br>
                 <span class="subtext">Perfil</span>
