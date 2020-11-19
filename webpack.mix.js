@@ -13,8 +13,8 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/assets/js')
     .sass('resources/assets/sass/app.scss', 'public/assets/css').options({
-    processCssUrls: false
-});
+        processCssUrls: false
+    });
 
 mix.copyDirectory('resources/assets/img', 'public/assets/img', false);
 
@@ -52,6 +52,11 @@ mix.copy('node_modules/ckeditor/config.js', 'public/assets/ckeditor/config.js')
     .copyDirectory('node_modules/ckeditor/skins', 'public/assets/ckeditor/skins')
     .copyDirectory('node_modules/ckeditor/lang', 'public/assets/ckeditor/lang')
     .copyDirectory('node_modules/ckeditor/plugins', 'public/assets/ckeditor/plugins')
+
+
+if (mix.inProduction()) {
+    mix.version();
+}
 
 // Full API
 // mix.js(src, output);

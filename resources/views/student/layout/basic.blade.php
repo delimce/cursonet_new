@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="{!! url('assets/img/favicon.png') !!}">
     <title>Cursonet 2.0 - @yield('title')</title>
     @stack('head')
-    <link rel="stylesheet" href="{!! url('assets/css/app.css') !!}">
+    <link rel="stylesheet" href="{!! mix('assets/css/app.css') !!}">
 </head>
 <body>
 
@@ -27,9 +27,9 @@
 </footer>
 <div id="axios-loader" class="lds-loading"></div>
 <!--/.Footer-->
-<script src="{!! url('assets/js/app.js') !!}"></script>
-<script src="{!! url('assets/js/vendor.js') !!}"></script>
-<script src="{!! url('assets/js/modules.js') !!}"></script>
+<script src="{!! mix('assets/js/app.js') !!}"></script>
+<script src="{!! mix('assets/js/vendor.js') !!}"></script>
+<script src="{!! mix('assets/js/modules.js') !!}"></script>
 @stack('scripts')
 <script>
     (function ($) {
