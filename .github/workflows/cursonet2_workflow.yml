@@ -8,7 +8,7 @@ jobs:
       name: Deploy
       runs-on: ubuntu-latest
       steps:
-      - name: deploying garafy project
+      - name: deploying cursonet 2.0 project
         uses: appleboy/ssh-action@master
         with:
           host: ${{secrets.CURSONET_SERVER_IP}}
