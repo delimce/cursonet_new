@@ -33,12 +33,16 @@ class CourseRepository
      *
      * @param  int $courseId
      * @param  int $studentId
-     * @return void
+     * @return string[]
      */
-    public function getMainDataByStudent($courseId, $studentId)
+    public function getMainDataByStudent(int $courseId, int $studentId)
     {
         $course = Course::findOrFail($courseId);
-        $estGroup = GroupStudent::whereEstId($studentId)->whereCursoId($courseId)->first();
+        $estGroup = GroupStudent::where([
+            "est_id" => $studentId,
+            "curso_id" => $courseId,
+        ])->first();
+
         $wallMessages = $course->walls()->wherein("grupo_id", ["0", $estGroup->grupo_id])->orderBy('fecha_c', 'desc')->get();
         $ntopics = $course->topics()->count();
         $data = [

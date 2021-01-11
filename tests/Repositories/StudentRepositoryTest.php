@@ -25,7 +25,7 @@ class StudentRepositoryTest extends TestCase
         $pass = '1234';
         $resp = $this->studentRepository->doLogin($email, $pass);
         $this->assertFalse($resp["ok"]);
-        $pass = '12345';
+        $pass = '12345678';
         $resp = $this->studentRepository->doLogin($email, $pass);
         $this->assertTrue($resp["ok"]);
     }

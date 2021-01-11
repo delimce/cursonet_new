@@ -42,4 +42,20 @@ class CourseRepositoryTest extends TestCase
         $result = $this->courseService->enrollInCourse($courseId, $studentId);
         $this->assertFalse($result);
     }
+
+        
+    /**
+     * testGetMainDataCourseByStudent
+     *
+     * @return void
+     */
+    public function testGetMainDataCourseByStudent()
+    {
+        $courseId = 24;
+        $studentId = 476;
+        $data = $this->courseService->getMainDataByStudent($courseId,$studentId);
+        $this->assertArrayHasKey("id",$data);
+        $this->assertArrayHasKey("nombre",$data);
+        $this->assertArrayHasKey("group",$data);
+    }
 }
