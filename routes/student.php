@@ -41,7 +41,7 @@ $router->group(
 
         //home
         $router->group(
-            ['middleware' => ['auth']],
+            ['middleware' => ['auth','csrf']],
             function () use ($router) {
                 $router->get('/home', ['as' => 'student.home', 'uses' => 'HomeController@home']);
                 $router->get('/logout', 'HomeController@logout');

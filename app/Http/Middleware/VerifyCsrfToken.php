@@ -55,11 +55,11 @@ class VerifyCsrfToken
         }
 
         throw new TokenMismatchException;
-//        if(strpos($request->getRequestUri(), 'api') >= 0)
-//        {
-//            return $next($request);
-//        }
-//        return parent::handle($request, $next);
+        //        if(strpos($request->getRequestUri(), 'api') >= 0)
+        //        {
+        //            return $next($request);
+        //        }
+        //        return parent::handle($request, $next);
     }
 
     /**
@@ -89,11 +89,12 @@ class VerifyCsrfToken
     {
         $token = $request->input('_token') ?: $request->header('X-CSRF-TOKEN');
 
-        if (! $token && $header = $request->header('X-XSRF-TOKEN')) {
+        if (!$token && $header = $request->header('X-XSRF-TOKEN')) {
             $token = $this->encrypter->decrypt($header);
         }
 
-        return Str::equals($request->session()->token(), $token);
+        return  $request->session()->token() === $token;
+        # return Str::equals($request->session()->token(), $token);
     }
 
     /**
@@ -109,8 +110,13 @@ class VerifyCsrfToken
 
         $response->headers->setCookie(
             new Cookie(
-                'XSRF-TOKEN', $request->session()->token(), time() + 60 * 120,
-                $config['path'], $config['domain'], false, false
+                'XSRF-TOKEN',
+                $request->session()->token(),
+                time() + 60 * 120,
+                $config['path'],
+                $config['domain'],
+                false,
+                false
             )
         );
 

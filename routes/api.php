@@ -63,7 +63,7 @@ $router->group(
                     ['prefix' => 'ratings'],
                     function () use ($router) {
                         $router->get('/', 'RatingsController@list');
-                        $router->get('/{id}', 'RatingsController@getDetail');
+                        $router->get('/{planId}', 'RatingsController@getDetail');
                     }
                 );
 
